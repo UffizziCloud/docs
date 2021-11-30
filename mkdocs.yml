@@ -1,0 +1,107 @@
+# Project information
+site_name: Uffizzi Docs
+site_author: Uffizzi.com
+site_description: >-
+  Uffizzi Documentation
+
+# Repository
+repo_url: https://github.com/uffizzicloud/docs
+repo_name: UffizziCloud/docs
+
+# Copyright
+copyright: Copyright &copy; 2021 Uffizzi
+
+# Styling
+extra_css:
+  - stylesheets/extra.css
+theme:
+  name: material
+  logo: assets/u-logo.svg
+  favicon: assets/favicon.png
+  features:
+    - content.code.annotate
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - footer.autohide
+    - search.highlight
+    - search.share
+    - search.suggest
+
+# Plugins
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/slack
+      link: https://join.slack.com/t/uffizzi/shared_invite/zt-ffr4o3x0-J~0yVT6qgFV~wmGm19Ux9A
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/Uffizzi_
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/orgs/uffizzicloud
+    - icon: fontawesome/brands/github
+      link: https://github.com/UffizziCloud
+  generator: false
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid-experimental
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Page tree
+nav:
+  - Home:
+    - Overview: index.md
+    - Continuous Previews (CP): continuous-previews.md
+    - Architecture: architecture.md
+    - Networking: networking.md
+  - Setup:
+    - Installation: setup/installation.md
+    - Integrations: setup/integrations.md
+    - Custer Configuration: setup/cluster-config.md
+  - References:
+    - API: references/api.md
+    - Uffizzi Compose Spec: references/compose-spec.md

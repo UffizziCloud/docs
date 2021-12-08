@@ -53,28 +53,33 @@ ingress:
 
 ### Uffizzi Compose Elements
 
-| Compose Element                        | Required               | Notes                          |
-| -------------------------------------- | ---------------------- | ------------------------------ |
-| **services (Top-level)**               | ✔︎                      |                                |
-| build                                  |                        |                                |
-| build: context                         | ✔︎                      | Required if **build** is specified; Expects a URL to a GitHub repository (e.g., `context: <repository_url>:<branch_name>`)  | 
-| build: dockerfile                      |                        | If no Dockerfile is specified, Uffizzi will attempt to build with buildpacks |
-| command                                |                        |                                |   
-| configs                                |                        |                                |
-| configs: source                        | ✔︎                      | Required if **configs** is specified; Name of the configuration file |
-| configs: target                        | ✔︎                      | Required if **configs** is specified; Mount path within the container |
-| deploy                                 |                        |                                |
-| deploy: auto                           |                        | defaults to `true`; If true, Uffizzi will auto-deploy changes made to a git or image repository |
-| deploy: resources: limits: memory      |                        | defaults to `125M`; possible values: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M` |
-| env_file                               |                        |                                |
-| environment                            |                        |                                |
-| image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub; If no rve |
-| **continuous_preview (Top-level)**     |                        |                                |
-| deploy_preview_when_image_tag_is_created |                      | `true` or `false`; When `true`, all new tags created for each **image** defined in the compose file will be deployed           |
-| deploy_preview_when_pull_request_is_opened |                    | `true` or `false`              |
-| delete_preview_when_pull_request_is_closed |                    | `true` or `false`              |
-| delete_preview_after                   |                        | Expects hours as an integer; Value is implicitly set to `72h` for previews triggered from new/updated image tag |
-| share_to_github                        |                        | `true` or `false`              |
+|Top-level Element | Sub-level Element     | Required           | Notes          |
+| ---------------- | --------------------- | ------------------ | -------------- |
+| **services**       |                       | ✔︎                  |                |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; foo | build                                  |                        |                                |
+| | build: context                         | ✔︎                      | Required if **build** is specified; Expects a URL to a GitHub repository (e.g., `context: <repository_url>:<branch_name>`)  | 
+| | build: dockerfile                      |                        | defaults to `Dockerfile` If no Dockerfile is specified, Uffizzi will attempt to build with buildpacks |
+| | command                                |                        |                                |   
+| | configs                                |                        |                                |
+| | configs: source                        | ✔︎                      | Required if **configs** is specified; Name of the configuration file |
+| | configs: target                        | ✔︎                      | Required if **configs** is specified; Mount path within the container |
+| | deploy                                 |                        |                                |
+| | deploy: auto                           |                        | defaults to `true`; If true, Uffizzi will auto-deploy changes made to a git or image repository |
+| | deploy: resources: limits: memory      |                        | defaults to `125M`; possible values: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M` |
+| | env_file                               |                        |                                |
+| | environment                            |                        |                                |
+| | image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub; If no rve |
+| **ingress**                  |           | ✔︎                      |                                |
+| | service                                | ✔︎                      |                                |
+| | port                                   | ✔︎                      |                                |
+| **continuous_preview**    |                |                        |                                |
+| | deploy_preview_when_image_tag_is_created |                      | `true` or `false`; When `true`, all new tags created for each **image** defined in the compose file will be deployed           |
+| | deploy_preview_when_pull_request_is_opened |                    | `true` or `false`              |
+| | delete_preview_when_pull_request_is_closed |                    | `true` or `false`              |
+| | delete_preview_after                   |                        | Expects hours as an integer; Value is implicitly set to `72h` for previews triggered from new/updated image tag |
+| | share_to_github                        |                        | `true` or `false`              |
+
+
 
 ### Ingress (required)
 

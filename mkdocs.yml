@@ -96,14 +96,16 @@ nav:
   - Home:
     - Overview: index.md
     - Continuous Previews: continuous-previews.md
-    - Architecture: architecture.md
-    - Networking: networking.md
+    - Networking & Load-balancing: networking.md
+    - Role-based Access Control: rbac.md
+    - Certificates (TLS/SSL): certs.md
   - Setup:
-    - Installation: setup/installation.md
+    - Configure Previews: setup/config-previews.md
     - Source Code Integrations: setup/source-code-integrations.md
     - Container Registry Integrations: setup/container-registry-integrations.md
     - Single Sign-On (SSO): setup/single-sign-on.md
     - Custer Configuration: setup/cluster-config.md
   - References:
-    - API: references/api.md
     - Uffizzi Compose Spec: references/compose-spec.md
+    - Example Uffizzi Compose: references/example-compose.md
+  

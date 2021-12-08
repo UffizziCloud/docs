@@ -1,3 +1,3 @@
 FROM nginx:1.19
 
-COPY ./site /usr/share/nginx/html/
+COPY ./docs /usr/share/nginx/html/

@@ -1,9 +1,9 @@
 FROM python:3-alpine AS build
 
+RUN pip install mkdocs mkdocs-material mkdocs-minify-plugin
+
 COPY ./mkdocs.yml /
 COPY ./docs /docs
-
-RUN pip install mkdocs mkdocs-material mkdocs-minify-plugin
 
 RUN mkdocs build
 

@@ -1,13 +1,13 @@
 services:
   docs:
     build:
-      context: github.com/UffizziCloud/docs:main
+      context: https://github.com/UffizziCloud/docs:main
       dockerfile: Dockerfile
 
 ingress:
   service: docs
   port: 80
-  
+
 continuous_preview:
   deploy_preview_when_pull_request_is_opened: true
   delete_preview_when_pull_request_is_closed: true

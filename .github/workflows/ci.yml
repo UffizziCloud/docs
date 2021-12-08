@@ -8,32 +8,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install Python
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: 3.x
-      # - name: Install Packages
-      #   uses: BSFishy/pip-action@v1
-      #   with:
-      #     packages: |
-      #       mkdocs
-      #       pygments
-      #       mkdocs-material
-      #       mkdocs-safe-text-plugin
-      #       git+https://github.com/jldiaz/mkdocs-plugin-tags.git
-      #       mkdocs-markdownextradata-plugin
-      #       mkdocs-codeinclude-plugin
-      #       mkdocs-git-revision-date-localized-plugin
-      #       mkdocs-git-authors-plugin
-      #       mkdocs-blog-plugin
-      #       mkdocs-img2fig-plugin
-      #       mkdocs-mermaid2-plugin
-      #       mkdocs-awesome-pages-plugin
-      #       git+https://github.com/andyoakley/mkdocs-navtitles
-      #       mkdocs-redirects 
-      #       mkdocs-minify-plugin
-      #       mkdocs-git-authors-plugin
       - run: pip install mkdocs-material # 
       - run: mkdocs gh-deploy --force

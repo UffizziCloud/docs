@@ -1,3 +1,12 @@
-FROM nginx:1.19
+FROM squidfunk/mkdocs-material:8.0.5 AS build
 
-COPY ./docs /usr/share/nginx/html/
+COPY ./mkdocs.yml /
+COPY ./docs /docs
+
+WORKDIR /
+
+RUN mkdocs build
+
+FROM nginx:1
+
+COPY --from=build /site /usr/share/nginx/html/

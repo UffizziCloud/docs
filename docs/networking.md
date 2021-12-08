@@ -1,0 +1,3 @@
+Every app environment in Uffizzi includes a load balancer whose job it is to receive incoming HTTPS requests (e.g. https://example.app.uffizzi.com) and route those requests to the HTTP Port you specified on one of your running application containers. Uffizzi load balancers are set up and managed automatically, so you don't need to enable or configure them. Uffizzi also handles HTTPS certificates for you; our certificate authority is trusted by all popular web browsers and devices. All of a deployment's containers share the same internal IP address, so they can talk to each other at 127.0.0.1 a.k.a. localhost.  Each container should listen on different ports.
+
+Separate deployments do not share an internal network, so they may only communicate over the public Internet.

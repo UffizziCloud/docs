@@ -1,19 +1,10 @@
 # Overview
 
-Uffizzi is a full-stack previews engine that allows teams tp
+Previewing code before it’s merged shouldn’t be limited to frontends. Define your full-stack apps with a familiar syntax based on Docker Compose, then Uffizzi will create on-demand test environments when you open pull requests or build new images. Preview URLs are updated when there’s a new commit, so your team can catch mistakes early, iterate quickly, and accelerate your release cycles.
 
 
+## Popular Links
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+* [Installation Guide](setup/installation)
+* [Uffizzi Compose Specification v1](references/compose-spec.md)
+* [Example Uffizzi Compose files](references/example-compose.md)

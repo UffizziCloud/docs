@@ -3,7 +3,7 @@
 This document specifies the Uffizzi Compose file format used to define and preview multi-container applications using Uffizzi. A Uffizzi Compose file is a structured YAML format, similar to Docker Compose. Uffizzi Compose is based on [Compose version 3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/), but it also includes additional parameters relevant to Continuous Previews. This document describes the required and optional parameters of Uffizzi Compose.
 
 ### Uffizzi Compose file  
-The Uffizzi Compose file is a YAML file defining `services` (REQUIRED) `continuous_previews`, and `ingress`. Other Compose top-level elements such as `configs`, `networks`, `version`, `volumes` and `secrets` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](# Services (required)).
+The Uffizzi Compose file is a YAML file defining `services` (required) `continuous_previews`, and `ingress`. Other Compose top-level elements such as `configs`, `networks`, `version`, `volumes` and `secrets` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](# Services (required)).
 
 #### Example Uffizzi Compose file
 ``` 
@@ -45,16 +45,48 @@ continuous_preview:
   deploy_preview_when_image_tag_is_created: true
   tag_pattern: foo-bar-*
   share_to_github: true
-  
+
 ingress:
   service: nginx
   port: 8080
 ```
 
+### Uffizzi Compose Elements
+
+| Compose Element                        | Required               | Notes                          |
+| -------------------------------------- | ---------------------- | ------------------------------ |
+| **services (Top-level)**               | ✔︎                      |                                |
+| build                                  |                        |                                |
+| build: context                         | ✔︎                      | Required if **build** is specified; Expects a URL to a GitHub repository (e.g., `context: <repository_url>:<branch_name>`)  | 
+| build: dockerfile                      |                        | If no Dockerfile is specified, Uffizzi will attempt to build with buildpacks |
+| command                                |                        |                                |   
+| configs                                |                        |                                |
+| configs: source                        | ✔︎                      | Required if **configs** is specified; Name of the configuration file |
+| configs: target                        | ✔︎                      | Required if **configs** is specified; Mount path within the container |
+| deploy                                 |                        |                                |
+| deploy: auto                           |                        | defaults to `true`; If true, Uffizzi will auto-deploy changes made to a git or image repository |
+| deploy: resources: limits: memory      |                        | defaults to `125M`; possible values: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M` |
+| env_file                               |                        |                                |
+| environment                            |                        |                                |
+| image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub; If no rve |
+| **continuous_preview (Top-level)**     |                        |                                |
+| deploy_preview_when_image_tag_is_created |                      | `true` or `false`; When `true`, all new tags created for each **image** defined in the compose file will be deployed           |
+| deploy_preview_when_pull_request_is_opened |                    | `true` or `false`              |
+| delete_preview_when_pull_request_is_closed |                    | `true` or `false`              |
+| delete_preview_after                   |                        | Expects hours as an integer; Value is implicitly set to `72h` for previews triggered from new/updated image tag |
+| share_to_github                        |                        | `true` or `false`              |
+
+### Ingress (required)
+
+
+### Continuous Preview (optional)
+
+
 ### Services (required)
 
-As with Docker Compose, a Service is an abstract definition of a computing resource within an application which can be scaled/replaced independently from other components. Services are backed by a set of containers when deployed on Uffizzi.  The following table outlines the support status of the Services sub-level elements:   
+As with Docker Compose, a Service is an abstract definition of a computing resource within an application which can be scaled/replaced independently from other components. Services are backed by a set of containers when deployed on Uffizzi.  See the following table for full support status of the Services sub-level elements:   
 
+#### Compatibility Matrix
 
 | Compose Element                        | Uffizzi Compose Support Status |
 | -------------------------------------- | ------------------------------ |
@@ -78,7 +110,7 @@ As with Docker Compose, a Service is an abstract definition of a computing resou
 | cap_add                                | Unsupported (not planned)      |
 | cap_drop                               | Unsupported (not planned)      |
 | cgroup_parent                          | Unsupported (not planned)      |
-| command                                | Unsupported (planned)          |
+| command                                | Supported                      |
 | configs                                | Supported                      |
 | container_name                         | Unsupported (not planned)      |
 | credential_spec                        | Unsupported (not planned)      |
@@ -97,7 +129,7 @@ As with Docker Compose, a Service is an abstract definition of a computing resou
 | external_links                         | Unsupported (planned)          |
 | extra_hosts                            | Unsupported (not planned)      |
 | group_add                              | Unsupported (not planned)      |
-| healthcheck                            | Unsupported (not planned)      |
+| healthcheck                            | Unsupported (planned)          |
 | hostname                               | Unsupported (planned)          |
 | image                                  | Supported                      |
 | init                                   | Unsupported (planned)          |

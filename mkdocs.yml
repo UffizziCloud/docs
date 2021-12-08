@@ -99,6 +99,7 @@ nav:
     - Networking & Load-balancing: networking.md
     - Role-based Access Control: rbac.md
     - Certificates (TLS/SSL): certs.md
+    - Logs: logs.md
   - Setup:
     - Configure Previews: setup/config-previews.md
     - Source Code Integrations: setup/source-code-integrations.md

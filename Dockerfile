@@ -1,12 +1,12 @@
-FROM squidfunk/mkdocs-material:8.0.5 AS build
+FROM python:3-alpine AS build
 
 COPY ./mkdocs.yml /
 COPY ./docs /docs
 
-WORKDIR /
+RUN pip install mkdocs mkdocs-material mkdocs-minify-plugin
 
 RUN mkdocs build
 
-FROM nginx:1
+FROM nginx:1-alpine
 
 COPY --from=build /site /usr/share/nginx/html/

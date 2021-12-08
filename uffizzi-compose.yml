@@ -3,6 +3,10 @@ services:
     build:
       context: https://github.com/UffizziCloud/docs:main
       dockerfile: Dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 125M
 
 ingress:
   service: docs

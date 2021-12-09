@@ -82,101 +82,14 @@ ingress:
 
 
 ### Ingress (required)
-
+Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `port` number.
 
 ### Continuous Preview (optional)
-
+Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.
 
 ### Services (required)
 
 As with Docker Compose, a Service is an abstract definition of a computing resource within an application which can be scaled/replaced independently from other components. Services are backed by a set of containers when deployed on Uffizzi.  See the following table for full support status of the Services sub-level elements:   
 
-#### Compatibility Matrix
-
-| Compose Element                        | Uffizzi Compose Support Status |
-| -------------------------------------- | ------------------------------ |
-| **Services (Top-level)**               | Supported                      |
-| deploy                                 | Supported                      |
-| blkio_config                           | Unsupported (not planned)      |
-| device_read_bps, device_write_bps      | Unsupported (not planned)      |
-| device_read_iops, device_write_iops    | Unsupported (not planned)      |
-| weight                                 | Unsupported (not planned)      |
-| weight_device                          | Unsupported (not planned)      |
-| cpu_count                              | Unsupported (not planned)      |
-| cpu_percent                            | Unsupported (not planned)      |
-| cpu_shares                             | Unsupported (not planned)      |
-| cpu_period                             | Unsupported (not planned)      |
-| cpu_quota                              | Unsupported (not planned)      |
-| cpu_rt_runtime                         | Unsupported (not planned)      |
-| cpu_rt_period                          | Unsupported (not planned)      |
-| cpus                                   | Unsupported (not planned)      |
-| cpuset                                 | Unsupported (not planned)      |
-| build                                  | Supported                      |
-| cap_add                                | Unsupported (not planned)      |
-| cap_drop                               | Unsupported (not planned)      |
-| cgroup_parent                          | Unsupported (not planned)      |
-| command                                | Supported                      |
-| configs                                | Supported                      |
-| container_name                         | Unsupported (not planned)      |
-| credential_spec                        | Unsupported (not planned)      |
-| depends_on                             | Unsupported (planned)          |
-| device_cgroup_rules                    | Unsupported (not planned)      |
-| devices                                | Unsupported (not planned)      |
-| dns                                    | Unsupported (not planned)      |
-| dns_opt                                | Unsupported (not planned)      |
-| dns_search                             | Unsupported (not planned)      |
-| domainname                             | Unsupported (not planned)      |
-| entrypoint                             | Unsupported (planned)          |
-| env_file                               | Supported                      |
-| environment                            | Supported                      |
-| expose                                 | Unsupported (planned)          |
-| extends                                | Unsupported (not planned)      |
-| external_links                         | Unsupported (planned)          |
-| extra_hosts                            | Unsupported (not planned)      |
-| group_add                              | Unsupported (not planned)      |
-| healthcheck                            | Unsupported (planned)          |
-| hostname                               | Unsupported (planned)          |
-| image                                  | Supported                      |
-| init                                   | Unsupported (planned)          |
-| ipc                                    | Unsupported (not planned)      |
-| isolation                              | Unsupported (not planned)      |
-| labels                                 | Unsupported (planned)          |
-| isolation                              | Unsupported (not planned)      |
-| links                                  | Unsupported (planned)          |
-| logging                                | Unsupported (not planned)      |
-| network_mode                           | Unsupported (not planned)      |
-| networks                               | Unsupported (not planned)      |
-| mac_address                            | Unsupported (not planned)      |
-| mem_limit                              | Unsupported (not planned)      |
-| mem_reservation                        | Unsupported (not planned)      |
-| mem_swappiness                         | Unsupported (not planned)      |
-| memswap_limit                          | Unsupported (not planned)      |
-| oom_kill_disable                       | Unsupported (not planned)      |
-| oom_score_adj                          | Unsupported (not planned)      |
-| pid                                    | Unsupported (not planned)      |
-| pids_limit                             | Unsupported (not planned)      |
-| platform                               | Unsupported (not planned)      |
-| ports                                  | Supported                      |
-| privileged                             | Unsupported (not planned)      |
-| profiles                               | Unsupported (not planned)      |
-| pull_policy                            | Unsupported (not planned)      |
-| read_only                              | Unsupported (not planned)      |
-| restart                                | Unsupported (planned)          |
-| runtime                                | Unsupported (not planned)      |
-| scale                                  | Unsupported (planned)          |
-| secrets                                | Unsupported (planned)          |
-| security_opt                           | Unsupported (not planned)      |
-| shm_size                               | Unsupported (not planned)      |
-| stdin_open                             | Unsupported (not planned)      |
-| stop_grace_period                      | Unsupported (not planned)      |
-| stop_signal                            | Unsupported (not planned)      |
-| storage_opt                            | Unsupported (not planned)      |
-| sysctls                                | Unsupported (not planned)      |
-| tmpfs                                  | Unsupported (not planned)      |
-| tty                                    | Unsupported (not planned)      |
-| ulimits                                | Unsupported (not planned)      |
-| user                                   | Unsupported (not planned)      |
-| userns_mode                            | Unsupported (not planned)      |
-| volumes                                | Unsupported (planned)          |
 
 

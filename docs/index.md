@@ -5,6 +5,5 @@ Previewing code before it’s merged shouldn’t be limited to frontends. Define
 
 ## Popular Links
 
-* [Installation Guide](setup/installation)
+* [Continuous Previews](continuous-previews.md)
 * [Uffizzi Compose Specification v1](references/compose-spec.md)
-* [Example Uffizzi Compose files](references/example-compose.md)

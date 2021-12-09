@@ -56,9 +56,9 @@ ingress:
 |Top-level Element | Sub-level Element     | Required           | Notes          |
 | ---------------- | --------------------- | ------------------ | -------------- |
 | **services**       |                       | ✔︎                  |                |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; foo | build                                  |                        |                                |
+|         | build                                  |                        |                                |
 | | build: context                         | ✔︎                      | Required if **build** is specified; Expects a URL to a GitHub repository (e.g., `context: <repository_url>:<branch_name>`)  | 
-| | build: dockerfile                      |                        | defaults to `Dockerfile` If no Dockerfile is specified, Uffizzi will attempt to build with buildpacks |
+| | build: dockerfile                      |                        | defaults to `./Dockerfile` |
 | | command                                |                        |                                |   
 | | configs                                |                        |                                |
 | | configs: source                        | ✔︎                      | Required if **configs** is specified; Name of the configuration file |
@@ -69,15 +69,15 @@ ingress:
 | | env_file                               |                        |                                |
 | | environment                            |                        |                                |
 | | image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub; If no rve |
-| **ingress**                  |           | ✔︎                      |                                |
-| | service                                | ✔︎                      |                                |
-| | port                                   | ✔︎                      |                                |
+| **ingress**                  |           | ✔︎                      |                                 |
+| | service                                | ✔︎                      | The service that should receive incoming HTTP/S traffic |
+| | port                                   | ✔︎                      | The port the containerized service is listening on                               |
 | **continuous_preview**    |                |                        |                                |
 | | deploy_preview_when_image_tag_is_created |                      | `true` or `false`; When `true`, all new tags created for each **image** defined in the compose file will be deployed           |
 | | deploy_preview_when_pull_request_is_opened |                    | `true` or `false`              |
 | | delete_preview_when_pull_request_is_closed |                    | `true` or `false`              |
 | | delete_preview_after                   |                        | Expects hours as an integer; Value is implicitly set to `72h` for previews triggered from new/updated image tag |
-| | share_to_github                        |                        | `true` or `false`              |
+| | share_to_github                        |                        | `true` or `false`; This options shares preview URL to the GitHub pull request as a comment |
 
 
 

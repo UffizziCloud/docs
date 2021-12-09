@@ -4,3 +4,5 @@ Two types of logs are available in Uffizzi: application logs and build logs.
 
 **Build logs** are the other type of logging you may encounter on Uffizzi. When building your application from source (e.g. GitHub), Uffizzi displays logs from this process in the the Activity Log feed. If you have trouble getting your app to build on Uffizzi, build logs may provide you with enough information to troubleshoot your issue.
 
+**Event logs** are kubernetes events that are being provided by the kubernetes api.  Uffizzi displays these logs in the Event Log feed.
+

@@ -18,8 +18,8 @@ If a Members Organization has enabled SSO for their account, then a member must 
 
 ## Roles 
 
-* **Admin** - Admins can do all and see all within an Account.  Admins can view and edit every project and deployment.  This is the highest level of permission for an account.  Uniquely they control the RBAC and billing, installation, and clusters as required.  An Account must have at least one Admin.  Admins control who is on the Account.
+* **Admin** - Admins can do all and see all within an Account.  Admins can view and edit every project and deployment.  This is the highest level of permission for an account.  Uniquely they control the RBAC, team members, projects, integrations, settings and billing.  An Account must have at least one Admin.
 
-* **Developer** - Developers can view and edit projects and deployments that they either created or were invited to.  They can NOT edit billing, installations, and clusters.  A Developer can create Projects and be invited to Projects.  A Developer can invite other Developers to a Project.  A Developer can only “see” and “edit” Projects that they either created or were invited to.
+* **Developer** - Developers can view and edit projects and deployments that they either created or were invited to.  They can NOT edit account level settings like billing, team members, and integrations.  A Developer can create Projects and be invited to Projects.  A Developer can invite other Developers to a Project.  A Developer can only “see” and “edit” Projects that they either created or were invited to.
 
 * **Viewers** - Viewers can see every project that they have been invited to.

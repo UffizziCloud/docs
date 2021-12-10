@@ -73,7 +73,7 @@ To grant Uffizzi access to pull images from your ACR, you will need:
 * Account ID  
 * Access Token  
 
-Log into [app.uffizzi.com](app.uffizzi.com) and navigate to **Settings** -> **Integrations**, then select **CONFIGURE** next to ACR. Enter your credentials when prompted, then click **SAVE**. Uffizzi should now have access to pull images from your ACR.  
+Log into [app.uffizzi.com](https://app.uffizzi.com) and navigate to **Settings** -> **Integrations**, then select **CONFIGURE** next to ACR. Enter your credentials when prompted, then click **SAVE**. Uffizzi should now have access to pull images from your ACR.
 &nbsp;  
 #### Configure webhooks for continuous previews from ACR
 

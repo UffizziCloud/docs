@@ -14,6 +14,6 @@ After adding the repo, branch, and path, select the `validate` button - Uffizzi 
 
 Save your setting and return to Project Overview.  If you have enabled trigger-based previews you can now initiate a preview based on that trigger.  Alternatively, you can select `new preview` from the UI and choose compose to deploy a preview.  If you use this method to initiate a preview you must manually delete it.
 
-![](assets/images/compose-one.png)
+![](../assets/images/compose-one.png)
 
 ## Templates

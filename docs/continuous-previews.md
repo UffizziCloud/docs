@@ -5,7 +5,7 @@ CP helps solve both technical challenges and collaboration challenges.  From a t
 
 This modern approach to agile enables teams to catch issues early, iterate quickly, and avoid the inefficiencies inherent in merging broken features or "dirty code".  The following diagram illustrates how CP improves the standard agile development process:
 
-![](assets/images/agile-with-cp.svg)
+![CP diagram](assets/images/agile-with-cp.svg)
 
 **CP is not a replacement for Continuous Integration / Continuous Delivery (CI/CD).  CP is designed to work in conjunction with CI/CD pipelines. You can think of CP as a preprocessing step that occurs before the merge, such that once you merge, your existing CI/CD pipeline takes over.**
 

@@ -68,7 +68,7 @@ ingress:
 | | deploy: resources: limits: memory      |                        | defaults to `125M`; possible values: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M` |
 | | env_file                               |                        |                                |
 | | environment                            |                        |                                |
-| | image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub; If no rve |
+| | image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub |
 | **ingress**                  |           | ✔︎                      |                                 |
 | | service                                | ✔︎                      | The service that should receive incoming HTTP/S traffic |
 | | port                                   | ✔︎                      | The port the containerized service is listening on                               |

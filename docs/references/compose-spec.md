@@ -3,7 +3,7 @@
 This document specifies the Uffizzi Compose file format used to define and preview multi-container applications using Uffizzi. A Uffizzi Compose file is a structured YAML format, similar to Docker Compose. Uffizzi Compose is based on [Compose version 3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/), but it also includes additional parameters relevant to Continuous Previews. This document describes the required and optional parameters of Uffizzi Compose.
 
 ### Uffizzi Compose file  
-The Uffizzi Compose file is a YAML file defining `services` (required) `continuous_previews`, and `ingress`. Other Compose top-level elements such as `configs`, `networks`, `version`, `volumes` and `secrets` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](# Services (required)).
+The Uffizzi Compose file is a YAML file defining `services` (required) `continuous_previews`, and `ingress`. Other Compose top-level elements such as `configs`, `networks`, `version`, `volumes` and `secrets` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](#services-required).
 
 #### Example Uffizzi Compose file
 ``` 

@@ -1,4 +1,4 @@
-When defining your application stack with a compose file or template, you can choose to add your application components from source code or as pre-built container images. Uffizzi has out-of-the-box support for the following hosted container registry providers. If your provider is not listed below, consider contributing a new integration to [open-source Uffizzi](github.com/UffizziCloud).  
+When defining your application stack with a compose file or template, you can choose to add your application components from source code or as pre-built container images. Uffizzi has out-of-the-box support for the following hosted container registry providers. If your provider is not listed below, consider contributing a new integration to [open-source Uffizzi](https://github.com/UffizziCloud).
 
 ## Amazon ECR  
 #### Authorize Uffizzi to pull container images from ECR
@@ -40,7 +40,7 @@ You should see output about the resource you've just created. If you see errors 
 
 You should also see the EventBridge Rule and other resources within the AWS Console:  
 
-![](../assets/images/ecr-webhook-screenshot.png)  
+![Screenshot](../assets/images/ecr-webhook-screenshot.png)
 &nbsp;  
 #### Removing webhook configuration
 
@@ -73,7 +73,7 @@ To grant Uffizzi access to pull images from your ACR, you will need:
 * Account ID  
 * Access Token  
 
-Log into [app.uffizzi.com](app.uffizzi.com) and navigate to **Settings** -> **Integrations**, then select **CONFIGURE** next to ACR. Enter your credentials when prompted, then click **SAVE**. Uffizzi should now have access to pull images from your ACR.  
+Log into [app.uffizzi.com](https://app.uffizzi.com) and navigate to **Settings** -> **Integrations**, then select **CONFIGURE** next to ACR. Enter your credentials when prompted, then click **SAVE**. Uffizzi should now have access to pull images from your ACR.
 &nbsp;  
 #### Configure webhooks for continuous previews from ACR
 

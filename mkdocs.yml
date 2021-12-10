@@ -3,10 +3,12 @@ site_name: Uffizzi Docs
 site_author: Uffizzi.com
 site_description: >-
   Uffizzi Documentation
+site_url: https://docs.uffizzi.com
 
 # Repository
-repo_url: https://github.com/uffizzicloud/docs
+repo_url: https://github.com/UffizziCloud/docs
 repo_name: UffizziCloud/docs
+edit_uri: edit/main/docs/
 
 # Copyright
 copyright: Copyright &copy; 2021 Uffizzi
@@ -16,6 +18,7 @@ extra_css:
   - stylesheets/extra.css
 theme:
   name: material
+  locale: en_US
   logo: assets/images/u-logo.svg
   favicon: assets/images/favicon.png
   features:
@@ -107,4 +110,3 @@ nav:
   - References:
     - Uffizzi Compose Spec: references/compose-spec.md
     - Example Uffizzi Compose: references/example-compose.md
-  

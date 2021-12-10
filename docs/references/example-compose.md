@@ -1,4 +1,4 @@
-#### uffizzi-compose-1.yml  
+#### uffizzi-compose-1.yml
 
 ```
 services:
@@ -45,9 +45,9 @@ continuous_preview:
 ingress:
   service: nginx
   port: 8080
-```  
+```
 
-#### uffizzi-compose-2.yml  
+#### uffizzi-compose-2.yml
 
 ```
 services:
@@ -56,7 +56,7 @@ services:
     configs:
       - source: vote.conf
         target: /etc/nginx/conf.d
-        
+
   redis:
     image: redis:latest
 
@@ -98,4 +98,37 @@ continuous_preview:
 ingress:
   service: nginx
   port: 8080
+```
+
+#### Wiki.js
+This example deploys images from Azure Container Registry.
+
+```
+version: "3"
+services:
+
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_USER: wikijs
+
+  wiki:
+    image: uffizziqa.azurecr.io/example-wiki:latest
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: wikijsrocks
+      DB_NAME: wiki
+
+ingress:
+  service: wiki
+  port: 3000
+
+continuous_preview:
+  deploy_preview_when_image_tag_is_created: true
+  share_to_github: true
 ```

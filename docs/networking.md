@@ -10,4 +10,4 @@ Every Uffizzi environment includes a load balancer that receives incoming HTTPS 
 
 Uffizzi will also set up an external IP address and DNS record for your load balancer, so you and your stakeholders can access it from anywhere via a public HTTPS URL.
 
-Separate preview deployments do not share an internal network, so they may only communicate over the public internet.
+Separate preview deployments do not share an internal network, so they may only communicate over the public Internet.

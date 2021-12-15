@@ -6,7 +6,7 @@ This also means that containers must coordinate port usage, but this is no diffe
 
 # Load Balancing Incoming Traffic
 
-Every Uffizzi environment includes a load balancer that receives incoming HTTPS requests and routes them to the [HTTP port specified](references/compose-spec/#ingress-required) for the container which receives incoming requests. Uffizzi load balancers are set up and managed automatically, so you don't need to enable or configure them. Uffizzi also handles HTTPS certificates for you; our certificate authority is trusted by all popular web browsers and devices.
+Every Uffizzi environment includes a load balancer that receives incoming HTTPS requests and routes them to the [HTTP port specified](../references/compose-spec/#ingress-required) for the container which receives incoming requests. Uffizzi load balancers are set up and managed automatically, so you don't need to enable or configure them. Uffizzi also handles HTTPS certificates for you; our certificate authority is trusted by all popular web browsers and devices.
 
 Uffizzi will also set up an external IP address and DNS record for your load balancer, so you and your stakeholders can access it from anywhere via a public HTTPS URL.
 

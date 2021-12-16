@@ -102,6 +102,7 @@ nav:
     - Networking & Load-balancing: networking.md
     - Role-based Access Control: rbac.md
     - Logs: logs.md
+    - Environment Variables: environment-variables.md
   - Setup:
     - Configure Previews: setup/config-previews.md
     - Source Code Integrations: setup/source-code-integrations.md

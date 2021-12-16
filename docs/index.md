@@ -66,11 +66,6 @@ The below table shows a list of features by configuration (dated 12/8/21):
 | Requires self-host Uffizzi App          | Y                             | No                       | Y                                |
 | Requires self-host Redis                | Y                             | No                       | Y                                |
 
-
-
-
-
-
 ## Popular Links
 
 * [Continuous Previews](continuous-previews.md)

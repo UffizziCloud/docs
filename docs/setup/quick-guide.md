@@ -8,33 +8,33 @@ This is a quick-guide for how to execute various actions related to Preview Depl
 |                              | 3. Connect to uffizzi-compose.yml in Repo             | Option 1- From existing template or create new |
 |                              |                                                          | Option 2- User Manually Adds Components        |
 |                              |                                                          |                                                |
-| **Set-up CP**                    | From Project Level- Specs                                 | From Project Level- Specs                       |
-|                              | Choose Compose                                           | Choose Templates                               |
-|                              | Connect to uffizzi-compose.yml in Repo                   | User chooses existing Template or creates new  |
-|                              | CP is defined within uffizzi-compose.yml                 | User selects CP Policy as part of the Template |
+| **Set-up CP**                    | 1. From Project Level- Specs                                 | 1. From Project Level- Specs                       |
+|                              | 2. Select Compose tab                                           | 2. Select Compose tab Templates                               |
+|                              | 3. Connect to uffizzi-compose.yml in Repo                   | 3. User chooses existing Template or creates new Template  |
+|                              | 4. CP is defined within uffizzi-compose.yml                 | 4. User selects CP Policy as part of the Template |
 |                              |                                                          |                                                |
-| **Manage Secrets**               | From Project Level- Project Settings                      | Same                                           |
-|                              | Secrets Tab                                              |                                                |
-|                              | User Adds Secrets to UI as Write Only                    |                                                |
+| **Manage Secrets**               | 1. From Project Level- got to Project Settings                      | Same                                           |
+|                              | 2. Select Secrets Tab                                              |                                                |
+|                              | 3. User Adds Secrets to UI as Write Only                    |                                                |
 |                              | Note- Secrets are applied to containers at run-time      |                                                |
 |                              |                                                          |                                                |
-| **Manage ENVs / Config Files**      | Option 1- Include in compose.yml                         | Add ENVs / Config Files to component                          |
+| **Manage ENVs / Config Files**      | Option 1- Include ENVS or Config in compose.yml                         | Add ENVs / Config Files to components in GUI                          |
 |                              | Option 2- Save within Repo and                              |                  |
-|                              | Reference the File within compose.yml                    |                                                |
+|                              | reference the the File(s) within compose.yml                    |                                                |
 |                              |                                                          |                                                |
-| **CP with a Uffizzi Build**      | User Specifies within uffizzi-compose.yml-               | User specifies CP policy in Template         |
-|                              | continuous_preview:                                      |                                            |
+| **CP with a Uffizzi Build**      | User Specifies within uffizzi-compose.yml-               | 1. User specifies CP policy in Template         |
+|                              | i.e. continuous_preview:                                      |                                            |
 |                              | deploy_preview_when_pull_request_is_opened: true         |                                                |
 |                              | delete_preview_when_pull_request_is_closed: true         |                                                |
 |                              |                                                          |                                                |
-| **CP with Bring Your Own Build** | User Specifies within uffizzi-compose.yml-               | Not Available from Template - not currently planned          |
+| **CP with Bring Your Own Build** | User Specifies policy within uffizzi-compose.yml-               | Feature Not Available from Template - not currently planned          |
 |                              | Note- Tag must = uffizzi_request_#                          |                                                |
-|                              | continuous_preview:                                      |                                                |
+|                              | i.e. continuous_preview:                                      |                                                |
 |                              | deploy_preview_when_image_tag_is_created: true           |                                                |
 |                              | *delete_preview_after: Xh                                |                                                |
 |                              |                                                          |                                                |
 | **Share Preview URL**            | User Specifies within uffizzi.compose.yml-                           | Check box in UI [Share to Github]              |
-|                              | continuous_preview:                                      |                                                |
+|                              | i.e. continuous_preview:                                      |                                                |
 |                              | share_to_service: true (i.e. Github, Jira, Slack...) |                                                |
 |                              |                                                          |                                                |
 | **Time-based deletion**          | User Specifies within uffizzi-compose.yml-               |                                                |

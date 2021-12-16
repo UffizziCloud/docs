@@ -3,9 +3,9 @@ This is a quick-guide for how to execute various actions related to Preview Depl
 |                    | **Compose Method**                                       | **Template Method**                            |
 |------------------------------|----------------------------------------------------------|------------------------------------------------|
 |                              |                                                          |                                                |
-| **Create a Preview**             | From Project Level- New Preview                           | From Project Level- New Preview                 |
-|                              | Choose Compose                                           | From Template or From Scratch                  |
-|                              | User chooses uffizzi-compose.yml in Repo             | Option 1- From existing template or create new |
+| **Create a Preview**             | 1. From Project Level- New Preview button                          | 1. From Project Level- New Preview button               |
+|                              | 2. Select Compose Tab                                           | 2. Select From Template or From Scratch                  |
+|                              | 3. Connect to uffizzi-compose.yml in Repo             | Option 1- From existing template or create new |
 |                              |                                                          | Option 2- User Manually Adds Components        |
 |                              |                                                          |                                                |
 | **Set-up CP**                    | From Project Level- Specs                                 | From Project Level- Specs                       |

@@ -98,7 +98,8 @@ markdown_extensions:
 # Page tree
 nav:
   - Home:
-    - Overview: index.md
+    - Home: index.md
+    - Overview: overview.md
     - Continuous Previews: continuous-previews.md
     - Networking & Load-balancing: networking.md
     - Role-based Access Control: rbac.md

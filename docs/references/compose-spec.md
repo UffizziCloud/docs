@@ -5,56 +5,46 @@ This document specifies the Uffizzi Compose file format used to define and previ
 ### Uffizzi Compose file  
 The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `continuous_previews`, and `ingress`. Other Compose top-level elements such as `networks`, `secrets`, `version`, and `volumes` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](#services-required).
 
-``` yaml title="docker-compose.uffizzi.yml" 
-services:
-
-  worker:
-    # Build an image from source
-    build:
-      context: https://github.com/example/example-voting-worker#main
-      dockerfile: ./Dockerfile      # Relative path from root of remote repository
-
-  vote:
-    # Pull an image from ACR
-    image: example.azurecr.io/example-voting-vote:latest
-    deploy:
+#### Example Uffizzi Compose file
+``` 
+services:  #required
+  frontend:
+    build:  #example building from source
+      context: https://github.com/Account/example-frontend:main
+      dockerfile: #optional, defaults to Dockerfile in directory
+ 
+  backend:  #example pulling image from registry
+    image: example.container-registry.io/example-backend:latest 
+    deploy:  #optional, defaults to 125M
       resources:
         limits:
-          memory: 250M              # Defaults to 125M
+          memory: 250M
 
-  result:
-    # Pull an image from GCR
-    image: gcr.io/example/example-result:latest
-
-  redis:
-    # If no registry is specified, defaults to hub.docker.com
-    image: redis                    # Defaults to `latest` tag
-
-  postgres:
-    image: postgres:9.6
+  db:
+    image: postgres:9.6  #defaults to pulling from Docker Hub and latest tag
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 250M #options are 125M, 250M, 500M, 1000M, 2000M, 4000M
 
   nginx:
-    image: nginx:latest
+    image: nginx  
     configs:
-      - source: vote.conf
-        target: /etc/nginx/conf.d/vote.conf
+      - my_config: example.conf
+        target: /etc/nginx/conf.d/example.conf
 
-configs:
-  vote-nginx-conf:
-    file: ./configs/vote.conf       # Relative path from root of current repository
+configs: 
+  my_config:
+    file:  ./example.conf
 
-# Event-based triggers
-continuous_preview:
-  deploy_preview_when_image_tag_is_created: true
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
-  share_to_github: true
+continuous_preview:  #optional, enables event-triggered previews
+  deploy_preview_when_pull_request_is_opened: true  
+  delete_preview_when_pull_request_is_closed: true  
 
-# Defines which service should receive incoming HTTPS traffic
-ingress:
+ingress:  #required
   service: nginx
   port: 8080
 ```

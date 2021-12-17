@@ -103,6 +103,7 @@ nav:
     - Role-based Access Control: rbac.md
     - Logs: logs.md
   - Setup:
+    - Quick Guide: setup/quick-guide.md  
     - Configure Previews: setup/config-previews.md
     - Source Code Integrations: setup/source-code-integrations.md
     - Container Registry Integrations: setup/container-registry-integrations.md

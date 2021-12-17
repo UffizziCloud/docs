@@ -1,19 +1,85 @@
-There are two ways to configure previews on Uffizzi:  
+There are two distinct methods for configuring Previews on Uffizzi:  
 
-* Compose  - A configuration-as-code YAML based on Docker Compose
-* Templates - Configurations created and managed in the Uffizzi GUI  
+* Compose  - A configuration-as-code YAML - `docker-compose.uffizzi.yml`- based on Docker Compose (version 3.9) .
+            Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.
+* Templates - Configurations created and managed in the Uffizzi Web Interface (GUI).  
 
 
-## Compose
+## Using Compose
 
-Check the References section for examples and detailed information on how to write your `docker-compose-uffizzi.yml`.  We recommend that your `docker-compose-uffizzi.yml` be saved at the top level of your `main` branch in your repository.  
+1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](https://docs.uffizzi.com/references/compose-spec/) for examples and detailed information on how to write your `docker-compose.uffizzi.yml`.  
 
-Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect your `docker-compose-uffizzi.yml`.
 
-After adding the repo, branch, and path, select the `validate` button - Uffizzi will confirm if your file is valid or will provide error messaging that indicates what needs to be addressed in your `docker-compose-uffizzi.yml`.
+2. Add your `x-uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
 
-Save your setting and return to Project Overview.  If you have enabled trigger-based previews you can now initiate a preview based on that trigger.  Alternatively, you can select `new preview` from the UI and choose compose to deploy a preview.  If you use this method to initiate a preview you must manually delete it.
+![Screenshot](../assets/images/compose-in-git.png)
+
+### Connecting Your Compose
+
+3. Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect to your `docker-compose.uffizzi.yml` which should be stored in your git repository.  To connect to your repository see [Source Code Integrations](https://docs.uffizzi.com/setup/source-code-integrations/).
 
 ![Screenshot](../assets/images/compose-one.png)
 
-## Templates
+After adding the repo, branch, and path, select the `validate` button - Uffizzi will confirm if your file is valid or will provide error messaging that indicates what needs to be addressed.
+
+![Screenshot](../assets/images/add-compose.png)
+
+If you want `uffizzi_app` to recognize changes to your `docker-compose.uffizzi.yml` check the Box for "Auto-deploy updates".
+
+Save your setting and return to Project Overview.
+
+### Initiating a Trigger-based Preview
+
+1- `Open Pull Request` Trigger - If you have enabled a Pull Request trigger in your compose you can initiate a preview by opening a `pull request` within any git repository that is invoked by your `docker-compose.uffizzi.yml`.
+
+![Screenshot](../assets/images/open-pr.png)
+
+The webhook within your git repo will inform `uffizzi_app` of the `Open pull request` and initiate the Preview.
+
+2-  `Tag-based` Trigger - If you have enabled a Tag-based trigger the webhook within your image registry will inform `uffizzi_app` of the new image tagged with `uffizzi_request_#` and will initiate the Preview.
+
+When a Preview is triggered `uffizzi_app` will show the new Preview and its status:
+
+![Screenshot](../assets/images/initiated-preview.png)
+
+The Preview will take a few minutes to finish deploying - the build process is typically the longest part of the sequence.  You can monitor the status by clicking on your Preview.  Within the UI you can monitor the activity log, build logs, individual container logs, and event logs.
+
+![Screenshot](../assets/images/preview-status.png)
+
+
+When the Preview has finished deploying, the Preview URL turns blue - the link is now live and you can securely access your Preview.  Please note that if you have deployed multiple containers, some of those containers may still take time to fully initiate after the Preview URL goes live.
+
+![Screenshot](../assets/images/preview-link-live.png)
+
+### Deleting a Trigger-based Preview
+
+1- `Close Pull Request` Deletion Trigger - If you have enabled deletion based on a Close Pull Request trigger in your compose your Preview will be deleted by merging or closing the respective `pull request` that initiated the Preview.
+
+2- `Time-based` Deletion Trigger - If you have enabled time-based deletion, your Preview will be deleted after the specified amount of time. The range is 1h to 720h.
+
+3- You can always delete a Preview by selecting the `trash` icon in the UI.
+
+![Screenshot](../assets/images/delete.png)
+
+If you have enabled both a `Close Pull Request` deletion trigger and a `Time-based` deletion trigger, `uffizzi_app` will recognize whichever trigger fires first.
+
+*Note- for Previews initiated with a `Tag-based` trigger the only programmatic deletion is `Time-based`.  This will be improved with future releases.
+
+### Initiating a Manual Preview
+
+Alternatively, you can select `new preview` from the UI and choose a compose from within your connected repository to deploy a preview.  If you use this method to initiate a preview you must manually delete it from the UI.
+
+![Screenshot](../assets/images/compose-two.png)
+
+![Screenshot](../assets/images/compose-three.png)
+
+![Screenshot](../assets/images/compose-four.png)
+
+
+### Deleting a Manual Preview
+
+You can always delete a Preview by selecting the `trash` icon in the UI.
+
+![Screenshot](../assets/images/delete.png)
+
+## Using Templates

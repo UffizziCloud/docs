@@ -7,46 +7,43 @@ The Uffizzi Compose file is a YAML file defining `services` (required), `continu
 
 #### Example Uffizzi Compose file
 ``` 
-services:
-  worker:
+services:  #required
+  frontend:
     build:
-      context: https://github.com/UffizziCloud/example-voting-worker:main
-      dockerfile: Dockerfile
-    deploy:
+      context: https://github.com/Account/example-frontend:main
+      dockerfile: #optional, defaults to Dockerfile in directory
+ 
+  backend:
+    image: example.container-registry.io/example-backend:latest 
+    deploy:  #optional, defaults to 125M
       resources:
         limits:
           memory: 250M
-  vote:
-    image: uffizziqa.azurecr.io/example-voting-vote:latest
-    deploy:
-      resources:
-        limits:
-          memory: 250M
-  result:
-    image: uffizziqa.azurecr.io/example-voting-result:latest
-  redis:
-    image: redis:latest
-  postgres:
-    image: postgres:9.6
+
+  db:
+    image: postgres:9.6  #defaults to pulling from Docker Hub and latest tag
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     deploy:
       resources:
         limits:
-          memory: 250M
+          memory: 250M #options are 250M, 500M, 1000M, 2000M, 4000M
   nginx:
-    image: nginx:latest
+    image: nginx  
     configs:
-      - source: vote.conf
-        target: /etc/nginx/conf.d
+      - my_config: example.conf
+        target: /etc/nginx/conf.d/example.conf
 
-continuous_preview:
-  deploy_preview_when_image_tag_is_created: true
-  tag_pattern: foo-bar-*
-  share_to_github: true
+configs: 
+  my_config:
+    file:  ./example.conf
 
-ingress:
+continuous_preview:  #optional, enables trigger-based previews
+  deploy_preview_when_pull_request_is_opened: true  
+  delete_preview_when_pull_request_is_closed: true  
+
+ingress:  #required
   service: nginx
   port: 8080
 ```

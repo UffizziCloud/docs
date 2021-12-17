@@ -36,10 +36,15 @@ services:
           memory: 250M
 
   result:
-    image: uffizziqa.azurecr.io/example-voting-result:latest
+    image: gcr.io/uffizzi-pro-qa-gke/example-result:latest
+
+configs:
+  source:
+    file: ./vote.conf
 
 continuous_preview:
-  deploy_preview_when_image_tag_is_created: true
+  deploy_preview_when_image_tag_is_created: true  #for tag-initiated preview tag must = uffizzi_request_#
+  delete_preview_after: 10h
   share_to_github: true
 
 ingress:

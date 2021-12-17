@@ -3,17 +3,17 @@
 This document specifies the Uffizzi Compose file format used to define and preview multi-container applications using Uffizzi. A Uffizzi Compose file is a structured YAML format, similar to Docker Compose. Uffizzi Compose is based on [Compose version 3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/), but it also includes additional parameters relevant to Continuous Previews. This document describes the required and optional parameters of Uffizzi Compose.
 
 ### Uffizzi Compose file  
-The Uffizzi Compose file is a YAML file defining `services` (required), `continuous_previews`, and `ingress`. Other Compose top-level elements such as `networks`, `version`, `volumes` and `secrets` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](#services-required).
+The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `continuous_previews`, and `ingress`. Other Compose top-level elements such as `networks`, `secrets`, `version`, and `volumes` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](#services-required).
 
 #### Example Uffizzi Compose file
 ``` 
 services:  #required
   frontend:
-    build:
+    build:  #example building from source
       context: https://github.com/Account/example-frontend:main
       dockerfile: #optional, defaults to Dockerfile in directory
  
-  backend:
+  backend:  #example pulling image from registry
     image: example.container-registry.io/example-backend:latest 
     deploy:  #optional, defaults to 125M
       resources:
@@ -29,6 +29,7 @@ services:  #required
       resources:
         limits:
           memory: 250M #options are 125M, 250M, 500M, 1000M, 2000M, 4000M
+
   nginx:
     image: nginx  
     configs:
@@ -39,7 +40,7 @@ configs:
   my_config:
     file:  ./example.conf
 
-continuous_preview:  #optional, enables trigger-based previews
+continuous_preview:  #optional, enables event-triggered previews
   deploy_preview_when_pull_request_is_opened: true  
   delete_preview_when_pull_request_is_closed: true  
 
@@ -54,6 +55,11 @@ As with Docker Compose, a Service is an abstract definition of a computing resou
 ### Ingress (required)
 Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `port` number.
 
+### Configs (optional)  
+Configs allow you to add configuration files to your applications. Files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository.  
+
+You must explicitly grant access to configuration files per service using the `configs` element within the service definition. Uffizzi supports [Docker `config` short syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#configs) only.
+
 ### Continuous Preview (optional)
 Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.
 
@@ -61,28 +67,30 @@ Continuous Previews (CP) are an automation-enabled best practice that encourages
 See the following table for full support status of the keys:
 
 
-|Top-level Element | Sub-level Element     | Required           | Notes          |
-| ---------------- | --------------------- | ------------------ | -------------- |
-| **services**       |                       | ✔︎                  |                |
-|         | build                                  |                        |                                |
-| | build: context                         | ✔︎                      | Required if **build** is specified; Expects a URL to a GitHub repository (e.g., `context: <repository_url>:<branch_name>`)  | 
-| | build: dockerfile                      |                        | defaults to `./Dockerfile` |
-| | command                                |                        |                                |   
-| | configs                                |                        |                                |
-| | configs: source                        | ✔︎                      | Required if **configs** is specified; Name of the configuration file |
-| | configs: target                        | ✔︎                      | Required if **configs** is specified; Mount path within the container |
-| | deploy                                 |                        |                                |
-| | deploy: auto                           |                        | defaults to `true`; If true, Uffizzi will auto-deploy changes made to a git or image repository |
-| | deploy: resources: limits: memory      |                        | defaults to `125M`; possible values: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M` |
-| | env_file                               |                        |                                |
-| | environment                            |                        |                                |
-| | image                                  |                        | Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub |
-| **ingress**                  |           | ✔︎                      |                                 |
-| | service                                | ✔︎                      | The service that should receive incoming HTTP/S traffic |
-| | port                                   | ✔︎                      | The port the containerized service is listening on                               |
-| **continuous_preview**    |                |                        |                                |
-| | deploy_preview_when_image_tag_is_created |                      | `true` or `false`; When `true`, all new tags created for each **image** defined in the compose file will be deployed           |
-| | deploy_preview_when_pull_request_is_opened |                    | `true` or `false`              |
-| | delete_preview_when_pull_request_is_closed |                    | `true` or `false`              |
-| | delete_preview_after                   |                        | Expects hours as an integer; Value is implicitly set to `72h` for previews triggered from new/updated image tag |
-| | share_to_github                        |                        | `true` or `false`; This options shares preview URL to the GitHub pull request as a comment |
+|Top-level Element       | Sub-level Element                            | Required | Notes                                                                                                                       |
+| ---------------------- | -------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **services**           |                                              | ✔︎        |                                                                                                                             |
+|                        | build                                        |          |                                                                                                                             |
+|                        | build: context                               | ✔︎        | Required if **build** is specified; Expects a URL to a GitHub repository (e.g., `context: <repository_url>:<branch_name>`) or a relative path in the current repository | 
+|                        | build: dockerfile                            |          | defaults to `./Dockerfile`                                                                                                  |
+|                        | command                                      |          |                                                                                                                             |   
+|                        | configs                                      |          | Expects a list of sources with targets                                                                                      |
+|                        | configs: source                              | ✔︎        | Required if **configs** is specified; A config name as defined in the top-level **config** definition                       |
+|                        | configs: target                              | ✔︎        | Required if **configs** is specified; Mount path (including filename) within the container                                  |
+|                        | deploy                                       |          |                                                                                                                             |
+|                        | deploy: auto                                 |          | defaults to `true`; If true, Uffizzi will auto-deploy changes made to a git or image repository                             |
+|                        | deploy: resources: limits: memory            |          | defaults to `125M`; possible values: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M`                                      |
+|                        | env_file                                     |          |                                                                                                                             |
+|                        | environment                                  |          |                                                                                                                             |
+|                        | image                                        |          | defaults to `latest` tag; Expects a URI to a container registry; Currently supports ACR, ECR, GCR, and Docker Hub                                     |
+| **configs**            |                                              |          |                                                                                                                             |
+|                        | file                                         | ✔︎        | Required if top-level `configs` is defined; The relative path to the config file                                            |
+| **ingress**            |                                              | ✔︎        |                                                                                                                             |
+|                        | service                                      | ✔︎        | The service that should receive incoming HTTP/S traffic                                                                     |
+|                        | port                                         | ✔︎        | The port the containerized service is listening on                                                                          |
+| **continuous_preview** |                                              |          |                                                                                                                             |
+|                        | deploy_preview_when_image_tag_is_created     |          | `true` or `false`; When `true`, all new tags created for each **image** defined in the compose file will be deployed        |
+|                        | deploy_preview_when_pull_request_is_opened   |          | `true` or `false`                                                                                                           |
+|                        | delete_preview_when_pull_request_is_closed   |          | `true` or `false`                                                                                                           |
+|                        | delete_preview_after                         |          | Expects hours as an integer; Value is implicitly set to `72h` for previews triggered from new/updated image tag             |
+|                        | share_to_github                              |          | `true` or `false`; This options shares preview URL to the GitHub pull request as a comment                                  |

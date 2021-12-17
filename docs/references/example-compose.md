@@ -1,4 +1,4 @@
-#### docker-compose.uffizzi.yml - Example of a Tag-initiated Preview (Bring Your Own Build)
+#### Vote App - Example of a Tag-initiated Preview (Bring Your Own Build)
 
 ```
 services:  #required
@@ -56,7 +56,7 @@ ingress:
   port: 8080
 ```
 
-#### docker-compose.uffizzi-2.yml - Example of PR-triggered Preview (Build from Source)
+#### Vote App - Example of PR-triggered Preview (Build from Source)
 
 ```
 services:

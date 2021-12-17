@@ -28,7 +28,7 @@ services:  #required
     deploy:
       resources:
         limits:
-          memory: 250M #options are 250M, 500M, 1000M, 2000M, 4000M
+          memory: 250M #options are 125M, 250M, 500M, 1000M, 2000M, 4000M
   nginx:
     image: nginx  
     configs:

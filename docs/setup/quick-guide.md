@@ -17,9 +17,9 @@ This is a quick-guide for how to execute various actions related to Preview Depl
 |                              | 3. User Adds Secrets to UI as Write Only                    |                                                |
 |                              | Note- Secrets are applied to containers at run-time      |                                                |
 |                              |                                                          |                                                |
-| **Manage ENVs / Config Files**      | Option 1- Include ENVS or Config in compose                         | Add ENVs / Config Files to components in GUI                          |
+| **Manage ENVs / Config Files**      | Option 1- Include ENVs or Config in `docker-compose.uffizzi.yml`                         | Add ENVs / Config Files to components in GUI                          |
 |                              | Option 2- Save within Repo and                              |                  |
-|                              | reference the the File(s) within compose                    |                                                |
+|                              | reference the the File(s) within `docker-compose.uffizzi.yml`                   |                                                |
 |                              |                                                          |                                                |
 | **CP with a Uffizzi Build**      | User Specifies within `docker-compose.uffizzi.yml`-               | User specifies CP policy in Template         |
 |                              | i.e. continuous_preview:                                      |                                            |

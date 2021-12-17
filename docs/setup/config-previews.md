@@ -1,15 +1,16 @@
 There are two distinct methods for configuring Previews on Uffizzi:  
 
-* Compose  - A configuration-as-code YAML based on Docker Compose (version 3.9) `docker-compose.uffizzi.yml`.
+* Compose  - A configuration-as-code YAML - `docker-compose.uffizzi.yml`- based on Docker Compose (version 3.9) .
             Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.
 * Templates - Configurations created and managed in the Uffizzi Web Interface (GUI).  
 
 
 ## Using Compose
 
-1. Write Your Compose - Start with your docker-compose.yml and create a new file named docker-compose.uffizzi.yml.  Check [References](https://docs.uffizzi.com/references/compose-spec/) for examples and detailed information on how to write your `docker-compose.uffizzi.yml`.  
+1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](https://docs.uffizzi.com/references/compose-spec/) for examples and detailed information on how to write your `docker-compose.uffizzi.yml`.  
 
-2. Save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
+
+2. Add your `x-uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
 
 ![Screenshot](../assets/images/compose-in-git.png)
 
@@ -23,7 +24,7 @@ After adding the repo, branch, and path, select the `validate` button - Uffizzi 
 
 ![Screenshot](../assets/images/add-compose.png)
 
-If you want `uffizzi_app` to recognize changes to your `docker-compose.uffizzi.yml` select the Check Box for "Auto-deploy updates".
+If you want `uffizzi_app` to recognize changes to your `docker-compose.uffizzi.yml` check the Box for "Auto-deploy updates".
 
 Save your setting and return to Project Overview.
 
@@ -46,7 +47,7 @@ The Preview will take a few minutes to finish deploying - the build process is t
 ![Screenshot](../assets/images/preview-status.png)
 
 
-When the Preview has finished deploying the Preview URL turns blue - the link is now live and you can securely access your Preview.  Please note that if you have deployed multiple containers, some of those containers may still take time to fully initiate after the Preview URL goes live.
+When the Preview has finished deploying, the Preview URL turns blue - the link is now live and you can securely access your Preview.  Please note that if you have deployed multiple containers, some of those containers may still take time to fully initiate after the Preview URL goes live.
 
 ![Screenshot](../assets/images/preview-link-live.png)
 
@@ -54,7 +55,7 @@ When the Preview has finished deploying the Preview URL turns blue - the link is
 
 1- `Close Pull Request` Deletion Trigger - If you have enabled deletion based on a Close Pull Request trigger in your compose your Preview will be deleted by merging or closing the respective `pull request` that initiated the Preview.
 
-2- `Time-based` Deletion Trigger - If you have enabled time-based deletion your Preview will be deleted after the specified amount of time.
+2- `Time-based` Deletion Trigger - If you have enabled time-based deletion, your Preview will be deleted after the specified amount of time. The range is 1h to 720h.
 
 3- You can always delete a Preview by selecting the `trash` icon in the UI.
 

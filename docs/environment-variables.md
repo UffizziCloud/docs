@@ -18,7 +18,6 @@ services:
 ```
 
 * Use `env_file` if you have a large number of enviroment variables that would otherwise clutter up your compose file. You can store your variables in a file within your repository and use the `env_file` component to specify the path to this file. For example, the following `uffizzi-compose.yml` snippet tells Uffizzi to read the contents of `envs/myconfigs.env` and add them to the container `myservice`:  
-
 ```
 services:
     mysevice:
@@ -27,11 +26,11 @@ services:
 ```
 
 ### 2. For Template-based Previews  
-Templates allow you to define and manage your application stack with a simple graphical user interface. If you use Templates to define your Previews, you can add environment variables when you add each application component to your Template. After adding a new component (e.g., a GitHub repository or container image) to your Template, select the **ADD ENVIRONMENT VARIABLES** button to copy and paste your environment variables into the text box provided. Environment variables should be formatted as name/value pairs with the following requirements:  
+Templates allow you to define and manage your application stack with a simple graphical user interface. If you use Templates to define your Previews, you can add environment variables when you add each application component to your Template. After adding a new component to your Template (e.g., a GitHub repository or container image), select the **ADD ENVIRONMENT VARIABLES** button to copy and paste your environment variables into the text box provided. Environment variables should be formatted as name/value pairs with the following requirements:  
 
 * Add one name/value pair per line   
 * Separate name and value by `=`  
-* No whitespaces allowed
+* Do not include whitespaces  
 
 For example:  
 
@@ -41,3 +40,9 @@ baz=bar                    # valid
 FOO=bar baz=bar            # invalid
 FOO = bar                  # invalid
 ```
+&nbsp;  
+
+![](assets/images/template-environment-variables.png)
+&nbsp;  
+
+![](assets/images/template-envvars-textbox.png)

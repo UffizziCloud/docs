@@ -48,9 +48,9 @@ The below table shows a list of features by configuration (dated 12/8/21):
 | Uffizzi Compose                         | Y                             | Y                        | Y                                |
 | Uffizzi Templates                       | N, N/A                        | Y                        | Y                                |
 | Requires CLI download                   | Y                             | Y                        | Y                                |
-| Requires Coordination with Uffizzi Reps | N / Never                     | No                       | Y, pending upgrade to onboarding |
-| Requires own K8s cluster                | Y                             | No                       | Y                                |
-| Requires self-host GUI                  | No Option                     | No                       | Y                                |
-| Requires self-host Postgres Db          | Y                             | No                       | Y                                |
-| Requires self-host Uffizzi App          | Y                             | No                       | Y                                |
-| Requires self-host Redis                | Y                             | No                       | Y                                |
+| Requires Coordination with Uffizzi Reps | N / Never                     | N                       | Y, pending upgrade to onboarding |
+| Requires own K8s cluster                | Y                             | N                       | Y                                |
+| Requires self-host GUI                  | N, N/A                     | N                       | Y                                |
+| Requires self-host Postgres Db          | Y                             | N                       | Y                                |
+| Requires self-host Uffizzi App          | Y                             | N                       | Y                                |
+| Requires self-host Redis                | Y                             | N                       | Y                                |

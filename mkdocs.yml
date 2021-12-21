@@ -101,7 +101,7 @@ nav:
     - Overview: index.md
     - Quick Guide: quick-guide.md  
     - Set Up Previews: set-up-previews.md
-    - Configuration Options and Features: configuration-options-and-features.md
+    - Uffizzi Configuration Options and Features: config-options.md
     - Continuous Previews: continuous-previews.md
     
   - Config:
@@ -114,5 +114,5 @@ nav:
     - Logs: config/logs.md
     - Role-based Access Control: config/rbac.md
     - Single Sign-On (SSO): config/single-sign-on.md
-  - Examples:
+  - Compose Examples:
     - Example Uffizzi Compose: examples/example-compose.md

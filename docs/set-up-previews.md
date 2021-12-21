@@ -32,7 +32,7 @@ Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR,
 
 ### Connecting Your Compose
 
-3. Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect to your `docker-compose.uffizzi.yml` which should be stored in your git repository.  To connect to your repository see [Source Code Integrations](https://docs.uffizzi.com//source-code-integrations/).
+3. Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect to your `docker-compose.uffizzi.yml` which should be stored in your git repository.  To connect to your repository see [Source Code Integrations](config/source-code-integrations.md).
 
 ![Screenshot](../assets/images/compose-one.png)
 

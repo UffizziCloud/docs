@@ -116,4 +116,4 @@ nav:
   - Compose Examples:
     - Example Uffizzi Compose: examples/example-compose.md
   - Engineering Blog: 
-    - Combining your existing CI/CD and Container Registry to enable Continuous Previews: engineering-blog/ci-cd-registry.md
+    - Combining your existing CI/CD and Container Registry to enable Continuous Previews: engineeringblog/ci-cd-registry.md

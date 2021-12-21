@@ -287,6 +287,10 @@ Specify the image to start the container from, as  `repository:tag`. If no tag i
 ## Secrets configuration examples
 This section contains of example configurations supported by a `secrets` definition in version 1.  
 
+### **external**  
+
+A secret that is external to you compose context
+
 ### **secrets**  
 
 The top-level secrets declaration defines or references secrets that can be granted to the services in this stack. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. In the following example, `FOO` is the name of a secret that has been added in the Uffizzi Dashboard.
@@ -304,7 +308,3 @@ secrets:
     name: "FOO"
 
 ```
-
-### **external**  
-
-A secret that is external to you compose context

@@ -1,13 +1,13 @@
-###Configuration Options
+##Configuration Options
 
 Option 1- **Compose**  - A configuration-as-code YAML - `docker-compose.uffizzi.yml`- based on Docker Compose (version 3.9) .
             Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.
 
 Option 2- **Templates** - Configurations created and managed in the Uffizzi Web Interface (GUI).
 
-###Build Options
+##Build Options
 
-Option 1- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle the Build 
+Option 1- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle the Build. 
      
    *This is for users who have custom builds or who are using a VCS that is not yet integrated with Uffizzi.
 
@@ -15,12 +15,18 @@ Option 2- **Use Uffizzi's Integrated Build** - Uffizzi will build from source fr
 
    *This is for users on Github who want Uffizzi to manage the full processs.
 
+##Integrations and Webhooks
+
+Out-of-the-box Uffizzi supports integrations with Github, Docker Hub, AWS Elastic Container Registry, Azure's Container Registry, and Google's Container Registry.  Ensure you have connected to the relevant Repos and Registries at the Account Level Settings.  
+
+Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR, ACR, and GCR the user must manually set-up the [webhooks](config/container-registry-integrations.md).
+
 ## Using Compose
 
 1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](https://docs.uffizzi.com/config/compose-spec/) and [Examples](examples/example-compose.md) for detailed information on how to write your `docker-compose.uffizzi.yml`.  
 
 
-2. Add your `x-uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
+2. Add your `uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
 
 ![Screenshot](../assets/images/compose-in-git.png)
 

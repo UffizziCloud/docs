@@ -6,7 +6,7 @@ This also means that containers must coordinate port usage, but this is no diffe
 
 # Load Balancing Incoming Traffic
 
-Every Preview environment includes a load balancer that receives incoming HTTPS requests and routes them to the [HTTP port specified](../references/compose-spec/#ingress-required) for the container which receives incoming requests. Preview load balancers are set up and managed automatically, so you don't need to enable or configure them. The load balancer also handles HTTPS certificates for you; the certificate authority is trusted by all popular web browsers and devices.
+Every Preview environment includes a load balancer that receives incoming HTTPS requests and routes them to the [HTTP port specified](https://docs.uffizzi.com/config/compose-spec/#ingress-required) for the container which receives incoming requests. Preview load balancers are set up and managed automatically, so you don't need to enable or configure them. The load balancer also handles HTTPS certificates for you; the certificate authority is trusted by all popular web browsers and devices.
 
 The load balancer will also set up an external IP address and DNS record, so you and your stakeholders can access it from anywhere via a public HTTPS URL.
 

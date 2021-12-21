@@ -100,6 +100,8 @@ configs:
 
 Specify configuration related to the deployment and running of services. Currently, the only deploy option supported is `deploy: resources: limit: memory`.  
 
+#### **resources: limits: memory**
+
 ``` yaml
 services:
   myservice:
@@ -111,3 +113,59 @@ services:
 ```
 
 `memory` defaults to 125 megabytes, but you can use the following increments: `125M`, `250M`, `500M`, `1000M`, `2000M`, `4000M`.
+
+### **entrypoint**  
+
+Override the default entrypoint.
+
+``` yaml
+  entrypoint: /code/entrypoint.sh
+```
+
+### **env_file**  
+
+Add environment variables from a file. Can be a single value or a list.  
+
+``` yaml
+  env_file: .env
+```
+
+``` yaml
+  env_file:
+  - ./common.env
+  - ./apps/web.env
+  - /opt/runtime_opts.env
+```
+
+Uffizzi expects each line in an env file to be in `NAME=VALUE` format.  
+
+```
+FOO=bar
+```
+
+### **environment**  
+
+Add environment variables as an array. Any boolean values (true, false, yes, no) need to be enclosed in quotes to ensure they are not converted to True or False by the YML parser.
+
+``` yaml
+  environment:
+    FOO: bar
+    BAR: 'true'
+```
+
+### **image**  
+
+Specify the image to start the container from, as  `repository:tag`. If no tag is specified, default is `latest`. Uffizzi currently integrates with Docker Hub, Amazon ECR, Azure Container Registry, and Google Container Registry. If no registry is specified, default is `hub.docker.com`.
+
+``` yaml
+  image: redis:latest  # Defaults to hub.docker.com
+```
+
+``` yaml
+  image: example.azurecr.io/example-service:latest  # Credentials should be added in the Uffizzi UI (**Settings** > **Integrations**)
+```
+
+
+
+
+

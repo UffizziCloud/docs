@@ -7,12 +7,12 @@ This is a quick-guide for how to execute various actions related to Preview Depl
 |                              | 3. Choose `docker-compose.uffizzi.yml` in Repo             | Option 1- Create from existing template or create new |
 |                              |                                                          | Option 2- User Manually Adds Components        |
 |                              |                                                          |                                                |
-| **Set-up Continuous Previews**                    | 1. [From Project Level- Specs](https://docs.uffizzi.com/setup/config-previews/#with-compose)                                 | 1. From Project Level- Specs                       |
+| **Set-up Continuous Previews**                    | 1. [From Project Level- Specs](https://docs.uffizzi.com/getting-started/set-up-previews/#with-compose)                                 | 1. From Project Level- Specs                       |
 |                              | 2. Select `Compose` tab                                           | 2. Select `Template` tab                              |
 |                              | 3. Connect to `docker-compose.uffizzi.yml` in Repo                   | 3. User chooses existing Template or creates new Template  |
 |                              | 4. CP is defined within `docker-compose.uffizzi.yml`                 | 4. User selects CP Policy as part of the Template |
 |                              |                                                          |                                                |
-| **Manage Secrets**               | 1. From Project Level- go to Project Settings                      | Same                                           |
+| **Manage Secrets**               | 1. [From Project Level- Go to Project Settings](https://docs.uffizzi.com/set-up-previews/config-previews/#with-compose)                       | Same                                           |
 |                              | 2. Select `Secrets` Tab                                              |                                                |
 |                              | 3. User Adds Secrets to UI as Write Only                    |                                                |
 |                              | Note- Secrets are applied to containers at run-time      |                                                |

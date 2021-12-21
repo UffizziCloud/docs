@@ -7,7 +7,7 @@ There are two distinct methods for configuring Previews on Uffizzi:
 
 ## Using Compose
 
-1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](https://docs.uffizzi.com/references/compose-spec/) for examples and detailed information on how to write your `docker-compose.uffizzi.yml`.  
+1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](https://docs.uffizzi.com/config/compose-spec/) for examples and detailed information on how to write your `docker-compose.uffizzi.yml`.  
 
 
 2. Add your `x-uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
@@ -16,7 +16,7 @@ There are two distinct methods for configuring Previews on Uffizzi:
 
 ### Connecting Your Compose
 
-3. Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect to your `docker-compose.uffizzi.yml` which should be stored in your git repository.  To connect to your repository see [Source Code Integrations](https://docs.uffizzi.com/setup/source-code-integrations/).
+3. Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect to your `docker-compose.uffizzi.yml` which should be stored in your git repository.  To connect to your repository see [Source Code Integrations](https://docs.uffizzi.com//source-code-integrations/).
 
 ![Screenshot](../assets/images/compose-one.png)
 
@@ -30,13 +30,15 @@ Save your setting and return to Project Overview.
 
 ### Initiating a Trigger-based Preview
 
-1- `Open Pull Request` Trigger - If you have enabled a Pull Request trigger in your compose you can initiate a preview by opening a `pull request` within any git repository that is invoked by your `docker-compose.uffizzi.yml`.
+#### `Open Pull Request` Trigger 
+ If you have enabled a Pull Request trigger in your compose you can initiate a preview by opening a `pull request` within any git repository that is invoked by your `docker-compose.uffizzi.yml`.
 
 ![Screenshot](../assets/images/open-pr.png)
 
 The webhook within your git repo will inform `uffizzi_app` of the `Open pull request` and initiate the Preview.
 
-2-  `Tag-based` Trigger - If you have enabled a Tag-based trigger the webhook within your image registry will inform `uffizzi_app` of the new image tagged with `uffizzi_request_#` and will initiate the Preview.
+#### Bring Your Own Build `Tag-based` Trigger
+ If you have enabled a Tag-based trigger the webhook within your image registry will inform `uffizzi_app` of the new image tagged with `uffizzi_request_#` and will initiate the Preview.
 
 When a Preview is triggered `uffizzi_app` will show the new Preview and its status:
 

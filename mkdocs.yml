@@ -97,20 +97,22 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Home:
+  - Getting Started:
     - Overview: index.md
+    - Quick Guide: quick-guide.md  
+    - Set Up Previews: set-up-previews.md
+    - Configuration Options and Features: configuration-options-and-features.md
     - Continuous Previews: continuous-previews.md
-    - Networking & Load-balancing: networking.md
-    - Role-based Access Control: rbac.md
-    - Logs: logs.md
-    - Secrets: secrets.md
-    - Environment Variables: environment-variables.md
-  - Setup:
-    - Quick Guide: setup/quick-guide.md  
-    - Configure Previews: setup/config-previews.md
-    - Source Code Integrations: setup/source-code-integrations.md
-    - Container Registry Integrations: setup/container-registry-integrations.md
-    - Single Sign-On (SSO): setup/single-sign-on.md
-  - References:
-    - Uffizzi Compose Spec: references/compose-spec.md
-    - Example Uffizzi Compose: references/example-compose.md
+    
+  - Config:
+    - Uffizzi Compose Spec: config/compose-spec.md
+    - Environment Variables: config/environment-variables.md
+    - Secrets: config/secrets.md
+    - Source Code Integrations: config/source-code-integrations.md
+    - Container Registry Integrations: config/container-registry-integrations.md
+    - Networking & Load-balancing: config/networking.md
+    - Logs: config/logs.md
+    - Role-based Access Control: config/rbac.md
+    - Single Sign-On (SSO): config/single-sign-on.md
+  - Examples:
+    - Example Uffizzi Compose: examples/example-compose.md

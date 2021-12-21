@@ -221,6 +221,18 @@ Uffizzi will setup webhooks on your git repositories to watch for closed pull re
 ``` yaml
 continuous_previews:
   deploy_preview_when_pull_request_is_opened: true
+  delete_preview_when_pull_request_is_closed: true
 ```
+
+## **delete_after**  
+
+A time-delayed deletion policy.  Accepts values from `0-720h`, defaults to `72h`.
+
+``` yaml
+continuous_previews:
+  deploy_preview_when_pull_request_is_opened: true
+  delete_after: 24h;
+```
+
 
 

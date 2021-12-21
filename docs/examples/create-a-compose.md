@@ -20,7 +20,7 @@ services:
     image: nginx:latest
 
 ingress:
-  service:
+  service: nginx-loadbalancer
   port: 8080
 ```
 

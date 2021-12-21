@@ -35,6 +35,6 @@ Uffizzi provides an off-the-shelf Continuous Previews capability that can suppor
 When a developer is ready for their feature branch to be previewed they `git push` to remote then open a `pull request` for their feature branch which then triggers a preview of the stack as defined in `docker-compose-uffizzi.yml`.  Users have the option for Uffizzi to build from source and deploy or to deploy directly from one of several integrated image registries (Docker Hub, ACR, ECR, GCR).  
 
 ## Bring Your Own Build (BYOB) 
-Uffizzi also offers a BYOB option that enables users to leverage their own build process to trigger previews.  In this scenario images tagged `uffizzi_request_<#>` will initiate new previews.  In addition to being compatible with custom build processes this allows for users on Gitlab, Bitbucket, or other Version Control Systems to benefit from Uffizzi.
+Uffizzi also offers a [BYOB or Tag-initiated](https://docs.uffizzi.com/set-up-previews/#bring-your-own-build-tag-based-trigger) option that enables users to leverage their own build process to trigger previews.  In this scenario images tagged `uffizzi_request_<#>` will initiate new previews.  In addition to being compatible with custom build processes this allows for users on Gitlab, Bitbucket, or other Version Control Systems to benefit from Uffizzi.
 
 

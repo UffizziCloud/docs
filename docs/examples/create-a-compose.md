@@ -42,7 +42,7 @@ ingress:
 
 This section contains of example configurations supported by a `continuous_previews` definition in version 1. 
 
-## **deploy_preview_when_pull_request_is_opened**  
+### **deploy_preview_when_pull_request_is_opened**  
 
 Boolean
 
@@ -53,7 +53,7 @@ continuous_previews:
   deploy_preview_when_pull_request_is_opened: true
 ```
 
-## **delete_preview_when_pull_request_is_closed**  
+### **delete_preview_when_pull_request_is_closed**  
 
 Boolean. Should be used with `deploy_preview_when_pull_request_is_opened`.  
 
@@ -65,19 +65,34 @@ continuous_previews:
   delete_preview_when_pull_request_is_closed: true
 ```
 
-## **delete_after**  
+### **deploy_preview_when_image_tag_is_created**  
 
-A time-delayed deletion policy.  Accepts values from `0-720h`, defaults to `72h`.
+Boolean
+
+If you have webhooks setup on your container registry, Uffizzi will deploy previews of all new tags (Or optionally matching `tag_pattern`).    
+
+``` yaml
+continuous_previews:
+  deploy_preview_when_image_tag_is_created: true
+```
+
+### **delete_after**  
+
+Delete preview after a certain number of hours
+
+Accepts values from `0-720h`, defaults to `72h`.
 
 ``` yaml
 continuous_previews:
   deploy_preview_when_pull_request_is_opened: true
-  delete_after: 24h;
+  delete_after: 24h
 ```
 
-## **share_to_github**  
+### **share_to_github**  
 
-After a preview is deploy, post the URL in a comment to the GitHub pull request issue.  
+Boolean
+
+After a preview is deployed, post the URL in a comment to the GitHub pull request issue.  
 
 ``` yaml
 continuous_previews:
@@ -86,8 +101,15 @@ continuous_previews:
   share_to_github: true
 ```
 
+### **tag_pattern**  
 
+Only deploy previews matching tag pattern. If tag_pattern matches `uffizzi_request_*`, where `*` is the merge/pull request number, Uffizzi will only deploy previews pull requests.    
 
+``` yaml
+continuous_previews:
+  deploy_preview_when_image_tag_is_created: true
+  tag_pattern: uffizzi_request_*
+```
 
 ## Service configuration examples
 This section contains of example configurations supported by a `service` definition in version 1.  

@@ -1,6 +1,6 @@
 # Create a Uffizzi Compose  
 
-This section highlights some of the key elements that you will likely want to include in your compose file. See the [Uffizzi Compose Specification v1](../../config/compose-spec.md) for the full list of supported keys and options. 
+This section highlights some of the key elements that you will likely want to include in your compose file. See the [Uffizzi Compose Specification v1](../../config/compose-spec) for the full list of supported keys and options. 
 
 ## File structure  
 
@@ -105,7 +105,7 @@ continuous_previews:
 
 Only deploy previews matching tag pattern. If tag_pattern matches `uffizzi_request_*`, where `*` is the merge/pull request number, Uffizzi will only deploy previews pull requests.  
 
-Use this option when building and tagging your own images.  See [Bring your own build](../../set-up-previews.md/#bring-your-own-build-tag-based-trigger)
+Use this option when building and tagging your own images.  See [Bring your own build](../../set-up-previews/#bring-your-own-build-tag-based-trigger)
 
 ``` yaml
 continuous_previews:

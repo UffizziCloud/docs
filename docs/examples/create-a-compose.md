@@ -103,7 +103,9 @@ continuous_previews:
 
 ### **tag_pattern**  
 
-Only deploy previews matching tag pattern. If tag_pattern matches `uffizzi_request_*`, where `*` is the merge/pull request number, Uffizzi will only deploy previews pull requests.    
+Only deploy previews matching tag pattern. If tag_pattern matches `uffizzi_request_*`, where `*` is the merge/pull request number, Uffizzi will only deploy previews pull requests.  
+
+Use this option when building and tagging your own images.  See [Bring your own build](../../set-up-previews.md/#bring-your-own-build-tag-based-trigger)
 
 ``` yaml
 continuous_previews:

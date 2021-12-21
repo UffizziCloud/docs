@@ -234,5 +234,15 @@ continuous_previews:
   delete_after: 24h;
 ```
 
+## **share_to_github**  
+
+After a preview is deploy, post the URL in a comment to the GitHub pull request issue.  
+
+``` yaml
+continuous_previews:
+  deploy_preview_when_pull_request_is_opened: true
+  delete_preview_when_pull_request_is_closed: true
+  share_to_github: true
+```
 
 

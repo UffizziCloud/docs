@@ -102,8 +102,7 @@ nav:
     - Quick Guide: quick-guide.md  
     - Set Up Previews: set-up-previews.md
     - Uffizzi Configuration Options and Features: config-options.md
-    - Continuous Previews: continuous-previews.md
-    
+    - Continuous Previews: continuous-previews.md 
   - Config:
     - Uffizzi Compose Spec: config/compose-spec.md
     - Environment Variables: config/environment-variables.md
@@ -116,3 +115,5 @@ nav:
     - Single Sign-On (SSO): config/single-sign-on.md
   - Compose Examples:
     - Example Uffizzi Compose: examples/example-compose.md
+  - Engineering Blog: 
+    - Combining your existing CI/CD and Container Registry to enable Continuous Previews: engineeringblog/ci-cd-registry.md

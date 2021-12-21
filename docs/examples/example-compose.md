@@ -56,7 +56,7 @@ ingress:
   port: 8080
 ```
 
-#### Vote App - Example of PR-triggered Preview (Build from Source)
+#### Vote App - Example of PR-initiated Preview (Build from Source)
 
 ```
 services:

@@ -7,7 +7,7 @@ This section highlights some of the key elements that you will likely want to in
 Uffizzi Compose files are YAML, so they should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file, `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must container `services` and `ingress`. Services are the containers that make up your application, and ingress is the container that should receive incoming HTTPS traffic. Ingress requires a port number that the container is listening on.   
 
 ## Service configuration examples
-This section contains of example configurations supported by a service definition in version 1.  
+This section contains of example configurations supported by a `service` definition in version 1.  
 
 ### **build**  
 
@@ -165,7 +165,74 @@ Specify the image to start the container from, as  `repository:tag`. If no tag i
   image: example.azurecr.io/example-service:latest  # Credentials should be added in the Uffizzi UI (**Settings** > **Integrations**)
 ```
 
+## Ingress configuration example  
 
+This section contains of example configurations supported by a `ingress` definition in version 1. 
+
+### **ingress**  
+
+The service that should receive incoming HTTPS traffic. 
+
+``` yaml
+services:
+  nginx-loadbalancer:
+    image: nginx:latest
+
+ingress:
+  service:
+  port: 8080
+```
+
+### **port**  
+
+The port number the ingress service container is listening for traffic on  
+
+``` yaml
+services:
+  nginx-loadbalancer:
+    image: nginx:latest
+
+ingress:
+  service:
+  port: 8080
+```
+
+## Continuous Previews configuration example  
+
+This section contains of example configurations supported by a `continuous_previews` definition in version 1. 
+
+## **deploy_preview_when_pull_request_is_opened**  
+
+Boolean
+
+Uffizzi will setup webhooks on your git repositories to watch for open pull requests (PR). If a PR is opened, Uffizzi will build the commit and deploy a new preview.  
+
+``` yaml
+continuous_previews:
+  deploy_preview_when_pull_request_is_opened: true
+```
+
+## **delete_preview_when_pull_request_is_closed**  
+
+Boolean. Should be used with `deploy_preview_when_pull_request_is_opened`.  
+
+Uffizzi will setup webhooks on your git repositories to watch for closed pull requests (PR). If a PR is closed, Uffizzi will destroy the preview with the corresponding commit.  
+
+``` yaml
+continuous_previews:
+  deploy_preview_when_pull_request_is_opened: true
+  delete_preview_when_pull_request_is_closed: true
+```
+
+## **delete_after**  
+
+A time-delayed deletion policy.  Accepts values from `0-720h`, defaults to `72h`.
+
+``` yaml
+continuous_previews:
+  deploy_preview_when_pull_request_is_opened: true
+  delete_after: 24h;
+```
 
 
 

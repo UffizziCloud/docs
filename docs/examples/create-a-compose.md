@@ -101,18 +101,6 @@ continuous_previews:
   share_to_github: true
 ```
 
-### **tag_pattern**  
-
-Only deploy previews matching tag pattern. If tag_pattern matches `uffizzi_request_*`, where `*` is the merge/pull request number, Uffizzi will only deploy previews pull requests.  
-
-Use this option when building and tagging your own images.  See [Bring your own build](../../set-up-previews/#bring-your-own-build-tag-based-trigger)
-
-``` yaml
-continuous_previews:
-  deploy_preview_when_image_tag_is_created: true
-  tag_pattern: uffizzi_request_*
-```
-
 ## Service configuration examples
 This section contains of example configurations supported by a `service` definition in version 1.  
 
@@ -291,6 +279,8 @@ This section contains of example configurations supported by a `secrets` definit
 
 A secret that is external to you compose context
 
+
+
 ### **secrets**  
 
 The top-level secrets declaration defines or references secrets that can be granted to the services in this stack. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. In the following example, `FOO` is the name of a secret that has been added in the Uffizzi Dashboard.
@@ -306,5 +296,4 @@ secrets:
   my_secret:
     external: true    
     name: "FOO"
-
 ```

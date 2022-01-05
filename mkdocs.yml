@@ -114,6 +114,7 @@ nav:
     - Role-based Access Control: config/rbac.md
     - Single Sign-On (SSO): config/single-sign-on.md
   - Compose Examples:
+    - Create a Uffizzi Compose: examples/create-a-compose.md
     - Example Uffizzi Compose: examples/example-compose.md
   - Engineering Blog: 
     - Combining your existing CI/CD and Container Registry to enable Continuous Previews: engineeringblog/ci-cd-registry.md

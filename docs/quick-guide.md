@@ -32,11 +32,11 @@ This is a quick-guide for how to execute various actions related to Preview Depl
 |                              | deploy_preview_when_image_tag_is_created: true           |                                                |
 |                              | delete_preview_after: Xh                                |                                                |
 |                              |                                                          |                                                |
-| **Share Preview URL**            | User Specifies within `docker-compose.uffizzi.yml`-                           | Check box in UI [Share to Github]              |
+| **Share Preview URL**            | User Specifies within [`docker-compose.uffizzi.yml`](https:docs.uffizzi.com/examples/example-compose/#vote-app-example-of-pr-triggered-preview-build-from-source)-                           | Check box in UI [Share to Github]              |
 |                              | i.e. continuous_preview:                                      |                                                |
 |                              | share_to_service: true (i.e. Github, Jira, Slack...) |                                                |
 |                              |                                                          |                                                |
-| **Time-based deletion**          | User Specifies within `docker-compose.uffizzi.yml`-       |  Not currently supported, planned |        |                                                |
+| **Time-based deletion**          | User Specifies within [`docker-compose.uffizzi.yml`](https:docs.uffizzi.com/examples/example-compose/#vote-app-example-of-pr-triggered-preview-build-from-source)-       |  Not currently supported, planned |        |                                                |
 |                              | i.e. continuous_preview:                                      |                                                |
 |                              | *delete_preview_after: Xh                                 |                                                |
 |                              | *Options are 1h to 720h                                   |                                                |

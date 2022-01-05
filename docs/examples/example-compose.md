@@ -1,29 +1,30 @@
+
 #### Vote App - Example of a Tag-initiated Preview (Bring Your Own Build)
 
-```
+``` yaml title="docker-compose.uffizzi.1.yml"
 services:  #required
   redis:
-    image: redis  #defaults to pulling from Docker Hub and latest tag
+    image: redis  # Default registry is hub.docker.com; default tag is `latest`
 
   postgres:
     image: postgres:9.6
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    deploy:  #optional, defaults to 125M
+    deploy:
       resources:
         limits:
-          memory: 250M #options are 250M, 500M, 1000M, 2000M, 4000M
+          memory: 250M # Options: 125M (default), 250M, 500M, 1000M, 2000M, 4000M
 
-  nginx:
+  nginx-loadbalancer:
     image: nginx:latest
     configs:
-      - source: vote.conf
+      - source: vote-nginx-conf
         target: /etc/nginx/conf.d/vote.conf
 
   worker:
     image: uffizziqa.azurecr.io/example-voting-worker:latest
-    auto: false  #optional, default=true, turns off auto-deploys to a Preview
+    auto: false  # Auto-deploy updates (optional, default=true)  
     deploy:
       resources:
         limits:
@@ -43,28 +44,31 @@ services:  #required
     image: gcr.io/uffizzi-pro-qa-gke/example-result:latest
 
 configs:
-  source:
+  vote-nginx-conf:
     file: ./vote.conf
 
-continuous_preview:       #for tag-initiated preview tag must = uffizzi_request_#
-  deploy_preview_when_image_tag_is_created: true  
+continuous_preview:       
+  deploy_preview_when_image_tag_is_created: true
+  # Images tagged with this pattern will be auto-deployed as previews 
+  tag_pattern: uffizzi_request_*    # where '*' is the pull/merge request number
   delete_preview_after: 10h
   share_to_github: true
 
 ingress:
-  service: nginx
+  service: nginx-loadbalancer
   port: 8080
 ```
 
+&nbsp;  
 #### Vote App - Example of PR-initiated Preview (Build from Source)
 
-```
+``` yaml title="docker-compose.uffizzi.2.yml"
 services:
   nginx:
     image: nginx:latest
     configs:
-      - source: vote.conf
-        target: /etc/nginx/conf.d
+      - source: vote-nginx-conf
+        target: /etc/nginx/conf.d/vote.conf
 
   redis:
     image: redis:latest
@@ -101,6 +105,10 @@ services:
       context: https://github.com/UffizziCloud/example-voting-result:main
       dockerfile: Dockerfile
 
+configs:
+  vote-nginx-conf:
+    file: ./vote.conf
+
 continuous_preview:  #optional, example below is PR-triggered example
   deploy_preview_when_pull_request_is_opened: true
   delete_preview_when_pull_request_is_closed: true
@@ -112,10 +120,10 @@ ingress:  #required
   port: 8080
 ```
 
+&nbsp;  
 #### Wiki.js Example - Example of Tag-initiated Preview (Bring Your Own Build)
 
-```
-version: "3"  #optional
+``` yaml title="docker-compose.uffizzi.3.yml"
 services:
 
   db:

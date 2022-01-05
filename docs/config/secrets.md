@@ -5,4 +5,4 @@ Secrets provide a mechanism for securely adding sensitive data, such as password
 Secrets can be added in the Uffizzi Dashboard (**Project** > **Project Settings** > **Secrets**). Once added, they cannot be viewed or edited. To update a Secret, you should delete the old Secret and create a new one. Secrets added in the **Project Settings** are available to all Preview environments in that project.  
 &nbsp;  
 
-![](assets/images/secrets.png)
+![](../assets/images/secrets.png)

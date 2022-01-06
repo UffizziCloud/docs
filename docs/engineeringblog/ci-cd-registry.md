@@ -40,6 +40,22 @@ Push merge_request:
 
 Notice the last two lines tag and push an image whose tag begins with `uffizzi_request_`. This is so Uffizzi can identify the new image is associated with a Merge Request.
 
+## Uffizzi Compose File
+
+Next we'll add a `docker-compose.uffizzi.yml` file to our repository and configure Uffizzi to use it. At the moment, Uffizzi only reads Compose files from GitHub, so I've [cloned my example repository over there](https://github.com/axisofentropy/noaafetch/). (Compose files on GitLab will be supported soon&trade;.) Here's my example Compose file: <https://github.com/axisofentropy/noaafetch/blob/main/docker-compose.uffizzi.yml>
+
+This file tells Uffizzi where to fetch the container image, what memory resources it requires, which container receives traffic from the load balancer, and how to create new Previews when new images are pushed. You can read more in [Uffizzi's Compose Reference Guide](../config/compose-spec.md).
+
 ## Uffizzi Continuous Previews
 
-Lastly we'll add a `docker-compose.uffizzi.yml` file to our repository and configure Uffizzi to use it.
+Lastly we'll configure Uffizzi to use our Compose file.
+
+![New Compose File](../assets/images/blog-1-new-compose.png)
+
+![Link Compose File](../assets/images/blog-1-link-compose.png)
+
+## Smoke Test
+
+Now let's tie it all together. Push a new commit on a new branch to your GitLab repository and then open a new Pull Request. GitLab's CI/CD will build a new image and push it to your Azure Container Registry. Uffizzi will recognize the new image and deploy it automatically.
+
+![New Preview](../assets/images/blog-1-new-preview.png)

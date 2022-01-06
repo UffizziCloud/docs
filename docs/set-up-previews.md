@@ -99,5 +99,3 @@ Alternatively, you can select `new preview` from the UI and choose a compose fro
 You can always delete a Preview by selecting the `trash` icon in the UI.
 
 ![Screenshot](assets/images/delete.png)
-
-## Using Templates

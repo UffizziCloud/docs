@@ -1,12 +1,12 @@
 # Continuous Previews with Bring Your Own Build 
 
-If you're looking for a Full Stack Preview capability but want to bring your own CI/CD solution and Container Registry - keep reading. In this blog I'll show how Uffizzi gives users the ability to enable tag-initiated Previews (a.k.a. Continuous Previews) by setting up a webhook in their registry and by using the Uffizzi image tagging convention `uffizzi_request_*`. 
+If you're looking for a Full Stack Preview capability but want to bring your own CI/CD solution and Container Registry - keep reading. In this blog I'll show how Uffizzi gives users the ability to enable tag-initiated Previews (a.k.a. Continuous Previews) by setting up a webhook in their registry and by using the Uffizzi image tagging convention `uffizzi_request_*`.
 
 For this blog I'll be referencing GitLab + Azure's Container Registry (ACR) but the concepts apply to any CI/CD + Registry combination. We'll use [an example Python application that fetches and renders weather forecasts from NOAA](https://gitlab.com/adam.d.vollrath/noaafetch/).
 
 ## Azure Container Registry
 
-If you haven't yet, integrate your Azure Container Registry by following our [ACR integration documentation](config/container-registry-integrations.md). You'll need the registry hostname, Application (client) ID, and Secret value for the next steps.
+If you haven't yet, integrate your Azure Container Registry by following our [ACR integration documentation](../config/container-registry-integrations.md). You'll need the registry hostname, Application (client) ID, and Secret value for the next steps.
 
 ## GitLab CI/CD
 

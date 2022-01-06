@@ -3,7 +3,7 @@
 ## TL;DR  
 1. Copy your `docker-compose.yml` file
 2. Paste the contents into a new file `docker-compose.uffizzi.yml`
-3. Add the following Uffizzi-specific parameters to create a [Uffizzi Compose file](setup/compose-spec.md) - this is the foundation of your Preview Set Up:  
+3. Add the following Uffizzi-specific parameters to create a [Uffizzi Compose file](config/compose-spec.md) - this is the foundation of your Preview Set Up:
 ``` yaml title="docker-compose.uffizzi.yml"
 services:
   ...

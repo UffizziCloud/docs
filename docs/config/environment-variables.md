@@ -42,7 +42,7 @@ FOO = bar                  # invalid
 ```
 &nbsp;  
 
-![](assets/images/template-environment-variables.png)
+![](../assets/images/template-environment-variables.png)
 &nbsp;  
 
-![](assets/images/template-envvars-textbox.png)
+![](../assets/images/template-envvars-textbox.png)

@@ -28,17 +28,17 @@ Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR,
 
 2. Add your `uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
 
-![Screenshot](../assets/images/compose-in-git.png)
+![Screenshot](assets/images/compose-in-git.png)
 
 ### Connecting Your Compose
 
 3. Within the Uffizzi UI go to Projects/Specs/Compose and select `new compose` to connect to your `docker-compose.uffizzi.yml` which should be stored in your git repository.  To connect to your repository see [Source Code Integrations](config/source-code-integrations.md).
 
-![Screenshot](../assets/images/compose-one.png)
+![Screenshot](assets/images/compose-one.png)
 
 After adding the repo, branch, and path, select the `validate` button - Uffizzi will confirm if your file is valid or will provide error messaging that indicates what needs to be addressed.
 
-![Screenshot](../assets/images/add-compose.png)
+![Screenshot](assets/images/add-compose.png)
 
 If you want `uffizzi_app` to recognize changes to your `docker-compose.uffizzi.yml` check the Box for "Auto-deploy updates".
 
@@ -49,7 +49,7 @@ Save your setting and return to Project Overview.
 #### `Open Pull Request` Trigger 
  If you have enabled a Pull Request trigger in your compose you can initiate a preview by opening a `pull request` within any git repository that is invoked by your `docker-compose.uffizzi.yml`.
 
-![Screenshot](../assets/images/open-pr.png)
+![Screenshot](assets/images/open-pr.png)
 
 The webhook within your git repo will inform `uffizzi_app` of the `Open pull request` and initiate the Preview.
 
@@ -58,16 +58,16 @@ The webhook within your git repo will inform `uffizzi_app` of the `Open pull req
 
 When a Preview is triggered `uffizzi_app` will show the new Preview and its status:
 
-![Screenshot](../assets/images/initiated-preview.png)
+![Screenshot](assets/images/initiated-preview.png)
 
 The Preview will take a few minutes to finish deploying - the build process is typically the longest part of the sequence.  You can monitor the status by clicking on your Preview.  Within the UI you can monitor the activity log, build logs, individual container logs, and event logs.
 
-![Screenshot](../assets/images/preview-status.png)
+![Screenshot](assets/images/preview-status.png)
 
 
 When the Preview has finished deploying, the Preview URL turns blue - the link is now live and you can securely access your Preview.  Please note that if you have deployed multiple containers, some of those containers may still take time to fully initiate after the Preview URL goes live.
 
-![Screenshot](../assets/images/preview-link-live.png)
+![Screenshot](assets/images/preview-link-live.png)
 
 ### Deleting a Trigger-based Preview
 
@@ -77,7 +77,7 @@ When the Preview has finished deploying, the Preview URL turns blue - the link i
 
 3- You can always delete a Preview by selecting the `trash` icon in the UI.
 
-![Screenshot](../assets/images/delete.png)
+![Screenshot](assets/images/delete.png)
 
 If you have enabled both a `Close Pull Request` deletion trigger and a `Time-based` deletion trigger, `uffizzi_app` will recognize whichever trigger fires first.
 
@@ -87,17 +87,15 @@ If you have enabled both a `Close Pull Request` deletion trigger and a `Time-bas
 
 Alternatively, you can select `new preview` from the UI and choose a compose from within your connected repository to deploy a preview.  If you use this method to initiate a preview you must manually delete it from the UI.
 
-![Screenshot](../assets/images/compose-two.png)
+![Screenshot](assets/images/compose-two.png)
 
-![Screenshot](../assets/images/compose-three.png)
+![Screenshot](assets/images/compose-three.png)
 
-![Screenshot](../assets/images/compose-four.png)
+![Screenshot](assets/images/compose-four.png)
 
 
 ### Deleting a Manual Preview
 
 You can always delete a Preview by selecting the `trash` icon in the UI.
 
-![Screenshot](../assets/images/delete.png)
-
-## Using Templates
+![Screenshot](assets/images/delete.png)

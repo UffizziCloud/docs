@@ -14,7 +14,7 @@ Members are individual users that are associated with an Account and have an ass
 
 ## Single Sign On (SSO)
 
-If a Members Organization has enabled SSO for their account, then a member must utilize the SSO function to log in to their account. Administrators are still able to login in via email/password to administer SSO configuration. See [Single Sign-on](setup/single-sign-on.md) for more details.
+If a Members Organization has enabled SSO for their account, then a member must utilize the SSO function to log in to their account. Administrators are still able to login in via email/password to administer SSO configuration. See [Single Sign-on](../config/single-sign-on.md) for more details.
 
 ## Roles 
 

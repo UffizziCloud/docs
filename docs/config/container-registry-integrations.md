@@ -67,11 +67,26 @@ If no longer needed, you can then delete the IAM User. You must first delete all
 
 #### Authorize Uffizzi to pull container images from ACR  
 
+To access your container images directly, Uffizzi requires access to your Azure Container Registry. The easiest way to accomplish this is to create a Service Principal and grant it the `ACRPull` role. You can read more about Azure Service Principals here: <https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals>
+
+You may need to create an Application with a Subscription. You can read more about this here: <https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app>
+
+Once you have an active Subscription and [a Container Image Registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli), you can use the `create-for-rbac` command to create a service principal and simultaneously grant it the `ACRPull` role:
+
+```
+az ad sp create-for-rbac --name uffizzi-example-acrpull --scopes /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/uffizzi-example/providers/Microsoft.ContainerRegistry/registries/uffizziexample --role acrpull
+```
+
+This command will output a JSON object with some values you will need later: `appId` and `password`. You can read more about this command here: <https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli>
+
+#### Configure Uffizzi to use Azure Service Principal
 To grant Uffizzi access to pull images from your ACR, you will need:  
 
-* Your registry domain (*myregistry*.azurecr.io)  
-* Account ID  
-* Access Token  
+* Your registry domain (*myregistry*.azurecr.io)
+* Application ID
+* Password
+
+The Application ID and Password are provided in the output from the `create-for-rbac` command above, or they can be obtained within the Azure web portal.
 
 Log into [app.uffizzi.com](https://app.uffizzi.com) and navigate to **Settings** -> **Integrations**, then select **CONFIGURE** next to ACR. Enter your credentials when prompted, then click **SAVE**. Uffizzi should now have access to pull images from your ACR.
 &nbsp;  

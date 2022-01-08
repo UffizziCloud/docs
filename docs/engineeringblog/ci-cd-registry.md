@@ -6,7 +6,7 @@ For this blog I'll be referencing GitLab + Azure's Container Registry (ACR) but 
 
 ## Azure Container Registry
 
-If you haven't yet, integrate your Azure Container Registry by following our [ACR integration documentation](../config/container-registry-integrations.md). You'll need the registry hostname, Application (client) ID, and Secret value for the next steps.
+If you haven't yet, integrate your Azure Container Registry by following our [ACR integration documentation](../config/container-registry-integrations.md#azure-container-registry-acr). You'll need the registry domain, Application (client) ID, and Secret or Password value for the next steps.
 
 ## GitLab CI/CD
 

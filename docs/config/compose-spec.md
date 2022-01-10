@@ -1,52 +1,78 @@
 # Uffizzi Compose Specification v1
 
-This document specifies the Uffizzi Compose file format used to define and preview multi-container applications using Uffizzi. A Uffizzi Compose file is a structured YAML format, similar to Docker Compose. Uffizzi Compose is based on [Compose version 3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/), but it also includes additional parameters relevant to Continuous Previews. This document describes the required and optional parameters of Uffizzi Compose.
+This document specifies the Uffizzi Compose file format used to define and preview multi-container applications using Uffizzi. Based on Docker Compose, a Uffizzi Compose file is a structured YAML format that provides Uffizzi with configuration details for an application. Additionally, Uffizzi Compose utilizes the Docker Compose [custom extension format](https://github.com/docker/compose/issues/7200), `x-uffizzi`, to specify configuration options that are used by Uffizzi to deploy previews. This means that all Uffizzi Compose files are valid [Docker Compose v3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/) files; however, the reverse is not necessarily true since Uffizzi only supports a subset of the full Docker Compose specification. This document describes all parameters that are supported by Uffizzi Compose and which are required or optional.
 
-### Uffizzi Compose file  
-The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `continuous_previews`, and `ingress`. Other Compose top-level elements such as `networks`, `secrets`, `version`, and `volumes` are not currently supported. For a full comparison between Compose 3.9 and Uffizzi Compose see [Compose Support](#services-required).
+### Uffizzi Compose file format  
+The Uffizzi Compose file is a YAML file defining `services` (required), `configs` and `secrets`. Other Compose top-level elements such as `networks`, `version`, and `volumes` are not currently supported. 
 
-#### Example Uffizzi Compose file
-``` 
-services:  #required
-  frontend:
-    build:  #example building from source
-      context: https://github.com/Account/example-frontend:main
-      dockerfile: #optional, defaults to Dockerfile in directory
- 
-  backend:  #example pulling image from registry
-    image: example.container-registry.io/example-backend:latest 
-    deploy:  #optional, defaults to 125M
+
+``` yaml title="docker-compose.uffizzi.yml
+# Uffizzi extension
+x-uffizzi:
+  ingress:    # required
+    service: loadbalancer
+    port: 8080
+  continuous_preview:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
+    share_to_github: true
+
+# Vote applicaiton
+services:
+  redis:
+    image: redis:latest
+
+  postgres:
+    image: postgres:9.6
+    secrets:
+      - pg_user
+      - pg_password
+
+  worker:
+    build: .  # defaults to ./Dockerfile
+    deploy:
       resources:
         limits:
           memory: 250M
 
-  db:
-    image: postgres:9.6  #defaults to pulling from Docker Hub and latest tag
+  result:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-result#main
+      dockerfile: Dockerfile
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      PORT: 8088
+
+  vote:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
+      dockerfile: Dockerfile
     deploy:
       resources:
         limits:
-          memory: 250M #options are 125M, 250M, 500M, 1000M, 2000M, 4000M
+          memory: 250M
+    environment:
+      PORT: 8888
 
-  nginx:
-    image: nginx  
+  loadbalancer:
+    image: nginx:latest
     configs:
-      - my_config: example.conf
-        target: /etc/nginx/conf.d/example.conf
+      - source: nginx-vote-conf
+        target: /etc/nginx/conf.d/vote.conf
 
-configs: 
-  my_config:
-    file:  ./example.conf
+# Loadbalancer configuration
+configs:
+  nginx-vote-conf:
+    file: ./vote.conf
+    
+# Postgres credentials
+secrets:
+  pg_user:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_USER"        # i.e., value should be added in the Uffizzi Dashboard
+  pg_password:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_PASSWORD"    # i.e., value should be added in the Uffizzi Dashboard
 
-continuous_preview:  #optional, enables event-triggered previews
-  deploy_preview_when_pull_request_is_opened: true  
-  delete_preview_when_pull_request_is_closed: true  
-
-ingress:  #required
-  service: nginx
-  port: 8080
 ```
 
 ### Services (required)

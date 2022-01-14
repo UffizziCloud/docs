@@ -1,27 +1,45 @@
-# Uffizzi Compose Specification v1
+# Uffizzi Compose file reference
 
-This document specifies the Uffizzi Compose file format used to define and preview multi-container applications using Uffizzi. Based on Docker Compose, a Uffizzi Compose file is a structured YAML format that provides Uffizzi with configuration details for an application. Additionally, Uffizzi Compose utilizes the Docker Compose [custom extension format](https://github.com/docker/compose/issues/7200), `x-uffizzi`, to specify configuration options that are used by Uffizzi to deploy previews. This means that all Uffizzi Compose files are valid [Docker Compose v3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/) files; however, the reverse is not necessarily true since Uffizzi only supports a subset of the full Docker Compose specification. This document describes all parameters that are supported by Uffizzi Compose and which are required or optional.
+This document describes the Uffizzi Compose file that is used to define and preview multi-container applications using Uffizzi. Based on Docker Compose, a Uffizzi Compose file is a structured YAML format that provides Uffizzi with configuration details needed to preview an application. Uffizzi Compose utilizes the Docker Compose [custom extension format](https://github.com/docker/compose/issues/7200), `x-uffizzi`, to specify configuration options used by Uffizzi. This means that all Uffizzi Compose files are valid [Docker Compose v3.9](https://docs.docker.com/compose/compose-file/compose-file-v3/) files; however, the reverse is not necessarily true since Uffizzi only supports a subset of the full Docker Compose specification. This document describes all parameters that are supported by Uffizzi Compose and which are required or optional.
 
-### Compose file structure   
+## Compose file structure   
 
-The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `secrets` and `x-uffizzi` elements. Other Compose top-level elements such as `networks`, `version`, and `volumes` are not currently supported. As a YAML file, it should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must include `services` and `ingress` (a sub-level element of `x-uffizzi`). Services are the containers that make up your application, and ingress tells Uffizzi which container should receive incoming HTTPS traffic. Ingress requires a service and port number that the service is listening on.   
+The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `secrets` and `x-uffizzi` elements. Other Compose top-level elements such as `networks`, `version`, and `volumes` are not currently supported by Uffizzi. As a YAML file, a Uffizzi Compose should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must include `services` and `ingress` (a sub-level element of `x-uffizzi`). Services are the containers that make up your application, and ingress tells Uffizzi which container should receive incoming HTTPS traffic. Ingress requires a service and port number that the service is listening on.   
 
-### Services (required)
-As with Docker Compose, a Service is an abstract definition of a computing resource within an application which can be scaled/replaced independently from other components. Services are backed by a set of containers when deployed on Uffizzi.
+## Uffizzi extension  
+Docker Compose supports [vendor-specific extensions](https://github.com/compose-spec/compose-spec/issues/17) for platforms like Uffizzi to supplement the Compose specification with parameters that are specific to that vendor's platform. For example, the Uffizzi extension, `x-uffizzi`, gives you the ability to add event triggers to your compose file. In the following example, a new preview will be deployed when a pull request is opened on GitHub:
 
-### Ingress (required)
-Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `port` number.
+```
+x-uffizzi-continuous_previews:
+  deploy_preview_when_pull_request_is_opened: true
+```
 
-### Configs (optional)  
-Configs allow you to add configuration files to your applications. Files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository.  
+The example above is valid Docker Compose syntax because the `docker-compose` CLI ignores any field prefixed with `x-`. This allows users to still run `docker-compose config` on a Uffizzi Compose file to check for valid Docker Compose format.  
 
-You must explicitly grant access to configuration files per service using the `configs` element within the service definition. Uffizzi supports [Docker `config` long syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#configs).
-
-### Secrets (optional)
-Secrets provide a mechanism for securing and sharing environment variables across all previews in a project. The environment variables are defined as name/value pairs and are injected at runtime. Secrets can only be added from the Uffizzi Dashboard (UI). Once added, they cannot be viewed or edited. To update a secret, you should delete the old secret and create a new one.  
+> **Note**: The `x-` extension prefix works for both top-level and sub-level definitions within a compose file. 
 
 
-``` yaml title="docker-compose.uffizzi.yml
+## Services  
+As with Docker Compose, a Service is an abstract definition of a computing resource within an application that can be combined with other components. Services are deployed as containers on Uffizzi. A valid `services` definition is required for a Uffizzi Compose file.  
+
+## Ingress  
+Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
+
+## Configs   
+Configs allow you to add configuration files to your applications. Files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository.
+
+You must explicitly grant access to configuration files per service using the `configs` element within the service definition. Configs are optional for Uffizzi Compose files.  
+
+## Secrets  
+Secrets provide a mechanism for securing and sharing environment variables across all previews in a project. The environment variables are defined as name/value pairs and are injected at runtime. Secrets can only be added from the Uffizzi Dashboard (UI). Once added, they cannot be viewed or edited. To update a secret, you should delete the old secret and create a new one.   
+
+> **Note**: You will receive an error in the Uffizzi Dashboard if secrets have not been added in the UI but they are referenced in your compose file.   
+
+Secrets are optional for Uffizzi Compose files. 
+
+## Example Uffizzi Compose file  
+
+``` yaml title="docker-compose.uffizzi.yml"
 # Uffizzi extension
 x-uffizzi:
   ingress:    # required
@@ -31,32 +49,27 @@ x-uffizzi:
     deploy_preview_when_pull_request_is_opened: true
     delete_preview_when_pull_request_is_closed: true
     share_to_github: true
-
 # Vote applicaiton
 services:
   redis:
     image: redis:latest
-
   postgres:
     image: postgres:9.6
     secrets:
       - pg_user
       - pg_password
-
   worker:
     build: .  # defaults to ./Dockerfile
     deploy:
       resources:
         limits:
           memory: 250M
-
   result:
     build:
       context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
     environment:
       PORT: 8088
-
   vote:
     build:
       context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
@@ -67,18 +80,15 @@ services:
           memory: 250M
     environment:
       PORT: 8888
-
   loadbalancer:
     image: nginx:latest
     configs:
       - source: nginx-vote-conf
         target: /etc/nginx/conf.d/vote.conf
-
 # Loadbalancer configuration
 configs:
   nginx-vote-conf:
-    file: ./vote.conf
-    
+    file: ./vote.conf   
 # Postgres credentials
 secrets:
   pg_user:
@@ -87,110 +97,236 @@ secrets:
   pg_password:
     external: true               # indicates value is external to this repository
     name: "POSTGRES_PASSWORD"    # i.e., value should be added in the Uffizzi Dashboard
-
 ```
 
-## x-uffizzi configuration example
+## Uffizzi extension configuration reference
 
-### **ingress** 
+### **x-uffizzi**  
 
-This section contains example configurations supported by a `ingress` definition in version 1. 
+The Uffizzi extension top-level element  
 
-#### **service**  
-
-The service that should receive incoming HTTPS traffic. 
+`x-uffizzi` defines an `ingress` and various `continuous_preview` options.  
 
 ``` yaml
 services:
+  foo:
+    image: foo:latest
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 8080
+  continuous_preview: 
+    deploy_preview_when_image_tag_is_created: true
+    delete_after: 48h
+    share_to_github: true
+```
+
+#### ingress (required)  
+
+Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
+
+This section contains example configurations supported by an `ingress` definition. 
+
+##### service (required)  
+
+The service that should receive incoming HTTPS traffic. The ingress service should be one of the services defined within the top-level `services`.  
+
+``` yaml
+services:
+  foo:
+    image: foo:latest
   nginx-loadbalancer:
     image: nginx:latest
-
 x-uffizzi:
   ingress:
     service: nginx-loadbalancer
     port: 8080
 ```
 
-#### **port**  
+##### port (required)  
 
-The port number the ingress service container is listening for traffic on  
+The port number the ingress service container is listening for traffic on.   
 
 ``` yaml
 services:
+  foo:
+    image: foo:latest
   nginx-loadbalancer:
     image: nginx:latest
-
 x-uffizzi:
   ingress:
     service: nginx-loadbalancer
     port: 8080
 ```
 
-### **continuous_previews** 
+#### **continuous_preview** 
 
-This section contains of example configurations supported by a `continuous_previews` definition in version 1. 
+Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.  
 
-#### **deploy_preview_when_pull_request_is_opened**  
+When specified, the continuous previews policies is globally scoped, i.e. the policies apply to all services in the compose file This behavior can be overrided with the [service-level `x-uffizzi-continuous-preview` option](#x-uffizzi-continuous-preview)).
 
-Boolean
+This section contains example configurations supported by a `continuous_preview` definition. 
+
+##### **deploy_preview_when_pull_request_is_opened**  
+
+Possible values: `true`, `false`
 
 Uffizzi will setup webhooks on your git repositories to watch for open pull requests (PR). If a PR is opened, Uffizzi will build the commit and deploy a new preview.  
 
 ``` yaml
-continuous_previews:
-  deploy_preview_when_pull_request_is_opened: true
-```
+x-uffizzi:
+  continuous_preview:
+    deploy_preview_when_pull_request_is_opened: true
+```   
 
-#### **delete_preview_when_pull_request_is_closed**  
+> **Note**: This option requires that you have first [connected to your git repository](../git-integrations). 
 
-Boolean. Should be used with `deploy_preview_when_pull_request_is_opened`.  
+##### **delete_preview_when_pull_request_is_closed**  
 
-Uffizzi will setup webhooks on your git repositories to watch for closed pull requests (PR). If a PR is closed, Uffizzi will destroy the preview with the corresponding commit.  
+Possible values: `true`, `false`  
 
-``` yaml
-continuous_previews:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
-```
+Should be used with `deploy_preview_when_pull_request_is_opened`.  
 
-#### **deploy_preview_when_image_tag_is_created**  
-
-Boolean
-
-If you have webhooks setup on your container registry, Uffizzi will deploy previews of all new tags (Or optionally matching `tag_pattern`).    
+Uffizzi will setup webhooks on your git repositories to watch for closed pull requests (PR). If a PR is closed, Uffizzi will destroy the preview associated with the corresponding commit.  
 
 ``` yaml
-continuous_previews:
-  deploy_preview_when_image_tag_is_created: true
+x-uffizzi:
+  continuous_preview:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
 ```
 
-#### **delete_after**  
+> **Note**: This option requires that you have first [connected to your git repository](../git-integrations).  
 
-Delete preview after a certain number of hours
+##### **deploy_preview_when_image_tag_is_created**  
+
+Possible values: `true`, `false`
+
+Uffizzi will deploy a preview each time a new tag is created for one of the images defined in `services`. 
+
+``` yaml
+services:
+  frontend:
+    image: foo:latest
+  backend:
+    image: bar:latest 
+x-uffizzi:
+  continuous_previews:
+    deploy_preview_when_image_tag_is_created: true
+```  
+
+> **Note**: This option requires that you have first [configured webhooks on your container registry](../container-registry-integrations).  
+
+> **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
+
+##### **delete_preview_when_image_tag_is_updated: true**  
+
+Possible values: `true`, `false`  
+
+Should be used with `deploy_preview_when_image_tag_is_created`
+
+Uffizzi will delete a preview if the service image tag that triggered the preview is updated. This parameter should be use in conjunction with `deploy_preview_when_image_tag_is_created`.
+
+``` yaml
+services:
+  foo:
+    image: foo:latest
+x-uffizzi:
+  continuous_previews:
+    deploy_preview_when_image_tag_is_created: true
+    delete_preview_when_image_tag_is_updated: true
+```  
+
+In this example, an existing preview of `foo:latest` will be deleted if the `latest` tag is updated.
+
+> **Note**: This option requires that you have first [configured webhooks on your container registry](../container-registry-integrations).  
+
+##### **delete_after**  
+
+Delete preview after a certain number of hours  
 
 Accepts values from `0-720h`, defaults to `72h`.
 
 ``` yaml
-continuous_previews:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_after: 24h
+x-uffizzi:
+  continuous_previews:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_after: 24h
 ```
 
-#### **share_to_github**  
+##### **share_to_github**  
 
-Boolean
+Possible values: `true`, `false`
 
 After a preview is deployed, post the URL in a comment to the GitHub pull request issue.  
 
 ``` yaml
-continuous_previews:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
-  share_to_github: true
+x-uffizzi:
+  continuous_previews:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
+    share_to_github: true
+```  
+
+> **Note**: This option requires that you have first [connected to your GitHub account](../git-integrations).  
+
+### x-uffizzi-ingress
+
+A top-level alternative to `ingress`  
+
+Ingress exposes HTTPS routes from outside your preview environment to your application services. Just like the sub-level `ingress`, `x-uffizzi-ingress` requires a `service` and `port` number as parameters.  
+
+``` yaml
+services:
+  foo:
+    image: foo:latest
+  nginx-loadbalancer:
+    image: nginx:latest
+x-uffizzi-ingress:
+  service: nginx-loadbalancer
+  port: 8080
+```  
+
+### x-uffizzi-continuous-preview  
+
+A top-level alternative to [`continuous_preview`](#continuous_preview). 
+>**Note**: Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.
+
+Just like for `continuous_preview`, the top-level  `x-uffizzi-continuous-preview` is optional.  
+
+``` yaml
+x-uffizzi-continuous-preview:
+  deploy_preview_when_image_tag_is_created: true
+  delete_preview_when_image_tag_is_updated: true
+  delete_preview_after: 10h
 ```
 
-## Service configuration examples
-This section contains of example configurations supported by a `service` definition in version 1.  
+## Service configuration reference  
+This section contains example configurations supported by a `services` definition.  
+
+### **x-uffizzi-continuous-preview**  
+
+An option for specifying continuous previews policies per service. This option overrides global [`continuous_preview`](#continuous_preview) policies for the service where it is specified. 
+
+``` yaml
+services:
+  frontend: 
+    image: foo:latest
+  backend:
+    image: bar:latest
+    x-uffizzi-continuous-preview:
+      deploy_preview_when_image_tag_is_created: false
+      delete_preview_when_image_tag_is_updated: false
+x-uffizzi:
+  ingress:
+    service: frontend
+    port: 80
+  continuous_preview:
+    deploy_preview_when_image_tag_is_created: true
+    delete_preview_when_image_tag_is_updated: true 
+```
+
+In this example, a preview will be triggered when a new tag is created for `frontend` but not for `backend`. This is because the continuous previews policies are set to `false` within the `backend` service definition, which overrides the global policies. The `frontend` service definition contains no such override, so continuous previews will still be enabled for `frontend`.
 
 ### **build**  
 
@@ -204,7 +340,7 @@ services:
     build: ./dir
 ```
 
-Or, as an object with the path specified under [`context`](create-a-compose.md#context).  
+Or, as an object with the path specified under [`context`](#context).  
 
 ``` yaml
 services:
@@ -214,23 +350,23 @@ services:
       dockerfile: Dockerfile-alternate
 ```
 
-### **context**  
-Either a path to a directory containing a Dockerfile, or a url to a GitHub repository.  
+#### **context**  
+Either a path to a directory containing a Dockerfile, or a URL to a GitHub repository.  
 
 When the value supplied is a relative path, it is interpreted as relative to the location of the Compose file.  
 
 ``` yaml
-  build:
-    context: ./dir
+build:
+  context: ./dir
 ```
 
 The GitHub repository URL must include `https://`. If no branch is specified, default is `main`/`master`.
 ``` yaml
-  build:
-    context: https://github.com/ACCOUNT/example-repo#main
+build:
+  context: https://github.com/ACCOUNT/example-repo#main
 ```
 
-You can tell Uffizzi which branch and build context to use by leveraging the `#` and `:`, respectively. For example:  
+You can tell Uffizzi which branch and build context to use by leveraging the `#` and `:` symbols, respectively. For example:  
 
 ```
 | Build Syntax Suffix                                       | Branch Used   | Build Context Used |
@@ -241,32 +377,36 @@ You can tell Uffizzi which branch and build context to use by leveraging the `#`
 | https://github.com/ACCOUNT/example-repo#main:myfolder     | main          | /myfolder          |
 ```
 
-### **dockerfile**  
+#### **dockerfile**  
 
 Alternate Dockerfile.
 
 Compose uses an alternate file to build with. A build path must also be specified. Default is `./Dockerfile`.  
 
 ``` yaml
-  build:
-    context: ./dir
-    dockerfile: Dockerfile-alternate
+build:
+  context: ./dir
+  dockerfile: Dockerfile-alternate
 ```
 
 ### **command**  
 
-Override the default command. Command and args should be used with [`entrypoint`](create-a-compose.md#entrypoint) and expressed in quotes as a list.
+Override the default command. Command and args should be used with [`entrypoint`](#entrypoint) and expressed in quotes as a list.
 
 ```  yaml
-  entrypoint: /usr/bin/nginx-debug
-  command: 
-    - "-g"
-    - "daemon off;"
+entrypoint: /usr/bin/nginx-debug
+command: 
+  - "-g"
+  - "daemon off;"
 ```
 
 ### **configs**  
 
-Grant access to configs on a per-service basis using the per-service `configs` configuration. Only the Docker Compose "Short Syntax" is supported.  
+Grant access to configs on a per-service basis using the per-service `configs` configuration. Both [Docker `configs` short syntax and long syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#configs) are supported.  
+
+> **Note**: `uid`, `gid`, and `mode` long syntax parameters are not supported.
+
+##### Short syntax 
 
 ``` yaml
 services:
@@ -279,9 +419,42 @@ configs:
     file: ./my_config.txt
 ```  
 
+##### Long syntax
+
+``` yaml
+services:
+  loadbalancer:
+      image: nginx:latest
+      configs:
+        - source: nginx-conf
+          target: /etc/nginx/conf.d/override.conf
+configs:
+  nginx-conf:
+    file: ./override.conf
+x-uffizzi-ingress:
+  service: loadbalancer
+  port: 8080
+```
+
 ### **deploy**  
 
-Specify configuration related to the deployment and running of services. Currently, the only deploy option supported is `deploy: resources: limit: memory`.  
+Specify configuration related to the deployment and running of services. 
+
+#### **x-uffizzi-auto-deploy-updates**  
+
+Possible values: `true`, `false`  
+Default value: `true`
+
+Deploy a preview if changes are made to the service—either a new commit in the git repository or the deployed tag is updated. If this parameter is missing, Uffizzi will auto-deploy updates to repositories or images by default.   
+
+``` yaml
+services:
+  foo:
+    build:
+      context: github.com/UffizziCloud/foo#main
+    deploy:
+      x-uffizzi-auto-deploy-updates: false
+```
 
 #### **resources: limits: memory**
 
@@ -302,7 +475,7 @@ services:
 Override the default entrypoint.
 
 ``` yaml
-  entrypoint: /code/entrypoint.sh
+entrypoint: /code/entrypoint.sh
 ```
 
 ### **env_file**  
@@ -310,14 +483,14 @@ Override the default entrypoint.
 Add environment variables from a file. Can be a single value or a list.  
 
 ``` yaml
-  env_file: .env
+env_file: .env
 ```
 
 ``` yaml
-  env_file:
-  - ./common.env
-  - ./apps/web.env
-  - /opt/runtime_opts.env
+env_file:
+- ./common.env
+- ./apps/web.env
+- /opt/runtime_opts.env
 ```
 
 Uffizzi expects each line in an env file to be in `NAME=VALUE` format.  
@@ -331,9 +504,9 @@ FOO=bar
 Add environment variables as an array. Any boolean values (true, false, yes, no) need to be enclosed in quotes to ensure they are not converted to True or False by the YML parser.
 
 ``` yaml
-  environment:
-    FOO: bar
-    BAR: 'true'
+environment:
+  FOO: bar
+  BAR: 'true'
 ```
 
 ### **image**  
@@ -341,26 +514,39 @@ Add environment variables as an array. Any boolean values (true, false, yes, no)
 Specify the image to start the container from, as  `repository:tag`. If no tag is specified, default is `latest`. Uffizzi currently integrates with Docker Hub, Amazon ECR, Azure Container Registry, and Google Container Registry. If no registry is specified, default is `hub.docker.com`.
 
 ``` yaml
-  image: redis:latest  # Defaults to hub.docker.com
+image: redis:latest  # Defaults to hub.docker.com
 ```
 
 ``` yaml
-  image: example.azurecr.io/example-service:latest  # Credentials should be added in the Uffizzi UI (**Settings** > **Integrations**)
-```
+image: example.azurecr.io/example-service:latest  
+``` 
+
+> **Note**: To be able pull images from container registries, you must first add your registry credentials in the Uffizzi UI (**Settings** > **Integrations**). However, you do not need to provide Docker Hub credentials to pull public images from hub.docker.com.
+
 
 ### **secrets**  
 
-Specify the image to start the container from, as  `repository:tag`. If no tag is specified, default is `latest`. Uffizzi currently integrates with Docker Hub, Amazon ECR, Azure Container Registry, and Google Container Registry. If no registry is specified, default is `hub.docker.com`.
+A service-level reference to a top-level secret. Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services in a stack. The secret name/value must be added in the Uffizzi Dashboard and invoked with `external` and secret name. In the following example, FOO is the name of a secret that has been added in the Uffizzi Dashboard.  
 
 ``` yaml
-  image: redis:latest  # Defaults to hub.docker.com
+services:
+  foo:
+    image: foo:latest
+    secrets:
+      - my_secret
+
+secrets:
+  my_secret:
+    external: true    
+    name: "FOO"
+
 ```
 
-``` yaml
-  image: example.azurecr.io/example-service:latest  # Credentials should be added in the Uffizzi UI (**Settings** > **Integrations**)
-```
+## Configs configuration refernce  
 
-## Secrets configuration examples
+// TODO
+
+## Secrets configuration refernce
 This section contains of example configurations supported by a `secrets` definition in version 1.  
 
 ### **external**  
@@ -371,7 +557,7 @@ A secret that is external to you compose context
 
 ### **secrets**  
 
-The top-level secrets declaration defines or references secrets that can be granted to the services in this stack. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. In the following example, `FOO` is the name of a secret that has been added in the Uffizzi Dashboard.
+A top-level reference to secrets that can be granted to the services in a stack. Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services defined in the compose file. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. In the following example, `FOO` is the name of a secret that has been added in the Uffizzi Dashboard.
 
 ``` yaml
 services:

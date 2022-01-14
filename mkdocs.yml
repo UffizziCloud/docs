@@ -104,7 +104,8 @@ nav:
     - Uffizzi Configuration Options and Features: config-options.md
     - Continuous Previews: continuous-previews.md 
   - Config:
-    - Uffizzi Compose Spec: config/compose-spec.md
+    - Uffizzi Compose file reference: config/compose-spec.md
+    - Uffizzi Compose reference table: config/reference-table.md
     - Environment Variables: config/environment-variables.md
     - Secrets: config/secrets.md
     - Git Integrations: config/git-integrations.md

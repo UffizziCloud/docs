@@ -97,15 +97,19 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Getting Started:
-    - Overview: index.md
+  - Home:
+    - Get started: index.md
     - Quick Guide: quick-guide.md  
     - Set Up Previews: set-up-previews.md
     - Uffizzi Configuration Options and Features: config-options.md
     - Continuous Previews: continuous-previews.md 
+  - Guides: 
+    - Uffizzi overview: guides/uffizzi-overview.md
+    - Continuous Previews: guides/continuous-previews.md
+    - Get started: guides/get-started.md
+    - Integrate GitHub: guides/git-integrations.md
+    - Integrate a container registry: guides/container-registry-integrations.md
   - Config:
-    - Uffizzi Compose file reference: config/compose-spec.md
-    - Uffizzi Compose reference table: config/reference-table.md
     - Environment Variables: config/environment-variables.md
     - Secrets: config/secrets.md
     - Git Integrations: config/git-integrations.md
@@ -114,8 +118,9 @@ nav:
     - Logs: config/logs.md
     - Role-based Access Control: config/rbac.md
     - Single Sign-On (SSO): config/single-sign-on.md
-  - Compose Examples:
-    - Create a Uffizzi Compose: examples/create-a-compose.md
-    - Example Uffizzi Compose: examples/example-compose.md
+  - References:
+    - Uffizzi Compose file reference: references/compose-spec.md
+    - Uffizzi Compose reference table: references/reference-table.md
+    - Example Uffizzi Compose: references/example-compose.md
   - Engineering Blog: 
     - Combining your existing CI/CD and Container Registry to enable Continuous Previews: engineeringblog/ci-cd-registry.md

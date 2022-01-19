@@ -1,7 +1,7 @@
 services:
   docs:
     build:
-      context: https://github.com/UffizziCloud/docs:main
+      context: https://github.com/UffizziCloud/docs#main
       dockerfile: Dockerfile
     deploy:
       resources:

@@ -109,7 +109,6 @@ nav:
     - Continuous Previews: guides/continuous-previews.md
     - Configure GitHub: guides/git-integrations.md
     - Link your container registry: guides/container-registry-integrations.md
-    - CI/CD + CP: guides/ci-cd-registry.md
     - Add environment variables: guides/environment-variables.md
     - Add secrets: guides/secrets.md
     - Check logs: guides/logs.md

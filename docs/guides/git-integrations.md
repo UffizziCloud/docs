@@ -1,7 +1,4 @@
-When defining your application stack with a compose file or template, you can choose to add your application components from source code or as pre-built container images. Uffizzi has out-of-the-box support for the following hosted git providers. If your provider is not listed below, consider contributing a new integration to [open-source Uffizzi](https://github.com/UffizziCloud).
-
-## GitHub
-Uffizzi's GitHub integration provides an easy way for you to preview code changes made to your GitHub repositories. To setup this integration, you will need to install the Uffizzi app in your GitHub account, then grant Uffizzi read-only access to the repositories you want to preview. Follow these simple steps to install the Uffizzi app in your GitHub account:  
+Uffizzi's GitHub integration provides an easy way for you to preview code changes made to your GitHub repositories. To configure this integration, you will need to install the Uffizzi app in your GitHub account, then grant Uffizzi read-only access to the repositories you want to preview. Follow these simple steps to install the Uffizzi app in your GitHub account:  
 
 1. Log into [app.uffizzi.com](https://app.uffizzi.com)  
 2. Navigate to **Settings** -> **Integrations**  

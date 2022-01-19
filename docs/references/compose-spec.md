@@ -219,28 +219,6 @@ x-uffizzi:
 
 > **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
-##### **delete_preview_when_image_tag_is_updated**  
-
-Possible values: `true`, `false`  
-
-Should be used with `deploy_preview_when_image_tag_is_created`
-
-Uffizzi will delete a preview if the service image tag that triggered the preview is updated. This parameter should be use in conjunction with `deploy_preview_when_image_tag_is_created`.
-
-``` yaml
-services:
-  foo:
-    image: foo:latest
-x-uffizzi:
-  continuous_previews:
-    deploy_preview_when_image_tag_is_created: true
-    delete_preview_when_image_tag_is_updated: true
-```  
-
-In this example, an existing preview of `foo:latest` will be deleted if the `latest` tag is updated.
-
-> **Note**: This option requires that you have first [configured webhooks on your container registry](../container-registry-integrations).  
-
 ##### **delete_after**  
 
 Delete preview after a certain number of hours  
@@ -443,7 +421,7 @@ Specify configuration related to the deployment and running of services.
 Possible values: `true`, `false`  
 Default value: `true`
 
-Deploy a preview if changes are made to the service—either a new commit in the git repository or the deployed tag is updated. If this parameter is missing, Uffizzi will auto-deploy updates to repositories or images by default.   
+Auto deploys updates to an existing preview—either a new commit in the git repository or the deployed tag is updated. If this parameter is missing, Uffizzi will auto-deploy updates to repositories or images by default.   
 
 ``` yaml
 services:
@@ -573,7 +551,7 @@ In this example, a preview will be triggered when a new tag is created for `fron
 
 &nbsp;  
 
-## `configs` configuration refernce  
+## `configs` configuration reference  
 
 The top-level `configs` declaration defines [configs](#configs) that can be granted to the services in this stack. The source of the config is a `file` (`external` source is currently not supported).
 
@@ -590,7 +568,7 @@ configs:
 
 &nbsp;  
 
-## `secrets` configuration refernce
+## `secrets` configuration reference
 
 A top-level reference to secrets that can be granted to the services in a stack. Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services defined in the compose file. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. If the external secret does not exist, you will see a secret-not-found error message in the Uffizzi Dashboard.
 

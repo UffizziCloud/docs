@@ -117,7 +117,7 @@ x-uffizzi:
     port: 8080
   continuous_previews: 
     deploy_preview_when_image_tag_is_created: true
-    delete_after: 48h
+    delete_preview_after: 48h
     share_to_github: true
 ```
 
@@ -219,17 +219,17 @@ x-uffizzi:
 
 > **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
-##### **delete_after**  
+##### **delete_preview_after**  
 
 Delete preview after a certain number of hours  
 
-Accepts values from `0-720h`, defaults to `72h`.
+Accepts values from `1-720h`, defaults to `72h`.
 
 ``` yaml
 x-uffizzi:
   continuous_previews:
-    deploy_preview_when_pull_request_is_opened: true
-    delete_after: 24h
+    deploy_preview_when_image_tag_is_created: true
+    delete_preview_after: 24h
 ```
 
 ##### **share_to_github**  
@@ -275,7 +275,6 @@ Just like for `continuous_previews`, the top-level  `x-uffizzi-continuous-previe
 ``` yaml
 x-uffizzi-continuous-previews:
   deploy_preview_when_image_tag_is_created: true
-  delete_preview_when_image_tag_is_updated: true
   delete_preview_after: 10h
 ```
 
@@ -537,14 +536,13 @@ services:
     image: bar:latest
     x-uffizzi-continuous-previews:
       deploy_preview_when_image_tag_is_created: false
-      delete_preview_when_image_tag_is_updated: false
 x-uffizzi:
   ingress:
     service: frontend
     port: 80
   continuous_previews:
     deploy_preview_when_image_tag_is_created: true
-    delete_preview_when_image_tag_is_updated: true 
+    delete_preview_after: 24h
 ```
 
 In this example, a preview will be triggered when a new tag is created for `frontend` but not for `backend`. This is because the continuous previews policies are set to `false` within the `backend` service definition, which overrides the global policies. The `frontend` service definition contains no such override, so continuous previews will still be enabled for `frontend`.

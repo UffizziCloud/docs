@@ -1,71 +1,88 @@
-When defining your application stack with a compose file or template, you can choose to add your application components from source code or as pre-built container images. Uffizzi has out-of-the-box support for the following hosted container registry providers. If your provider is not listed below, consider contributing a new integration to [open-source Uffizzi](https://github.com/UffizziCloud).
+When defining your application stack with a compose file or template, you can choose to add your application components from source code or as pre-built container images. Uffizzi has out-of-the-box support for the following hosted container registry providers:  
 
 ## Amazon ECR  
-#### Authorize Uffizzi to pull container images from ECR
 
-To fetch container images from your private ECR repositories, Uffizzi requires an API access key for an IAM User within your AWS Account. It's a best practice to grant this user only the permissions required. This section will walk you through creating a new IAM User, granting it strict permissions, and creating an API access key.
+To configure Uffizzi to pull images from your Amazon ECR, it is recommended that you first create a dedicated IAM user for this purpose. After creating this IAM user, add its credentials in the Uffizzi Dashboard. Finally, configure webhooks to send notifications to Uffizzi when new images or tags are pushed to ECR.   
 
-The easiest way to create this user is to use the AWS command-line interface (CLI). Make sure you have installed and configured the `aws` command on your workstation or container, including setting the default region to match your ECR repositories.
+<details><summary>Create IAM user to authorize Uffizzi to pull images from ECR</summary>
 
-Create a new IAM User within your AWS Account. If you get an error that it already exists, that's fine.
+<p>To fetch container images from your private ECR repositories, Uffizzi requires an API access key for an IAM User within your AWS Account. It's a best practice to grant this user only the permissions required. This section will walk you through creating a new IAM User, granting it strict permissions, and creating an API access key.</p>
 
-    aws iam create-user --user-name uffizzi --output table  
+<p>The easiest way to create this user is to use the AWS command-line interface (CLI). Make sure you have installed and configured the `aws` command on your workstation or container, including setting the default region to match your ECR repositories.</p>
 
-Attach an Amazon-managed policy to the new User. This grants permission only to list and read images.
+</p>Create a new IAM User within your AWS Account. If you get an error that it already exists, that's fine.</p>
 
-    aws iam attach-user-policy --user-name uffizzi --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+<code>aws iam create-user --user-name uffizzi --output table</code>   
 
-Create and obtain an API access key for this user. You'll need the output of this command soon.
+<p>Attach an Amazon-managed policy to the new User. This grants permission only to list and read images.</p>
 
-    aws iam create-access-key --user-name uffizzi --query "[join(' ', ['Access Key ID:', AccessKey.AccessKeyId]), join(' ', ['Secret Access Key:', AccessKey.SecretAccessKey])]" --output table
+<code>aws iam attach-user-policy --user-name uffizzi --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly</code>  
 
-When you configure ECR within Uffizzi, you'll need those values.  
-&nbsp;  
-#### Configure webhooks for continuous previews from Amazon ECR
+<p>Create and obtain an API access key for this user. You'll need the output of this command soon.</p>
 
-After configuring AWS ECR to pull images, you'll probably also want to enable continuous previews when you push a new container image. This requires configuring AWS EventBridge to send Uffizzi notifications via webhook HTTP requests. This section will walk you through configuring these webhooks.
+</code>
+aws iam create-access-key --user-name uffizzi --query "[join(' ', ['Access Key ID:', AccessKey.AccessKeyId]), join(' ', ['Secret Access Key:', AccessKey.SecretAccessKey])]" --output table
+</code>
 
-The easiest way to configure these webhooks is to use the AWS CLI. Make sure you have installed and configured the `aws` command on your workstation or container, including setting the default region to match your ECR repositories.
+<p>When you configure ECR within Uffizzi in the next step, you'll need these values.</p>  
+</details>
 
-Download the following shell script to configure these webhooks for you:   
+<details><summary>Add IAM user credentials in the Uffizzi Dashboard</summary>
 
-    wget http://uffizzi.com/docs/setup/container-registry-integrations/assets/scripts/uffizzi_ecr_webhook_configure.bash
+<p>In the Uffizzi Dashboard (UI), navigate to **Settings** > **Integrations**. There you will see a list that includes container registries supported by Uffizzi. Select **CONFIGURE** next to the Amazon ECR option. After that, you'll be promoted to sign in to ECR with your registry domain, access key ID, and your secret access key. Once authenticated, Uffizzi will now be able to pull images from your registry.</p>
+
+<img src="../../assets/images/settings-integrations.png">
+</details>   
+
+<details><summary>Configure webhooks for Continuous Previews from ECR</summary>
+
+<p>After configuring AWS ECR to pull images, you'll probably also want to enable continuous previews when you push a new container image. This requires configuring AWS EventBridge to send Uffizzi notifications via webhook HTTP requests. This section will walk you through configuring these webhooks.</p>
+
+<p>The easiest way to configure these webhooks is to use the AWS CLI. Make sure you have installed and configured the `aws` command on your workstation or container, including setting the default region to match your ECR repositories.</p>
+
+<p>Download the following shell script to configure these webhooks for you:</p>   
+
+<code> wget http://uffizzi.com/docs/setup/container-registry-integrations/assets/scripts/uffizzi_ecr_webhook_configure.bash</code>  
 
 
-Review the contents so you understand what you're executing. Then execute the script:
+<p>Review the contents so you understand what you're executing. Then execute the script:</p>
 
-    bash ./uffizzi_ecr_webhook_configure.bash
+<code>bash ./uffizzi_ecr_webhook_configure.bash</code>
 
-You should see output about the resource you've just created. If you see errors about resources already existing that's fine; that means someone else has already configured them.
+<p>You should see output about the resource you've just created. If you see errors about resources already existing that's fine; that means someone else has already configured them.</p>
 
-You should also see the EventBridge Rule and other resources within the AWS Console:  
+<p>You should also see the EventBridge Rule and other resources within the AWS Console:<p>    
 
-![Screenshot](../assets/images/ecr-webhook-screenshot.png)
-&nbsp;  
-#### Removing webhook configuration
+<img src="../../assets/images/ecr-webhook-screenshot.png">
+</details>
+<details><summary>Removing webhook configuration</summary>
 
-We've also provided a script to remove all of this configuration. Use this when you want to reconfigure the webhooks or when you no longer require automatic deployment to Uffizzi.
+<p>We've also provided a script to remove all of this configuration. Use this when you want to reconfigure the webhooks or when you no longer require automatic deployment to Uffizzi.<p>
 
-Download the removal script:
+</p>Download the removal script:</p>
 
-    wget https://uffizzi.zendesk.com/hc/article_attachments/4410648688919/uffizzi_ecr_webhook_remove.bash
+<code>wget https://uffizzi.zendesk.com/hc/article_attachments/4410648688919/uffizzi_ecr_webhook_remove.bash</code>
 
-Review the contents so you understand what you're executing. Then execute the removal script:
+<p>Review the contents so you understand what you're executing. Then execute the removal script:</p>
 
-    bash ./uffizzi_ecr_webhook_remove.bash
-&nbsp;  
-#### Removing IAM User
+<code>bash ./uffizzi_ecr_webhook_remove.bash</code>  
+</details>
 
-You can revoke Uffizzi's access to your ECR repositories by detaching the policy from the IAM User:
+<details><summary>Removing IAM User</summary>
+
+<p>You can revoke Uffizzi's access to your ECR repositories by detaching the policy from the IAM User:</p>
 
     
-    aws iam detach-user-policy --user-name uffizzi --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+<code>aws iam detach-user-policy --user-name uffizzi --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly</code>
 
-If no longer needed, you can then delete the IAM User. You must first delete all of the user's API Access Keys.
+<p>If no longer needed, you can then delete the IAM User. You must first delete all of the user's API Access Keys.</p>
+</details>
 
 ## Azure Container Registry (ACR)  
 
-#### Authorize Uffizzi to pull container images from ACR  
+To configure Uffizzi to pull images from your ACR, it is recommended that you first create a dedicated Service Principal for this purpose, along with an Application and Subscription. After creating these resources, add the Service Principal's credentials in the Uffizzi Dashboard. Finally, configure webhooks to send notifications to Uffizzi when new images or tags are pushed to ACR.   
+
+<details><summary>Create Azure Service Principal to authorize Uffizzi to pull images from ACR</summary>
 
 To access your container images directly, Uffizzi requires access to your Azure Container Registry. The easiest way to accomplish this is to create a Service Principal and grant it the `ACRPull` role. You can read more about Azure Service Principals here: <https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals>
 
@@ -78,6 +95,7 @@ az ad sp create-for-rbac --name uffizzi-example-acrpull --scopes /subscriptions/
 ```
 
 This command will output a JSON object with some values you will need later: `appId` and `password`. You can read more about this command here: <https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli>
+</details>
 
 #### Configure Uffizzi to use Azure Service Principal
 To grant Uffizzi access to pull images from your ACR, you will need:  

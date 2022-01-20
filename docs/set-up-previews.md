@@ -1,18 +1,17 @@
 ##Configuration
 
-**Compose**  - A configuration-as-code YAML - `docker-compose.uffizzi.yml`- based on Docker Compose (version 3.9) .
-            Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.
+**Compose**  - The core functionality of Uffizzi is defined with configuration-as-code YAML - [`docker-compose.uffizzi.yml`](references/compose-spec.md)- which is based on Docker Compose (version 3.9).  Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.
 
 
 ##Build Options
 
 Option 1- **Use Uffizzi's Integrated Build** - Uffizzi will build from source from your connected VCS.
 
-   *This is for users who want Uffizzi to manage the full build and deploy processs.
+   *This is for users who want Uffizzi to manage the full build and deploy processs.  Uffizzi currently integrates with Github.
    
-Option 2- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle the Build. 
+Option 2- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle the Build. You can manually deploy Previews on Uffizzi from existing images on any of the major image registry providers and you can also trigger Previews based on a [tagging convention](engineeringblog/ci-cd-registry.md).
      
-   *This is for users who have custom builds or who are using a VCS that is not yet integrated with Uffizzi.
+   *This is for users who have custom builds or who are using a VCS that is not yet integrated with Uffizzi - Gitlab and Bitbucket are on our roadmap.
 
 ##Integrations and Webhooks
 
@@ -22,10 +21,10 @@ Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR,
 
 ## Using Compose
 
-1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](config/compose-spec/) and [Examples](examples/example-compose.md) for detailed information on how to write your `docker-compose.uffizzi.yml`.  
+1. Write Your Compose - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check [References](references/compose-spec.md) and [Examples](references/example-compose.md) for detailed information on how to write your `docker-compose.uffizzi.yml`.  
 
 
-2. Add your `uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
+2. Add your `x-uffizzi` element(s) and save your `docker-compose.uffizzi.yml` at the top level of the `main` or primary branch in your repository.  
 
 ![Screenshot](assets/images/compose-in-git.png)
 
@@ -39,7 +38,7 @@ After adding the repo, branch, and path, select the `validate` button - Uffizzi 
 
 ![Screenshot](assets/images/add-compose.png)
 
-If you want `uffizzi_app` to recognize changes to your `docker-compose.uffizzi.yml` check the Box for "Auto-deploy updates".
+If you want `uffizzi_app` to automatically recognize and apply configuration changes made to `docker-compose.uffizzi.yml` check the Box for "Auto-deploy updates".
 
 Save your setting and return to Project Overview.
 
@@ -53,7 +52,7 @@ Save your setting and return to Project Overview.
 The webhook within your git repo will inform `uffizzi_app` of the `Open pull request` and initiate the Preview.
 
 #### Bring Your Own Build `Tag-based` Trigger
- If you have enabled a Tag-based trigger the webhook within your image registry will inform `uffizzi_app` of the new image tagged with `uffizzi_request_#` and will initiate the Preview.
+ If you have [enabled](engineeringblog/ci-cd-registry.md) a Tag-based trigger the webhook within your image registry will inform `uffizzi_app` of the new image tagged with `uffizzi_request_#` and will initiate the Preview.
 
 When a Preview is triggered `uffizzi_app` will show the new Preview and its status:
 
@@ -84,7 +83,7 @@ If you have enabled both a `Close Pull Request` deletion trigger and a `Time-bas
 
 ### Initiating a Manual Preview
 
-Alternatively, you can select `new preview` from the UI and choose a compose from within your connected repository to deploy a preview.  If you use this method to initiate a preview you must manually delete it from the UI.
+Alternatively, you can select `new preview` from the UI and choose a compose from within your connected repository to deploy a preview.  If you use this method to initiate a preview you must manually delete it from the UI.  Users also have the option to add components manually via point and click method and deploy - this would typically be used for ad hoc use cases to Preview isolated services or to support a unique test case.
 
 ![Screenshot](assets/images/compose-two.png)
 

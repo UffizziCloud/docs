@@ -48,5 +48,5 @@ By testing the functionality of a topic branch before it’s merged into QA/Test
 
 Continuous Previews can lead not only to time savings, but also cost savings. Teams employing an Agile + Continuous Previews strategy can often replace their single, static QA/Test environment with a dynamic set of test environments for each new topic branch. These dynamic test environments can share the same lifecycle as the topic branch itself—i.e., when a branch is created or deleted, a corresponding environment is stood up or torn down. This enables you to effectively "rent" your QA environment(s) - there's no reason to run QA environments in off hours, over the weekend, or during holidays - you can run these for a fraction of the time and have as many environments as you need for as long as you need them and no longer.
 
-To learn more see the [CP Manifesto](https://www.cpmanifesto.org).
+To learn more see the [CP Manifesto](https://www.continuous-previews.org).
 

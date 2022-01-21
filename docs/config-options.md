@@ -1,5 +1,5 @@
 # Configuration Options and Features
-Uffizzi is currently only available has a cloud-hosted offering.  The Open Source and Paid/Self-hosted configurations represented in the below table represent future releases. The open source self-hosted offering with CLI is scheduled to be released April 2022.
+Uffizzi is currently only available as a cloud-hosted offering.  The Open Source and Paid/Self-hosted configurations represented in the below table represent future releases. The open source self-hosted offering with CLI is scheduled to be released April 2022.
 
 The Uffizzi Dashboard or Graphical User Interface (GUI) is the only component of Uffizzi that will not be open sourced.
 

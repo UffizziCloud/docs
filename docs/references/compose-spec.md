@@ -285,7 +285,7 @@ This section contains example configurations supported by a `services` definitio
 
 ### **build**  
 
-Configuration options that are applied at build time.
+Configuration options that are applied at build time. In each example below, the default build [context](#context) is `Dockerfile`, unless otherwise specified.
 
 `build` can be specified either as a string containing a path to the build context:  
 
@@ -294,8 +294,9 @@ services:
   webapp:
     build: ./dir
 ```
+Here the build context is implied to be `Dockerfile` (i.e. Uffizzi expects that `./dir/Dockerfile` exists).
 
-Or, as an object with the path specified under [`context`](#context). The path can local (i.e., within the same file system or repository as the Uffizzi Compose file):  
+Or, a build can be an object with the path specified with [`context`](#context). The path can be local (i.e., within the same file system or repository as the Uffizzi Compose file):  
 
 ``` yaml
 services:
@@ -312,7 +313,7 @@ services:
   webapp:
     build:
       context: https://github.com/ACCOUNT/example-repo#main
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-alternate
 ```
 
 #### **context**  

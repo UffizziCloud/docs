@@ -127,7 +127,7 @@ az ad sp create-for-rbac --name uffizzi-example-acrpull --scopes /subscriptions/
 
 <p>The Application ID and Password are provided in the output from the <code>create-for-rbac</code> command above, or they can be obtained within the Azure web portal.</p>
 
-<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard (UI)</a> and navigate to <b>Settings</b> > <b>Integrations</b> then select <b>CONFIGURE</b> next to the ACR option.</p>
+<p>Log in to the <a href="https://app.uffizzi.com">Uffizzi Dashboard (UI)</a> and navigate to <b>Settings</b> > <b>Integrations</b> then select <b>CONFIGURE</b> next to the ACR option.</p>
 
 <img src="../../assets/images/settings-integrations.png">  
 
@@ -174,7 +174,7 @@ To configure Uffizzi to pull images from your GCR, it is recommended that you ne
 
 <p>To grant Uffizzi access to pull images from your GCR, you will need a JSON key file.</p>
 
-<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to the GCR option.</p>
+<p>Log in to the <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to the GCR option.</p>
 
 <img src="../../assets/images/settings-integrations.png">  
 &nbsp;  
@@ -228,13 +228,37 @@ gcloud pubsub subscriptions delete uffizzi-gcr-webhook
 
 To configure Uffizzi to pull images from your private Docker Hub registry, it is recommended that you first create an Access Token to provide to Uffizzi. Once authorized, Uffizzi will automatically configure webhooks on your registry to be notified when you push new images.  
 
+<details><summary>Create an access token for Docker Hub</summary>
+
+<p> Log in to <a href="hub.docker.com">Docker Hub</a>, then navigate to <b>Account Settings</b> > <b>Security</b> and select the <b>New Access Token</b> button. In the <b>Access Token Description</b> field, enter "uffizzi" or a similar description. For <b>Access permissions</b> choose <b>Read-only</b>, then select <b>Generate</b> to create your Access Token.</p>
+
+<img src="../../assets/images/docker-hub-generate-access-token.png">
+
+<p>On the next screen, you should see your Accesss Token. Save this value, as you will need it in the next step.</p>
+
+<img src="../../assets/images/docker-hub-access-token.png">
+
+</details>
+
 <details><summary>Authorize Uffizzi to pull container images from Docker Hub</summary>  
 
-<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to the Docker Hub option.</p>
+<p>Log in to the <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to the Docker Hub option.</p>
 
-<img src="../../assets/images/settings-integrations.png">  
-&nbsp;  
+<img src="../../assets/images/settings-integrations.png">
 
-<p>Upload or copy and paste your key file when prompted, then click <b>Add GCR Key File</b>. Uffizzi should now have access to pull images from your GCR.</p>  
+<p>Enter your Docker ID and you access token, then select <b>Sign in to Docker Hub</b>. Uffizzi should now have access to pull images from your Docker Hub registry. ffizzi will automatically configure a webhook to be notified when you push new images.</p>
 
-<img src="../../assets/images/.png">  
+<img src="../../assets/images/docker-hub-login.png">  
+
+</details>
+
+<details><summary>Deleting the access token for Docker Hub</summary>  
+
+<p> Log in to <a href="hub.docker.com">Docker Hub</a>, then navigate to <b>Account Settings</b> > <b>Security</b>. Select the the checkbox next the access token you added in the Uffizzi Dashboard, then select <b>Delete</b> and <b>Delete Forever</b> to confirm. 
+
+<img src="../../assets/images/docker-hub-delete-access-token.png">
+
+<img src="../../assets/images/docker-hub-delete-access-token-confirmation.png">
+
+
+</details>

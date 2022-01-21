@@ -127,7 +127,7 @@ az ad sp create-for-rbac --name uffizzi-example-acrpull --scopes /subscriptions/
 
 <p>The Application ID and Password are provided in the output from the <code>create-for-rbac</code> command above, or they can be obtained within the Azure web portal.</p>
 
-<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard (UI)</a> and navigate to <b>Settings</b> > <b>Integrations</b> then select <b>CONFIGURE</b> next to ACR.</p>
+<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard (UI)</a> and navigate to <b>Settings</b> > <b>Integrations</b> then select <b>CONFIGURE</b> next to the ACR option.</p>
 
 <img src="../../assets/images/settings-integrations.png">  
 
@@ -174,7 +174,7 @@ To configure Uffizzi to pull images from your GCR, it is recommended that you ne
 
 <p>To grant Uffizzi access to pull images from your GCR, you will need a JSON key file.</p>
 
-<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to GCR.</p>
+<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to the GCR option.</p>
 
 <img src="../../assets/images/settings-integrations.png">  
 &nbsp;  
@@ -221,3 +221,20 @@ gcloud pubsub subscriptions delete uffizzi-gcr-webhook
 <p>If this was your only Subscription to the GCR Topic, you could also delete that Topic.</p>
 
 <p>If that was your only Topic, you could also disable the Pub/Sub API.</p>
+
+</details>
+
+## Docker Hub  
+
+To configure Uffizzi to pull images from your private Docker Hub registry, it is recommended that you first create an Access Token to provide to Uffizzi. Once authorized, Uffizzi will automatically configure webhooks on your registry to be notified when you push new images.  
+
+<details><summary>Authorize Uffizzi to pull container images from Docker Hub</summary>  
+
+<p>Log into <a href="https://app.uffizzi.com">Uffizzi Dashboard</a> and navigate to <b>Settings</b> > <b>Integrations</b>, then select <b>CONFIGURE</b> next to the Docker Hub option.</p>
+
+<img src="../../assets/images/settings-integrations.png">  
+&nbsp;  
+
+<p>Upload or copy and paste your key file when prompted, then click <b>Add GCR Key File</b>. Uffizzi should now have access to pull images from your GCR.</p>  
+
+<img src="../../assets/images/.png">  

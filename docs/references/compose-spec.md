@@ -31,7 +31,7 @@ Configs allow you to add configuration files to your applications. Files are exp
 You must explicitly grant access to configuration files per service using the `configs` element within the service definition. Configs are optional for Uffizzi Compose files.  
 
 ## Secrets  
-Secrets provide a mechanism for securing and sharing environment variables across all previews in a project. The environment variables are defined as name/value pairs and are injected at runtime. Secrets can only be added from the Uffizzi Dashboard (UI). Once added, they cannot be viewed or edited. To update a secret, you should delete the old secret and create a new one.   
+Secrets provide a mechanism supplying sensitive environment varialbes (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets can only be added from the Uffizzi Dashboard (UI). Once added, they cannot be viewed or edited. To update a secret, you should delete the old secret and create a new one.   
 
 > **Note**: You will receive an error in the Uffizzi Dashboard if secrets have not been added in the UI but they are referenced in your compose file.   
 
@@ -99,13 +99,11 @@ secrets:
     name: "POSTGRES_PASSWORD"    # i.e., value should be added in the Uffizzi Dashboard
 ```
 
-## Uffizzi extension configuration reference
+## `x-uffizzi` extension configuration reference
 
-### **x-uffizzi**  
+`x-uffizzi` extension top-level element  
 
-The Uffizzi extension top-level element  
-
-`x-uffizzi` defines an `ingress` and various `continuous_previews` options.  
+This option provides Uffizzi with configuration information required for deploying and managing previews of your application stack.
 
 ``` yaml
 services:
@@ -121,13 +119,13 @@ x-uffizzi:
     share_to_github: true
 ```
 
-#### ingress (required)  
+### ingress (required)  
 
 Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
 
 This section contains example configurations supported by an `ingress` definition. 
 
-##### service (required)  
+#### service (required)  
 
 The service that should receive incoming HTTPS traffic. The ingress service should be one of the services defined within the top-level `services`.  
 
@@ -143,7 +141,7 @@ x-uffizzi:
     port: 8080
 ```
 
-##### port (required)  
+#### port (required)  
 
 The port number the ingress service container is listening for traffic on.   
 
@@ -159,7 +157,7 @@ x-uffizzi:
     port: 8080
 ```
 
-#### **continuous_previews** 
+### **continuous_previews** 
 
 Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.  
 
@@ -167,7 +165,7 @@ When specified, the continuous previews policies is globally scoped, i.e. the po
 
 This section contains example configurations supported by a `continuous_previews` definition. 
 
-##### **deploy_preview_when_pull_request_is_opened**  
+#### **deploy_preview_when_pull_request_is_opened**  
 
 Possible values: `true`, `false`
 
@@ -181,7 +179,7 @@ x-uffizzi:
 
 > **Note**: This option requires that you have first [connected to your git repository](../git-integrations). 
 
-##### **delete_preview_when_pull_request_is_closed**  
+#### **delete_preview_when_pull_request_is_closed**  
 
 Possible values: `true`, `false`  
 
@@ -198,7 +196,7 @@ x-uffizzi:
 
 > **Note**: This option requires that you have first [connected to your git repository](../git-integrations).  
 
-##### **deploy_preview_when_image_tag_is_created**  
+#### **deploy_preview_when_image_tag_is_created**  
 
 Possible values: `true`, `false`
 
@@ -219,11 +217,11 @@ x-uffizzi:
 
 > **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
-##### **delete_preview_after**  
+#### **delete_preview_after**  
 
-Delete preview after a certain number of hours  
+Delete preview after a certain number of hours (optional)
 
-Accepts values from `1-720h`, defaults to `72h`.
+Possible values: `1-720h`
 
 ``` yaml
 x-uffizzi:
@@ -232,12 +230,11 @@ x-uffizzi:
     delete_preview_after: 24h
 ```
 
-##### **share_to_github**  
+#### **share_to_github**  
 
 Possible values: `true`, `false`
 
-After a preview is deployed, post the URL in a comment to the GitHub pull request issue.  This option requires that your GitHub credentials have been added in the Uffizzi Dashboard (UI).  
-
+After a preview is deployed, post the URL in a comment to the GitHub pull request issue.
 ``` yaml
 x-uffizzi:
   continuous_previews:
@@ -246,39 +243,7 @@ x-uffizzi:
     share_to_github: true
 ```  
 
-> **Note**: This option requires that you have first [connected to your GitHub account](../git-integrations).  
-
-### x-uffizzi-ingress
-
-A top-level alternative to `ingress`  
-
-Ingress exposes HTTPS routes from outside your preview environment to your application services. Just like the sub-level `ingress`, `x-uffizzi-ingress` requires a `service` and `port` number as parameters.  
-
-``` yaml
-services:
-  foo:
-    image: foo:latest
-  nginx-loadbalancer:
-    image: nginx:latest
-x-uffizzi-ingress:
-  service: nginx-loadbalancer
-  port: 8080
-```  
-
-### x-uffizzi-continuous-previews  
-
-A top-level alternative to [`continuous_previews`](#continuous_previews). 
->**Note**: Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.
-
-Just like for `continuous_previews`, the top-level  `x-uffizzi-continuous-previews` is optional.  
-
-``` yaml
-x-uffizzi-continuous-previews:
-  deploy_preview_when_image_tag_is_created: true
-  delete_preview_after: 10h
-```
-
-&nbsp;  
+> **Note**: This option requires that you have first [connected to your GitHub account](../../guides/git-integrations).  
 
 ## `services` configuration reference  
 This section contains example configurations supported by a `services` definition.  
@@ -504,7 +469,7 @@ image: example.azurecr.io/example-service:latest
 
 Grant access to secrets on a per-service basis using the per-service `secrets` configuration. Uffizzi Compose currently supports the secrets [short syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#secrets) only.  
 
-Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services in a stack. The secret name/value pairs must be added in the Uffizzi Dashboard (UI).  
+Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services in a stack. The secret name/value pairs must be [added in the Uffizzi Dashboard (UI)](../guides/secrets.md).  
 
 In the following example, `pg_user` and `pg_password` are references to secrets invoked in the top-level `secrets` stanza. `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are injected into the `db` service container once the stack is deployed.  
 
@@ -530,13 +495,6 @@ secrets:
 An option for specifying continuous previews policies per service. This option overrides global [`continuous_previews`](#continuous_previews) policies for the service where it is specified. 
 
 ``` yaml
-services:
-  frontend: 
-    image: foo:latest
-  backend:
-    image: bar:latest
-    x-uffizzi-continuous-previews:
-      deploy_preview_when_image_tag_is_created: false
 x-uffizzi:
   ingress:
     service: frontend
@@ -544,11 +502,252 @@ x-uffizzi:
   continuous_previews:
     deploy_preview_when_image_tag_is_created: true
     delete_preview_after: 24h
+services:
+  frontend: 
+    image: foo:latest
+  backend:
+    image: bar:latest
+    x-uffizzi-continuous-previews:
+      deploy_preview_when_image_tag_is_created: false
 ```
 
-In this example, a preview will be triggered when a new tag is created for `frontend` but not for `backend`. This is because the continuous previews policies are set to `false` within the `backend` service definition, which overrides the global policies. The `frontend` service definition contains no such override, so continuous previews will still be enabled for `frontend`.
+In this example, a preview will be triggered when a new tag is created for `frontend` but not for `backend`. This is because the continuous previews policies are set to `false` within the `backend` service definition, which overrides the global policies. The `frontend` service definition contains no such override, so continuous previews will still be enabled for `frontend`.  
 
-&nbsp;  
+#### **deploy_preview_when_pull_request_is_opened**  
+
+A service-level option or override  
+
+If the global option[`deploy_preview_when_pull_request_is_opened`](#deploy_preview_when_pull_request_is_opened) is also specified, this service-level option overrides the global option.  
+
+Possible values: `true`, `false`
+
+Uffizzi will setup webhooks on your git repositories to watch for open pull requests (PR). If a PR is opened, Uffizzi will build the commit and deploy a new preview.  
+
+This parameter can be used as a standalone option:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+services:
+  foo:
+    image: foo:latest
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_pull_request_is_opened: true
+      delete_preview_when_pull_request_is_closed: true
+```
+
+Or as an override:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+  continuous-previews:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed : true
+services:
+  foo:
+    build:
+      context: https://github.com/example/foo#main
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_pull_request_is_opened: false
+  bar:
+    build: 
+      context: https://github.com/example/bar#main
+```
+
+In this example, a preview will not be deployed when a pull request is opened on the `example/foo` repository because `deploy_preview_when_pull_request_is_open : false` overrides the global setting.  However, an open pull request on `example/bar` repository will still trigger a new preview.  
+
+> **Note**: This option requires that you have first [connected to your git repository](../git-integrations). 
+
+#### **delete_preview_when_pull_request_is_closed**  
+
+A service-level option or override  
+
+If the global option[`delete_preview_when_pull_request_is_closed`](#delete_preview_when_pull_request_is_closed) is also specified, this service-level option overrides the global option.  
+
+Possible values: `true`, `false`  
+
+Should be used with `deploy_preview_when_pull_request_is_opened`.  
+
+Uffizzi will setup webhooks on your git repositories to watch for closed pull requests (PR). If a PR is closed, Uffizzi will destroy the preview associated with the corresponding commit.  
+
+This parameter can be used as a standalone option:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+services:
+  foo:
+    image: foo:latest
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_pull_request_is_opened: true
+      delete_preview_when_pull_request_is_closed: true
+```
+
+Or as an override:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+  continuous-previews:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed : true
+services:
+  foo:
+    build:
+      context: https://github.com/example/foo#main
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_pull_request_is_opened: true
+      delete_preview_when_pull_request_is_closed : false
+  bar:
+    build:
+      context: https://github.com/example/bar#main
+```
+
+In this example, `foo` will not be deleted when the pull request is closed because `delete_preview_when_pull_request_is_closed : false` overrides the global setting.  
+
+> **Note**: This option requires that you have first [connected to your git repository](../git-integrations).  
+
+#### **deploy_preview_when_image_tag_is_created**  
+
+A service-level option or override  
+
+If the global option[`deploy_preview_when_image_tag_is_created`](#deploy_preview_when_image_tag_is_created) is also specified, this service-level option overrides the global option.  
+
+Possible values: `true`, `false`
+
+Uffizzi will deploy a preview each time a new tag is created for one of the images defined in `services`. 
+
+This parameter can be used as a standalone option:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+services:
+  foo:
+    image: foo:latest
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_image_tag_is_created: true
+```
+
+Or as an override:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+  continuous-previews:
+    deploy_preview_when_image_tag_is_created: false
+services:
+  foo:
+    image: foo:latest
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_image_tag_is_created: true
+  bar:
+    image: bar:latest
+  baz:
+    image: baz:latest
+```
+
+In this example, previews are disabled for all services except `foo` because the override is specified for this service.  
+
+> **Note**: This option requires that you have first [configured webhooks on your container registry](../container-registry-integrations).  
+
+> **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
+
+#### **delete_preview_after**  
+
+A service-level option or override  
+
+If the global option[`delete_preview_after`](#delete_preview_after) is also specified, this service-level option overrides the global option.   
+
+Delete preview after a certain number of hours (optional)
+
+Possible values: `1-720h`
+
+This parameter can be used as a standalone option:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+services:
+  foo:
+    image: foo:latest
+    x-uffizzi-continuous_previews:
+      deploy_preview_when_image_tag_is_created: true
+      delete_preview_after: 24h
+```
+
+Or as an override:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+  continuous-previews:
+    deploy_preview_when_image_is_created: true
+    delete_preview_after: 1h
+services:
+  foo:
+    image: foo:latest
+    x-uffizzi-continuous_previews:
+      delete_preview_after: 24h
+  bar:
+    image: bar:latest
+```
+
+In this example, `foo` wil be deleted after 24 hours, instead of 1 hour.  
+
+#### **share_to_github**  
+
+A service-level option or override  
+
+If the global option[`share_to_github`](#share_to_github) is also specified, this service-level option overrides the global option.  
+
+Possible values: `true`, `false`
+
+After a preview is deployed, post the URL in a comment to the GitHub pull request issue.  
+
+This parameter can be used as a standalone option:  
+
+Or as an override:  
+
+``` yaml
+x-uffizzi:
+  ingress:
+    service: foo
+    port: 80
+  continuous_previews:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
+    share_to_github: false
+services:
+  foo:
+    build: 
+      context: https://github.com/example/foo#main
+    x-uffizzi-continuous_previews:
+      share_to_github: true
+  bar:
+    image: bar:latest
+```  
+
+In this example, the preview URL will only be shared to GitHub when a pull request is opened on repository `foo` (but not `bar`).  
+
+> **Note**: This option requires that you have first [connected to your GitHub account](../../guides/git-integrations).   
 
 ## `configs` configuration reference  
 

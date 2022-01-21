@@ -2,122 +2,123 @@
 #### Vote App - Example of a Tag-initiated Preview (Bring Your Own Build)
 
 ``` yaml title="docker-compose.uffizzi.1.yml"
-services:  #required
+# Uffizzi extension
+x-uffizzi:
+  ingress:    # required
+    service: loadbalancer
+    port: 8080
+  continuous_preview:
+    deploy_preview_when_image_tag_is_created: true
+    delete_preview_after: 8h
+# Vote applicaiton
+services:
   redis:
-    image: redis  # Default registry is hub.docker.com; default tag is `latest`
-
+    image: redis:latest
   postgres:
     image: postgres:9.6
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    secrets:
+      - pg_user
+      - pg_password
+  worker:
+    image: uffizzi.azurecr.io/example-voting-worker:latest
     deploy:
       resources:
         limits:
-          memory: 250M # Options: 125M (default), 250M, 500M, 1000M, 2000M, 4000M
-
-  nginx-loadbalancer:
+          memory: 250M
+  result:
+    image: uffizzi.azurecr.io/example-voting-result:latest
+    environment:
+      PORT: 8088
+  vote:
+    image: uffizzi.azurecr.io/example-voting-vote:latest
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+    environment:
+      PORT: 8888
+  loadbalancer:
     image: nginx:latest
     configs:
-      - source: vote-nginx-conf
+      - source: nginx-vote-conf
         target: /etc/nginx/conf.d/vote.conf
-
-  worker:
-    image: uffizziqa.azurecr.io/example-voting-worker:latest
-    auto: false  # Auto-deploy updates (optional, default=true)  
-    deploy:
-      resources:
-        limits:
-          memory: 250M
-
-  vote:
-    image: uffizziqa.azurecr.io/example-voting-vote:latest
-    env_file:
-      - vote1.env
-      - vote2.env
-    deploy:
-      resources:
-        limits:
-          memory: 250M
-
-  result:
-    image: gcr.io/uffizzi-pro-qa-gke/example-result:latest
-
+# Loadbalancer configuration
 configs:
-  vote-nginx-conf:
+  nginx-vote-conf:
     file: ./vote.conf
-
-continuous_preview:       
-  deploy_preview_when_image_tag_is_created: true
-  # Images tagged with this pattern will be auto-deployed as previews 
-  tag_pattern: uffizzi_request_*    # where '*' is the pull/merge request number
-  delete_preview_after: 10h
-  share_to_github: true
-
-ingress:
-  service: nginx-loadbalancer
-  port: 8080
+# Postgres credentials
+secrets:
+  pg_user:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_USER"        # i.e., value should be added in the Uffizzi Dashboard
+  pg_password:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_PASSWORD"    # i.e., value should be added in the Uffizzi Dashboard
 ```
 
 &nbsp;  
 #### Vote App - Example of PR-initiated Preview (Build from Source)
 
 ``` yaml title="docker-compose.uffizzi.2.yml"
+# Uffizzi extension
+x-uffizzi:
+  ingress:    # required
+    service: loadbalancer
+    port: 8080
+  continuous_preview:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
+    share_to_github: true
+# Vote applicaiton
 services:
-  nginx:
-    image: nginx:latest
-    configs:
-      - source: vote-nginx-conf
-        target: /etc/nginx/conf.d/vote.conf
-
   redis:
-    image: redis:latest
-
+    image: redis:latest   # Defaults registry is hub.docker.com
   postgres:
-    image: postgres:9.6
-    env_file:
-      - file1.env
-      - file2.env
-
+    image: postgres:9.6   # Defaults registry is hub.docker.com
+    secrets:
+      - pg_user
+      - pg_password
   worker:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-worker:main
-      dockerfile: #optional, defaults to Dockerfile in directory
+    build: .  # defaults to ./Dockerfile
     deploy:
       resources:
         limits:
           memory: 250M
-
-  vote:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-vote:main
-      dockerfile: 
-    environment:
-      key_1: value_1
-      key_2: value_2
-    deploy:
-      resources:
-        limits:
-          memory: 250M
-
   result:
     build:
-      context: https://github.com/UffizziCloud/example-voting-result:main
+      context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
-
+    environment:
+      PORT: 8088
+  vote:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
+      dockerfile: Dockerfile
+    x-uffizzi-continuous_preview:
+      deploy_preview_when_pull_request_is_opened: false
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+    environment:
+      PORT: 8888
+  loadbalancer:
+    image: nginx:latest
+    configs:
+      - source: nginx-vote-conf
+        target: /etc/nginx/conf.d/vote.conf
+# Loadbalancer configuration
 configs:
-  vote-nginx-conf:
+  nginx-vote-conf:
     file: ./vote.conf
-
-continuous_preview:  #optional, example below is PR-triggered example
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
-  share_to_github: true
-  delete_preview_after: 12h
-
-ingress:  #required
-  service: nginx
-  port: 8080
+# Postgres credentials
+secrets:
+  pg_user:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_USER"        # i.e., value should be added in the Uffizzi Dashboard
+  pg_password:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_PASSWORD"    # i.e., value should be added in the Uffizzi Dashboard
 ```
 
 &nbsp;  
@@ -125,14 +126,12 @@ ingress:  #required
 
 ``` yaml title="docker-compose.uffizzi.3.yml"
 services:
-
   db:
     image: postgres:11-alpine
     environment:
       POSTGRES_DB: wiki
       POSTGRES_PASSWORD: wikijsrocks
       POSTGRES_USER: wikijs
-
   wiki:
     image: requarks/wiki
     environment:
@@ -142,12 +141,11 @@ services:
       DB_USER: wikijs
       DB_PASS: wikijsrocks
       DB_NAME: wiki
-
-ingress:
-  service: wiki
-  port: 3000
-
-continuous_preview:  #for tag-initiated preview tag must = uffizzi_request_#
-  deploy_preview_when_image_tag_is_created: true   
-  share_to_github: true
+x-uffizzi:
+  ingress:
+    service: wiki
+    port: 3000
+  continuous_preview:  #for tag-initiated preview tag must = uffizzi_request_#
+    deploy_preview_when_image_tag_is_created: true   
+    share_to_github: true
 ```

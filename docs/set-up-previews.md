@@ -15,7 +15,7 @@ Option 2- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle th
 
 ##Integrations and Webhooks
 
-Out-of-the-box Uffizzi supports integrations with Github, Docker Hub, AWS' Elastic Container Registry, Azure's Container Registry, and Google's Container Registry.  Ensure you have connected to the relevant Repos and Registries at the Account Level Settings.  
+Out-of-the-box Uffizzi supports integrations with Github, Docker Hub, AWS' Elastic Container Registry, Azure's Container Registry, and Google's Container Registry.  Ensure you have connected to the relevant [Repos](guides/git-integrations.md) and [Registries](guides/container-registry-integrations.md) at the Account Level Settings.  
 
 Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR, ACR, and GCR the user must manually set-up the [webhooks](config/container-registry-integrations.md).
 

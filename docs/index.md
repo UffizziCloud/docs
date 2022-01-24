@@ -29,8 +29,8 @@ See the [Uffizzi Compose reference](references/compose-spec.md) for more details
 * [Uffizzi Compose file reference](references/compose-spec.md)
 * [Uffizzi Compose examples](references/example-compose.md)
 * [CI/CD + CP](engineeringblog/ci-cd-registry.md)
-* [Configure GitHub](config/source-code-integrations)
-* [Connect to your container registry](guides/container-registry-integrations)
+* [Configure GitHub](guides/git-integrations.md)
+* [Connect to your container registry](guides/container-registry-integrations.md)
 
 ## Overview
 

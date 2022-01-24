@@ -29,7 +29,7 @@ This table provides a quick guide for how to execute various actions related to 
 |                              | Set [`delete_preview_after: 24h`](references/compose-spec.md#delete_preview_when_after)                                |
 | **Share preview URL**        | Share the preview URL to various third-party platforms                              |
 |                              | Use the [`continuous_previews`](references/compose-spec.md#continuous_previews) option within your `docker-compose.uffizzi.yml`        |
-|                              | Set [`share_to_[service]: true`](references/compose-spec.md#deploy_preview_when_new_image_is_created)(i.e., GitHub, Jira, Slack, etc.)                                |
+|                              | Set [`share_to_[service]: true`](references/compose-spec.md#share_to_github)(i.e., GitHub, Jira, Slack, etc.)                                |
 
 
 

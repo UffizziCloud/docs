@@ -7,6 +7,6 @@ Uffizzi's GitHub integration provides an easy way for you to preview code change
 5. Once authenticated, select which repositories you want Uffizzi to have access to  
 6. Save your selection  
 
-Your Uffizzi account should now have access to the repositories you selected. Repositories that are visible to Uffizzi can be added to compose files or to templates. For more information on using the GitHub build context for compose, see the [Uffizzi Compose Specification](../config/compose-spec.md).
+Your Uffizzi account should now have access to the repositories you selected. Repositories that are visible to Uffizzi can be added to compose files or to templates. For more information on using the GitHub build context for compose, see the [Uffizzi Compose file reference](../references/compose-spec.md).
 
 Additionally, Uffizzi's GitHub integration will configure webhooks for your repositories so that anytime your repository changes, Uffizzi will update your previews. Webhooks are automatically configured when you select the **Auto-deploy code changes** option in the Uffizzi web console or set `deploy: auto: true` in your compose file.

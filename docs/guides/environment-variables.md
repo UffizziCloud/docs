@@ -2,7 +2,7 @@
 
 Environment variables are name/value pairs that are dynamically loaded into your containers at runtime. They are often used to pass configuration details to your application. Using environment variables instead of hard-coded values lets you keep environment-specific details out of your source code.  
 
-When you define your application stack with a [Uffizzi Compose file](../config/compose-spec.md), you have two options for adding environment variables to your containers: `environment` or `env_file`.  
+When you define your application stack with a [Uffizzi Compose file](../references/compose-spec.md), you have two options for adding environment variables to your containers: `environment` or `env_file`.  
 
 * Use `environment` if you have a small number of environment variables to add. You can list your variables in an `environment` block within the service definition. For example, the following `uffizzi-compose.yml` snippet adds two environment variables, `FOO` and `BAR`, to the `myservice` container:    
 ```    

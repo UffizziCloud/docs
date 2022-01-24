@@ -178,7 +178,7 @@ x-uffizzi:
     deploy_preview_when_pull_request_is_opened: true
 ```   
 
-> **Note**: This option requires that you have first [connected to your git repository](../git-integrations). 
+> **Note**: This option requires that you have first [connected to your git repository](../../guides/git-integrations). 
 
 #### **delete_preview_when_pull_request_is_closed**  
 
@@ -195,7 +195,7 @@ x-uffizzi:
     delete_preview_when_pull_request_is_closed: true
 ```
 
-> **Note**: This option requires that you have first [connected to your git repository](../git-integrations).  
+> **Note**: This option requires that you have first [connected to your git repository](../guides/git-integrations.md).  
 
 #### **deploy_preview_when_image_tag_is_created**  
 
@@ -214,7 +214,7 @@ x-uffizzi:
     deploy_preview_when_image_tag_is_created: true
 ```  
 
-> **Note**: This option requires that you have first [configured webhooks on your container registry](../container-registry-integrations).  
+> **Note**: This option requires that you have first [configured webhooks on your container registry](../guides/container-registry-integrations.md).  
 
 > **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
@@ -244,7 +244,7 @@ x-uffizzi:
     share_to_github: true
 ```  
 
-> **Note**: This option requires that you have first [connected to your GitHub account](../../guides/git-integrations).  
+> **Note**: This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).  
 
 ## `services` configuration reference  
 This section contains example configurations supported by a `services` definition.  
@@ -562,7 +562,7 @@ services:
 
 In this example, a preview will not be deployed when a pull request is opened on the `example/foo` repository because `deploy_preview_when_pull_request_is_open : false` overrides the global setting.  However, an open pull request on `example/bar` repository will still trigger a new preview.  
 
-> **Note**: This option requires that you have first [connected to your git repository](../git-integrations). 
+> **Note**: This option requires that you have first [connected to your git repository](../guides/git-integrations.md). 
 
 #### **delete_preview_when_pull_request_is_closed**  
 
@@ -615,7 +615,7 @@ services:
 
 In this example, `foo` will not be deleted when the pull request is closed because `delete_preview_when_pull_request_is_closed : false` overrides the global setting.  
 
-> **Note**: This option requires that you have first [connected to your git repository](../git-integrations).  
+> **Note**: This option requires that you have first [connected to your git repository](../guides/git-integrationsmd).  
 
 #### **deploy_preview_when_image_tag_is_created**  
 
@@ -663,7 +663,7 @@ services:
 
 In this example, previews are disabled for all services except `foo` because the override is specified for this service.  
 
-> **Note**: This option requires that you have first [configured webhooks on your container registry](../container-registry-integrations).  
+> **Note**: This option requires that you have first [configured webhooks on your container registry](../guides/container-registry-integrations.md).  
 
 > **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
@@ -748,7 +748,7 @@ services:
 
 In this example, the preview URL will only be shared to GitHub when a pull request is opened on repository `foo` (but not `bar`).  
 
-> **Note**: This option requires that you have first [connected to your GitHub account](../../guides/git-integrations).   
+> **Note**: This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).   
 
 ## `configs` configuration reference  
 

@@ -6,7 +6,7 @@ We'll use GitLab CI/CD for builds and the Azure Container Registry (ACR) to stor
 
 ## Azure Container Registry  
 
-If you haven't yet, integrate your Azure Container Registry by following our [ACR integration documentation](../config/container-registry-integrations.md#azure-container-registry-acr). You'll need the registry domain, Application (client) ID, and Secret or Password value for the next steps.  
+If you haven't yet, integrate your Azure Container Registry by following our [ACR integration documentation](../guides/container-registry-integrations.md#azure-container-registry-acr). You'll need the registry domain, Application (client) ID, and Secret or Password value for the next steps.  
 
 ## GitLab CI/CD  
 

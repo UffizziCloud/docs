@@ -3,7 +3,7 @@
 ## TL;DR  
 1. Copy your `docker-compose.yml` file
 2. Paste the contents into a new file `docker-compose.uffizzi.yml`
-3. Add the following Uffizzi-specific parameters to create a [Uffizzi Compose file](config/compose-spec.md) - this is the foundation of your Preview Set Up:
+3. Add the following Uffizzi-specific parameters to create a [Uffizzi Compose file](references/compose-spec.md) - this is the foundation of your Preview Set Up:
 ``` yaml title="docker-compose.uffizzi.yml"
 # Uffizzi extension
 x-uffizzi:
@@ -18,16 +18,16 @@ x-uffizzi:
 services: . . .
 ```
 
-See [Uffizzi Compose Reference](config/compose-spec.md) for more details on writing your configuration or check out our [Examples](examples/example-compose.md).  When you've completed your specification go to [Set Up Previews](set-up-previews.md) to connect it to Uffizzi.
+See [Uffizzi Compose Reference](references/compose-spec.md) for more details on writing your configuration or check out our [Uffizzi Compose examples](references/example-compose.md). Once you've created your specification, go to [Set Up Previews](set-up-previews.md) to connect it to Uffizzi.
 
 ## Popular Links
 
 * [Continuous Previews](continuous-previews.md)
-* [Uffizzi Compose Specification v1](config/compose-spec.md)
-* [Compose Examples](examples/example-compose.md)
+* [Uffizzi Compose Specification v1](references/compose-spec.md)
+* [Compose Examples](references/example-compose.md)
 * [Add Continuous Previews to your Existing CI/CD](engineeringblog/ci-cd-registry.md)
 * [Source Code Integrations](config/source-code-integrations)
-* [Container Registry Integrations](config/container-registry-integrations)
+* [Container Registry Integrations](guides/container-registry-integrations)
 
 ## Overview
 

@@ -99,9 +99,9 @@ markdown_extensions:
 nav:
   - Home:
     - Get started: index.md
-    - Quick Guide: quick-guide.md  
-    - Set Up Previews: set-up-previews.md
-    - Uffizzi Configuration Options and Features: config-options.md
+    - Quick guide: quick-guide.md  
+    - Set up previews: set-up-previews.md
+    - Uffizzi configuration options and features: config-options.md
     - Continuous Previews: continuous-previews.md 
   - Guides: 
     - Uffizzi overview: guides/uffizzi-overview.md

@@ -10,8 +10,9 @@ The Uffizzi Compose file is a YAML file defining `services` (required), `configs
 Docker Compose supports [vendor-specific extensions](https://github.com/compose-spec/compose-spec/issues/17) for platforms like Uffizzi to supplement the Compose specification with parameters that are specific to that vendor's platform. For example, the Uffizzi extension, `x-uffizzi`, gives you the ability to add event triggers to your compose file. In the following example, a new preview will be deployed when a pull request is opened on GitHub:
 
 ```
-x-uffizzi-continuous_previews:
-  deploy_preview_when_pull_request_is_opened: true
+x-uffizzi:
+  continuous_previews:
+    deploy_preview_when_pull_request_is_opened: true
 ```
 
 The example above is valid Docker Compose syntax because the `docker-compose` CLI ignores any field prefixed with `x-`. This allows users to still run `docker-compose config` on a Uffizzi Compose file to check for valid Docker Compose format.  

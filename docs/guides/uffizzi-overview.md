@@ -1,6 +1,6 @@
 # Uffizzi overview  
 
-Uffizzi is an open engine for previewing full-stack applications in the cloud. Uffizzi automates the creation of on-demand test environments when you open pull requests (PRs) or build new images. Each preview gets a secure URL that's continually updated when you push new commits or image tags, so teams can provide feedback on new features or bug fixes before merging. This capability, known as [Continuous Previews](../continuous-preview.md), helps alleviate two problems that commonly plague software development teams:  
+Uffizzi is an open engine for previewing full-stack applications in the cloud. Uffizzi automates the creation of on-demand test environments when you open pull requests (PRs) or build new images. Each preview gets a secure URL that's continually updated when you push new commits or image tags, so teams can provide feedback on new features or bug fixes before merging. This capability, known as [Continuous Previews](../continuous-previews.md), helps alleviate two problems that commonly plague software development teams:  
 
 1. **Dirty code in your `main` branch**: Uffizzi provides Dev and QA teams with the ability to rapidly share and review new features before they're merged—catching bugs early and keeping them out of a team's main git branch. This capability also empowers a team to separate functional testing from integration testing, since an individual developer's topic branch can be tested in isolation before merging it with the rest of the team's contributions.
 

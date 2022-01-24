@@ -35,7 +35,7 @@ Once you've added your compose file, return to the project's **Overview** page.
 
 ## Trigger a preview  
 
-### Trigger preview with open pull request  
+### Trigger a preview with an open pull request  
  
  To trigger a preview by opening a pull request, you must:  
 
@@ -46,12 +46,12 @@ Once you've added your compose file, return to the project's **Overview** page.
    foo:
      build:
        context: https://github.com/example/foo
- ```  
-
-Once you have enabled previews to trigger on new pull requests (via [`deploy_preview_when_pull_request_is_opened`](references/compose-spec.md#deploy_preview_when_pull_request_is_opened)), then simply open a pull request on GitHub to kick off a new preview. The webhook configured within your git repo will inform Uffizzi of the open pull request and initiate the preview.   
+ ```
+ 
+ Once you have enabled previews to trigger on new pull requests (via [`deploy_preview_when_pull_request_is_opened`](references/compose-spec.md#deploy_preview_when_pull_request_is_opened)), then simply open a pull request on GitHub to kick off a new preview. The webhook configured within your git repo will inform Uffizzi of the open pull request and initiate the preview.   
 ![Screenshot](assets/images/open-pr.png)
 
-### Trigger preview with new tag ([Bring Your Own Build](engineeringblog/ci-cd-registry.md))  
+### Trigger a preview with a new tag ([Bring Your Own Build](engineeringblog/ci-cd-registry.md))  
 To trigger a preview via a new tag, you must:  
 
 1. Configure your build system to tag images created from new pull requests with `uffizzi_request_#` where `#` is the pull request number.  
@@ -64,11 +64,9 @@ services:
 ```
 
 When a preview is triggered, Uffizzi will show the new preview and its status:  
-![Screenshot](assets/images/initiated-preview.png)
-
+![Screenshot](assets/images/initiated-preview.png)   
 The preview will take a few minutes to finish deploying (The build process is typically the longest part of the sequence). You can monitor the status by clicking on your preview. Within the UI you can monitor the activity log, build logs, individual container logs, and event logs.  
-![Screenshot](assets/images/preview-status.png)
-
+![Screenshot](assets/images/preview-status.png)  
 When the preview has finished deploying, the preview URL turns blue. The link is now live, and you can securely access your preview. Please note that if you have deployed multiple containers, some of those containers may still take time to fully initiate after the preview URL goes live.  
 ![Screenshot](assets/images/preview-link-live.png)
 
@@ -79,8 +77,7 @@ When the preview has finished deploying, the preview URL turns blue. The link is
 2. **Timeout** - If you have set [`delete_preview_after: [value]`](references/compose-spec.md#delete_preview_after), your preview will be deleted after the specified amount of time.
 
 3. **Manual** - You can always manually delete a preview by selecting the delete icon in the Uffizzi Dashboard:  
-![Screenshot](assets/images/delete.png)
-
+![Screenshot](assets/images/delete.png)  
 If you have specify both `delete_pull_request_when_pull_request_is_closed: true` and `delete_preview_after: [value]`, Uffizzi will abide by whichever trigger fires first.  
 
 > **Note**: Images typically do not have a well-defined lifecycle the way that a PR does. That is, unlike a PR that is opened/closed, images are often never (or rarely) deleted. For this reason, the only way to programmatically delete a preview initiated via a new image/tag, is via `delete_preview_after: [value]` element. This will be improved with future releases.  

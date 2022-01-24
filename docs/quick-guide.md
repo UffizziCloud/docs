@@ -30,7 +30,3 @@ This table provides a quick guide for how to execute various actions related to 
 | **Share preview URL**        | Share the preview URL to various third-party platforms                              |
 |                              | Use the [`continuous_previews`](references/compose-spec.md#continuous_previews) option within your `docker-compose.uffizzi.yml`        |
 |                              | Set [`share_to_[service]: true`](references/compose-spec.md#share_to_github)(i.e., GitHub, Jira, Slack, etc.)                                |
-
-
-
-

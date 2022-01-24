@@ -1,22 +1,20 @@
-##Configuration
+## Configuration
 
-**Compose**  - A configuration-as-code YAML - `docker-compose.uffizzi.yml`- based on Docker Compose (version 3.9) .
-            Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.
+## Compose**  - The core functionality of Uffizzi is defined with configuration-as-code YAML— [`docker-compose.uffizzi.yml`](references/compose-spec.md)—which is based on Docker Compose (version 3.9).  Unless otherwise noted, Uffizzi recognizes Docker Compose syntax.  
 
-
-##Build Options
+## Build Options
 
 Option 1- **Use Uffizzi's Integrated Build** - Uffizzi will build from source from your connected VCS.
 
-   *This is for users who want Uffizzi to manage the full build and deploy processs.
+   *This is for users who want Uffizzi to manage the full build and deploy processs.  Uffizzi currently integrates with Github.
    
-Option 2- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle the Build. 
+Option 2- **Bring Your Own Build** (BYOB) - Use your existing CI/CD to handle the Build. You can manually deploy Previews on Uffizzi from existing images on any of the major image registry providers and you can also trigger Previews based on a [tagging convention](engineeringblog/ci-cd-registry.md).
      
-   *This is for users who have custom builds or who are using a VCS that is not yet integrated with Uffizzi.
+   *This is for users who have custom builds or who are using a VCS that is not yet integrated with Uffizzi - Gitlab and Bitbucket are on our roadmap.
 
 ##Integrations and Webhooks
 
-Out-of-the-box Uffizzi supports integrations with Github, Docker Hub, AWS' Elastic Container Registry, Azure's Container Registry, and Google's Container Registry.  Ensure you have connected to the relevant Repos and Registries at the Account Level Settings.  
+Out-of-the-box Uffizzi supports integrations with Github, Docker Hub, AWS' Elastic Container Registry, Azure's Container Registry, and Google's Container Registry.  Ensure you have connected to the relevant [Repos](guides/git-integrations.md) and [Registries](guides/container-registry-integrations.md) at the Account Level Settings.  
 
 Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR, ACR, and GCR the user must manually set-up the [webhooks](guides/container-registry-integrations.md).
 

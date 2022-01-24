@@ -1,11 +1,13 @@
 # Configuration Options and Features
-Uffizzi has a cloud-hosted offering and a self-hosted offering with separate CLI and GUI interfaces.  The GUI is the only component of Uffizzi that is not open source.
+Uffizzi is currently only available as a cloud-hosted offering.  The Open Source and Paid/Self-hosted configurations represented in the below table represent future releases. The open source self-hosted offering with CLI is scheduled to be released April 2022.
 
-During our beta phase (~Dec2021-Feb2022) we will be releasing more source code and documentation to install and run Uffizzi in the self-host configuration.
+The Uffizzi Dashboard or Graphical User Interface (GUI) is the only component of Uffizzi that will not be open sourced.
 
-The below table shows a list of features by configuration (dated 12/8/21):
+During our beta phase (~Dec2021-April2022) we will be releasing more source code and documentation to install and run Uffizzi in the self-host configuration.
 
-|                                    | **Open Source/Self-hosted**   | **Cloud-hosted** | **Paid/Self-hosted**           |
+The below table shows a list of features by configuration:
+
+|                                    | **Open Source/Self-hosted (Apr 2022)**   | **Cloud-hosted (In Beta as of Oct 2021)** | **Paid/Self-hosted (TBD release date)**           |
 |-----------------------------------------|-------------------------------|--------------------------|----------------------------------|
 | **INTERFACE:**                              |                               |                          |                                  |
 | CLI                                     | Y                             | Y                        | Y                                |
@@ -24,9 +26,9 @@ The below table shows a list of features by configuration (dated 12/8/21):
 | Uffizzi-managed Build Option            | N, N/A                      | Y                        | Custom                           |
 | Custom Build Option                     | Y                             | Y                        | Y                                |
 | **PREVIEWS:**                               |                               |                          |                                  |
-| Preview                                 | Y                             | Y                        | Y                                |
+| Manaul Previews                                 | Y                             | Y                        | Y                                |
 | Continuous Previews                     | Y                             | Y                        | Y                                |
-| COLLABORATION INTEGRATION:              |                               |                          |                                  |
+| **COLLABORATION INTEGRATION:**              |                               |                          |                                  |
 | Jira                                    | N, planned                    | N, planned               | N, planned                       |
 | Slack                                   | N, planned                    | N, planned               | N, planned                       |
 | Microsoft Teams                         | N, planned                    | N, planned               | N, planned                       |

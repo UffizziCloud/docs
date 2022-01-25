@@ -89,7 +89,7 @@ If you have specified both `delete_pull_request_when_pull_request_is_closed: tru
 
 Alternatively, you can select **NEW PREVIEW** from the UI and choose a compose from within your connected repository or, alternatively, you can manually add each service component via the GUI and then select **Deploy**.  If you create a manaul preview, you must manually delete it from the UI.
 
->**Note:** Each project can only have one Compose file specification - 1 Project : 1 Compose.  To manage Preview Deployments with difference Compose Versions you must first create a **New Project** and connect the relevant `docker-compose.uffizzi.yml` from your repository.
+>**Note:** Each project can only have one Compose file specification - 1 Project : 1 Compose.  To manage Preview Deployments specified with different Compose Versions you must first create a **New Project** and connect the relevant `docker-compose.uffizzi.yml` from your repository.
 
 ![Screenshot](assets/images/compose-two.png)
 

@@ -230,7 +230,7 @@ To configure Uffizzi to pull images from your private Docker Hub registry, it is
 
 <details><summary>Create an access token for Docker Hub</summary>
 
-<p> Log in to <a href="hub.docker.com">Docker Hub</a>, then navigate to <b>Account Settings</b> > <b>Security</b> and select the <b>New Access Token</b> button. In the <b>Access Token Description</b> field, enter "uffizzi" or a similar description. For <b>Access permissions</b> choose <b>Read-only</b>, then select <b>Generate</b> to create your Access Token.</p>
+<p> Log in to <a href="https://hub.docker.com">Docker Hub</a>, then navigate to <b>Account Settings</b> > <b>Security</b> and select the <b>New Access Token</b> button. In the <b>Access Token Description</b> field, enter "uffizzi" or a similar description. For <b>Access permissions</b> choose <b>Read-only</b>, then select <b>Generate</b> to create your Access Token.</p>
 
 <img src="../../assets/images/docker-hub-generate-access-token.png">
 
@@ -254,7 +254,7 @@ To configure Uffizzi to pull images from your private Docker Hub registry, it is
 
 <details><summary>Deleting the access token for Docker Hub</summary>  
 
-<p> Log in to <a href="hub.docker.com">Docker Hub</a>, then navigate to <b>Account Settings</b> > <b>Security</b>. Select the the checkbox next the access token you added in the Uffizzi Dashboard, then select <b>Delete</b> and <b>Delete Forever</b> to confirm. 
+<p> Log in to <a href="https://hub.docker.com">Docker Hub</a>, then navigate to <b>Account Settings</b> > <b>Security</b>. Select the the checkbox next the access token you added in the Uffizzi Dashboard, then select <b>Delete</b> and <b>Delete Forever</b> to confirm. 
 
 <img src="../../assets/images/docker-hub-delete-access-token.png">
 

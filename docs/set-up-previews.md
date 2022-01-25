@@ -29,7 +29,7 @@ Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR,
 ![Screenshot](assets/images/compose-one.png)
 After adding the repo, branch, and path, select the **VALIDATE & SAVE** button. Uffizzi will confirm if your file is valid or will provide error messaging that indicates what needs to be addressed.  
 ![Screenshot](assets/images/add-compose.png)
-If you want `uffizzi_app` to recognize changes to your `docker-compose.uffizzi.yml` check the Box for "Auto-deploy updates".
+`Uffizzi_app` will recognize changes to your `docker-compose.uffizzi.yml` via webhook. Changes made will impact future preview deployments but will not impact existing preview deployments.
 
 Once you've added your compose file, return to the project's **Overview** page.  
 
@@ -39,7 +39,7 @@ Once you've added your compose file, return to the project's **Overview** page.
  
  To trigger a preview by opening a pull request, you must:  
 
-1. Ensure your GitHub account is properly [conencted and configured with a webhook](guides/git-integrations.md).  
+1. Ensure your GitHub account is properly [connected and configured with a webhook](guides/git-integrations.md).  
 2. Define your services in your `docker-compose.uffizzi.yml` using the `build` element, [specifying your GitHub repository as the build `context`](references/compose-spec.md#build). For example: 
  ```
  services:  
@@ -55,7 +55,7 @@ Once you've added your compose file, return to the project's **Overview** page.
 To trigger a preview via a new tag, you must:  
 
 1. Configure your build system to tag images created from new pull requests with `uffizzi_request_#` where `#` is the pull request number.  
-2. Ensure your container registry is properly [conencted and configured with a webhook](guides/container-registry-integrations.md).  
+2. Ensure your container registry is properly [connected and configured with a webhook](guides/container-registry-integrations.md).  
 3. Define your services in your `docker-compose.uffizzi.yml` using the `image` element. For example: 
 ```
 services:  
@@ -67,7 +67,10 @@ When a preview is triggered, Uffizzi will show the new preview and its status:
 ![Screenshot](assets/images/initiated-preview.png)   
 The preview will take a few minutes to finish deploying (The build process is typically the longest part of the sequence). You can monitor the status by clicking on your preview. Within the UI you can monitor the activity log, build logs, individual container logs, and event logs.  
 ![Screenshot](assets/images/preview-status.png)  
-When the preview has finished deploying, the preview URL turns blue. The link is now live, and you can securely access your preview. Please note that if you have deployed multiple containers, some of those containers may still take time to fully initiate after the preview URL goes live.  
+When the preview has finished deploying, the preview URL turns blue. The link is now live, and you can securely access your preview. 
+
+>**Note:** If you have deployed multiple containers some of those containers may still take time to fully initiate after the preview URL goes live.  You can review the container logs to check their status. 
+
 ![Screenshot](assets/images/preview-link-live.png)
 
 ## Deleting a trigger-based preview
@@ -78,13 +81,13 @@ When the preview has finished deploying, the preview URL turns blue. The link is
 
 3. **Manual** - You can always manually delete a preview by selecting the delete icon in the Uffizzi Dashboard:  
 ![Screenshot](assets/images/delete.png)  
-If you have specify both `delete_pull_request_when_pull_request_is_closed: true` and `delete_preview_after: [value]`, Uffizzi will abide by whichever trigger fires first.  
+If you have specified both `delete_pull_request_when_pull_request_is_closed: true` and `delete_preview_after: [value]`, Uffizzi will abide by whichever trigger fires first.  
 
 > **Note**: Images typically do not have a well-defined lifecycle the way that a PR does. That is, unlike a PR that is opened/closed, images are often never (or rarely) deleted. For this reason, the only way to programmatically delete a preview initiated via a new image/tag, is via `delete_preview_after: [value]` element. This will be improved with future releases.  
 
 ## Initiating a manual preview
 
-Alternatively, you can select **NEW PREVIEW** from the UI and choose a compose from within your connected repository.  If you use this method to initiate a preview you must manually delete it from the UI.  
+Alternatively, you can select **NEW PREVIEW** from the UI and choose a compose from within your connected repository or, alternatively, you can manually add each service component via the GUI and then select **Deploy**.  If you create a manaul preview, you must manually delete it from the UI.
 
 ![Screenshot](assets/images/compose-two.png)
 

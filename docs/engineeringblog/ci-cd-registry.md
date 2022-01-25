@@ -1,6 +1,6 @@
 # Add Continuous Previews (CP) to your CI/CD  
 
-This blog provides an example of how to integrate an existing CI/CD solution and a container registry to enable tag-initiated previews, also known as [Continuous Previews](../continuous-previews.md). This guide walks you through setting up webhooks on the registry and using the Uffizzi image tagging convention `uffizzi_request_*` to trigger automated previews of new pull requests.  
+This blog provides an example of how to integrate Uffizzi with an existing CI/CD solution to enable tag-initiated previews, also known as [Continuous Previews](../continuous-previews.md). This guide walks you through setting up webhooks on the registry and using the Uffizzi image tagging convention `uffizzi_request_*` to trigger automated previews of new pull requests.  
 
 We'll use GitLab CI/CD for builds and the Azure Container Registry (ACR) to store images, but the general method discussed here applies to any CI/CD and registry combination. For the application, we'll use [an example Python application that fetches and renders weather forecasts from NOAA](https://gitlab.com/adam.d.vollrath/noaafetch/).  
 

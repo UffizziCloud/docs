@@ -35,7 +35,7 @@ You can eliminate the bottlenecks of a shared development environment since ever
 With Uffizzi, teams can test topic branches *before* they're merged. This means you can separate functional testing from integration testing, allowing you to merge with confidence knowing that the feature works as expected before it undergoes integration testing.  
 
 - **Reduce cost**  
-Uffizzi's preview environments can replace your static QA environment. Every preview exists in its own lightweight environment, which is destroyed when a PR is closed or after a certain number of hours. See [Uffizzi Compose file reference](references/compose-spec.md) for configuration options.
+Uffizzi's preview environments can replace your static QA environment. Every preview exists in its own lightweight environment, which is destroyed when a PR is closed or after a certain number of hours. See [Uffizzi Compose file reference](../references/compose-spec.md) for configuration options.
 
 - **Augment your existing CI/CD pipeline**  
 Continuous Previews can be combined with your existing CI/CD solution 

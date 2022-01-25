@@ -20,7 +20,7 @@ Uffizzi will automatically set-up webhooks with Github and Docker Hub.  For ECR,
 
 ## Configure previews with Uffizzi Compose 
 
-1. **Create a Uffizzi Compose file** - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check the [Uffizzi Compose reference](references/compose-spec.md) and [these examples](examples/example-compose.md) for detailed information on how to write your `docker-compose.uffizzi.yml`.  
+1. **Create a Uffizzi Compose file** - Start with your `docker-compose.yml` and create a new file named `docker-compose.uffizzi.yml`.  Check the [Uffizzi Compose reference](references/compose-spec.md) and [these examples](references/example-compose.md) for detailed information on how to write your `docker-compose.uffizzi.yml`.  
 
 2. **Add the Uffizzi extension** - Add the [`x-uffizzi`](references/compose-spec.md#x-uffizzi) object to your `docker-compose.uffizzi.yml` and commit it to the top level of the `main` or primary branch in your repository.  
 ![Screenshot](assets/images/compose-in-git.png)

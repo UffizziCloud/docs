@@ -11,7 +11,7 @@ This table provides a quick guide for how to execute various actions related to 
 |                              | CP must be defined within `docker-compose.uffizzi.yml`                                 |
 | **[Manage secrets](guides/secrets.md)**           | Navigate to **Project** > **Specs** > **Secrets**                                                          |
 |                              | Select **NEW SECRET**. Enter secrets, then select **SAVE & CLOSE**                                                                        |
-|                              | (Note: Secrets must be [explicitly invoked](references/compose-spec.md#secrets)  in your `docker-compose.uffizzi.yml`)                             |
+|                              | (Note: Secrets must be [explicitly invoked](references/compose-spec.md#secrets-configuration-reference)  in your `docker-compose.uffizzi.yml`)                             |
 | **[Add environment variables](guides/environment-variables.md)** | Environment variables are added via your `docker-compose.uffizzi.yml`                               |
 |                              | Option 1: Use the [`environment`](references/compose-spec.md#environment) object in your `docker-compose.uffizzi.yml`                                                        |
 |                              | Option 2: Use the [`env_file`](references/compose-spec.md#env_file) parameter in your `docker-compose.uffizzi.yml`                                          |

@@ -94,7 +94,7 @@ services:
     build:
       context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
       dockerfile: Dockerfile
-    x-uffizzi-continuous_preview:
+    x-uffizzi-continuous-preview:
       deploy_preview_when_pull_request_is_opened: false
     deploy:
       resources:

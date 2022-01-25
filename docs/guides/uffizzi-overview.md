@@ -29,7 +29,6 @@ Uffizzi helps improve collaboration across Dev and Product Teams to iterate fast
 Uffizzi has been shown to increase development velocity by reducing returned tickets.  
 
 - **Deconflict your shared Test/QA environment**  
-
 You can eliminate the bottlenecks of shared a development environment since very developer on your team gets as many preview environments as they need. And because preview environments are isolated and ephemeral, you no longer have to worry that a new commit might break QA for the rest of the team. 
 
 - **Trace root cause more easily**  

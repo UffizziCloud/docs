@@ -8,15 +8,15 @@
 ``` yaml title="docker-compose.uffizzi.yml"
 # Uffizzi extension
 x-uffizzi:
-  ingress: # required
-    service: # the service that should receive http traffic
-    port: # the port this service listens on
-  continuous_preview:
+  ingress:                   # required
+    service: [service-name]  # the service that should receive https traffic
+    port: [port-number]      # the port this service listens on
+  continuous_previews:
     deploy_preview_when_pull_request_is_opened: true
     delete_preview_when_pull_request_is_closed: true
     share_to_github: true
 
-# Your applicaiton services
+# Your application services
 services:  
 ...
 ```

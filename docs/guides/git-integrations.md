@@ -11,6 +11,6 @@ Your Uffizzi account should now have access to the repositories you selected. Re
 
 Additionally, Uffizzi's GitHub integration will configure webhooks for your repositories so that anytime your repository changes Uffizzi will apply those changes accordingly.  
 
-For existing Preview Deployments any new commits to the relevant repositories will be built and the Deployment will be updated automatically.  This is the default configuration in `docker-compose.uffizzi.yml`, if you want to turn this feature off you can set [`deploy: auto: false`](../references/compose-spec/#x-uffizzi-auto-deploy-updates) at the service level.   
+For existing Preview Deployments any new commits to the relevant repositories will be built and the Deployment will be updated automatically.  This is the default configuration in `docker-compose.uffizzi.yml`, if you want to turn this feature off you can set [`deploy: auto: false`](https://docs.uffizzi.com/references/compose-spec/#x-uffizzi-auto-deploy-updates) at the service level.   
 
 >**Note:** Any changes made to your `docker-compose.uffizzi.yml` will be recognized and will be applied to any future Preview Deployments - these changes will not impact existing Preview Deployments.  

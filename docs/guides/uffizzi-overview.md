@@ -8,7 +8,7 @@ Uffizzi is an open engine for previewing full-stack applications in the cloud. U
 
 ## The Uffizzi platform   
 
-Uffizzi supports deploying previews directly from your [git repository](../guides/git-integrations.md) or from a [container registry](../guides/container-registry-integrations.md), so you can let Uffizzi build your application or you can bring your own build (BYOB) system. In fact, you can use Uffizzi to [augment your existing CI/CD solution with a Continuous Previews (CP) capability](engineeringblog/ci-cd-registry.md). 
+Uffizzi supports deploying previews directly from your [git repository](../guides/git-integrations.md) or from a [container registry](../guides/container-registry-integrations.md), so you can let Uffizzi build your application or you can bring your own build (BYOB) system. In fact, you can use Uffizzi to [augment your existing CI/CD solution with a Continuous Previews (CP) capability](../engineeringblog/ci-cd-registry.md). 
 
 Uffizzi supports *configuration-as-code*. This means to configure Uffizzi, you simply provide a `docker-compose.uffizzi.yml` file that describes your application stack in Docker Compose syntax, along with a few extra parameters to tell Uffizzi when and how to deploy your previews. See the [Uffizzi Compose file reference](../references/compose-spec.md) for details or check out these [example Uffizzi Compose files](../references/example-compose.md).
 

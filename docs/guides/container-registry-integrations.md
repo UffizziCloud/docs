@@ -107,7 +107,7 @@ To configure Uffizzi to pull images from your ACR, it is recommended that you fi
 
 <p>You may need to <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app">create an Application with a Subscription</a>.</p>
 
-<p>Once you have an active Subscription and a <a src="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli">Container Registry</a>, you can use the <code>create-for-rbac</code> command to create a service principal and simultaneously grant it the <code>ACRPull</code> role:</p>
+<p>Once you have an active Subscription and a <a href="https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli">Container Registry</a>, you can use the <code>create-for-rbac</code> command to create a service principal and simultaneously grant it the <code>ACRPull</code> role:</p>
 
 ```
 az ad sp create-for-rbac --name uffizzi-example-acrpull --scopes /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/uffizzi-example/providers/Microsoft.ContainerRegistry/registries/uffizziexample --role acrpull

@@ -87,7 +87,7 @@ If you have specified both `delete_pull_request_when_pull_request_is_closed: tru
 
 ## Initiating a manual preview
 
-Alternatively, you can select **NEW PREVIEW** from the UI and choose a compose from within your connected repository OR you can manually add each service component via the GUI and then select **Deploy**.  
+Alternatively, you can select **NEW PREVIEW** from the UI and choose the connected compose from within repository OR you can manually add each service component via the GUI and then select **Deploy**.  
 
 If you create a manual preview, you must manually delete it from the UI.
 

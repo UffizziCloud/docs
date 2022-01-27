@@ -147,5 +147,4 @@ x-uffizzi:
     port: 3000
   continuous_preview:  #for tag-initiated preview tag must = uffizzi_request_#
     deploy_preview_when_image_tag_is_created: true   
-    share_to_github: true
 ```

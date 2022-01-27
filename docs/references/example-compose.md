@@ -146,5 +146,6 @@ x-uffizzi:
     service: wiki
     port: 3000
   continuous_preview:  #for tag-initiated preview tag must = uffizzi_request_#
-    deploy_preview_when_image_tag_is_created: true   
+    deploy_preview_when_image_tag_is_created: true  
+    delete_preview_after: 96h 
 ```

@@ -69,10 +69,10 @@ Uffizzi directly improves Lead Time, Cycle Time, Team Velocity, and Code Stabili
 - **Deconflict your shared Test/QA environment**  
 You can eliminate the bottlenecks of a shared development environment since every developer on your team can have as many preview environments as they need. And because preview environments are isolated and ephemeral, you no longer have to worry that a new commit might break QA for the rest of the team. 
 
-- **Trace root cause more easily**  
+- **Trace root causes more easily**  
 With Uffizzi, teams can test topic branches *before* they're merged. This means you can separate functional testing from integration testing, allowing you to merge with confidence knowing that the feature works as expected before it undergoes integration testing.  
 
-- **Reduce cost**  
+- **Reduce costs**  
 Uffizzi's preview environments can replace your static QA environment. Every preview exists in its own lightweight environment, which is destroyed when a PR is closed or after a certain number of hours. See [Uffizzi Compose file reference](./references/compose-spec.md) for configuration options.
 
 - **Augment your existing CI/CD pipeline with CP**  

@@ -24,7 +24,7 @@ If a Member's Organization has enabled SSO for their account, then a Member must
 Admins can do all and see all within an Account. Admins can view and edit every Project and previews. This is the highest level of permission for an account. Uniquely, Admins control the RBAC, Team Members, Projects, integrations, settings and billing. An Account must have at least one Admin.
 
 ### Developer  
-Developers can view and edit Projects and previews that they either created or were invited to. They cannot edit Account-level settings like billing, Team Members or integrations. A Developer can create Projects and be invited to Projects. A Developer can invite other Developers to a Project. A Developer can only view and edit Projects that they either created or were invited to.  
+Developers can view, create, and edit Projects. They cannot edit Account-level settings like Billing, SSO, Team Members or integrations. A Developer can create Projects and be invited to Projects.  
 
 ### View Only    
-View Only users can see every Project that they have been invited to. They cannot edit previews, nor view or edit Project or Account settings.  
+View Only users can see every Project and Admin Settings but cannot edit anything within Uffizzi.

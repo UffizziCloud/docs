@@ -104,8 +104,6 @@ nav:
     - Uffizzi configuration options and features: config-options.md
     - Continuous Previews: continuous-previews.md 
   - Guides: 
-    - Uffizzi overview: guides/uffizzi-overview.md
-    - Get started: guides/get-started.md
     - Configure GitHub: guides/git-integrations.md
     - Connect to your container registry: guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md

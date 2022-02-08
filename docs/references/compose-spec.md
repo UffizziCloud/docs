@@ -320,6 +320,41 @@ build:
   context: ./dir
   dockerfile: Dockerfile-alternate
 ```
+#### **args**  
+
+Add build arguments, which are environment variables accessible only during the build process.
+
+First, specify the arguments in your Dockerfile:
+
+``` yaml
+# syntax=docker/dockerfile:1
+
+ARG buildno
+ARG gitcommithash
+
+RUN echo "Build number: $buildno"
+RUN echo "Based on commit: $gitcommithash"
+```
+
+Then specify the arguments under the build key. You can pass a mapping or a list:
+``` yaml
+build:
+  context: .
+  args:
+    buildno: 1
+    gitcommithash: cdc3b19
+```
+``` yaml
+build:
+  context: .
+  args:
+    - buildno=1
+    - gitcommithash=cdc3b19
+```
+
+> **Note**: Scope of build-args  
+>
+>In your Dockerfile, if you specify `ARG` before the `FROM` instruction, `ARG` is not available in the build instructions under `FROM`. If you need an argument to be available in both places, also specify it under the `FROM` instruction. Refer to the [understand how `ARGS` and `FROM` interact](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact) section in the documentation for usage details.
 
 ### **command**  
 

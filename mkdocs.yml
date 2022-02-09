@@ -111,7 +111,7 @@ nav:
     - Check logs: guides/logs.md
     - Configure role-based access: guides/rbac.md
     - Configure SSO: guides/single-sign-on.md 
-    - Networking and loadbalancing: guides/networking.md
+    - Networking and architecture: guides/networking.md
   - References:
     - Uffizzi Compose file reference: references/compose-spec.md
     - Uffizzi Compose reference table: references/reference-table.md

@@ -1,6 +1,6 @@
 # Single sign-on (SSO)  
 
-Single sign-on allows you to require that members of your organization sign in to the Uffizzi Dashboard via your Identity Provider. Uffizzi is compatible with any Identity Providers that supports both the SAML and OpenID Connect protocols. We currently have out-of-the-box support for the following SSO Identity Providers:  
+Single sign-on allows you to require that members of your organization sign in to the Uffizzi Dashboard via your Identity Provider. Uffizzi is compatible with any Identity Provider that supports both the SAML and OpenID Connect protocols. We currently have out-of-the-box support for the following SSO Identity Providers:  
 
 * ADFS  
 * Azure AD  
@@ -22,3 +22,9 @@ Follow these steps to configure SSO on Uffizzi:
 4. Select **CONFIGURE SSO**. This will route you to a setup guide that includes configuration instructions specific to your Identity Provider. Once you complete the setup guide, you will be routed back to the Uffizzi Dashboard.  
 5. If your configuration was successful, you should see a confirmation message. If so, SSO is now configured for your account. Your teammates will now be required to sign in to the Uffizzi Dashboard with SSO. On the Uffizzi sign in page, they should select the **SIGN IN WITH SSO** option.  
 6. If there is a problem with your SSO connection, you can reset your configuration by selecting the **CONFIGURE SSO** button again and then selecting **Reset Connection** in the setup guide.  
+
+## Sign in with SSO  
+
+Once configured, your team members must authenticate via [app.uffizzi.com](https://app.uffizzi.com/sign_in_sso) with the **Sign in with SSO** option. Our SSO implementation does not support signing in from your Identity Provider portal since IDP-initiated authentication is [vulnerable to man-in-the-middle attacks](https://workos.com/blog/sp-initiated-sso-vs-idp-authentication). We recommended that you disable the Uffizzi sign in option in your IdP's portal. 
+
+

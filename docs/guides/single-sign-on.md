@@ -22,3 +22,9 @@ Follow these steps to configure SSO on Uffizzi:
 4. Select **CONFIGURE SSO**. This will route you to a setup guide that includes configuration instructions specific to your Identity Provider. Once you complete the setup guide, you will be routed back to the Uffizzi Dashboard.  
 5. If your configuration was successful, you should see a confirmation message. If so, SSO is now configured for your account. Your teammates will now be required to sign in to the Uffizzi Dashboard with SSO. On the Uffizzi sign in page, they should select the **SIGN IN WITH SSO** option.  
 6. If there is a problem with your SSO connection, you can reset your configuration by selecting the **CONFIGURE SSO** button again and then selecting **Reset Connection** in the setup guide.  
+
+## Sign in with SSO  
+
+Once configured, your team members must authenticate via [app.uffizzi.com](https://app.uffizzi.com/sign_in_sso) with the **Sign in with SSO** option. Ufizzi does not support signing in from your Identity Provider (IdP) portal. This is because IdP-initiated authentication is vulnerable to man-in-the-middle attacks since unsolicited authentication requests made to Uffizzi cannot be verified. It is recommended that you disable the Uffizzi sign in option in your IdP's portal. 
+
+

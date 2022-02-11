@@ -292,7 +292,7 @@ build:
   context: ./dir
 ```
 
-The GitHub repository URL must include `https://`. If no branch is specified, default is `main`/`master`.
+The GitHub repository URL must include `https://`. If no branch is specified, Uffizzi uses the Default Branch as configured on GitHub.
 ``` yaml
 build:
   context: https://github.com/ACCOUNT/example-repo#main

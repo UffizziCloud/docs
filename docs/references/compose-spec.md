@@ -358,7 +358,18 @@ build:
 
 ### **command**  
 
-Override the default command. Command and args should be used with [`entrypoint`](#entrypoint) and expressed in quotes as a list.
+Override the default command.
+
+``` yaml
+command: bundle exec thin -p 3000
+```  
+
+The command can also be a list, in a manner similar to dockerfile:
+``` yaml
+command: ["bundle", "exec", "thin", "-p", "3000"]
+```
+
+Command can be used as args for [`entrypoint`](#entrypoint) and expressed in quotes as a list:  
 
 ```  yaml
 entrypoint: /usr/bin/nginx-debug
@@ -454,6 +465,17 @@ Override the default entrypoint.
 ``` yaml
 entrypoint: /code/entrypoint.sh
 ```
+
+The entrypoint can also be a list, in a manner similar to dockerfile:  
+
+``` yaml
+entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
+```  
+
+> **Note**:
+>
+> Setting `entrypoint` both overrides any default entrypoint set on the service’s image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default command on the image - meaning that if there’s a `CMD` instruction in the Dockerfile, it is ignored.
+
 
 ### **env_file**  
 

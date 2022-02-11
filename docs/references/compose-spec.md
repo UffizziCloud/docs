@@ -162,7 +162,7 @@ x-uffizzi:
 
 Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.  
 
-When specified, the continuous previews policies is globally scoped, i.e. the policies apply to all services in the compose file This behavior can be overrided with the [service-level `x-uffizzi-continuous-previews` option](#x-uffizzi-continuous-previews)).
+When specified, the continuous previews policies are globally scoped, i.e. the policies apply to all services in the compose file. This behavior can be overrided with the [service-level `x-uffizzi-continuous-previews` option](#x-uffizzi-continuous-previews)).
 
 This section contains example configurations supported by a `continuous_previews` definition. 
 

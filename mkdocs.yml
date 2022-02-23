@@ -113,7 +113,6 @@ nav:
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
   - References:
-    - Uffizzi CLI: references/cli.md
     - Uffizzi Compose file reference: references/compose-spec.md
     - Uffizzi Compose reference table: references/reference-table.md
     - Example Uffizzi Compose: references/example-compose.md

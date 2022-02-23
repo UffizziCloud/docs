@@ -17,7 +17,9 @@ x-uffizzi:
 
 The example above is valid Docker Compose syntax because the `docker-compose` CLI ignores any field prefixed with `x-`. This allows users to still run `docker-compose config` on a Uffizzi Compose file to check for valid Docker Compose format.  
 
-> **Note**: The `x-` extension prefix works for both top-level and sub-level definitions within a compose file. 
+!!! info  
+
+    The `x-` extension prefix works for both top-level and sub-level definitions within a compose file. 
 
 
 ## Services  
@@ -34,7 +36,8 @@ You must explicitly grant access to configuration files per service using the `c
 ## Secrets  
 Secrets provide a mechanism supplying sensitive environment varialbes (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets can only be added from the Uffizzi Dashboard (UI). Once added, they cannot be viewed or edited. To update a secret, you should delete the old secret and create a new one.   
 
-> **Note**: You will receive an error in the Uffizzi Dashboard if secrets have not been added in the UI but they are referenced in your compose file.   
+!!! warning
+    You will receive an error in the Uffizzi Dashboard if secrets have not been added in the UI but they are referenced in your compose file.   
 
 Secrets are optional for Uffizzi Compose files. 
 
@@ -178,7 +181,8 @@ x-uffizzi:
     deploy_preview_when_pull_request_is_opened: true
 ```   
 
-> **Note**: This option requires that you have first [connected to your git repository](../../guides/git-integrations). 
+!!! important
+    This option requires that you have first [connected to your git repository](../../guides/git-integrations). 
 
 #### **delete_preview_when_pull_request_is_closed**  
 
@@ -195,7 +199,8 @@ x-uffizzi:
     delete_preview_when_pull_request_is_closed: true
 ```
 
-> **Note**: This option requires that you have first [connected to your git repository](../guides/git-integrations.md).  
+!!! important
+    This option requires that you have first [connected to your git repository](../guides/git-integrations.md).  
 
 #### **deploy_preview_when_image_tag_is_created**  
 
@@ -214,9 +219,11 @@ x-uffizzi:
     deploy_preview_when_image_tag_is_created: true
 ```  
 
-> **Note**: This option requires that you have first [configured webhooks on your container registry](../guides/container-registry-integrations.md).  
+!!! important
+    This option requires that you have first [configured webhooks on your container registry](../guides/container-registry-integrations.md).  
 
-> **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
+!!! tip
+    Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
 #### **delete_preview_after**  
 
@@ -244,7 +251,8 @@ x-uffizzi:
     share_to_github: true
 ```  
 
-> **Note**: This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).  
+!!! important 
+    This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).  
 
 ## `services` configuration reference  
 This section contains example configurations supported by a `services` definition.  
@@ -352,9 +360,9 @@ build:
     - gitcommithash=cdc3b19
 ```
 
-> **Note**: Scope of build-args  
->
->In your Dockerfile, if you specify `ARG` before the `FROM` instruction, `ARG` is not available in the build instructions under `FROM`. If you need an argument to be available in both places, also specify it under the `FROM` instruction. Refer to the [understand how `ARGS` and `FROM` interact](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact) section in the documentation for usage details.
+!!! note
+    **Scope of build-args**  
+    In your Dockerfile, if you specify `ARG` before the `FROM` instruction, `ARG` is not available in the build instructions under `FROM`. If you need an argument to be available in both places, also specify it under the `FROM` instruction. Refer to the [understand how `ARGS` and `FROM` interact](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact) section in the documentation for usage details.
 
 ### **command**  
 
@@ -382,7 +390,8 @@ command:
 
 Grant access to configs on a per-service basis using the per-service `configs` configuration. Both [Docker `configs` short syntax and long syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#configs) are supported.  
 
-> **Note**: `uid`, `gid`, and `mode` long syntax parameters are not supported.
+!!! note
+    `uid`, `gid`, and `mode` long syntax parameters are not supported.
 
 #### Short syntax  
 
@@ -472,9 +481,8 @@ The entrypoint can also be a list, in a manner similar to dockerfile:
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
 ```  
 
-> **Note**:
->
-> Setting `entrypoint` both overrides any default entrypoint set on the service’s image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default command on the image - meaning that if there’s a `CMD` instruction in the Dockerfile, it is ignored.
+!!! note
+    Setting `entrypoint` both overrides any default entrypoint set on the service’s image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default command on the image - meaning that if there’s a `CMD` instruction in the Dockerfile, it is ignored.
 
 
 ### **env_file**  
@@ -520,7 +528,8 @@ image: redis:latest  # Defaults to hub.docker.com
 image: example.azurecr.io/example-service:latest  
 ``` 
 
-> **Note**: To be able pull images from container registries, you must first add your registry credentials in the Uffizzi UI (**Settings** > **Integrations**). However, you do not need to provide Docker Hub credentials to pull public images from hub.docker.com.
+!!! note
+    To be able pull images from container registries, you must first add your registry credentials in the Uffizzi UI (**Settings** > **Integrations**). However, you do not need to provide Docker Hub credentials to pull public images from hub.docker.com.
 
 
 ### **secrets**  
@@ -619,7 +628,8 @@ services:
 
 In this example, a preview will not be deployed when a pull request is opened on the `example/foo` repository because `deploy_preview_when_pull_request_is_open : false` overrides the global setting.  However, an open pull request on `example/bar` repository will still trigger a new preview.  
 
-> **Note**: This option requires that you have first [connected to your git repository](../guides/git-integrations.md). 
+!!! important 
+    This option requires that you have first [connected to your git repository](../guides/git-integrations.md). 
 
 #### **delete_preview_when_pull_request_is_closed**  
 
@@ -672,7 +682,8 @@ services:
 
 In this example, `foo` will not be deleted when the pull request is closed because `delete_preview_when_pull_request_is_closed : false` overrides the global setting.  
 
-> **Note**: This option requires that you have first [connected to your git repository](../guides/git-integrationsmd).  
+!!! important
+    This option requires that you have first [connected to your git repository](../guides/git-integrationsmd).  
 
 #### **deploy_preview_when_image_tag_is_created**  
 
@@ -720,9 +731,11 @@ services:
 
 In this example, previews are disabled for all services except `foo` because the override is specified for this service.  
 
-> **Note**: This option requires that you have first [configured webhooks on your container registry](../guides/container-registry-integrations.md).  
+!!! important
+    This option requires that you have first [configured webhooks on your container registry](../guides/container-registry-integrations.md).  
 
-> **Tip**: Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
+!!! tip
+    Uffizzi will preview all images tagged with `uffizzi_request_#` where `#` is a pull request number. This is useful if you want Uffizzi to only preview images built from pull requests. To enable this behavior, set `deploy_preview_when_image_tag_is_created: false`, then configure your build system or CI/CD tool to tag images generated from pull requests with the `uffizzi_request_#` tag.  
 
 #### **delete_preview_after**  
 
@@ -805,7 +818,8 @@ services:
 
 In this example, the preview URL will only be shared to GitHub when a pull request is opened on repository `foo` (but not `bar`).  
 
-> **Note**: This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).   
+!!! important
+    This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).   
 
 ## `configs` configuration reference  
 

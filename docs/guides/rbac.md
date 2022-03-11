@@ -14,7 +14,7 @@ Projects fall within accounts and represent a development effort such as an appl
 
 Members are individual users that are associated with an Account and have an assigned access role of [Admin](#admin), [Developer](#developer), or [View Only](#view-only). The Member who creates an Account is by default the Admin of that account. An account must always have at least one Admin.
 
-## Single Sign On (SSO)
+## Single Sign-On (SSO)
 
 If a Member's Organization has enabled SSO for their account, then a Member must utilize the SSO function to log in to their account. Admins are still able to login in via email/password to administer SSO configuration. See [Single Sign-on](../guides/single-sign-on.md) for more details.
 

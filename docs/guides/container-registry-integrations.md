@@ -168,7 +168,7 @@ az acr webhook create --registry <registry name> --name uffizzi --actions push -
 
 ## Google Container Registry (GCR)  
 
-To configure Uffizzi to pull images from your GCR, it is recommended that you need to add your GCR key file in the Uffizzi Dashboard (UI). Once added, configure a webhook to send notifications to Uffizzi when you push new images to GCR.   
+To configure Uffizzi to pull images from your GCR, you need to add your GCR key file in the Uffizzi Dashboard (UI). Once added, configure a webhook to send notifications to Uffizzi when you push new images to GCR.   
 
 <details><summary>Authorize Uffizzi to pull container images from GCR</summary>
 

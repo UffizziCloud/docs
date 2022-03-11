@@ -236,7 +236,9 @@ x-uffizzi:
   continuous_previews:
     deploy_preview_when_image_tag_is_created: true
     delete_preview_after: 24h
-```
+```  
+
+If `delete_preview_when_pull_request_is_closed` is also specified, Uffizzi will delete the preview based on whichever event (timeout or closed PR) happens first.
 
 #### **share_to_github**  
 

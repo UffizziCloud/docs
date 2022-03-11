@@ -12,7 +12,7 @@ Projects fall within accounts and represent a development effort such as an appl
 
 ## Team Members
 
-Members are individual users that are associated with an Account and have an assigned access role of [Admin](#admin), [Developer](#developer), or [View Only](#view-only). The Member who creates an Account is by default the Admin of that account. An account must always have one Admin.
+Members are individual users that are associated with an Account and have an assigned access role of [Admin](#admin), [Developer](#developer), or [View Only](#view-only). The Member who creates an Account is by default the Admin of that account. An account must always have at least one Admin.
 
 ## Single Sign On (SSO)
 

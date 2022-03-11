@@ -246,7 +246,7 @@ To configure Uffizzi to pull images from your private Docker Hub registry, it is
 
 <img src="../../assets/images/settings-integrations.png">
 
-<p>Enter your Docker ID and the access token you created, then select <b>Sign in to Docker Hub</b>. Uffizzi should now have access to pull images from your Docker Hub registry. ffizzi will automatically configure a webhook to be notified when you push new images.</p>
+<p>Enter your Docker ID and the access token you created, then select <b>Sign in to Docker Hub</b>. Uffizzi should now have access to pull images from your Docker Hub registry. Uffizzi will automatically configure a webhook to be notified when you push new images.</p>
 
 <img src="../../assets/images/docker-hub-login.png">  
 

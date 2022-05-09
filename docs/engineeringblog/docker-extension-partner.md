@@ -1,4 +1,5 @@
 # Announcing the Uffizzi Docker Desktop Extension: Test Your Compose Stack In An On-Demand Cloud Environment 
+
 May 10th, 2022 – by [Josh Thurman](https://twitter.com/joshthurman19) 
 
 Today we are thrilled to announce that Uffizzi is one of the first Extensions live on the Docker Desktop marketplace.  Through the Docker Extensions Program we are making Uffizzi’s on-demand full-stack preview environments accessible within the Docker Desktop interface.

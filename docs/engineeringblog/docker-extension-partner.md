@@ -1,7 +1,9 @@
 # Uffizzi is a Docker Extensions Partner: Announcing the Uffizzi Docker Desktop Extension  
 May 10th, 2022 – by [Josh Thurman](https://twitter.com/joshthurman19) 
 
-Today we are thrilled to announce that Uffizzi is one of the first Docker Extensions Partners live on the Docker Desktop marketplace.  Through the Extensions Partners Program we are making Uffizzi’s on-demand full-stack preview environments accessible within the Docker Desktop interface - this means Developers can streamline their workflows and reduce context switching to do their best work.  Through Desktop and the Uffizzi Extension Developers now have the ability to manage their compose stack both locally and in an on-demand cloud environment.  
+Today we are thrilled to announce that Uffizzi is one of the first Extensions live on the Docker Desktop marketplace.  Through the Docker Extensions Program we are making Uffizzi’s on-demand full-stack preview environments accessible within the Docker Desktop interface.
+
+This means Developers can streamline their workflows and reduce context switching to do their best work.  Through Desktop and the Uffizzi Extension Developers now have the ability to manage their compose stack both locally and in an on-demand cloud environment.  
 
 ![Marketplace](../assets/images/DD first page.png) 
 

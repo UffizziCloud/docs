@@ -97,12 +97,11 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Home:
-    - Get started: index.md
-    - Quick guide: quick-guide.md  
-    - Set up previews: set-up-previews.md
-    - Uffizzi configuration options and features: config-options.md
-    - Continuous Previews: continuous-previews.md 
+  - Getting Started:
+    - About: index.md
+    - Create a Docker Compose template: docker-compose-template.md
+    - Integrate with your CI pipeline: integrate-with-ci.md
+    - Connect to Uffizzi Cloud: connect-to-uffizzi-cloud.md
   - Guides: 
     - Configure GitHub: guides/git-integrations.md
     - Connect to your container registry: guides/container-registry-integrations.md
@@ -116,6 +115,7 @@ nav:
     - Uffizzi Compose file reference: references/compose-spec.md
     - Uffizzi Compose reference table: references/reference-table.md
     - Example Uffizzi Compose: references/example-compose.md
-  - Engineering Blog: 
-    - CI/CD + CP: engineeringblog/ci-cd-registry.md
-    - Docker Extensions Partner: engineeringblog/docker-extension-partner.md
+  - Use Cases: 
+    - CI/CD + CP: use-cases/ci-cd-registry.md
+    - Docker Extensions Partner: use-cases/docker-extension-partner.md
+    - Why Uffizzi?: use-cases/why-uffizzi.md

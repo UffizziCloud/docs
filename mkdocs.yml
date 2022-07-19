@@ -105,7 +105,7 @@ nav:
     - Connect to Uffizzi Cloud: connect-to-uffizzi-cloud.md
   - Guides: 
     - Configure GitHub: guides/git-integrations.md
-    - Connect to your container registry: guides/container-registry-integrations.md
+    - Connect to your container registry (Uffizzi CI): guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md
     - Add secrets: guides/secrets.md
     - Check logs: guides/logs.md

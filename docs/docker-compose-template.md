@@ -96,7 +96,16 @@ You may also want to move sensitive information like database credentials out of
 
 - **External CI** - If you're using an external CI provider, you can store the secrets using your provider's interface and then reference them via variable substitution within an `environment` definition (See highlighted example below). This solution is discussed in detail in the [next section](integrate-with-ci.md).
 
-- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface, then reference them using the `external` keyword, as shown below. See the [Uffizzi Compose file reference](https://docs.uffizzi.com/references/compose-spec/#secrets_1) for `secrets` and `external` details.
+<details><summary>GitHub Actions example</summary>
+<p>In GitHub, navigate to your repository, then select <b>Settings</b> > <b>Secrets</b> > <b>Actions</b> > <b>New repository secret</b>.</p>
+
+<img src="../../assets/images/github-actions-secrets.png">
+<hr>
+<img src="../../assets/images/add-database-secrets.png">
+<hr>
+</details>
+
+- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](connect-to-uffizzi-cloud.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](https://docs.uffizzi.com/references/compose-spec/#secrets_1). 
 
 === "External CI"
 
@@ -160,6 +169,10 @@ You may also want to move sensitive information like database credentials out of
           external: true
           name: "POSTGRES_PASSWORD"
     ```
+
+## Commit your template to your repository
+
+Once you're finished creating your Docker Compose template, commit it to your repository.
 
 ## Next article
 

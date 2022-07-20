@@ -11,7 +11,7 @@ repo_name: UffizziCloud/docs
 edit_uri: edit/main/docs/
 
 # Copyright
-copyright: Copyright &copy; 2021 Uffizzi
+copyright: Copyright &copy; 2022 Uffizzi
 
 # Styling
 extra_css:
@@ -104,6 +104,7 @@ nav:
     - Integrate with your CI pipeline: integrate-with-ci.md
     - Connect to Uffizzi Cloud: connect-to-uffizzi-cloud.md
   - Guides: 
+    - Configure password-protected environments: guides/password-protected.md
     - Configure GitHub: guides/git-integrations.md
     - Connect to your container registry (Uffizzi CI): guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md

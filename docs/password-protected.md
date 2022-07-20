@@ -5,7 +5,7 @@ Uffizzi allows you to configure a username and password for your test environmen
 1. Navigate to your project, then select **Project Settings** > **Password protection** > **EDIT** > **Password protection** (toggle).  
 2. Enter a username and password, then select **SAVE**.
 
-Password protection will now enabled for all environments belonging to this project, including any pre-existing environments.  
+Password protection will now be enabled for all environments belonging to this project, including any pre-existing environments.  
 
 ___
 

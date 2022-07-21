@@ -540,7 +540,7 @@ Grant access to secrets on a per-service basis using the per-service `secrets` c
 
 Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services in a stack. The secret name/value pairs must be [added in the Uffizzi Dashboard (UI)](../guides/secrets.md).  
 
-In the following example, `pg_user` and `pg_password` are references to secrets invoked in the top-level `secrets` stanza. `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are injected into the `db` service container once the stack is deployed.  
+In the following example, `pg_user` and `pg_password` are references to secrets invoked in the [top-level `secrets` key](compose-spec.md#secrets-top-level-element). `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are injected into the `db` service container once the stack is deployed.  
 
 ``` yaml
 services:
@@ -558,6 +558,41 @@ secrets:
     external: true
     name: "POSTGRES_PASSWORD"
 ```
+
+### **volumes**
+
+`volumes` defines mount host paths or named volumes that MUST be accessible by service containers.
+
+If the mount is a host path and only used by a single service, it MAY be declared as part of the service definition instead of the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
+
+To reuse a volume across multiple services, a named volume MUST be declared in the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
+
+This example shows a named volume (`share-db`) being used by the backend service, and a bind mount defined for a single service
+
+``` yaml
+services:
+ web:
+   image: zipofar/uffizzi_test_rails_simple:latest
+   volumes:
+     - source: share_db
+       target: /db
+       read_only: true
+       
+
+volumes:
+ share_db:
+```
+
+### Short syntax
+
+he short syntax uses a single string with colon-separated values to specify a volume mount (VOLUME:CONTAINER_PATH), or an access mode (VOLUME:CONTAINER_PATH:ACCESS_MODE).
+
+`VOLUME`: MAY be either a host path on the platform hosting containers (bind mount) or a volume name
+`CONTAINER_PATH``: the path in the container where the volume is mounted
+ACCESS_MODE`: is a comma-separated , list of options and MAY be set to:
+rw: read and write access (default)
+ro: read-only access
+
 
 ### **x-uffizzi-continuous-previews**  
 
@@ -840,7 +875,7 @@ configs:
 
 &nbsp;  
 
-## `secrets` configuration reference
+## <a id="secrets-top-level-element"></a>`secrets` configuration reference
 
 A top-level reference to secrets that can be granted to the services in a stack. Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services defined in the compose file. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. If the external secret does not exist, you will see a secret-not-found error message in the Uffizzi Dashboard.
 
@@ -865,3 +900,5 @@ secrets:
     external: true
     name: "POSTGRES_PASSWORD"
 ```
+
+## <a id="volumes-top-level-element"></a>`volumes` configuration reference

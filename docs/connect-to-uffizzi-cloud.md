@@ -11,12 +11,25 @@ In the [previous section](integrate-with-ci.md), we added a GitHub Actions [reus
   * `username`
   * `server`
   * `project`
-  * `UFFIZZI_PASSWORD`
+  * `password`
 
-In this section, we'll add our container registry credentials in the Uffizzi Dashboard, then create the `username`, `UFFIZZI_PASSWORD`, and `project` values to pass to the workflow. If you haven't already done so, sign up at [Uffizzi Cloud](https://app.uffizzi.com/sign_up), and then follow these steps to set up your account:
+In this section, we'll add our container registry credentials in the Uffizzi Dashboard, then create the `username`, `password`, and `project` values to pass to the workflow. If you haven't already done so, sign up at [Uffizzi Cloud](https://app.uffizzi.com/sign_up), and then follow these steps to set up your account:
 
 <details><summary>1. Add container registry credentials to Uffizzi</summary>
-<p>Recall that in the <a href="../integrate-with-ci">previous section</a> we used an example build job that included container registry credentials, which were added as secrets in our GitHub repository <b>Settings</b>. In the highlighted example below these are <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>:</p>
+<p>How you add container registry credentials to Uffizzi depends on your registry of choice.</p>
+
+<h4>GHCR</h4>
+
+<p>If you use GitHub Container Registry (ghcr.io), you will need to generate a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">Github personal access token</a> with access to the <code>read:packages</code> scope. Once this token is generated, <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">add it as a GitHub repository secret</a>, then pass this value to the <a href="https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml">reusable workflow</a> using the <code>personal-access-token</code> parameter, as described in the <a href="../integrate-with-ci#reusable-workflow">previous section</a>.</p>
+
+``` yaml
+    secrets:
+      personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
+```
+
+<h4>ECR, ACR, GCR, Docker Hub</h4>
+
+<p>If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub repository secrets</a>. In the highlighted example below, <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> are used:</p>
 
     ``` yaml title=".github/workflows/ci.yml" hl_lines="15 16"
     [...]
@@ -63,33 +76,53 @@ In this section, we'll add our container registry credentials in the Uffizzi Das
 </details>
 
 <details><summary>2. Make note of your project slug</summary>
-<p>In <b>Step 4 of 4</b>, make note of the project slug when creating your project. You will need it to set the <code>project</code> parameter of the <code>uffizzi-test-env</code> job of your pipeline that we configured in the <a href="../integrate-with-ci#reusable-workflow">previous section</a>. A project slug is URL-compatible ID used to uniquely identify your project. This can be seen highlighted in the image below. You can also find the project slug on the Project Settings page, as shown in the second image below. 
+<p>In <b>Step 4 of 4</b>, make note of the project slug when creating your project. You will need it to set the <code>project</code> parameter of the <code>deploy-uffizzi-preview</code> and <code>delete-uffizzi-preview</code> jobs of your pipeline that we configured in the <a href="../integrate-with-ci#reusable-workflow">previous section</a>. A project slug is URL-compatible ID used to uniquely identify your project. This can be seen highlighted in the image below. You can also find the project slug on the Project Settings page, as shown in the second image below. 
 </p>
 <img src="../../assets/images/project-slug.png">  
 <hr>
 <img src="../../assets/images/project-settings-slug.png">  
 </details>
 
-<details><summary>3. Add username, server, and project slug to your <code>uffizzi-test-env</code> job</summary>
-<p>Back in GitHub Actions, input your Uffizzi <code>username</code> (i.e. email address), <code>server</code> (https://app.uffizzi.com), and <code>project</code> slug values into the <code>uffizzi-test-env</code> job, as highlighted below:
+<details><summary>3. Add <code>username</code>, <code>server</code>, and <code>project</code> to your deploy and delete jobs</summary>
+<p>Back in GitHub Actions, input your Uffizzi <code>username</code> (i.e. email address), <code>server</code> (https://app.uffizzi.com), and <code>project</code> slug values into the deploy and delete jobs, as highlighted below:
 
-    ``` yaml title=".github/workflows/ci.yml" hl_lines="14 15 16"
+    ``` yaml title=".github/workflows/ci.yml" hl_lines="14 15 16 34 35 36"
     name: Build images and deploy with Uffizzi
 
       [...]
 
-      # Create, update, and delete test environments with Uffizzi
-      uffizzi-test-env:
+      # Create and update test environments with Uffizzi
+      deploy-uffizzi-preview:
         name: Use Remote Workflow to Preview on Uffizzi
         needs: render-compose-file
-        uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@reusable-workflow
-        if: github.event_name == 'pull_request'
+        uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+        if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
         with:
           compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
           compose-file-cache-path: docker-compose.rendered.yml
           username: foo@example.com
           server: https://app.uffizzi.com
-          project: app-9djwj8
+          project: my-application
+        secrets:
+          password: ${{ secrets.UFFIZZI_PASSWORD }}
+          personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
+          url-username: admin
+          url-password: ${{ secrets.URL_PASSWORD }}
+        permissions:
+          contents: read
+          pull-requests: write
+
+      # Delete test environments with Uffizzi
+      delete-uffizzi-preview:
+        name: Use Remote Workflow to Delete an Existing Preview
+        uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+        with:
+          compose-file-cache-key: ''
+          compose-file-cache-path: docker-compose.rendered.yml
+          username: foo@example.com
+          server: https://app.uffizzi.com
+          project: my-application
         secrets:
           password: ${{ secrets.UFFIZZI_PASSWORD }}
         permissions:
@@ -112,7 +145,7 @@ In this section, we'll add our container registry credentials in the Uffizzi Das
 <img src="../../assets/images/github-repository-secrets.png">
 <hr>
 <p><code>UFFIZZI_PASSWORD</code> is now available to the reusable workflow via:</p>
-```
+``` yaml
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
 ```

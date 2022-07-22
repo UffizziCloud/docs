@@ -156,7 +156,7 @@ This workflow takes as input the following required parameters:
   * `project` - A Uffizzi project ID (See [next section](connect-to-uffizzi-cloud.md))  
   * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](connect-to-uffizzi-cloud.md))
   
-Additionally, this workflow has two optional parameters if you want to configure password protection for your Uffizzi test environments. For instructions on configuring password, follow [this guide](guides/password-protected.md).  
+Additionally, this workflow has two optional parameters if you want to configure password protection for your Uffizzi test environments. For instructions on configuring passwords, follow [this guide](guides/password-protected.md).  
 
   * `url-username` - An HTTP username  
   * `url-password` - An HTTP password stored as a GitHub Actions secret  

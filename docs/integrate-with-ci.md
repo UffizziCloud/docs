@@ -145,20 +145,25 @@ Next, we'll use the bash shell command `envsubst` and a couple redirects (`<`, `
 
 Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
 
-In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue.
+In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your test environment via [`UFFIZZI_URL`](uffizzi-url.md) environment variable.
 
-This workflow takes as input the following parameters:  
+This workflow takes as input the following required parameters:  
 
   * `compose-file-cache-key`  
   * `compose-file-cache-path`  
-  * `username`  - i.e. your Uffizzi username (See [next section](connect-to-uffizzi-cloud.md))  
+  * `username`  - i.e. Your Uffizzi username (See [next section](connect-to-uffizzi-cloud.md))  
   * `server` - https://app.uffizzi.com or the Uffizzi endpoint if you are self-hosting (See [next section](connect-to-uffizzi-cloud.md))  
   * `project` - A Uffizzi project ID (See [next section](connect-to-uffizzi-cloud.md))  
-  * `UFFIZZI_PASSWORD` - your Uffizzi password stored as a GitHub Actions secret (See [next section](connect-to-uffizzi-cloud.md))
+  * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](connect-to-uffizzi-cloud.md))
+  
+Additionally, this workflow has two optional parameters if you want to configure password protection for you Uffizzi test environments. For instructions on configuring password, follow [this guide](guides/password-protected.md).  
+
+  * `url-username` - An HTTP username  
+  * `url-password` - An HTTP password stored as a GitHub Actions secret  
 
 === "GitHub Actions"
 
-    ``` yaml title=".github/workflows/ci.yml" hl_lines="72-88"
+    ``` yaml title=".github/workflows/ci.yml" hl_lines="72-90"
     name: Build images and deploy with Uffizzi
 
     on:
@@ -244,6 +249,8 @@ This workflow takes as input the following parameters:
           project: app-9djwj8
         secrets:
           password: ${{ secrets.UFFIZZI_PASSWORD }}
+          url-username: admin
+          url-password: ${{ secrets.URL_PASSWORD }}
         permissions:
           contents: read
           pull-requests: write

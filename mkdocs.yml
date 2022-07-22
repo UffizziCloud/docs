@@ -103,6 +103,7 @@ nav:
     - Create a Docker Compose template: docker-compose-template.md
     - Integrate with your CI pipeline: integrate-with-ci.md
     - Connect to Uffizzi Cloud: connect-to-uffizzi-cloud.md
+    - UFFIZZI_URL: uffizzi-url.md
   - Guides: 
     - Configure password-protected environments: guides/password-protected.md
     - Configure GitHub: guides/git-integrations.md

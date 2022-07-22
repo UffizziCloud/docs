@@ -155,7 +155,8 @@ This workflow takes as input the following required parameters:
   * `server` - https://app.uffizzi.com or the Uffizzi endpoint if you are self-hosting (See [next section](connect-to-uffizzi-cloud.md))  
   * `project` - A Uffizzi project ID (See [next section](connect-to-uffizzi-cloud.md))  
   * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](connect-to-uffizzi-cloud.md))
-  
+  * `personal-access-token` (require if using GitHub Container Registry (ghcr.io)) - [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with access to the `read:packages` scope
+
 Additionally, this workflow has two optional parameters if you want to configure password protection for your Uffizzi test environments. For instructions on configuring passwords, follow [this guide](guides/password-protected.md).  
 
   * `url-username` - An HTTP username  
@@ -246,9 +247,10 @@ Additionally, this workflow has two optional parameters if you want to configure
           compose-file-cache-path: docker-compose.rendered.yml
           username: foo@example.com
           server: https://app.uffizzi.com
-          project: app-9djwj8
+          project: my-application
         secrets:
           password: ${{ secrets.UFFIZZI_PASSWORD }}
+          personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
         permissions:
           contents: read
           pull-requests: write

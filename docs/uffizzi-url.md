@@ -1,4 +1,4 @@
-# `UFFIZZI_URL`
+# `UFFIZZI_URL` environment variable
 
 Each Uffizzi environment is assigned a unique, public URL that exists for the lifetime of the environment. This URL is accessible to all containers of your deployment via the environment variable `UFFIZZI_URL`. 
 ## Uses

@@ -601,7 +601,7 @@ volumes:
 
 !!! Warning  
 
-    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the short syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
+    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
 
 ### Long syntax
 
@@ -616,9 +616,9 @@ services:
   web:
     image: nginx:alpine
     volumes:
-      - type: volume
         source: mydata
         target: /data
+        read-only: true
 
 volumes:
   mydata:

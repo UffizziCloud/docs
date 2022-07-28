@@ -580,6 +580,10 @@ volumes:
  share_db:
 ```
 
+!!! Note
+    
+    Uffizzi currently only supports mounting empty volumes, i.e. you cannot preload data into your volumes. Support for non-empty volumes is on the [roadmap](https://github.com/orgs/UffizziCloud/projects/2/views/1).
+
 #### Short syntax
 
 The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where `SOURCE` can be either a host path or volume name. `TARGET` is the container path where the volume is mounted. Standard modes are `ro` for read-only and `rw` for read-write (default).
@@ -588,9 +592,6 @@ The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where `SOURCE
 volumes:
   # Just specify a path and let Uffizzi create a volume
   - /var/lib/mysql
-
-  # Specify an absolute path mapping
-  - /opt/data:/var/lib/mysql
     
   # Named volume
   - datavolume:/var/lib/mysql

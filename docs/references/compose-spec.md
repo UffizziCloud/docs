@@ -540,7 +540,7 @@ Grant access to secrets on a per-service basis using the per-service `secrets` c
 
 Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services in a stack. The secret name/value pairs must be [added in the Uffizzi Dashboard (UI)](../guides/secrets.md).  
 
-In the following example, `pg_user` and `pg_password` are references to secrets invoked in the top-level `secrets` stanza. `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are injected into the `db` service container once the stack is deployed.  
+In the following example, `pg_user` and `pg_password` are references to secrets invoked in the [top-level `secrets` key](compose-spec.md#secrets-top-level-element). `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are injected into the `db` service container once the stack is deployed.  
 
 ``` yaml
 services:
@@ -558,6 +558,72 @@ secrets:
     external: true
     name: "POSTGRES_PASSWORD"
 ```
+
+### **volumes**
+
+`volumes` defines mount host paths or named volumes, specified as sub-options to a service.
+
+If the mount is a host path and only used by a single service, it may be declared as part of the service definition instead of the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
+
+To reuse a volume across multiple services, a named volume must be declared in the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
+
+This example shows a named volume (`share-db`) being used by the `web` service, and a bind mount defined for a single service
+
+``` yaml
+services:
+ web:
+   image: nginx:alpine
+   volumes:
+     - share_db:/db
+       
+volumes:
+ share_db:
+```
+
+!!! Note
+    
+    Uffizzi currently only supports mounting empty volumes, i.e. you cannot preload data into your volumes. Support for non-empty volumes is on the [roadmap](https://github.com/orgs/UffizziCloud/projects/2/views/1).
+
+#### Short syntax
+
+The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where `SOURCE` can be either a host path or volume name. `TARGET` is the container path where the volume is mounted. Standard modes are `ro` for read-only and `rw` for read-write (default).
+
+``` yaml
+volumes:
+  # Just specify a path and let Uffizzi create a volume
+  - /var/lib/mysql
+    
+  # Named volume
+  - datavolume:/var/lib/mysql
+
+  # Named volume with read-only access
+  - shared_db:/var/lib/mysql:ro
+```
+
+#### Long syntax
+
+The long form syntax allows the configuration of additional fields that can’t be expressed in the short form.
+
+`source`: the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.  
+`target`: the path in the container where the volume is mounted  
+`read_only`: flag to set the volume as read-only
+
+``` yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+        source: mydata
+        target: /data
+        read-only: true
+
+volumes:
+  mydata:
+```
+
+!!! Warning  
+
+    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
 
 ### **x-uffizzi-continuous-previews**  
 
@@ -840,7 +906,7 @@ configs:
 
 &nbsp;  
 
-## `secrets` configuration reference
+## <a id="secrets-top-level-element"></a>`secrets` configuration reference
 
 A top-level reference to secrets that can be granted to the services in a stack. Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services defined in the compose file. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. If the external secret does not exist, you will see a secret-not-found error message in the Uffizzi Dashboard.
 
@@ -853,7 +919,7 @@ In the following example, `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names 
 services:
   db:
     image: postgres:9.6
-    secrets:
+    secrets:`
       - pg_user
       - pg_password
 
@@ -865,3 +931,5 @@ secrets:
     external: true
     name: "POSTGRES_PASSWORD"
 ```
+
+## <a id="volumes-top-level-element"></a>`volumes` configuration reference

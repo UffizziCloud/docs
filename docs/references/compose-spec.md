@@ -599,10 +599,6 @@ volumes:
   - shared_db:/var/lib/mysql:ro
 ```
 
-!!! Warning  
-
-    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
-
 #### Long syntax
 
 The long form syntax allows the configuration of additional fields that can’t be expressed in the short form.
@@ -623,6 +619,10 @@ services:
 volumes:
   mydata:
 ```
+
+!!! Warning  
+
+    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
 
 ### **x-uffizzi-continuous-previews**  
 

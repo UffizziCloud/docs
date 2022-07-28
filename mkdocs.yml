@@ -115,7 +115,7 @@ nav:
     - Networking and architecture: guides/networking.md
   - References:
     - Uffizzi Compose file reference: references/compose-spec.md
-    - Uffizzi Compose reference table: references/reference-table.md
+    - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
   - Use Cases: 
     - CI/CD + CP: use-cases/ci-cd-registry.md

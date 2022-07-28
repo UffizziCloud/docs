@@ -202,5 +202,5 @@ That's it! Uffizzi is now configured with your Docker Compose template. To test 
 ## Suggested articles
 
 * [Configure password-protected environments](guides/password-protected.md) 
-* [`UFFIZZI_URL` environment variable](uffizzi-url.md)
+* [`UFFIZZ_URL` environment variable](references/uffizzi-environment-variables.md)
 * [Set up single sign-on (SSO)](guides/single-sign-on.md)

@@ -9,11 +9,11 @@ It is designed to integrate with any CI/CD system as a step in your CI Pipeline.
 
 Rapidly create
 
-- pull request environments
-- preview environments
-- release candidate environments
-- demo environments
-- staging environments
+- pull request environments  
+- preview environments  
+- release candidate environments  
+- demo environments  
+- staging environments  
 
 which are purpose built for your environment requirements.
 

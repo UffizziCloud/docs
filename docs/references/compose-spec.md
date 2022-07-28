@@ -561,38 +561,68 @@ secrets:
 
 ### **volumes**
 
-`volumes` defines mount host paths or named volumes that MUST be accessible by service containers.
+`volumes` defines mount host paths or named volumes, specified as sub-options to a service.
 
-If the mount is a host path and only used by a single service, it MAY be declared as part of the service definition instead of the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
+If the mount is a host path and only used by a single service, it may be declared as part of the service definition instead of the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
 
-To reuse a volume across multiple services, a named volume MUST be declared in the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
+To reuse a volume across multiple services, a named volume must be declared in the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
 
-This example shows a named volume (`share-db`) being used by the backend service, and a bind mount defined for a single service
+This example shows a named volume (`share-db`) being used by the `web` service, and a bind mount defined for a single service
 
 ``` yaml
 services:
  web:
-   image: zipofar/uffizzi_test_rails_simple:latest
+   image: nginx:alpine
    volumes:
-     - source: share_db
-       target: /db
-       read_only: true
+     - share_db:/db
        
-
 volumes:
  share_db:
 ```
 
 ### Short syntax
 
-he short syntax uses a single string with colon-separated values to specify a volume mount (VOLUME:CONTAINER_PATH), or an access mode (VOLUME:CONTAINER_PATH:ACCESS_MODE).
+The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where `SOURCE` can be either a host path or volume name. `TARGET` is the container path where the volume is mounted. Standard modes are `ro` for read-only and `rw` for read-write (default).
 
-`VOLUME`: MAY be either a host path on the platform hosting containers (bind mount) or a volume name
-`CONTAINER_PATH``: the path in the container where the volume is mounted
-ACCESS_MODE`: is a comma-separated , list of options and MAY be set to:
-rw: read and write access (default)
-ro: read-only access
+``` yaml
+volumes:
+  # Just specify a path and let Uffizzi create a volume
+  - /var/lib/mysql
 
+  # Specify an absolute path mapping
+  - /opt/data:/var/lib/mysql
+    
+  # Named volume
+  - datavolume:/var/lib/mysql
+
+  # Named volume with read-only access
+  - shared_db:/var/lib/mysql:ro
+```
+
+!!! Warning  
+
+    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the short syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
+
+### Long syntax
+
+The long form syntax allows the configuration of additional fields that can’t be expressed in the short form.
+
+`source`: the source of the mount, a path on the host for a bind mount, or the name of a volume defined in the top-level volumes key. Not applicable for a tmpfs mount.  
+`target`: the path in the container where the volume is mounted  
+`read_only`: flag to set the volume as read-only
+
+``` yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: volume
+        source: mydata
+        target: /data
+
+volumes:
+  mydata:
+```
 
 ### **x-uffizzi-continuous-previews**  
 
@@ -888,7 +918,7 @@ In the following example, `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names 
 services:
   db:
     image: postgres:9.6
-    secrets:
+    secrets:`
       - pg_user
       - pg_password
 

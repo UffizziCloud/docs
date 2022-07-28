@@ -8,7 +8,7 @@ If you're using an external CI provider, such as GitHub Actions, GitLab, or Circ
 You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/example-voting-app/blob/main/.github/workflows/uffizzi-previews.yml).
 
 ## <a id="cache-tags"></a>Output tags from your build step
- In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs.tags`](https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs), as highlighted below.
+ In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), as highlighted below.
 
 === "GitHub Actions"
 
@@ -33,20 +33,20 @@ You can see a complete example workflow using GitHub Actions [here](https://gith
       outputs:
         tags: ${{ steps.meta.outputs.tags }}
       steps:
-        - name: Login to ECR
-          uses: docker/login-action@v2
-          with:
-            registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-            username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        - name: Login to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         - name: Checkout git repo
           uses: actions/checkout@v3
         - name: Docker metadata
           id: meta
           uses: docker/metadata-action@v3
           with:
-            images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/app
-        - name: Build and Push Image to ECR
+            images: ghcr.io/${{ github.repository_owner }}/example-app
+        - name: Build and Push Image to GitHub Container Registry
           uses: docker/build-push-action@v2
           with:
             push: true
@@ -60,9 +60,9 @@ You can see a complete example workflow using GitHub Actions [here](https://gith
 
 ## <a id="render-compose-from-cache"></a>Render and cache a new compose file
 
-Recall that in the [previous section](docker-compose-template.md), we created a Docker Compose template that replaced our static image name with a variable, denoted in the example as `image: "${APP_IMAGE}"`. In this step, we'll set and export that variable using the `outputs.tags` that we configured in the previous step. Additionally, we'll set and export our database secrets that [we configured in the preview section](docker-compose-template.md#secrets). 
+Recall that in the [previous section](docker-compose-template.md), we created a Docker Compose template that replaced our static image name with a variable, denoted in the example as `image: "${APP_IMAGE}"`. In this step, we'll set and export that variable using the `outputs` of the previous job. Additionally, we'll set and export our database secrets that [we configured in the preview section](docker-compose-template.md#secrets). 
 
-Next, we'll use the bash shell command `envsubst` and a couple redirects (`<`, `>`) to render a new compose file that includes the image name literal. Finally, we store this rendered compose file in the [GitHub Actions cache](https://github.com/marketplace/actions/cache).
+Next, we'll use the common utility `envsubst` and shell I/O redirection (`<`, `>`) to render a new compose file that includes the image name literal. Finally, we store this rendered compose file in the [GitHub Actions cache](https://github.com/marketplace/actions/cache).
 
 === "GitHub Actions"
 
@@ -77,7 +77,7 @@ Next, we'll use the bash shell command `envsubst` and a couple redirects (`<`, `
           - staging
           - qa
       pull_request:
-        types: [opened,reopened,synchronize,closed]
+        types: [opened,reopened,synchronize]
 
     jobs:
       # Build and push app image
@@ -87,20 +87,20 @@ Next, we'll use the bash shell command `envsubst` and a couple redirects (`<`, `
       outputs:
         tags: ${{ steps.meta.outputs.tags }}
       steps:
-        - name: Login to ECR
-          uses: docker/login-action@v2
-          with:
-            registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-            username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        - name: Login to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         - name: Checkout git repo
           uses: actions/checkout@v3
         - name: Docker metadata
           id: meta
           uses: docker/metadata-action@v3
           with:
-            images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/app
-        - name: Build and Push Image to ECR
+            images: ghcr.io/${{ github.repository_owner }}/example-app
+        - name: Build and Push Image to GitHub Container Registry
           uses: docker/build-push-action@v2
           with:
             push: true
@@ -145,25 +145,26 @@ Next, we'll use the bash shell command `envsubst` and a couple redirects (`<`, `
 
 Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
 
-In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your test environment via [`UFFIZZI_URL`](uffizzi-url.md) environment variable.
+In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your environment's containers as the [`UFFIZZI_URL`](uffizzi-url.md) environment variable.
 
-This workflow takes as input the following required parameters:  
+This workflow takes as input the following **required** parameters:  
 
   * `compose-file-cache-key`  
   * `compose-file-cache-path`  
-  * `username`  - i.e. Your Uffizzi username (See [next section](connect-to-uffizzi-cloud.md))  
-  * `server` - https://app.uffizzi.com or the Uffizzi endpoint if you are self-hosting (See [next section](connect-to-uffizzi-cloud.md))  
+  * `username` - Your Uffizzi username (See [next section](connect-to-uffizzi-cloud.md))  
+  * `server` - `https://app.uffizzi.com` or your own Uffizzi API endpoint if you are self-hosting (See [next section](connect-to-uffizzi-cloud.md))  
   * `project` - A Uffizzi project ID (See [next section](connect-to-uffizzi-cloud.md))  
   * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](connect-to-uffizzi-cloud.md))
-  
-Additionally, this workflow has two optional parameters if you want to configure password protection for you Uffizzi test environments. For instructions on configuring password, follow [this guide](guides/password-protected.md).  
+
+Additionally, this workflow has a few **optional** parameters if you have configured password protection for your Uffizzi test environments. For instructions on configuring passwords, follow [this guide](guides/password-protected.md).  
 
   * `url-username` - An HTTP username  
   * `url-password` - An HTTP password stored as a GitHub Actions secret  
+  * `personal-access-token` - [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with access to the `read:packages` scope. This parameter is required only if you use GitHub Container Registry (ghcr.io) to store images.  
 
 === "GitHub Actions"
 
-    ``` yaml title=".github/workflows/ci.yml" hl_lines="72-90"
+    ``` yaml title=".github/workflows/ci.yml" hl_lines="72-108"
     name: Build images and deploy with Uffizzi
 
     on:
@@ -174,7 +175,7 @@ Additionally, this workflow has two optional parameters if you want to configure
           - staging
           - qa
       pull_request:
-        types: [opened,reopened,synchronize,closed]
+        types: [opened,reopened,synchronize]
 
     jobs:
       # Build and push app image
@@ -184,20 +185,20 @@ Additionally, this workflow has two optional parameters if you want to configure
       outputs:
         tags: ${{ steps.meta.outputs.tags }}
       steps:
-        - name: Login to ECR
-          uses: docker/login-action@v2
-          with:
-            registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-            username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        - name: Login to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         - name: Checkout git repo
           uses: actions/checkout@v3
         - name: Docker metadata
           id: meta
           uses: docker/metadata-action@v3
           with:
-            images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/app
-        - name: Build and Push Image to ECR
+            images: ghcr.io/${{ github.repository_owner }}/example-app
+        - name: Build and Push Image to GitHub Container Registry
           uses: docker/build-push-action@v2
           with:
             push: true
@@ -235,27 +236,46 @@ Additionally, this workflow has two optional parameters if you want to configure
               path: docker-compose.rendered.yml
               key: ${{ steps.hash.outputs.hash }}
 
-      # Create, update, and delete test environments with Uffizzi
-      uffizzi-test-env:
+      # Create and update test environments with Uffizzi
+      deploy-uffizzi-preview:
         name: Use Remote Workflow to Preview on Uffizzi
         needs: render-compose-file
-        uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@reusable-workflow
-        if: github.event_name == 'pull_request'
+        uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+        if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
         with:
           compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
           compose-file-cache-path: docker-compose.rendered.yml
           username: foo@example.com
           server: https://app.uffizzi.com
-          project: app-9djwj8
+          project: my-application
         secrets:
           password: ${{ secrets.UFFIZZI_PASSWORD }}
+          personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
           url-username: admin
           url-password: ${{ secrets.URL_PASSWORD }}
         permissions:
           contents: read
           pull-requests: write
+
+      # Delete test environments with Uffizzi
+      delete-uffizzi-preview:
+        name: Use Remote Workflow to Delete an Existing Preview
+        uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+        with:
+          compose-file-cache-key: ''
+          compose-file-cache-path: docker-compose.rendered.yml
+          username: foo@example.com
+          server: https://app.uffizzi.com
+          project: my-application
+        secrets:
+          password: ${{ secrets.UFFIZZI_PASSWORD }}
+    permissions:
+      contents: read
+      pull-requests: write
     ```
 
+See [the full documentation for this reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/README.md#workflow-inputs).
 
 ## Next article
 

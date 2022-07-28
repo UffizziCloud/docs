@@ -3,10 +3,9 @@
 
 In this section, we'll create a Uffizzi Cloud account and connect it with your CI provider.
 
-
 ## Connect to Uffizzi Cloud from an external CI provider
 
-In the [previous section](integrate-with-ci.md), we added a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) to our pipeline that takes as input several parameters, including:
+In the [previous section](integrate-with-ci.md), we added a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) to our pipeline that takes several inputs, including:
 
   * `username`
   * `server`
@@ -83,7 +82,7 @@ In this section, we'll add our container registry credentials in the Uffizzi Das
 <img src="../../assets/images/project-settings-slug.png">  
 </details>
 
-<details><summary>3. Add <code>username</code>, <code>server</code>, and <code>project</code> to your deploy and delete jobs</summary>
+<details><summary>3. Add <code>username</code>, <code>server</code>, and <code>project</code> to your create, update, and delete jobs</summary>
 <p>Back in GitHub Actions, input your Uffizzi <code>username</code> (i.e. email address), <code>server</code> (https://app.uffizzi.com), and <code>project</code> slug values into the deploy and delete jobs, as highlighted below:
 
     ``` yaml title=".github/workflows/ci.yml" hl_lines="14 15 16 34 35 36"
@@ -171,7 +170,7 @@ If you're using Uffizzi CI, you will need to link to the Docker Compose template
 </details>
 
 <details><summary>2. Add application secrets</summary>
-<p>If your compose file includes application secrets, such as database credentials, you can add them in the Uffizzi Dashboard. Navigate to your project, then select <b>Specs</b> > <b>Secrets</b> > <b>NEW SECRET</b>. This will open a modal, where you can input your secrets as <code>NAME=VALUE</code> pairs. Be sure to add one secret per line, separatedy by <code>=</code> with no white spaces.
+<p>If your compose file includes [application secrets](https://docs.uffizzi.com/references/compose-spec/#secrets), such as database credentials, you can add them in the Uffizzi Dashboard. Navigate to your project, then select <b>Specs</b> > <b>Secrets</b> > <b>NEW SECRET</b>. This will open a modal, where you can input your secrets as <code>NAME=VALUE</code> pairs. Be sure to add one secret per line, separatedy by <code>=</code> with no white spaces.
 </p>
 <img src="../../assets/images/project-list.png">  
 <hr>

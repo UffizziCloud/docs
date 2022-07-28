@@ -580,7 +580,7 @@ volumes:
  share_db:
 ```
 
-### Short syntax
+#### Short syntax
 
 The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where `SOURCE` can be either a host path or volume name. `TARGET` is the container path where the volume is mounted. Standard modes are `ro` for read-only and `rw` for read-write (default).
 
@@ -603,7 +603,7 @@ volumes:
 
     If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
 
-### Long syntax
+#### Long syntax
 
 The long form syntax allows the configuration of additional fields that can’t be expressed in the short form.
 

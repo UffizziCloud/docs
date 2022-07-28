@@ -3,7 +3,7 @@
 ## Introduction
 
 Uffizzi is a platform for managing lightweight, ephemeral test environments. 
-It is designed to integrate with any CI/CD system as a step in your CI Pipeline. Each time a pull request, new commit, or any other event triggers your CI pipeline, Uffizzi will deploy your changes to an ephemeral environment. 
+It is designed to integrate with any CI/CD system as a step in your CI Pipeline. Each time a pull request, new commit, or any other event triggers your CI pipeline, Uffizzi will deploy your changes to an ephemeral environment. Uffizzi also handles clean up, so your environments last only as long as you need them.  
 
 ## Use Cases
 
@@ -14,8 +14,6 @@ Rapidly create
 - release candidate environments  
 - demo environments  
 - staging environments  
-
-which are purpose built for your environment requirements.
 
 ## Add Uffizzi Environments to your CI pipeline
 

@@ -559,7 +559,7 @@ secrets:
     name: "POSTGRES_PASSWORD"
 ```
 
-### **volumes**
+### **volumes**<a id="volumes"></a>
 
 `volumes` defines mount host paths or named volumes, specified as sub-options to a service.
 
@@ -933,3 +933,21 @@ secrets:
 ```
 
 ## <a id="volumes-top-level-element"></a>`volumes` configuration reference
+While it is possible to declare [`volumes`](compose-spec.md#volumes) on the fly as part of the service declaration, this section allows you to create named volumes that can be reused across multiple services.
+
+Here’s an example of a two-service setup where a database’s data directory is shared with another service as a volume so that it can be periodically backed up:
+
+``` yaml
+services:
+  db:
+    image: db
+    volumes:
+      - data-volume:/var/lib/db
+  backup:
+    image: backup-service
+    volumes:
+      - data-volume:/var/lib/backup/data
+
+volumes:
+  data-volume:
+```

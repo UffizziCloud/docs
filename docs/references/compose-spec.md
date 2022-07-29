@@ -621,10 +621,6 @@ volumes:
   mydata:
 ```
 
-!!! Warning  
-
-    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
-
 ### **x-uffizzi-continuous-previews**  
 
 An option for specifying continuous previews policies per service. This option overrides global [`continuous_previews`](#continuous_previews) policies for the service where it is specified. 

@@ -626,7 +626,7 @@ volumes:
 
 !!! Warning  
 
-    The options 'source' and 'target' are required for a long syntax. Therefore anonymous volume can't be define for a long syntax.
+    The 'source' and 'target' options are required for the long syntax. Therefore you can't use long syntax with anonymous volumes.
 
 ### **x-uffizzi-continuous-previews**  
 

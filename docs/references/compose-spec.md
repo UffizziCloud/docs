@@ -582,7 +582,7 @@ volumes:
 
 !!! Note
     
-    Uffizzi currently only supports mounting empty volumes, i.e. you cannot preload data into your volumes. Support for non-empty volumes is on the [roadmap](https://github.com/orgs/UffizziCloud/projects/2/views/1).
+    Uffizzi currently only supports mounting empty volumes (i.e. 'anonymous' and 'named' volumes). Therefore you cannot preload data into your volumes. Support for non-empty volumes is on the [roadmap](https://github.com/orgs/UffizziCloud/projects/2/views/1).
 
 #### Short syntax
 
@@ -590,8 +590,11 @@ The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where `SOURCE
 
 ``` yaml
 volumes:
-  # Just specify a path and let Uffizzi create a volume
+  # Anonymous volume. Just specify a path and let Uffizzi create a volume
   - /var/lib/mysql
+
+  # Anonymous volume with read-only access
+  - /var/lib/mysql:ro
     
   # Named volume
   - datavolume:/var/lib/mysql
@@ -623,7 +626,7 @@ volumes:
 
 !!! Warning  
 
-    If more than one service mounts a shared volume, only one service can have read-write access to it. All other services must be designated read-only, e.g. using the sh~ort syntax ` - shared_db:/var/lib/mysql:ro` or long syntax `read-only: true`.
+    The options 'source' and 'target' are required for a long syntax. Therefore anonymous volume can't be define for a long syntax.
 
 ### **x-uffizzi-continuous-previews**  
 

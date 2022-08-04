@@ -580,9 +580,15 @@ volumes:
  share_db:
 ```
 
+Requirements for the **host volumes** (aka non-empty volumes):
+
+* Only supported if your compose file is located in the Github repository.
+* As a `source`, you must use a directory that exists in the github repository where your compose file is located.
+* The path for the `source` must be relative and start with  `../` or `./`.
+
 !!! Note
-    
-    Uffizzi currently only supports mounting empty volumes (i.e. 'anonymous' and 'named' volumes). Therefore you cannot preload data into your volumes. Support for non-empty volumes is on the [roadmap](https://github.com/orgs/UffizziCloud/projects/2/views/1).
+
+    For the host volumes the starting point for relative path is the directory where compose file is located.
 
 #### Short syntax
 
@@ -597,10 +603,16 @@ volumes:
   - /var/lib/mysql:ro
     
   # Named volume
-  - datavolume:/var/lib/mysql
+  - data_volume:/var/lib/mysql
 
   # Named volume with read-only access
   - shared_db:/var/lib/mysql:ro
+
+  # Host volume. Just specify a path and let Uffizzi create a volume
+  - ./db/mysql:/var/lib/mysql
+
+  # Host volume with read-only access
+  - ./db/mysql:/var/lib/mysql:ro
 ```
 
 #### Long syntax

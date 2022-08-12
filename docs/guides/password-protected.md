@@ -14,7 +14,7 @@ ___
 ___  
 
 !!! Warning
-    If you enable password protection and are using the GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/6504e1578015e5470858bfe7e7793779fa01b6a4/.github/workflows/reusable.yaml), as described in the [Getting started guide](getting-started.md), you must pass `URL_USERNAME` and `URL_PASSWORD` as parameters to the reusable workflow, otherwise the deployment confirmation step will fail. You can find an example GitHub Actions job [here](https://github.com/UffizziCloud/example-voting-app/blob/161d76c159607455b7c3cda74fcb2515502b2920/.github/workflows/uffizzi-previews.yml#L161-L176).
+    If you enable password protection and are using the GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/6504e1578015e5470858bfe7e7793779fa01b6a4/.github/workflows/reusable.yaml), as described in the [Getting started guide](getting-started.md), you must pass `url-username` and `url-password` as parameters to the reusable workflow, otherwise the deployment confirmation step will fail. You can find an example GitHub Actions job [here](https://github.com/UffizziCloud/example-voting-app/blob/161d76c159607455b7c3cda74fcb2515502b2920/.github/workflows/uffizzi-previews.yml#L161-L176).
 
 ## Suggested articles
 * [Set up single sign-on (SSO)](guides/single-sign-on.md)

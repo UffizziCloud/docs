@@ -43,7 +43,7 @@ You can pass a compose file to this command to create an ad hoc preview of an al
 
 ### Uffizzi wide flags
 
-The flage `--project` is available to all commands. Run `$ uffizzi help` for details.
+The flag `--project` is available to all commands. Run `$ uffizzi help` for details.
 
 ### Examples  
 
@@ -80,7 +80,7 @@ Deletes a preview with the given preview ID. This command can fail for the follo
 
 ### Uffizzi wide flags
 
-The flage `--project` is available to all commands. Run `$ uffizzi help` for details.
+The flag `--project` is available to all commands. Run `$ uffizzi help` for details.
 
 ### Examples  
 
@@ -111,7 +111,7 @@ Shows metadata for a project given a valid preview ID. This command can fail for
 
 ### Uffizzi wide flags
 
-The flage `--project` is available to all commands. Run `$ uffizzi help` for details.
+The flag `--project` is available to all commands. Run `$ uffizzi help` for details.
 
 ### Examples  
 
@@ -141,7 +141,7 @@ $ uffizzi preview list [UFFIZZI_WIDE_FLAG ...]
 Lists all previews for a project, including `active`, `building`, `deploying` and `failed` previews.  
 
 ### Uffizzi wide flags
-The flage `--project` is available to all commands. Run `$ uffizzi help` for details.
+The flag `--project` is available to all commands. Run `$ uffizzi help` for details.
 
 ### Examples  
 

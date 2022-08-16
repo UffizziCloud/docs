@@ -4,7 +4,7 @@ This document describes the Uffizzi Compose file that is used to define and prev
 
 ## Compose file structure   
 
-The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `secrets`, and `x-uffizzi` elements such as `ingress` (required). Other Compose top-level elements such as `networks`, `version`, and `volumes` are not currently supported by Uffizzi. As a YAML file, a Uffizzi Compose should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must include `services` and `ingress` (a sub-level element of `x-uffizzi`). Services are the containers that make up your application, and ingress tells Uffizzi which container should receive incoming HTTPS traffic. Ingress requires a service and port number that the service is listening on.   
+The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `secrets`, `'volumes`, and `x-uffizzi` elements such as `ingress` (required). Other Compose top-level elements `networks` and `version` are not currently supported by Uffizzi. As a YAML file, a Uffizzi Compose should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must include `services` and `ingress` (a sub-level element of `x-uffizzi`). Services are the containers that make up your application, and ingress tells Uffizzi which container should receive incoming HTTPS traffic. Ingress requires a service and port number that the service is listening on.   
 
 ## Uffizzi extension  
 Docker Compose supports [vendor-specific extensions](https://github.com/compose-spec/compose-spec/issues/17) for platforms like Uffizzi to supplement the Compose specification with parameters that are specific to that vendor's platform. For example, the Uffizzi extension, `x-uffizzi`, gives you the ability to add event triggers to your compose file. In the following example, a new preview will be deployed when a pull request is opened on GitHub:
@@ -40,6 +40,9 @@ Secrets provide a mechanism for supplying sensitive environment varialbes (such 
     You will receive an error in the Uffizzi Dashboard if secrets have not been added in the UI but they are referenced in your compose file.   
 
 Secrets are optional for Uffizzi Compose files. 
+
+## Volumes  
+// TODO  
 
 ## Example Uffizzi Compose file  
 
@@ -388,12 +391,18 @@ command:
   - "daemon off;"
 ```
 
-### **configs**  
+### <a id="configs-nested"></a> **configs**  
 
 Grant access to configs on a per-service basis using the per-service `configs` configuration. Both [Docker `configs` short syntax and long syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#configs) are supported.  
 
-!!! note
-    `uid`, `gid`, and `mode` long syntax parameters are not supported.
+!!! important  
+    `configs` is only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, it is recommended that you pass configuration files using [`env_file`](compose-spec.md#env_file) instead. In this example, an environment variable `LOKI_CONFIG` is stored by your CI provider:  
+    ``` yaml 
+    services:
+      logging:
+        image: mirror.gcr.io/grafana/loki:2.3.0
+        env_file: ${LOKI_CONFIG}  
+    ``` 
 
 #### Short syntax  
 
@@ -419,6 +428,9 @@ The long syntax provides more granularity in how the config is created within th
 - `source`: The identifier of the config as it is defined in this configuration.  
 
 - `target`: The path and name of the file to be mounted in the service’s task containers. Defaults to /<source> if not specified.
+
+!!! note
+    `uid`, `gid`, and `mode` long syntax parameters are not supported.
 
 ``` yaml
 services:
@@ -455,6 +467,17 @@ services:
       x-uffizzi-auto-deploy-updates: false
 ```
 
+!!! important  
+    `x-uffizzi-auto-deploy-updates` is only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, deployment updates should be configured by your provider's event triggers. For example, in GitHub Actions this can be defined with `push`, `pull_request` and `types`:  
+    ``` yaml
+    on:
+      push:
+        branches:
+          - main
+      pull_request:
+        types: [opened,reopened,synchronize,closed]
+    ```
+
 #### **resources: limits: memory**
 
 ``` yaml
@@ -487,7 +510,7 @@ entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
     Setting `entrypoint` both overrides any default entrypoint set on the service’s image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default command on the image - meaning that if there’s a `CMD` instruction in the Dockerfile, it is ignored.
 
 
-### **env_file**  
+### <a id="env_file"></a> **env_file**  
 
 Add environment variables from a file. Can be a single value or a list.  
 
@@ -604,46 +627,99 @@ services:
 
 ### **image**  
 
-Specify the image to start the container from, as  `repository:tag`. If no tag is specified, default is `latest`. Uffizzi currently integrates with Docker Hub, Amazon ECR, Azure Container Registry, and Google Container Registry. If no registry is specified, default is `hub.docker.com`.
+Specify the image to start the container from, as  `repository:tag`. If no tag is specified, default is `latest`. If no registry is specified, default is `hub.docker.com`.   
 
 ``` yaml
-image: redis:latest  # Defaults to hub.docker.com
+services:  
+  cache:
+    image: redis:latest  # Defaults to hub.docker.com
 ```
 
 ``` yaml
-image: example.azurecr.io/example-service:latest  
+services:  
+  web:
+    image: example.azurecr.io/example-service:latest  
 ``` 
 
-!!! note
-    To be able pull images from container registries, you must first add your registry credentials in the Uffizzi UI (**Settings** > **Integrations**). However, you do not need to provide Docker Hub credentials to pull public images from hub.docker.com.
+!!! note        
+    Uffizzi CI supports major cloud registries, as noted below. If you use an external CI provider with Uffizzi, such as GitHub Actions, GitLab CI, CircleCI, etc., you can deploy images from any registry that implements the generic [Docker Registry HTTP API V2](https://docs.docker.com/registry/spec/api/) protocol, including:   
+
+    - Amazon ECR[^1]  
+    - Azure Container Registry[^1]  
+    - Cloudsmith  
+    - Docker Hub[^1]  
+    - GitHub Container Registry[^1]  
+    - Google Container Registry[^1]  
+    - JFrog (Artifactory) Container Registry    
+    - Quay  
+
+[^1]: Supported by Uffizzi CI  
+
+!!! important
+    If you use Uffizzi CI, you must first add your registry credentials in the Uffizzi UI (**Settings** > **Integrations**). You do not need to provide Docker Hub credentials to pull public images from hub.docker.com.
 
 
-### **secrets**  
+### <a id="secrets-nested"></a>**secrets**  
 
 Grant access to secrets on a per-service basis using the per-service `secrets` configuration. Uffizzi Compose currently supports the secrets [short syntax](https://docs.docker.com/compose/compose-file/compose-file-v3/#secrets) only.  
+
+!!! important  
+    `secrets` are only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, it is recommended that you pass secrets using [`environment`](compose-spec.md#environment) instead.
+ 
+#### Uffizzi CI  
 
 Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services in a stack. The secret name/value pairs must be [added in the Uffizzi Dashboard (UI)](../guides/secrets.md).  
 
 In the following example, `pg_user` and `pg_password` are references to secrets invoked in the [top-level `secrets` key](compose-spec.md#secrets-top-level-element). `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are injected into the `db` service container once the stack is deployed.  
 
-``` yaml
-services:
-  db:
-    image: postgres:9.6
+=== "Uffizzi CI"
+
+    ``` yaml
+    services:
+      db:
+        image: postgres:9.6
+        secrets:`
+          - pg_user
+          - pg_password
+
     secrets:
-      - pg_user
-      - pg_password
+      pg_user:
+        external: true
+        name: "POSTGRES_USER"
+      pg_password:
+        external: true
+        name: "POSTGRES_PASSWORD"
+    ```
 
-secrets:
-  pg_user:
-    external: true
-    name: "POSTGRES_USER"
-  pg_password:
-    external: true
-    name: "POSTGRES_PASSWORD"
-```
+#### External CI
 
-### **volumes**<a id="volumes"></a>
+Secrets should be stored as secrets using your external CI provider's interface abd referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
+
+See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
+
+=== "GitHub Actions"
+
+    ``` yaml
+    secrets:
+      password: ${{ secrets.PG_PASSWORD }}
+    ```  
+
+=== "Docker Compose Template"
+
+    ``` yaml
+    services:
+      postgres:
+        image: postgres:9.6
+        environment:
+          POSTGRES_USER: "${PGUSER}"
+          POSTGRES_PASSWORD: "${PGPASSWORD}"
+        deploy:
+          resources:
+            limits:
+              memory: 500M
+    ```  
+
+### <a id="volumes-nested"></a>**volumes**
 
 `volumes` defines mount host paths or named volumes, specified as sub-options to a service.
 
@@ -651,7 +727,7 @@ If the mount is a host path and only used by a single service, it may be declare
 
 To reuse a volume across multiple services, a named volume must be declared in the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
 
-This example shows a named volume (`share-db`) being used by the `web` service, and a bind mount defined for a single service
+This example shows a named volume (`share_db`) being used by the `web` service, and a bind mount defined for a single service
 
 ``` yaml
 services:
@@ -991,49 +1067,119 @@ In this example, the preview URL will only be shared to GitHub when a pull reque
 
 ## `configs` configuration reference  
 
-The top-level `configs` declaration defines [configs](#configs) that can be granted to the services in this stack. The source of the config is a `file` (`external` source is currently not supported).
+The top-level `configs` declaration defines [configs](compose-spec.md#configs-nested) that can be granted to the services in this stack. The source of the config is a `file` (`external` source is currently not supported).
 
-``` yaml
-services:
-  redis:
-    image: redis:latest
+=== "External CI"
+
+    ``` yaml
+    services:
+      hello-world:
+        build:
+          context: https://github.com/ACCOUNT/hello-world:main
+        env_file: ${FOO_BACKING_SERVICE}
+
+    ingress:
+      service: hello-world
+      port: 80
+    ```  
+
+=== "Uffizzi CI"
+
+    ``` yaml
+    services:
+      hello-world:
+        build:
+          context: https://github.com/ACCOUNT/hello-world:main
+
+      redis:
+        image: redis:latest
+        configs:
+          - my_config
+
     configs:
-      - my_config
-configs:
-  my_config:
-    file: ./my_config.txt
-```  
+      my_config:
+        file: ./my_config.txt
+    
+    ingress:
+      service: hello-world
+      port: 80
+    ```  
+
+!!! important  
+    `configs` is only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, it is recommended that you pass configuration files using [`env_file`](compose-spec.md#env_file) instead. In this example, an environment variable `LOKI_CONFIG` is stored by your CI provider:  
+    ``` yaml 
+    services:
+      logging:
+        image: mirror.gcr.io/grafana/loki:2.3.0
+        env_file: ${LOKI_CONFIG}  
+    ``` 
 
 &nbsp;  
 
 ## <a id="secrets-top-level-element"></a>`secrets` configuration reference
 
-A top-level reference to secrets that can be granted to the services in a stack. Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services defined in the compose file. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. If the external secret does not exist, you will see a secret-not-found error message in the Uffizzi Dashboard.
+A top-level reference to [`secrets`](compose-spec.md#secrets-nested) that can be granted to the services in a stack.
+
+!!! important  
+    Top-level `secrets` is only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, it is recommended that you pass secrets using [`environment`](compose-spec.md#environment) instead. 
+ 
+#### Uffizzi CI
+Secrets are name/value pairs that provide a mechanism for securing and sharing environment variables across all services defined in the compose file. The source of the secret must be added in the Uffizzi Dashboard and invoked with `external` and secret name. If the external secret does not exist, you will see a secret-not-found error message in the Uffizzi Dashboard.
 
 - `external`: Indicates that the secret object (a name/value pair) is declared in the Uffizzi Dashboard (UI). Value must be `true`.  
 - `name`: The name of the secret object in Uffizzi.
 
 In the following example, `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names of secrets that have been added in the Uffizzi Dashboard. Their respective values are available to the `db` service once the stack is deployed.  
 
-``` yaml
-services:
-  db:
-    image: postgres:9.6
-    secrets:`
-      - pg_user
-      - pg_password
+=== "Uffizzi CI"
 
-secrets:
-  pg_user:
-    external: true
-    name: "POSTGRES_USER"
-  pg_password:
-    external: true
-    name: "POSTGRES_PASSWORD"
-```
+    ``` yaml
+    services:
+      db:
+        image: postgres:9.6
+        secrets:`
+          - pg_user
+          - pg_password
+
+    secrets:
+      pg_user:
+        external: true
+        name: "POSTGRES_USER"
+      pg_password:
+        external: true
+        name: "POSTGRES_PASSWORD"
+    ```
+
+#### External CI
+
+Secrets should be stored as secrets using your external CI provider's interface abd referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
+
+See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
+
+=== "GitHub Actions"
+
+    ``` yaml
+    secrets:
+      password: ${{ secrets.PG_PASSWORD }}
+    ```  
+
+=== "Docker Compose Template"
+
+    ``` yaml
+    services:
+      postgres:
+        image: postgres:9.6
+        environment:
+          POSTGRES_USER: "${PGUSER}"
+          POSTGRES_PASSWORD: "${PGPASSWORD}"
+        deploy:
+          resources:
+            limits:
+              memory: 500M
+    ```  
 
 ## <a id="volumes-top-level-element"></a>`volumes` configuration reference
-While it is possible to declare [`volumes`](compose-spec.md#volumes) on the fly as part of the service declaration, this section allows you to create named volumes that can be reused across multiple services.
+While it is possible to declare [`volumes`](compose-spec.md#volumes-nested) on the fly as part of the service declaration, this section allows you to create named volumes that can be reused across multiple services.
 
 Here’s an example of a two-service setup where a database’s data directory is shared with another service as a volume so that it can be periodically backed up:
 

@@ -115,18 +115,12 @@ The flag `--project` is available to all commands. Run `$ uffizzi help` for deta
 
 ### Examples  
 
-To list all previews in the default project, run:
+The following command prints metadata for the preview with ID
+`deployment-213`:
 
 ```
-$ uffizzi preview list
+$ uffizzi preview describe deployment-213_project
 ```
-
-To list all previews in a project with name `my_project`, run:
-
-```
-$ uffizzi preview list --project="my_project"
-```
-
 
 ## <a id="list"></a> `uffizzi preview list`  
 

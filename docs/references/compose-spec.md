@@ -518,6 +518,90 @@ environment:
   BAR: 'true'
 ```
 
+### **healthcheck**
+Healthchecks let Uffizzi know when to restart a container. For example, a healthcheck could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite bugs.
+
+**Available params:**
+
+* `test`
+* `interval`
+* `timeout`
+* `retries`
+* `start_period`
+* `disable`
+
+#### `test`
+Can be string or list of commands. If you use list of commands the first item must be one of: `NONE`, `CMD`, `CMD-SHELL`.
+
+``` yaml
+services:
+  db:
+    image: postgres:last
+    healthcheck:
+      test: ['CMD-SHELL', 'check']
+```
+
+
+#### `start_period`
+Number of seconds after the container has started before healthcheck are initiated. Defaults to 0 seconds. Minimum value is 0.
+
+Available formats: `s`, `m`, `h`, `d`
+
+``` yaml
+services:
+  db:
+    image: postgres:last
+    healthcheck:
+      test: ['CMD-SHELL', 'check']
+      start_period: 5s
+```
+
+#### `interval`
+How often (in seconds) to perform the healthcheck. Default to 10 seconds. Minimum value is 1.
+
+Available formats: `s`, `m`, `h`, `d`
+
+``` yaml
+services:
+  db:
+    image: postgres:last
+    healthcheck:
+      test: ['CMD-SHELL', 'check']
+      interval: 10s
+      start_period: 5s
+```
+
+#### `timeout`
+Number of seconds after which the healthcheck times out. Defaults to 1 second. Minimum value is 1.
+
+Available formats: `s`, `m`, `h`, `d`
+
+``` yaml
+services:
+  db:
+    image: postgres:last
+    healthcheck:
+      test: ['CMD-SHELL', 'check']
+      interval: 10s
+      timeout: 5s
+      start_period: 5s
+```
+
+#### `retries`
+When a healthcheck fails, Uffizzi will try `retries` times before giving up. Giving up means restarting the container. Defaults to 3. Minimum value is 1.
+
+``` yaml
+services:
+  db:
+    image: postgres:last
+    healthcheck:
+      test: ['CMD-SHELL', 'check']
+      interval: 10s
+      timeout: 5s
+      start_period: 5s
+      retries: 5
+```
+
 ### **image**  
 
 Specify the image to start the container from, as  `repository:tag`. If no tag is specified, default is `latest`. Uffizzi currently integrates with Docker Hub, Amazon ECR, Azure Container Registry, and Google Container Registry. If no registry is specified, default is `hub.docker.com`.
@@ -628,89 +712,6 @@ volumes:
 
     The 'source' and 'target' options are required for the long syntax. Therefore you can't use long syntax with anonymous volumes.
 
-### healthchecks
-Healthchecks provide to know when to restart a container. For example, healthcheck could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite bugs.
-
-**Available params:**
-
-* test
-* interval
-* timeout
-* retries
-* startPeriod
-* disable
-
-#### test
-Can be string or list of commands. If you use list of commands the first item must be one of: `NONE`, `CMD`, `CMD-SHELL`.
-
-``` yaml
-services:
-  db:
-    image: postgres:last
-    healthcheck:
-      test: ['CMD-SHELL', 'check']
-```
-
-
-#### startPeriod
-Number of seconds after the container has started before healthcheck are initiated. Defaults to 0 seconds. Minimum value is 0.
-
-Available formats: `s`, `m`, `h`, `d`
-
-``` yaml
-services:
-  db:
-    image: postgres:last
-    healthcheck:
-      test: ['CMD-SHELL', 'check']
-      start_period: 5s
-```
-
-#### interval
-How often (in seconds) to perform the healthcheck. Default to 10 seconds. Minimum value is 1.
-
-Available formats: `s`, `m`, `h`, `d`
-
-``` yaml
-services:
-  db:
-    image: postgres:last
-    healthcheck:
-      test: ['CMD-SHELL', 'check']
-      interval: 10s
-      start_period: 5s
-```
-
-#### timeout
-Number of seconds after which the healthcheck times out. Defaults to 1 second. Minimum value is 1.
-
-Available formats: `s`, `m`, `h`, `d`
-
-``` yaml
-services:
-  db:
-    image: postgres:last
-    healthcheck:
-      test: ['CMD-SHELL', 'check']
-      interval: 10s
-      timeout: 5s
-      start_period: 5s
-```
-
-#### retries
-When a healthcheck fails, Uffizzi will try `retries` times before giving up. Giving up means restarting the container. Defaults to 3. Minimum value is 1.
-
-``` yaml
-services:
-  db:
-    image: postgres:last
-    healthcheck:
-      test: ['CMD-SHELL', 'check']
-      interval: 10s
-      timeout: 5s
-      start_period: 5s
-      retries: 5
-```
 
 ### **x-uffizzi-continuous-previews**  
 

@@ -30,9 +30,7 @@ $ uffizzi preview create [POSITIONAL_ARGUMENTS] [UFFIZZI_WIDE_FLAG ...]
 
 ### Description
 
-Creates a new preview. If no COMPOSE_FILE is specified, the preview is created with the project´s default compose file.
-
-This command can fail for the following reasons:  
+Creates a new preview. If no `COMPOSE_FILE` is specified, the preview is created with the project´s default compose file. This command can fail for the following reasons:  
 
 - The project does not have a default compose file set. Run `$ uffizzi compose --help` for details.  
 - The alternate compose file is invalid.  

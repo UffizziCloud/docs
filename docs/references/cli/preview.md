@@ -119,7 +119,7 @@ The following command prints metadata for the preview with ID
 `deployment-213`:
 
 ```
-$ uffizzi preview describe deployment-213_project
+$ uffizzi preview describe deployment-213
 ```
 
 ## <a id="list"></a> `uffizzi preview list`  

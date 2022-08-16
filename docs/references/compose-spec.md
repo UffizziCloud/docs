@@ -4,15 +4,17 @@ This document describes the Uffizzi Compose file that is used to define and prev
 
 ## Compose file structure   
 
-The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `secrets`, `'volumes`, and `x-uffizzi` elements such as `ingress` (required). Other Compose top-level elements `networks` and `version` are not currently supported by Uffizzi. As a YAML file, a Uffizzi Compose should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must include `services` and `ingress` (a sub-level element of `x-uffizzi`). Services are the containers that make up your application, and ingress tells Uffizzi which container should receive incoming HTTPS traffic. Ingress requires a service and port number that the service is listening on.   
+The Uffizzi Compose file is a YAML file defining `services` (required), `configs`, `secrets`, `volumes`, and `x-uffizzi` elements such as `ingress` (required). Other Compose top-level elements `networks` and `version` are not currently supported by Uffizzi. As a YAML file, a Uffizzi Compose should comply with the [YAML Specification](https://yaml.org). It is recommended to name your Uffizzi Compose file `docker-compose.uffizzi.yml` (Note: You can use either the `.yml` or `.yaml` extension). At a minimum, a Uffizzi Compose file must include `services` and `ingress` (a sub-level element of `x-uffizzi`). Services are the containers that make up your application, and ingress tells Uffizzi which container should receive incoming HTTPS traffic. Ingress requires a service and port number that the service is listening on.   
 
 ## Uffizzi extension  
-Docker Compose supports [vendor-specific extensions](https://github.com/compose-spec/compose-spec/issues/17) for platforms like Uffizzi to supplement the Compose specification with parameters that are specific to that vendor's platform. For example, the Uffizzi extension, `x-uffizzi`, gives you the ability to add event triggers to your compose file. In the following example, a new preview will be deployed when a pull request is opened on GitHub:
+Docker Compose supports [vendor-specific extensions](https://github.com/compose-spec/compose-spec/issues/17) for platforms like Uffizzi to supplement the Compose specification with parameters that are specific to that vendor's platform. For example, the Uffizzi extension, `x-uffizzi`, tells Uffizzi which service should receive incoming HTTP traffic:
 
 ```
 x-uffizzi:
-  continuous_previews:
-    deploy_preview_when_pull_request_is_opened: true
+  ingress:
+    service: web
+    port: 8080
+    
 ```
 
 The example above is valid Docker Compose syntax because the `docker-compose` CLI ignores any field prefixed with `x-`. This allows users to still run `docker-compose config` on a Uffizzi Compose file to check for valid Docker Compose format.  
@@ -29,22 +31,17 @@ As with Docker Compose, a Service is an abstract definition of a computing resou
 Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
 
 ## Configs   
-Configs allow you to add configuration files to your applications. Files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository.
-
-You must explicitly grant access to configuration files per service using the `configs` element within the service definition. Configs are optional for Uffizzi Compose files.  
+Configs allow you to add configuration files to your applications. Configs are only supported in Uffizzi CI. If you use a different CI provider, you should use [`env_file`](compose-spec.md#configs-nested). Config files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository. Configs are optional for Uffizzi Compose files.  
 
 ## Secrets  
-Secrets provide a mechanism for supplying sensitive environment varialbes (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets can only be added from the Uffizzi Dashboard (UI). Once added, they cannot be viewed or edited. To update a secret, you should delete the old secret and create a new one.   
-
-!!! warning
-    You will receive an error in the Uffizzi Dashboard if secrets have not been added in the UI but they are referenced in your compose file.   
-
-Secrets are optional for Uffizzi Compose files. 
+Secrets provide a mechanism for supplying sensitive environment varialbes (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets are optional for Uffizzi Compose files. 
 
 ## Volumes  
-// TODO  
+Volumes provide a way to persist data used by contaienrs in a given Uffizzi environment. Volumes will persist for the lifetime of a Uffizzi environment, and they are destroyed when the environment is destroyed. Uffizzi supports both empty volumes and host (i.e. non-empty) volumes. Empty volumes can be either named or anonymous. Host volumes are mounted from a host mount path. 
 
 ## Example Uffizzi Compose file  
+
+This is an example Docker Compose file for Uffizzi CI. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
 
 ``` yaml title="docker-compose.uffizzi.yml"
 # Uffizzi extension
@@ -174,6 +171,9 @@ This section contains example configurations supported by a `continuous_previews
 
 #### **deploy_preview_when_pull_request_is_opened**  
 
+!!! important
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+
 Possible values: `true`, `false`
 
 Uffizzi will setup webhooks on your git repositories to watch for open pull requests (PR). If a PR is opened, Uffizzi will build the commit and deploy a new preview.  
@@ -188,6 +188,9 @@ x-uffizzi:
     This option requires that you have first [connected to your git repository](../../guides/git-integrations). 
 
 #### **delete_preview_when_pull_request_is_closed**  
+
+!!! important
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
 
 Possible values: `true`, `false`  
 
@@ -206,6 +209,9 @@ x-uffizzi:
     This option requires that you have first [connected to your git repository](../guides/git-integrations.md).  
 
 #### **deploy_preview_when_image_tag_is_created**  
+
+!!! important
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
 
 Possible values: `true`, `false`
 
@@ -768,7 +774,7 @@ volumes:
   # Named volume with read-only access
   - shared_db:/var/lib/mysql:ro
 
-  # Host volume. Just specify a path and let Uffizzi create a volume
+  # Host volume  
   - ./db/mysql:/var/lib/mysql
 
   # Host volume with read-only access
@@ -826,6 +832,9 @@ In this example, a preview will be triggered when a new tag is created for `fron
 
 #### **deploy_preview_when_pull_request_is_opened**  
 
+!!! important
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+
 A service-level option or override  
 
 If the global option[`deploy_preview_when_pull_request_is_opened`](#deploy_preview_when_pull_request_is_opened) is also specified, this service-level option overrides the global option.  
@@ -876,6 +885,9 @@ In this example, a preview will not be deployed when a pull request is opened on
     This option requires that you have first [connected to your git repository](../guides/git-integrations.md). 
 
 #### **delete_preview_when_pull_request_is_closed**  
+
+!!! important
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
 
 A service-level option or override  
 
@@ -930,6 +942,9 @@ In this example, `foo` will not be deleted when the pull request is closed becau
     This option requires that you have first [connected to your git repository](../guides/git-integrationsmd).  
 
 #### **deploy_preview_when_image_tag_is_created**  
+
+!!! important
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
 
 A service-level option or override  
 

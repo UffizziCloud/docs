@@ -25,7 +25,6 @@ theme:
     - content.code.annotate
     - navigation.instant
     - navigation.tracking
-    - navigation.tabs
     - navigation.sections
     - navigation.expand
     - navigation.indexes
@@ -106,7 +105,6 @@ nav:
     - UFFIZZI_URL: uffizzi-url.md
   - Guides: 
     - Configure password-protected environments: guides/password-protected.md
-    - Configure GitHub: guides/git-integrations.md
     - Connect to your container registry (Uffizzi CI): guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md
     - Add secrets: guides/secrets.md
@@ -114,8 +112,18 @@ nav:
     - Configure role-based access: guides/rbac.md
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
-  - References:
-    - Uffizzi Compose file reference: references/compose-spec.md
+  - Docker Compose for Uffizzi: 
+    - Compose file reference: references/compose-spec.md
+  - Command-line reference:
+    - uffizzi (base command): references/cli/uffizzi.md
+    - uffizzi config: references/cli/config.md
+    - uffizzi connect: references/cli/connect.md
+    - uffizzi help: references/cli/help.md
+    - uffizzi login: references/cli/login.md
+    - uffizzi logout: references/cli/logout.md
+    - uffizzi preview: references/cli/preview.md
+    - uffizzi project: references/cli/project.md
+    - uffizzi version: references/cli/version.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
   - Use Cases: 

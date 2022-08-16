@@ -516,7 +516,7 @@ entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
     Setting `entrypoint` both overrides any default entrypoint set on the service’s image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default command on the image - meaning that if there’s a `CMD` instruction in the Dockerfile, it is ignored.
 
 
-### <a id="env_file"></a> **env_file**  
+### <a id="env_file"></a>**env_file**  
 
 Add environment variables from a file. Can be a single value or a list.  
 
@@ -537,7 +537,7 @@ Uffizzi expects each line in an env file to be in `NAME=VALUE` format.
 FOO=bar
 ```
 
-### **environment**  
+### <a id="environment"></a>**environment**  
 
 Add environment variables as an array. Any boolean values (true, false, yes, no) need to be enclosed in quotes to ensure they are not converted to True or False by the YML parser.
 
@@ -707,6 +707,7 @@ See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/creat
 
     ``` yaml
     secrets:
+      username: ${{ secrets.PG_USER }}
       password: ${{ secrets.PG_PASSWORD }}
     ```  
 
@@ -1167,7 +1168,7 @@ In the following example, `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names 
 
 #### External CI
 
-Secrets should be stored as secrets using your external CI provider's interface abd referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
+Secrets should be stored as secrets using your external CI provider's interface and referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
 
 See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
 
@@ -1175,6 +1176,7 @@ See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/creat
 
     ``` yaml
     secrets:
+      username: ${{ secrets.PG_USER }}
       password: ${{ secrets.PG_PASSWORD }}
     ```  
 

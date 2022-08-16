@@ -114,7 +114,7 @@ nav:
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
   - References:
-    - Uffizzi Compose file reference: references/compose-spec.md
+    - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
   - Use Cases: 

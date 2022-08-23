@@ -88,7 +88,7 @@ aws iam create-access-key --user-name uffizzi --query "[join(' ', ['Access Key I
 <p>Download the following shell script to configure these webhooks for you:</p>   
 
 ```
-wget http://uffizzi.com/docs/setup/container-registry-integrations/assets/scripts/uffizzi_ecr_webhook_configure.bash
+wget https://raw.githubusercontent.com/UffizziCloud/docs/main/docs/assets/scripts/uffizzi_ecr_webhook_configure.bash
 ```
 
 

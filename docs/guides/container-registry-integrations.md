@@ -112,7 +112,7 @@ bash ./uffizzi_ecr_webhook_configure.bash
 </p>Download the removal script:</p>
 
 ```
-wget https://uffizzi.zendesk.com/hc/article_attachments/4410648688919/uffizzi_ecr_webhook_remove.bash
+wget https://raw.githubusercontent.com/UffizziCloud/docs/main/docs/assets/scripts/uffizzi_ecr_webhook_remove.bash
 ```
 
 <p>Review the contents so you understand what you're executing. Then execute the removal script:</p>

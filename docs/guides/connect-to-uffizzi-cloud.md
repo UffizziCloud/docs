@@ -1,5 +1,5 @@
 **Section 3 of 3**  
-# Connect to Uffizzi Cloud
+# Configure credentials
 
 In this section, we'll create a Uffizzi Cloud account and connect it with your CI provider.
 

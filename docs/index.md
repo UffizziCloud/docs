@@ -30,6 +30,10 @@ Select **Actions**, then select **I understand my workflows, go ahead and enable
 
 That's it! This will kick off a GitHub Actions workflow and post the Preview Environment URL as a comment to your PR issue.  
 
+<details><summary>Click to expand</summary>
+<img alt="gha" src="https://user-images.githubusercontent.com/7218230/191423820-f0a19489-4fc2-41ee-96aa-00a75554a563.png" width="800">  
+</details>
+
 ## What to expect  
 
 The PR will trigger a [GitHub Actions workflow](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-environment.yml) that creates a Uffizzi Preview Environment for the [microservices application](#architecture-of-this-example-app) defined by this repo. The Preview Environment URL will be posted as a comment in your PR issue when the workflow completes, along with a link to the Uffizzi Dashboard where you can view application logs. The Preview Environment and comment is deleted after 1 hour or when the PR is merged/closed.  

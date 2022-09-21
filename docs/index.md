@@ -55,5 +55,5 @@ Each account receives 10,000 preview minutes per month for free. If you exceed t
 
 ## Add Uffizzi for your own application
 
-Now that you know how Uffizzi works, [add Uffizzi for your own application or service ➡️](add-uffizzi-for-your-own-repo.md).
+Now that you know how Uffizzi works, [add Uffizzi for your own application or service ➡️](add-uffizzi-for-your-own-application.md).
 

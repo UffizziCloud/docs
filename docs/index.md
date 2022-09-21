@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Uffizzi is a platform that let's you preview pull requests before merging. Create on-demand Preview Environments for APIs, frontends, backends, databases, and microservices. Each Preview Environment gets a secure HTTPS URL that is continually refreshed when you push new commits. Uffizzi also handles clean up, so your environments last only as long as you need them.  
+Uffizzi is a platform that lets you preview pull requests before merging. Create on-demand Preview Environments for APIs, frontends, backends, databases, and microservices. Each Preview Environment gets a secure HTTPS URL that is continually refreshed when you push new commits. Uffizzi also handles clean up, so your environments last only as long as you need them.  
 
 You can also use Uffizzi to create demo environments, debugging environments, release candidate environments, or to replace your team's shared QA or Staging environment.
 

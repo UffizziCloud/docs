@@ -3,9 +3,9 @@
 
 In this section, we'll discuss how to integrate the Docker Compose template you created in the [previous section](docker-compose-template.md) with your CI pipeline. If you're using Uffizzi CI, there is no extra configuration required. You can skip to the [next section](connect-to-uffizzi-cloud.md).
 
-If you're using an external CI provider, such as GitHub Actions, GitLab, or CircleCI, you will need to add a step to the end of your pipeline that will use Uffizzi to deploy your application to an on-demand test environment. Exact instructions will vary by provider, so the GitHub Actions guide shown below should be used as a general outline if you're using a different provider. 
+If you're using an external CI provider, such as GitHub Actions, GitLab, or CircleCI, you will need to add a step to the end of your pipeline that will use Uffizzi to deploy your application to an on-demand Preview Environment. Exact instructions will vary by provider, so the GitHub Actions guide shown below should be used as a general outline if you're using a different provider. 
 
-You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/example-voting-app/blob/main/.github/workflows/uffizzi-previews.yml).
+You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-previews.yml).
 
 ## <a id="cache-tags"></a>Output tags from your build step
  In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), as highlighted below.
@@ -60,7 +60,7 @@ You can see a complete example workflow using GitHub Actions [here](https://gith
 
 ## <a id="render-compose-from-cache"></a>Render and cache a new compose file
 
-Recall that in the [previous section](docker-compose-template.md), we created a Docker Compose template that replaced our static image name with a variable, denoted in the example as `image: "${APP_IMAGE}"`. In this step, we'll set and export that variable using the `outputs` of the previous job. Additionally, we'll set and export our database secrets that [we configured in the preview section](docker-compose-template.md#secrets). 
+Recall that in the [previous section](docker-compose-template.md), we created a Docker Compose template (`docker-compose.uffizzi.yml`) that replaced our static image name with a variable, denoted in the example as `image: "${APP_IMAGE}"`. In this step, we'll set and export that variable using the `outputs` of the previous job. Additionally, we'll set and export our database secrets that [we configured in the preview section](docker-compose-template.md#secrets). 
 
 Next, we'll use the common utility `envsubst` and shell I/O redirection (`<`, `>`) to render a new compose file that includes the image name literal. Finally, we store this rendered compose file in the [GitHub Actions cache](https://github.com/marketplace/actions/cache).
 

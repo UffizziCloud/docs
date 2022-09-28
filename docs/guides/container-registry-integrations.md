@@ -6,6 +6,15 @@ You can authenticate with the container registries you use in one of two ways, d
 
 If you're using an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, you must add registry credentials as secrets in your provider's interface. 
 
+Uffizzi supports the following container registries:  
+- Amazon ECR  
+- Azure Container Registry (ACR)  
+- Docker Hub  
+- GitHub Container Registry (GHCR)  
+- Google Container Registry (GCR)   
+- Docker Registry (generic)  
+
+
 See the following GitHub Actions example ([full example available here](https://github.com/UffizziCloud/example-voting-app/blob/8f78f9204c8869aca538cb929d49c5b1074da8ff/.github/workflows/uffizzi-previews.yml#L181)) that passes a GitHub Container Registry access token to the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment):  
 
 === "GitHub Actions example"

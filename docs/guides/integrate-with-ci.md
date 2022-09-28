@@ -279,4 +279,4 @@ See [the full documentation for this reusable workflow](https://github.com/Uffiz
 
 ## Next article
 
-[Connect to Uffizzi Cloud](connect-to-uffizzi-cloud.md)
+[Configure credentials](configure-credentials.md)

@@ -99,7 +99,7 @@ markdown_extensions:
 nav:
   - Getting Started:
     - Quickstart: index.md
-    - Add Uffizzi for your own application: add-uffizzi-to-your-own-application.md
+    - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
   - Guides: 
     - Create a Docker Compose template: docker-compose-template.md
     - Integrate with your CI pipeline: integrate-with-ci.md

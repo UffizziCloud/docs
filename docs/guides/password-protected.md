@@ -14,9 +14,9 @@ ___
 ___  
 
 !!! Warning
-    If you enable password protection and are using the GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/6504e1578015e5470858bfe7e7793779fa01b6a4/.github/workflows/reusable.yaml), as described in the [Getting started guide](getting-started.md), you must pass `url-username` and `url-password` as parameters to the reusable workflow, otherwise the deployment confirmation step will fail. You can find an example GitHub Actions job [here](https://github.com/UffizziCloud/example-voting-app/blob/8f78f9204c8869aca538cb929d49c5b1074da8ff/.github/workflows/uffizzi-previews.yml#L179-L180).
+    If you enable password protection and are using the GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/6504e1578015e5470858bfe7e7793779fa01b6a4/.github/workflows/reusable.yaml), as described in the guide titled [Set up Uffizzi for your application](../set-up-uffizzi-for-your-application.md), you must pass `url-username` and `url-password` as parameters to the reusable workflow, otherwise the deployment confirmation step will fail. You can find an example GitHub Actions job [here](https://github.com/UffizziCloud/example-voting-app/blob/8f78f9204c8869aca538cb929d49c5b1074da8ff/.github/workflows/uffizzi-previews.yml#L179-L180).
 
 ## Suggested articles
-* [Set up single sign-on (SSO)](guides/single-sign-on.md)
-* [Configure role-based access (RBAC)](guides/rbac.md)
-* [Check the logs](guides/logs.md)
+* [Set up single sign-on (SSO)](single-sign-on.md)
+* [Configure role-based access (RBAC)](rbac.md)
+* [Check the logs](logs.md)

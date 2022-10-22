@@ -41,7 +41,7 @@ Volumes provide a way to persist data used by contaienrs in a given Uffizzi envi
 
 ## Example Uffizzi Compose file  
 
-This is an example Docker Compose file for Uffizzi CI. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+This is an example Docker Compose file for Uffizzi CI. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 ``` yaml title="docker-compose.uffizzi.yml"
 # Uffizzi extension
@@ -172,7 +172,7 @@ This section contains example configurations supported by a `continuous_previews
 #### **deploy_preview_when_pull_request_is_opened**  
 
 !!! important
-    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 Possible values: `true`, `false`
 
@@ -185,12 +185,12 @@ x-uffizzi:
 ```   
 
 !!! important
-    This option requires that you have first [connected to your git repository](../../guides/git-integrations). 
+    This option requires that you have first connected your git repository in the Uffizzi Dashboard. 
 
 #### **delete_preview_when_pull_request_is_closed**  
 
 !!! important
-    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 Possible values: `true`, `false`  
 
@@ -206,12 +206,12 @@ x-uffizzi:
 ```
 
 !!! important
-    This option requires that you have first [connected to your git repository](../guides/git-integrations.md).  
+    This option requires that you have first connected your git repository in the Uffizzi Dashboard.  
 
 #### **deploy_preview_when_image_tag_is_created**  
 
 !!! important
-    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 Possible values: `true`, `false`
 
@@ -263,7 +263,7 @@ x-uffizzi:
 ```  
 
 !!! important 
-    This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).  
+    This option requires that you have first connected your git repository in the Uffizzi Dashboard.  
 
 ## `services` configuration reference  
 This section contains example configurations supported by a `services` definition.  
@@ -699,9 +699,9 @@ In the following example, `pg_user` and `pg_password` are references to secrets 
 
 #### External CI
 
-Secrets should be stored as secrets using your external CI provider's interface abd referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
+Secrets should be stored as secrets using your external CI provider's interface abd referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../guides/docker-compose-template.md).  
 
-See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
+See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/preview-environments) for example usage.
 
 === "GitHub Actions"
 
@@ -834,7 +834,7 @@ In this example, a preview will be triggered when a new tag is created for `fron
 #### **deploy_preview_when_pull_request_is_opened**  
 
 !!! important
-    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 A service-level option or override  
 
@@ -883,12 +883,12 @@ services:
 In this example, a preview will not be deployed when a pull request is opened on the `example/foo` repository because `deploy_preview_when_pull_request_is_open : false` overrides the global setting.  However, an open pull request on `example/bar` repository will still trigger a new preview.  
 
 !!! important 
-    This option requires that you have first [connected to your git repository](../guides/git-integrations.md). 
+    This option requires that you have first connected your git repository in the Uffizzi Dashboard. 
 
 #### **delete_preview_when_pull_request_is_closed**  
 
 !!! important
-    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 A service-level option or override  
 
@@ -940,12 +940,12 @@ services:
 In this example, `foo` will not be deleted when the pull request is closed because `delete_preview_when_pull_request_is_closed : false` overrides the global setting.  
 
 !!! important
-    This option requires that you have first [connected to your git repository](../guides/git-integrationsmd).  
+    This option requires that you have first connect your git repository in the Uffizzi Dashboard.  
 
 #### **deploy_preview_when_image_tag_is_created**  
 
 !!! important
-    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../docker-compose-template.md) for building a Docker Compose template.  
+    This option is for Uffizzi CI only. If you are using a different CI provider, see the [Getting Started guide](../guides/docker-compose-template.md) for building a Docker Compose template.  
 
 A service-level option or override  
 
@@ -1079,7 +1079,7 @@ services:
 In this example, the preview URL will only be shared to GitHub when a pull request is opened on repository `foo` (but not `bar`).  
 
 !!! important
-    This option requires that you have first [connected to your GitHub account](../guides/git-integrations.md).   
+    This option requires that you have first connected your GitHub account in the Uffizzi Dashboard.   
 
 ## `configs` configuration reference  
 
@@ -1168,9 +1168,9 @@ In the following example, `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names 
 
 #### External CI
 
-Secrets should be stored as secrets using your external CI provider's interface and referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
+Secrets should be stored as secrets using your external CI provider's interface and referenced in your compose file using the [`environment`](compose-spec.md#environment) element with variable substitution. In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../guides/docker-compose-template.md).  
 
-See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
+See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/preview-environments) for example usage.
 
 === "GitHub Actions"
 

@@ -42,7 +42,7 @@ Notice the last two lines tag and push an image whose tag begins with `uffizzi_r
 
 ## Uffizzi Compose File  
 
-Next we'll add a `docker-compose.uffizzi.yml` file to our repository and configure Uffizzi to use it. At the moment, Uffizzi only reads Compose files from GitHub, so I've [cloned my example repository over there](https://github.com/axisofentropy/noaafetch/). (Compose files on GitLab will be supported soon&trade;.) Here's my example Compose file: <https://github.com/axisofentropy/noaafetch/blob/main/docker-compose.uffizzi.yml>  
+Next we'll add a `docker-compose.uffizzi.yml` file to our repository and configure Uffizzi to use it. At the moment, Uffizzi only reads Compose files from GitHub, so I've [cloned my example repository over there](https://gitlab.com/adam.d.vollrath/noaafetch). (Compose files on GitLab will be supported soon&trade;.) Here's my example Compose file: <https://gitlab.com/adam.d.vollrath/noaafetch/-/blob/main/docker-compose.uffizzi.yml>  
 
 This file tells Uffizzi where to fetch the container image, what memory resources it requires, which container receives traffic from the load balancer, and how to create new Previews when new images are pushed. You can read more in [Uffizzi's Compose Reference Guide](../references/compose-spec.md).  
 

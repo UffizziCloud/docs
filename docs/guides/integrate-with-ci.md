@@ -1,7 +1,7 @@
 **Section 2 of 3**
 # Integrate with your CI pipeline
 
-In this section, we'll discuss how to integrate the Docker Compose template you created in the [previous section](docker-compose-template.md) with your CI pipeline. If you're using Uffizzi CI, there is no extra configuration required. You can skip to the [next section](connect-to-uffizzi-cloud.md).
+In this section, we'll discuss how to integrate the Docker Compose template you created in the [previous section](docker-compose-template.md) with your CI pipeline. If you're using Uffizzi CI, there is no extra configuration required. You can skip to the [next section](configure-credentials.md).
 
 If you're using an external CI provider, such as GitHub Actions, GitLab, or CircleCI, you will need to add a step to the end of your pipeline that will use Uffizzi to deploy your application to an on-demand Preview Environment. Exact instructions will vary by provider, so the GitHub Actions guide shown below should be used as a general outline if you're using a different provider. 
 
@@ -145,18 +145,18 @@ Next, we'll use the common utility `envsubst` and shell I/O redirection (`<`, `>
 
 Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
 
-In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your environment's containers as the [`UFFIZZI_URL`](uffizzi-url.md) environment variable.
+In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your environment's containers as the [`UFFIZZI_URL`](../references/uffizzi-environment-variables.md) environment variable.
 
 This workflow takes as input the following **required** parameters:  
 
   * `compose-file-cache-key`  
   * `compose-file-cache-path`  
-  * `username` - Your Uffizzi username (See [next section](connect-to-uffizzi-cloud.md))  
-  * `server` - `https://app.uffizzi.com` or your own Uffizzi API endpoint if you are self-hosting (See [next section](connect-to-uffizzi-cloud.md))  
-  * `project` - A Uffizzi project ID (See [next section](connect-to-uffizzi-cloud.md))  
-  * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](connect-to-uffizzi-cloud.md))
+  * `username` - Your Uffizzi username (See [next section](configure-credentials.md))  
+  * `server` - `https://app.uffizzi.com` or your own Uffizzi API endpoint if you are self-hosting (See [next section](configure-credentials.md))  
+  * `project` - A Uffizzi project ID (See [next section](configure-credentials.md))  
+  * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](configure-credentials.md))
 
-Additionally, this workflow has a few **optional** parameters if you have configured password protection for your Uffizzi test environments. For instructions on configuring passwords, follow [this guide](guides/password-protected.md).  
+Additionally, this workflow has a few **optional** parameters if you have configured password protection for your Uffizzi test environments. For instructions on configuring passwords, follow [this guide](password-protected.md).  
 
   * `url-username` - An HTTP username  
   * `url-password` - An HTTP password stored as a GitHub Actions secret  
@@ -179,7 +179,7 @@ Additionally, this workflow has a few **optional** parameters if you have config
 
     jobs:
       # Build and push app image
-      build-app:
+      build-app:[](http://127.0.0.1:8000/guides/networking/)
         name: Build and Push `app`
       runs-on: ubuntu-latest
       outputs:

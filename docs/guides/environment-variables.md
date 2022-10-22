@@ -6,7 +6,7 @@ You will add secrets in one of two ways, depending on which CI solution you choo
 
 ## External CI  
 
-If you're using an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, environment variables should be stored via your provider's interface and referenced in your [Docker Compose template](../docker-compose-template.md) using the [`environment`](../references/compose-spec.md#environment) element.
+If you're using an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, environment variables should be stored via your provider's interface and referenced in your [Docker Compose template](docker-compose-template.md) using the [`environment`](../references/compose-spec.md#environment) element.
 
 
 !!! note

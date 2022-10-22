@@ -101,9 +101,9 @@ nav:
     - Quickstart: index.md
     - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
   - Guides: 
-    - Create a Docker Compose template: docker-compose-template.md
-    - Integrate with your CI pipeline: integrate-with-ci.md
-    - Configure credentials: configure-credentials.md
+    - Create a Docker Compose template: guides/docker-compose-template.md
+    - Integrate with your CI pipeline: guides/integrate-with-ci.md
+    - Configure credentials: guides/configure-credentials.md
     - Configure password-protected environments: guides/password-protected.md
     - Authenticate with a container registry: guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md

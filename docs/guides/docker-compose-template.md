@@ -3,7 +3,7 @@
 In this section, we'll create a template using [Docker Compose](https://docs.docker.com/compose/compose-file/) that describes our applicaiton configuration. Uffizzi uses Docker Compose as its configuration format because it is relatively simple and widely used by developers.
 
 !!! note
-    Uffizzi supports a subset of the [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). For a full list of supported keywords, see the [Uffizzi Compose file reference](references/compose-spec.md). 
+    Uffizzi supports a subset of the [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). For a full list of supported keywords, see the [Uffizzi Compose file reference](../references/compose-spec.md). 
 
 ## Configure your Compose to dynamically update image definitions
 
@@ -13,7 +13,7 @@ Each time your CI pipeline builds and pushes new images, Uffizzi needs access to
 
 - **External CI** - If you're using an external CI provider such as GitHub Actions or GitLab CI, you can use variable substitution to pass the output from your CI build step, i.e. `image:tag`, to your Compose file `image` definition (See highlighted example below). This solution is discussed in detail in the [next section](integrate-with-ci.md).
 
-- **Uffizzi CI** - If you want to use Uffizzi CI, you can simply define a `build` context that points to your source code repository on GitHub and let Uffizzi handle building and tagging images and updating your Compose. See the [Uffizzi Compose file reference](https://docs.uffizzi.com/references/compose-spec/#build) for `build` and `context` details.
+- **Uffizzi CI** - If you want to use Uffizzi CI, you can simply define a `build` context that points to your source code repository on GitHub and let Uffizzi handle building and tagging images and updating your Compose. See the [Uffizzi Compose file reference](../references/compose-spec.md#build) for `build` and `context` details.
 
 === "External CI"
 
@@ -104,7 +104,7 @@ You may also want to move sensitive information like credentials out of your Doc
 <hr>
 </details>
 
-- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](connect-to-uffizzi-cloud.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](https://docs.uffizzi.com/references/compose-spec/#secrets_1). 
+- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](connect-to-uffizzi-cloud.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](../references/compose-spec.md#secrets_1). 
 
 === "External CI"
 

@@ -747,11 +747,20 @@ volumes:
  share_db:
 ```
 
+#### Uffizzi CI
+
 Requirements for the **host volumes** (aka non-empty volumes):
 
-* Only supported if your compose file is located in the Github repository.
-* As a `source`, you must use a directory that exists in the github repository where your compose file is located.
-* The path for the `source` must be relative and start with  `../` or `./`.
+* As a `source`, you must use a directory that exists in the repository where your compose file is located.
+* The path for the `source` must be relative and start with  `./`.
+
+#### External CI
+
+Requirements for the **host volumes** (aka non-empty volumes):
+
+* As a `source`, you can use a directory or file.
+* The path for the `source` must be relative and can start with  `./` or `../`.
+* Uffizzi compress `source` file or directory to archive. And this archive should be less then 1 Mb.
 
 !!! Note
 
@@ -1205,7 +1214,10 @@ services:
   db:
     image: db
     volumes:
+      - ./some_init_db_data:/var/lib/db_init
+      - /some_data:/var/lib/some_data
       - data-volume:/var/lib/db
+
   backup:
     image: backup-service
     volumes:

@@ -728,6 +728,10 @@ See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/previ
 
 ### <a id="volumes-nested"></a>**volumes**
 
+!!! Important
+
+    Each volume has a size limit of 1MB compressed. Support for larger volumes [is planned](https://github.com/UffizziCloud/roadmap/issues/31).
+
 `volumes` defines mount host paths or named volumes, specified as sub-options to a service.
 
 If the mount is a host path and only used by a single service, it may be declared as part of the service definition instead of the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).

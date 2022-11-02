@@ -37,7 +37,7 @@ Configs allow you to add configuration files to your applications. Configs are o
 Secrets provide a mechanism for supplying sensitive environment varialbes (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets are optional for Uffizzi Compose files. 
 
 ## Volumes  
-Volumes provide a way to persist data used by contaienrs in a given Uffizzi environment. Volumes will persist for the lifetime of a Uffizzi environment, and they are destroyed when the environment is destroyed. Uffizzi supports both empty volumes and host (i.e. non-empty) volumes. Empty volumes can be either named or anonymous. Host volumes are mounted from a host mount path. 
+Volumes provide a way to persist data used by containers in a given Uffizzi environment. Volumes will persist for the lifetime of a Uffizzi environment, and they are destroyed when the environment is destroyed. Uffizzi supports both empty volumes and host (i.e. non-empty) volumes. Empty volumes can be either named or anonymous. Host volumes are mounted from a host mount path. 
 
 ## Example Uffizzi Compose file  
 

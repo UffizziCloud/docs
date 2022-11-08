@@ -38,6 +38,13 @@ That's it! This will kick off a GitHub Actions workflow and post the Preview Env
 
 The PR will trigger a [GitHub Actions workflow](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-preview.yaml) that creates a Uffizzi Preview Environment for the [microservices application](#architecture-of-this-example-app) defined by this repo. The Preview Environment URL will be posted as a comment in your PR issue when the workflow completes, along with a link to the Uffizzi Dashboard where you can view application logs. The Preview Environment and comment is deleted when the PR is merged/closed or after 1 hour (configurable).  
 
+!!! Tip
+    Each Preview Environment is available at a predictable URL which consists of `https://app.uffizzi.com/` appended with the GitHub pull request domain. For example:  
+    `https://app.uffizzi.com/github.com/{account}/{repo}/pull/{pull-request-number}`.  
+
+    You can make requests to specific endpoints by appending a route to the end of the URL. For example:  
+    `https://app.uffizzi.com/github.com/boxyhq/jackson/pull/661/api/health`  
+
 ## How it works  
 
 #### Configuration

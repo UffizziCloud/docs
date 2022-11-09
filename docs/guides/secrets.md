@@ -8,7 +8,7 @@ You can add secrets in one of two ways, depending on which CI solution you choos
 
 If you're using an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, secrets should be stored via your provider's interface and referenced in your compose file using the [`environment`](../references/compose-spec.md#environment) element with variable substitution.  
 
-In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](../docker-compose-template.md).  
+In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](docker-compose-template.md).  
 
 See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
 

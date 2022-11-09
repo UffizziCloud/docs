@@ -115,6 +115,7 @@ nav:
     - Configure role-based access: guides/rbac.md
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
+    - Continuous Previews: guides/continuous-previews.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md

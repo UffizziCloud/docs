@@ -5,7 +5,7 @@ In this section, we'll discuss how to integrate the Docker Compose template you 
 
 If you're using an external CI provider, such as GitHub Actions, GitLab, or CircleCI, you will need to add a step to the end of your pipeline that will use Uffizzi to deploy your application to an on-demand Preview Environment. Exact instructions will vary by provider, so the GitHub Actions guide shown below should be used as a general outline if you're using a different provider. 
 
-You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-previews.yml).
+You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-preview.yaml).
 
 ## <a id="cache-tags"></a>Output tags from your build step
  In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), as highlighted below.
@@ -179,7 +179,7 @@ Additionally, this workflow has a few **optional** parameters if you have config
 
     jobs:
       # Build and push app image
-      build-app:[](http://127.0.0.1:8000/guides/networking/)
+      build-app:
         name: Build and Push `app`
       runs-on: ubuntu-latest
       outputs:

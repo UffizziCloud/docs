@@ -104,7 +104,7 @@ You may also want to move sensitive information like credentials out of your Doc
 <hr>
 </details>
 
-- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](connect-to-uffizzi-cloud.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](../references/compose-spec.md#secrets_1). 
+- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](configure-credentials.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](../references/compose-spec.md#nested-secrets). 
 
 === "External CI"
 

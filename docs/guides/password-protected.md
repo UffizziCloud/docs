@@ -9,7 +9,7 @@ Password protection will now be enabled for all environments belonging to this p
 
 ___
 
-![Enable password protection](../../assets/images/enable-password-protection.png)
+![Enable password protection](../assets/images/enable-password-protection.png)
 
 ___  
 

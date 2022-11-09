@@ -19,7 +19,7 @@ In this section, we'll add our container registry credentials in the Uffizzi Das
 
 <h4>GHCR</h4>
 
-<p>If you use GitHub Container Registry (ghcr.io), you will need to generate a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">Github personal access token</a> with access to the <code>read:packages</code> scope. Once this token is generated, <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">add it as a GitHub repository secret</a>, then pass this value to the <a href="https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml">reusable workflow</a> using the <code>personal-access-token</code> parameter, as described in the <a href="../integrate-with-ci#reusable-workflow">previous section</a>.</p>
+<p>If you use GitHub Container Registry (ghcr.io), you will need to generate a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">GitHub personal access token</a> with access to the <code>read:packages</code> scope. Once this token is generated, <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">add it as a GitHub repository secret</a>, then pass this value to the <a href="https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml">reusable workflow</a> using the <code>personal-access-token</code> parameter, as described in the <a href="../integrate-with-ci#reusable-workflow">previous section</a>.</p>
 
 ``` yaml
     secrets:

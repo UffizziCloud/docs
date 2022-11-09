@@ -25,19 +25,21 @@ The example above is valid Docker Compose syntax because the `docker-compose` CL
 
 
 ## Services  
-As with Docker Compose, a Service is an abstract definition of a computing resource within an application that can be combined with other components. Services are deployed as containers on Uffizzi. A valid `services` definition is required for a Uffizzi Compose file.  
+As with Docker Compose, a [Service](compose-spec.md#services-top-level-element) is an abstract definition of a computing resource within an application that can be combined with other components. Services are deployed as containers on Uffizzi. A valid `services` definition is required for a Uffizzi Compose file.  
 
 ## Ingress  
-Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
+[Ingress](compose-spec.md#x-uffizzi-ingress) exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
 
 ## Configs   
-Configs allow you to add configuration files to your applications. Configs are only supported in Uffizzi CI. If you use a different CI provider, you should use [`env_file`](compose-spec.md#configs-nested). Config files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository. Configs are optional for Uffizzi Compose files.  
+[Configs](compose-spec.md#configs-top-level-element) allow you to add configuration files to your applications. Configs are only supported in Uffizzi CI. If you use a different CI provider, you should use [`env_file`](compose-spec.md#configs-nested). Config files are expected to be in the same git repository as your compose file. All `file` paths are relative from the root of the current repository. Configs are optional for Uffizzi Compose files.  
 
 ## Secrets  
-Secrets provide a mechanism for supplying sensitive environment varialbes (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets are optional for Uffizzi Compose files. 
+[Secrets](compose-spec.md#secrets-top-level-element) provide a mechanism for supplying sensitive environment variables (such as passwords, secret keys, access tokens, etc.) to your application services. The environment variables are defined as name/value pairs and are injected at runtime. Secrets are optional for Uffizzi Compose files. 
 
 ## Volumes  
-Volumes provide a way to persist data used by containers in a given Uffizzi environment. Volumes will persist for the lifetime of a Uffizzi environment, and they are destroyed when the environment is destroyed. Uffizzi supports both empty volumes and host (i.e. non-empty) volumes. Empty volumes can be either named or anonymous. Host volumes are mounted from a host mount path. 
+[Volumes](compose-spec.md#volumes-top-level-element) provide a way to persist data used by containers in a given Uffizzi environment. Volumes will persist for the lifetime of a Uffizzi environment, and they are destroyed when the environment is destroyed. Uffizzi supports both empty volumes and host (i.e. non-empty) volumes. Empty volumes can be either named or anonymous. Host volumes are mounted from a host mount path. 
+
+Each volume has a size limit of 1MB compressed. Support for larger volumes is planned. A volume has read+write access by default. This means that two or more containers that mount the same volume can safely write to it. Alternatively, you may specify `read-only` access.
 
 ## Example Uffizzi Compose file  
 
@@ -123,7 +125,7 @@ x-uffizzi:
     share_to_github: true
 ```
 
-### ingress (required)  
+### <a id="x-uffizzi-ingress"></a>ingress (required)  
 
 Ingress exposes HTTPS routes from outside your preview environment to your application services. Ingress requires a `service` and `port` number as parameters. A valid `ingress` definition is required for a Uffizzi Compose file.
 
@@ -265,7 +267,7 @@ x-uffizzi:
 !!! important 
     This option requires that you have first connected your git repository in the Uffizzi Dashboard.  
 
-## `services` configuration reference  
+## <a id="services-top-level-element"></a>`services` configuration reference  
 This section contains example configurations supported by a `services` definition.  
 
 ### **build**  
@@ -732,6 +734,8 @@ See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/previ
 
     Each volume has a size limit of 1MB compressed. Support for larger volumes [is planned](https://github.com/UffizziCloud/roadmap/issues/31).
 
+    A volume has read+write access by default. This means that two or more containers that mount the same volume can safely write to it. Alternatively, you may specify read-only access using the `:ro` short sytnax or `read-only` long syntax, as described in this section.
+
 `volumes` defines mount host paths or named volumes, specified as sub-options to a service.
 
 If the mount is a host path and only used by a single service, it may be declared as part of the service definition instead of the [top-level `volumes` key](compose-spec.md#volumes-top-level-element).
@@ -1094,9 +1098,18 @@ In this example, the preview URL will only be shared to GitHub when a pull reque
 !!! important
     This option requires that you have first connected your GitHub account in the Uffizzi Dashboard.   
 
-## `configs` configuration reference  
+## <a id="configs-top-level-element"></a>`configs` configuration reference  
 
 The top-level `configs` declaration defines [configs](compose-spec.md#configs-nested) that can be granted to the services in this stack. The source of the config is a `file` (`external` source is currently not supported).
+
+!!! important  
+    `configs` is only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, it is recommended that you pass configuration files using [`env_file`](compose-spec.md#env_file) instead. In this example, an environment variable `LOKI_CONFIG` is stored by your CI provider:  
+    ``` yaml 
+    services:
+      logging:
+        image: mirror.gcr.io/grafana/loki:2.3.0
+        env_file: ${LOKI_CONFIG}  
+    ``` 
 
 === "External CI"
 
@@ -1133,15 +1146,6 @@ The top-level `configs` declaration defines [configs](compose-spec.md#configs-ne
       service: hello-world
       port: 80
     ```  
-
-!!! important  
-    `configs` is only supported in Uffizzi CI. If you use an external CI provider, such as GitHub Actions, GitLab CI, or CircleCI, it is recommended that you pass configuration files using [`env_file`](compose-spec.md#env_file) instead. In this example, an environment variable `LOKI_CONFIG` is stored by your CI provider:  
-    ``` yaml 
-    services:
-      logging:
-        image: mirror.gcr.io/grafana/loki:2.3.0
-        env_file: ${LOKI_CONFIG}  
-    ``` 
 
 &nbsp;  
 
@@ -1208,7 +1212,14 @@ See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/previ
               memory: 500M
     ```  
 
-## <a id="volumes-top-level-element"></a>`volumes` configuration reference
+## <a id="volumes-top-level-element"></a>`volumes` configuration reference  
+
+!!! Important
+
+    Each volume has a size limit of 1MB compressed. Support for larger volumes [is planned](https://github.com/UffizziCloud/roadmap/issues/31).
+
+    A volume has read+write access by default. This means that two or more containers that mount the same volume can safely write to it. Alternatively, you may specify read-only access using the `:ro` short sytnax or `read-only` long syntax, as described [here](compose-spec.md#volumes-nested).
+
 While it is possible to declare [`volumes`](compose-spec.md#volumes-nested) on the fly as part of the service declaration, this section allows you to create named volumes that can be reused across multiple services.
 
 Here’s an example of a two-service setup where a database’s data directory is shared with another service as a volume so that it can be periodically backed up:

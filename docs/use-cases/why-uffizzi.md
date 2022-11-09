@@ -9,7 +9,7 @@ Uffizzi supports *configuration-as-code*. To configure Uffizzi, you provide a `d
 When Continuous Previews are configured, Uffizzi uses webhooks on your git repository or container registry to watch for changes to your application. When it detects a trigger, a new preview is deployed based on the policies you set within your Uffizzi Compose file. For each new preview, Uffizzi generates a secure, shareable URL, and when you push new commits/tag updates, the preview link is automatically updated. This allows you to avoid context switching by staying within a git workflow - you do not have to tell Uffizzi to deploy previews.
 
 ## Uffizzi-Managed Build vs. Bring Your Own Build Options
-Uffizzi supports deploying previews directly from your git repository or from a [container registry](./guides/container-registry-integrations.md).  
+Uffizzi supports deploying previews directly from your git repository or from a [container registry](../guides/container-registry-integrations.md).  
 
 Users have the option for Uffizzi to build your application or you can [augment your existing CI/CD solution with a Continuous Previews (CP) capability](../use-cases/ci-cd-registry.md).  
 

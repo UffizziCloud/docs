@@ -18,8 +18,7 @@ The real power of Uffizzi’s on-demand environments is that they enable Develop
 
 Historically Docker Desktop has been an inner loop tool that organizes individual Developer workflows as they iterate.  With the Uffizzi Extension, Desktop becomes a powerful outer loop tool that enables key stakeholders on your cross-functional team – whether it be peer review, QA, or product– to shift left and provide feedback on in-progress development.
 
-If you'd like to try Uffizzi you can start with a [Live Demo](https://uffizzi.com) on our main site or jump right into the [Docker Desktop Extensions Marketplace](https://www.docker.com/blog/
-docker-extensions-discover-build-integrate-new-tools-into-docker-desktop).
+If you'd like to try Uffizzi you can start with a [Live Demo](https://uffizzi.com) on our main site or jump right into the [Docker Desktop Extensions Marketplace](https://www.docker.com/blog/docker-extensions-discover-build-integrate-new-tools-into-docker-desktop).
  
 ## Relevant Resources
 

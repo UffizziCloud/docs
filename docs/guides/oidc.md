@@ -1,0 +1,5 @@
+# Authenticating via OpenID Connect
+
+_This article is relevant for [GitHub Actions](https://github.com/features/actions) users._
+
+Using the official Uffizzi [preview action](https://github.com/marketplace/actions/preview-environments), GitHub Actions workflows authenticate with Uffizzi Cloud via OpenID Connect (OIDC) JSON Web Tokens (JWT). Every time a job runs, GitHub's OIDC Provider automatically generates an OIDC token, which is signed by GitHub to verify the workflow runner's identity. When this token is passed to the preview action, Uffizzi verifies the signature on the token to confirm that the request came from GitHub and the identity of the requester (i.e., the GitHub username). No other credentials are needed by Uffizzi to authenticate a request. This point is worth emphasizing: you do not need a password to authenticate with Uffizzi. In fact, **when the preview workflow runs for the first time, Uffizzi will automatically create an account from the metadata of the OIDC JWT**, so it's not even necessary to first create an account at _uffizzi.com_ before seeing your previews.

@@ -101,9 +101,13 @@ markdown_extensions:
 # Page tree
 nav:
   - Getting Started:
-    - Quickstart: index.md
+    - Overview: index.md
+    - Quickstart using GitHub Actions: quickstart-gha.md
+    - Quickstart using Uffizzi CI: quickstart-uffizzi-ci.md
     - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
   - Guides: 
+    - Set up your account: guides/set-up-your-account.md
+    - Authenticating via OpenID Connect: guides/oidc.md
     - Create a Docker Compose template: guides/docker-compose-template.md
     - Integrate with your CI pipeline: guides/integrate-with-ci.md
     - Configure credentials: guides/configure-credentials.md

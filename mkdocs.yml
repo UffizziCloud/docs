@@ -102,8 +102,6 @@ markdown_extensions:
 nav:
   - Getting Started:
     - Overview: index.md
-    - Quickstart using GitHub Actions: quickstart-gha.md
-    - Quickstart using Uffizzi CI: quickstart-uffizzi-ci.md
     - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
   - Guides: 
     - Set up your account: guides/set-up-your-account.md

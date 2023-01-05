@@ -11,7 +11,7 @@ To set up Uffizzi CI, login to the [Uffizzi Dashboard](https://app.uffizzi.com/s
 
 Next, choose which repositories you wish to preview, then select **Install & Authorize**. Uffizzi requests only the minimum permissions it needs, which includes read access to your code and write access to pull request issues for posting comments. You can manage the GitHub App permissions from the **Developer Settings** page in GitHub.  
 
-Once the Uffizzi Cloud GitHub App is installed and has access to your repository, follow the [Quickstart for Uffizzi CI](quickstart-uffizzi-ci.md) guide to complete the set up process.  
+Once the Uffizzi Cloud GitHub App is installed and has access to your repository, follow the [Quickstart for Uffizzi CI](../quickstart-uffizzi-ci.md) guide to complete the set up process.  
 
 &nbsp;  
 <img src="../../assets/images/authorize-uffizzi.webp" width="600">

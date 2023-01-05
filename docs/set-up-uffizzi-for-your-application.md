@@ -1,5 +1,6 @@
+# Set up Uffizzi for your application
 !!! Tip
-    If this is your first time using Uffizzi, we recommend following the [Quickstart guide](index.md#quickstart--1-minute) to see how Uffizzi is configured with an example application.
+    If this is your first time using Uffizzi, we recommend following the [Quickstart (GitHub Actions)](quickstart-gha.md) or [Quickstart (Uffizzi CI)](quickstart-gha.md) to see how Uffizzi is configured with an example application.
 
 Uffizzi is usually added to the end of your CI pipeline after images have been built and pushed to a container registry. Alternatively, you can use Uffizzi CI if you want to let Uffizzi build and store images for you. In either case, Uffizzi will deploy your application images and manage the environments for you. This guide will walk you through the following steps:
 

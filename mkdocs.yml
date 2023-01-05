@@ -100,9 +100,11 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Getting Started:
-    - Overview: index.md
-    - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
+  - Overview:
+    - What is Uffizzi?: index.md
+    - Quickstart (GitHub Actions): quickstart-gha.md
+    - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
+    - Set up previews for your application: set-up-uffizzi-for-your-application.md
   - Guides: 
     - Set up your account: guides/set-up-your-account.md
     - Authenticating via OpenID Connect: guides/oidc.md

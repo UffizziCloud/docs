@@ -20,8 +20,8 @@ If a Member's Organization has enabled SSO for their account, then a Member must
 
 ## Roles 
 
-### Admin  
-Admins can do all and see all within an Account. Admins can view and edit every Project and previews. This is the highest level of permission for an account. Uniquely, Admins control the RBAC, Team Members, Projects, integrations, settings and billing. An Account must have at least one Admin.
+### Owner  
+Owners can do all and see all within an Account. Owners can view and edit every Project and previews. This is the highest level of permission for an account. Uniquely, Owners control the RBAC, Team creation/deletion, adding Team Members, Projects, integrations, settings and billing. An Account must have at least one Owner.
 
 ### Developer  
 Developers can view, create, and edit Projects. They cannot edit Account-level settings like Billing, SSO, Team Members or integrations. A Developer can create Projects and be invited to Projects.  

@@ -8,11 +8,11 @@ Accounts are associated with a customer billing account, typically the customer'
 
 ## Projects  
 
-Projects fall within accounts and represent a development effort such as an application. Projects can be created and edited by [Admins](#admin) and [Developers](#developer).  
+Projects fall within accounts and represent a development effort such as an application. Projects can be created and edited by [Owners](#owner) and [Developers](#developer).  
 
 ## Team Members
 
-Members are individual users that are associated with an Account and have an assigned access role of [Admin](#admin), [Developer](#developer), or [View Only](#view-only). The Member who creates an Account is by default the Admin of that account. An account must always have at least one Admin.
+Members are individual users that are associated with an Account and have an assigned access role of [Owner](#owner), [Developer](#developer), or [View Only](#view-only). The Member who creates an Account is by default the Admin of that account. An account must always have at least one Admin.
 
 ## Single Sign-On (SSO)
 
@@ -27,4 +27,4 @@ Owners can do all and see all within an Account. Owners can view and edit every 
 Developers can view, create, and edit Projects. They cannot edit Account-level settings like Billing, SSO, Team Members or integrations. A Developer can create Projects and be invited to Projects.  
 
 ### View Only    
-View Only users can see every Project and Admin Settings but cannot edit anything within Uffizzi.
+View Only users can see every Project and Owner Settings but cannot edit anything within Uffizzi.

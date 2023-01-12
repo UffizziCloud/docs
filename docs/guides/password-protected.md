@@ -24,7 +24,7 @@ Password protection will now be enabled for all environments belonging to this p
 2. Enter a username and password, then select **Save**.
 3. Store credentials as GitHub Actions secrets.  
   &nbsp;  
-  In GitHub, navigate to your repository **Settings** > **Secrets and variables** > **Actions** > **New repository secret**. Add a secret name and value, then select **Add secret**.
+  In GitHub, navigate to your repository. Then select **Settings** > **Secrets and variables** > **Actions** >  **Secrets** (tab) > **New repository secret**. (_Be sure you add a new repository **secret** from the **Secrets** tab, not a new repository **variable** from the **Variables** tab_). Add a secret name and value, then select **Add secret**.       
   <details><summary>Click to expand</summary>
   <img src="../../assets/images/github-actions-secrets.webp">
   <img src="../../assets/images/add-secret.webp">
@@ -42,7 +42,7 @@ Password protection will now be enabled for all environments belonging to this p
     with:
       ...
     secrets:
-      url-username: admin
+      url-username: ${{ secrets.URL_USERNAME }}
       url-password: ${{ secrets.URL_PASSWORD }}
     permissions:
       ...

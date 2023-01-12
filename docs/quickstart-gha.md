@@ -1,7 +1,7 @@
 # Quickstart (GitHub Actions)
 
 !!! Important
-    This quickstart guide uses [GitHub Actions](https://github.com/features/actions) as a fast and free way to demonstrate Uffizzi capabilities, but Uffizzi will work with any CI platform. If you don't have a CI provider, you can use [Uffizzi CI](quickstart-uffizzi-ci.md), a free build service that integrates with your GitHub repository.
+    This quickstart guide uses [GitHub Actions](https://github.com/features/actions) as a fast way to demonstrate Uffizzi capabilities, but Uffizzi will work with any CI platform. If you don't have a CI provider, you can use [Uffizzi CI](quickstart-uffizzi-ci.md), a free build service that integrates with your GitHub repository.
 
 Get started using Uffizzi Preview Environments in 3 simple steps...
 

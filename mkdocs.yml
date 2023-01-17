@@ -24,6 +24,8 @@ theme:
   features:
     - content.code.annotate
     - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.tracking
     - navigation.sections
     - navigation.expand
@@ -48,13 +50,14 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/Uffizzi_
     - icon: fontawesome/brands/docker
-      link: https://hub.docker.com/orgs/uffizzicloud
+      link: https://hub.docker.com/orgs/uffizzi
     - icon: fontawesome/brands/github
       link: https://github.com/UffizziCloud
   generator: true
   analytics:
     provider: google
     property: UA-157967585-1
+  homepage: https://www.uffizzi.com
 
 # Extensions
 markdown_extensions:
@@ -100,12 +103,14 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Overview:
+  - Home:
     - What is Uffizzi?: index.md
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up previews for your application: set-up-uffizzi-for-your-application.md
   - Guides: 
+    - Quickstart (GitHub Actions): quickstart-gha.md
+    - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up your account: guides/set-up-your-account.md
     - Authenticating via OpenID Connect: guides/oidc.md
     - Create a Docker Compose template: guides/docker-compose-template.md

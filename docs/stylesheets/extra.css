@@ -1,33 +1,33 @@
 :root {
 
-    /* Primary color shades */
-    --md-primary-fg-color: black;
-    --md-primary-bg-color: hsla(0, 0%, 100%, 1);
-    --md-primary-bg-color--light: hsla(0, 0%, 100%, 0.7);
-    --md-primary-fg-color--dark: rgb(128, 170, 181);
-    --md-text-link-color: hsla(231, 48%, 48%, 1);
+  /* Primary color shades */
+  --md-primary-fg-color: black;
+  --md-primary-bg-color: hsla(0, 0%, 100%, 1);
+  --md-primary-bg-color--light: hsla(0, 0%, 100%, 0.7);
+  --md-primary-fg-color--dark: rgb(253, 216, 48);
+  --md-text-link-color: hsla(231, 48%, 48%, 1);
 
-    /* Accent color shades */
-    --md-accent-fg-color: rgb(152, 200, 211);
-    --md-accent-fg-color--transparent: hsla(189, 100%, 37%, 0.1);
-    --md-accent-bg-color: hsla(0, 0%, 100%, 1);
-    --md-accent-bg-color--light: hsla(0, 0%, 100%, 0.7);
+  /* Accent color shades */
+  --md-accent-fg-color: rgb(100, 100, 100);
+  --md-accent-fg-color--transparent: hsla(189, 100%, 37%, 0.1);
+  --md-accent-bg-color: hsla(0, 0%, 100%, 1);
+  --md-accent-bg-color--light: hsla(0, 0%, 100%, 0.7);
 
-  }
-  
-  :root > * {
-  
-    /* Code block color shades */
-    --md-code-bg-color: hsla(0, 0%, 96%, 1);
-    --md-code-fg-color: hsla(200, 18%, 26%, 1);
+}
 
-    /* Footer */
-    --md-footer-bg-color: black;
-    --md-footer-bg-color--dark: hsla(0, 0%, 0%, 0.32);
-    --md-footer-fg-color: hsla(0, 0%, 100%, 1);
-    --md-footer-fg-color--light: hsla(0, 0%, 100%, 0.7);
-    --md-footer-fg-color--lighter: hsla(0, 0%, 100%, 0.3);
+:root>* {
 
-    /* Link color */
-    --md-typeset-a-color: rgb(125, 173, 190);
-  }
+  /* Code block color shades */
+  --md-code-bg-color: hsla(0, 0%, 96%, 1);
+  --md-code-fg-color: hsla(200, 18%, 26%, 1);
+
+  /* Footer */
+  --md-footer-bg-color: black;
+  --md-footer-bg-color--dark: hsla(0, 0%, 0%, 0.32);
+  --md-footer-fg-color: hsla(0, 0%, 100%, 1);
+  --md-footer-fg-color--light: hsla(0, 0%, 100%, 0.7);
+  --md-footer-fg-color--lighter: hsla(0, 0%, 100%, 0.3);
+
+  /* Link color */
+  --md-typeset-a-color: rgb(92, 127, 209);
+}

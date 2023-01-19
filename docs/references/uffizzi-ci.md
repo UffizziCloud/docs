@@ -85,7 +85,7 @@ For example, if you configure Uffizzi CI with a Compose file from your <code>mai
 - `{topic_branch}` ← `main` or  
 - `{topic_branch}` ← `{topic_branch}`
 
-Note that this design is changing with the next release of Uffizzi CI.  
+Note that this design is changing with the next release of Uffizzi CI, such that all pull requests will be previewed for a given project.  
 
 !!! Important
     If the Compose file in a base and head branches do not match for a given pull request, Uffizzi will use the Compose file in the head branch (i.e. the merging branch) as the preview configuration.  

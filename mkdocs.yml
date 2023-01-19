@@ -11,7 +11,7 @@ repo_name: UffizziCloud/docs
 edit_uri: edit/main/docs/
 
 # Copyright
-copyright: Copyright &copy; 2022 Uffizzi
+copyright: Copyright &copy; 2023 Uffizzi
 
 # Styling
 extra_css:
@@ -127,6 +127,7 @@ nav:
     - Continuous Previews: guides/continuous-previews.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md
+    - Uffizzi CI: references/uffizzi-ci.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
   - Use Cases: 

@@ -3,6 +3,8 @@
 Add the **Demo on Uffizzi** button to your repository's `README.md` to give visitors a fast way to interact with your application in a live demo environment. This button requires **no configuration** by your users, and it **does not** require them to have a Uffizzi account.
 
 ![Demo](https://cdn.uffizzi.com/demo-button.svg)  
+
+You can see an example of this button working [here on a fork Logto](https://github.com/gadkins/logto/tree/uffizzi-live-demo-button#launch-logto).
  
 !!! Note
     The **Demo on Uffizzi** button is currently available only to Uffizzi [Open Source Plan](https://www.uffizzi.com/pricing) customers—i.e. it will not work on any arbitrary repo. Open source maintainers can [contact us on Slack](https://join.slack.com/t/uffizzi/shared_invite/zt-ffr4o3x0-J~0yVT6qgFV~wmGm19Ux9A) to configure this for their projects.

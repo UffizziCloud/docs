@@ -11,20 +11,10 @@ You can see an example of this button working [here on a fork Logto](https://git
 
 ## How it works  
 
-When you add the following markdown to your `README.md`, Uffizzi will check to see if your project has a demo configuration, as noted above. When visitors click on this link, Uffizzi uses the HTTP `referer` header to determine the origin of the request. If the request comes from your GitHub repository, the visitor will get a demo of your project, as defined by your demo configuration.
+For qualifying projects, Uffizzi creates a public route of the the form `https://app.uffizzi.com/demo/github.com/<ACCOUNT>/<PROJECT>`. When a user visits this endpoint (by clicking on the demo button), Uffizzi checks that a demo Compose file (`docker-compose.demo.uffizzi.yml`) is configured for the project. If it exists, Uffizzi will deploy this configuration to a demo environment.
 
 ```
-[![Demo](https://cdn.uffizzi.com/demo-button.svg)](https://app.uffizzi.com/demo)
+[![Demo](https://cdn.uffizzi.com/demo-button.svg)](https://app.uffizzi.com/demo/github.com/<ACCOUNT>/<PROJECT>)
 ```
-&nbsp;  
-!!! Important
-    **Browser Support**
-    
-    The **Demo on Uffizzi** button works in Chrome and Firefox browsers by default; however, Safari browsers are configured with a [stricter privacy policy by default](https://webkit.org/blog/9661/preventing-tracking-prevention-tracking/), so demos will not work for Safari users until they disable this restriction. To enable demos, go to **Safari** > **Preferences** > **Privacy**, then uncheck **Prevent cross-site tracking**.
-
-&nbsp;  
-![Safari Preferences](../assets/images/safari-preferences.webp)  
-![Safari Preferences](../assets/images/safari-preferences-privacy.webp)  
-
 
 

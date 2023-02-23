@@ -68,7 +68,7 @@ Now we will create a new file in our repository `/uffizzi/nginx/nginx.conf` that
 ```json title="nginx.conf"
 
 events {
-  worker_connections  4096;  ## Default: 1024
+  worker_connections  4096;
 }
 
 http {

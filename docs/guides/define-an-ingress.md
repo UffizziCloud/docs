@@ -19,7 +19,7 @@ services:
 
 ## Expose multiple routes
 
-Some applications may want to expose different services at different routes, for example, `/` and `/console`. To do this, we can use `nginx` to map requests for specific ports to their target containers. We'll first add an `nginx` service to our Docker Compose file, then define the routes in an `nginx.conf` file.
+Some applications may want to expose multiple routes, for example, `/` and `/console`. To do this, we can use `nginx` to map requests for specific ports to their target containers. We'll first add an `nginx` service to our Docker Compose file, then define the routes in an `nginx.conf` file.
 
 ```yaml title="docker-compose.uffizzi.multiple-routes.yml"
 x-uffizzi:

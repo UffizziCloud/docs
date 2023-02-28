@@ -6,35 +6,13 @@ In this section, we'll create a template using [Docker Compose](https://docs.doc
     Uffizzi supports a subset of the [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). For a full list of supported keywords, see the [Uffizzi Compose file reference](../references/compose-spec.md). 
 
 ## Configure your Compose to dynamically update image definitions
-
 The Uffizzi environment creation step typically executes at the end of a CI pipeline after a series of steps that are triggered by an event, such as a pull request or new commit. If you don't have an existing CI solution, Uffizzi CI can build your application from source and store your container images for you (Note: Your source code must be stored in a GitHub repository to use Uffizzi CI). Alternatively, if you're using an external CI service, such as GitHub Actions or CircleCI, you will need to tell Uffizzi where your images are stored and how to access them.
 
 Each time your CI pipeline builds and pushes new images, Uffizzi needs access to them. This means that we need to dynamically update our compose file `service` definitions with the new image names and tags each time our pipeline runs. To do this, we'll follow one of two methods, depending on which CI solution you choose:
 
-- **External CI** - If you're using an external CI provider such as GitHub Actions or GitLab CI, you can use variable substitution to pass the output from your CI build step, i.e. `image:tag`, to your Compose file `image` definition (See highlighted example below). This solution is discussed in detail in the [next section](integrate-with-ci.md).
-
 - **Uffizzi CI** - If you want to use Uffizzi CI, you can simply define a `build` context that points to your source code repository on GitHub and let Uffizzi handle building and tagging images and updating your Compose. See the [Uffizzi Compose file reference](../references/compose-spec.md#build) for `build` and `context` details.
 
-=== "External CI"
-
-    ``` yaml hl_lines="3" title="docker-compose.uffizzi.yml"
-    services:
-      app:
-        image: "${APP_IMAGE}"    # Output of build step stored as environment variable
-        environment:
-          PGUSER: "${PGUSER}"
-          PGPASSWORD: "${PGPASSWORD}"
-        deploy:
-          resources:
-            limits:
-              memory: 250M
-
-      db:
-        image: postgres:9.6
-        environment:
-          POSTGRES_USER: "${PGUSER}"
-          POSTGRES_PASSWORD: "${PGPASSWORD}"
-    ```
+- **External CI** - If you're using an external CI provider such as GitHub Actions or GitLab CI, you can use variable substitution to pass the output from your CI build step, i.e. `image:tag`, to your Compose file `image` definition (See highlighted example below). This solution is discussed in detail in the [next section](integrate-with-ci.md).
 
 === "Uffizzi CI"
 
@@ -57,6 +35,27 @@ Each time your CI pipeline builds and pushes new images, Uffizzi needs access to
         environment:
           POSTGRES_USER: "postgres"
           POSTGRES_PASSWORD: "postgres"
+    ```
+
+=== "External CI"
+
+    ``` yaml hl_lines="3" title="docker-compose.uffizzi.yml"
+    services:
+      app:
+        image: "${APP_IMAGE}"    # Output of build step stored as environment variable
+        environment:
+          PGUSER: "${PGUSER}"
+          PGPASSWORD: "${PGPASSWORD}"
+        deploy:
+          resources:
+            limits:
+              memory: 250M
+
+      db:
+        image: postgres:9.6
+        environment:
+          POSTGRES_USER: "${PGUSER}"
+          POSTGRES_PASSWORD: "${PGPASSWORD}"
     ```
 
 ## Define an Ingress for your application
@@ -88,6 +87,10 @@ services:
       POSTGRES_USER: "${PGUSER}"
       POSTGRES_PASSWORD: "${PGPASSWORD}"
 ```
+&nbsp;  
+
+!!! Tip 
+    If you need to expose multiple public routes for your application, see this article [Exposing multiple routes](expose-multiple-routes.md).
 
 ## <a id="secrets"></a>Add secrets in your CI platform (optional)
 

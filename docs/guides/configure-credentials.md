@@ -3,6 +3,48 @@
 
 In this section, we'll create a Uffizzi Cloud account and connect it with your CI provider.
 
+## Uffizzi CI
+
+If you're using Uffizzi CI, you will need to link to the Docker Compose template in your GitHub repository from the Uffizzi Dashboard. If you haven't already done so, sign up at [Uffizzi Cloud](https://app.uffizzi.com/sign_up), and then follow the steps to set up your account.
+
+<details><summary>1. Connect to GitHub and your container registries</summary>
+<p>In <b>Step 3 of 4</b> of the account setup guide, you are asked to connect to various external services. Select <b>Sign in to GitHub</b> to install the Uffizzi app in your GitHub account, then grant Uffizzi access to the repositories you want to deploy. If the Docker Compose template you created in <a href="../docker-compose-template">Section 1</a> references images stored in a private container registry, add those credentials in this step, as indicated in the screenshot below:
+</p>
+<img src="../../assets/images/configure-repositories.png">  
+<hr>
+<p>If you need to make changes to your GitHub credentials in the Uffizzi Dashboard, navigate to <b>Settings</b> > <b>Integrations</b> > <b>GitHub</b> > <b>CONFIGURE/DISCONNECT</b>.</p>
+<img src="../../assets/images/settings-integrations-github.png">  
+<hr>
+<p>Similarly, you can manage the Uffizzi app installation from GitHub by navigating to <b>Settings</b> > <b>Applications</b> > <b>Uffizzi Cloud</b> > <b>Configure</b></p>
+<img src="../../assets/images/github-apps-configure.png">
+<hr>
+</details>
+
+<details><summary>2. Add application secrets</summary>
+<p>If your compose file includes [application secrets](https://docs.uffizzi.com/references/compose-spec/#secrets), such as database credentials, you can add them in the Uffizzi Dashboard. Navigate to your project, then select <b>Specs</b> > <b>Secrets</b> > <b>NEW SECRET</b>. This will open a modal, where you can input your secrets as <code>NAME=VALUE</code> pairs. Be sure to add one secret per line, separatedy by <code>=</code> with no white spaces.
+</p>
+<img src="../../assets/images/settings-secrets.png">  
+<hr>
+<img src="../../assets/images/add-secrets.png">  
+<hr>
+<p>Once the secrets are saved, you will not be able to view or edit their values. To make changes to a secret, first delete the old secret, then create a new one.
+</details>
+
+<details><summary>3. Link to your Docker Compose template</summary>
+<p>In this final step, we'll link to our Docker Compose template that's stored in our GitHub repository. To do this, navigate to your project, then select <b>Specs</b> > <b>Compose</b> > <b>NEW COMPOSE</b>. Next, select the repository, branch (typically this is the branch you open pull requests against), and name of the compose file. Finally, select <b>VALIDATE & SAVE</b>.
+</p>
+<img src="../../assets/images/link-to-compose-file.png"> 
+<hr>
+<p>Note, if you did not add your secrets as described in the previous step, you will see a validation error with a link to add your secretes.</p>
+<img src="../../assets/images/compose-validation-error-secret-not-found.png">  
+<hr>
+<p>Once your compose file has been successfully added, you will see it in the Uffizzi Dashboard with a link to its source on GitHub. Any changes you make to this compose file on GitHub will be synced in the Uffizzi Dashboard.</p>
+<img src="../../assets/images/linked-compose-file.png">
+<hr>
+</details>
+
+That's it! Uffizzi is now configured with your Docker Compose template. To test your setup, you can manually deploy your primary branch to an on-demand test environment using the **NEW PREVIEW** button in the Uffizzi Dashboard, or try opening a pull request on GitHub to deploy a feature branch.
+
 ## Connect to Uffizzi Cloud from an external CI provider
 
 In the [previous section](integrate-with-ci.md), we added a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) to our pipeline that takes several inputs, including:
@@ -151,52 +193,6 @@ In this section, we'll add our container registry credentials in the Uffizzi Das
 </details>
 
 That's it! Your pipeline is now configured to use Uffizzi. To test your pipeline, try opening a new pull request.
-
-## Uffizzi CI
-
-If you're using Uffizzi CI, you will need to link to the Docker Compose template in your GitHub repository from the Uffizzi Dashboard. If you haven't already done so, sign up at [Uffizzi Cloud](https://app.uffizzi.com/sign_up), and then follow the steps to set up your account.
-
-<details><summary>1. Connect to GitHub and your container registries</summary>
-<p>In <b>Step 3 of 4</b> of the account setup guide, you are asked to connect to various external services. Select <b>Sign in to GitHub</b> to install the Uffizzi app in your GitHub account, then grant Uffizzi access to the repositories you want to deploy. If the Docker Compose template you created in <a href="../docker-compose-template">Section 1</a> references images stored in a private container registry, add those credentials in this step, as indicated in the screenshot below:
-</p>
-<img src="../../assets/images/configure-repositories.png">  
-<hr>
-<p>If you need to make changes to your GitHub credentials in the Uffizzi Dashboard, navigate to <b>Settings</b> > <b>Integrations</b> > <b>GitHub</b> > <b>CONFIGURE/DISCONNECT</b>.</p>
-<img src="../../assets/images/settings-integrations-github.png">  
-<hr>
-<p>Similarly, you can manage the Uffizzi app installation from GitHub by navigating to <b>Settings</b> > <b>Applications</b> > <b>Uffizzi Cloud</b> > <b>Configure</b></p>
-<img src="../../assets/images/github-apps-configure.png">
-<hr>
-</details>
-
-<details><summary>2. Add application secrets</summary>
-<p>If your compose file includes [application secrets](https://docs.uffizzi.com/references/compose-spec/#secrets), such as database credentials, you can add them in the Uffizzi Dashboard. Navigate to your project, then select <b>Specs</b> > <b>Secrets</b> > <b>NEW SECRET</b>. This will open a modal, where you can input your secrets as <code>NAME=VALUE</code> pairs. Be sure to add one secret per line, separatedy by <code>=</code> with no white spaces.
-</p>
-<img src="../../assets/images/project-list.png">  
-<hr>
-<img src="../../assets/images/add-secret.png">  
-<hr>
-<img src="../../assets/images/secret-name-value.png">
-<hr>
-<p>Once the secrets are saved, you will not be able to view or edit their values. To make changes to a secret, first delete the old secret, then create a new one. To delete a secret, hover over the secret in the list view, then select the delete icon.</p>
-<img src="../../assets/images/delete-secret.png">
-<hr>
-</details>
-
-<details><summary>3. Link to your Docker Compose template</summary>
-<p>In this final step, we'll link to our Docker Compose template that's stored in our GitHub repository. To do this, navigate to your project, then select <b>Specs</b> > <b>Compose</b> > <b>NEW COMPOSE</b>. Next, select the repository, branch (typically this is the branch you open pull requests against), and name of the compose file. Finally, select <b>VALIDATE & SAVE</b>.
-</p>
-<img src="../../assets/images/link-to-compose-file.png"> 
-<hr>
-<p>Note, if you did not add your secrets as described in the previous step, you will see a validation error with a link to add your secretes.</p>
-<img src="../../assets/images/compose-validation-error-secret-not-found.png">  
-<hr>
-<p>Once your compose file has been successfully added, you will see it in the Uffizzi Dashboard with a link to its source on GitHub. Any changes you make to this compose file on GitHub will be synced in the Uffizzi Dashboard.</p>
-<img src="../../assets/images/linked-compose-file.png">
-<hr>
-</details>
-
-That's it! Uffizzi is now configured with your Docker Compose template. To test your setup, you can manually deploy your primary branch to an on-demand test environment using the **NEW PREVIEW** button in the Uffizzi Dashboard, or try opening a pull request on GitHub to deploy a feature branch.
 
 ## Suggested articles
 

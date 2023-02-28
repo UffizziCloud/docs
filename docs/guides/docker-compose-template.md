@@ -37,7 +37,7 @@ Each time your CI pipeline builds and pushes new images, Uffizzi needs access to
           POSTGRES_PASSWORD: "postgres"
     ```
 
-=== "External CI"
+=== "External CI (e.g. GitHub Action)"
 
     ``` yaml hl_lines="3" title="docker-compose.uffizzi.yml"
     services:
@@ -109,33 +109,6 @@ You may also want to move sensitive information like credentials out of your Doc
 
 - **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](configure-credentials.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](../references/compose-spec.md#nested-secrets). 
 
-=== "External CI"
-
-    ``` yaml hl_lines="20-22" title="docker-compose.uffizzi.yml"
-    # This block tells Uffizzi which service should receive HTTPS traffic
-    x-uffizzi:
-      ingress:
-        service: app
-        port: 80
-
-    services:
-      app:
-        image: "${APP_IMAGE}"    # Output of build step stored as environment variable
-        environment:
-          PGUSER: "${PGUSER}"
-          PGPASSWORD: "${PGPASSWORD}"
-        deploy:
-          resources:
-            limits:
-              memory: 250M
-
-      db:
-        image: postgres:9.6
-        environment:
-          POSTGRES_USER: "${PGUSER}"
-          POSTGRES_PASSWORD: "${PGPASSWORD}"
-    ```
-
 === "Uffizzi CI"
 
     ``` yaml hl_lines="20-32" title="docker-compose.uffizzi.yml"
@@ -171,6 +144,33 @@ You may also want to move sensitive information like credentials out of your Doc
         pg_password:
           external: true
           name: "POSTGRES_PASSWORD"
+    ```
+
+=== "External CI (e.g. GitHub Actions)"
+
+    ``` yaml hl_lines="20-22" title="docker-compose.uffizzi.yml"
+    # This block tells Uffizzi which service should receive HTTPS traffic
+    x-uffizzi:
+      ingress:
+        service: app
+        port: 80
+
+    services:
+      app:
+        image: "${APP_IMAGE}"    # Output of build step stored as environment variable
+        environment:
+          PGUSER: "${PGUSER}"
+          PGPASSWORD: "${PGPASSWORD}"
+        deploy:
+          resources:
+            limits:
+              memory: 250M
+
+      db:
+        image: postgres:9.6
+        environment:
+          POSTGRES_USER: "${PGUSER}"
+          POSTGRES_PASSWORD: "${PGPASSWORD}"
     ```
 
 ## Commit your template to your repository

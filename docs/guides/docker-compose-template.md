@@ -96,6 +96,8 @@ services:
 
 You may also want to move sensitive information like credentials out of your Docker Compose file before commiting it to a remote repository. Most CI providers offer a way to store secrets and then reference them in the steps of your pipeline. To do this, we'll follow one of two methods, depending on which CI solution you choose:
 
+- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](configure-credentials.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](../references/compose-spec.md#nested-secrets). 
+
 - **External CI** - If you're using an external CI provider, you can store the secrets using your provider's interface and then reference them via variable substitution within an `environment` definition (See highlighted example below). This solution is discussed in detail in the [next section](integrate-with-ci.md).
 
 <details><summary>GitHub Actions example</summary>
@@ -106,8 +108,6 @@ You may also want to move sensitive information like credentials out of your Doc
 <img src="../../assets/images/add-database-secrets.png">
 <hr>
 </details>
-
-- **Uffizzi CI** - If you want to use Uffizzi CI, you can create read-only secrets in the Uffizzi Dashboard web interface (this process is described in detail in [Section 3](configure-credentials.md)), then reference them using the `external` keyword, as shown below. For details on `secrets` and `external` configuration options, see the [Uffizzi Compose file reference](../references/compose-spec.md#nested-secrets). 
 
 === "Uffizzi CI"
 

@@ -33,17 +33,17 @@ If you're using Uffizzi CI, you will need to link to the Docker Compose template
 <details><summary>3. Link to your Docker Compose template</summary>
 <p>In this final step, we'll link to our Docker Compose template that's stored in our GitHub repository. To do this, navigate to your project, then select <b>Specs</b> > <b>Compose</b> > <b>NEW COMPOSE</b>. Next, select the repository, branch (typically this is the branch you open pull requests against), and name of the compose file. Finally, select <b>VALIDATE & SAVE</b>.
 </p>
-<img src="../../assets/images/link-to-compose-file.png"> 
+<img src="../../assets/images/settings-compose-file.png"> 
 <hr>
 <p>Note, if you did not add your secrets as described in the previous step, you will see a validation error with a link to add your secretes.</p>
-<img src="../../assets/images/compose-validation-error-secret-not-found.png">  
+<img src="../../assets/images/settings-compose-resolve-errors.png">  
 <hr>
 <p>Once your compose file has been successfully added, you will see it in the Uffizzi Dashboard with a link to its source on GitHub. Any changes you make to this compose file on GitHub will be synced in the Uffizzi Dashboard.</p>
-<img src="../../assets/images/linked-compose-file.png">
+<img src="../../assets/images/settings-compose-synced.png">
 <hr>
 </details>
 
-That's it! Uffizzi is now configured with your Docker Compose template. To test your setup, you can manually deploy your primary branch to an on-demand test environment using the **NEW PREVIEW** button in the Uffizzi Dashboard, or try opening a pull request on GitHub to deploy a feature branch.
+That's it! Uffizzi is now configured with your Docker Compose template. To test your setup, you can manually deploy your primary branch to an on-demand test environment using the **Test Compose** button in the Uffizzi Dashboard, or try opening a pull request on GitHub to deploy a feature branch.
 
 ## Connect to Uffizzi Cloud from an external CI provider
 

@@ -1,6 +1,6 @@
 # Create a Docker Compose template
 
-In this section, we'll create a template using [Docker Compose](https://docs.docker.com/compose/compose-file/) that describes our applicaiton configuration. Uffizzi uses Docker Compose as its configuration format because it is relatively simple and widely used by developers.
+In this section, we'll create a template using [Docker Compose](https://docs.docker.com/compose/compose-file/) that describes our application configuration. Uffizzi uses Docker Compose as its configuration format because it is relatively simple and widely used by developers.
 
 !!! note
     Uffizzi supports a subset of the [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). For a full list of supported keywords, see the [Uffizzi Compose file reference](../references/compose-spec.md). 

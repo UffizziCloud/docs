@@ -10,7 +10,7 @@ If you're using an external CI provider, such as GitHub Actions, GitLab CI, or C
 
 In the following example, `PG_USER` and `PG_PASSWORD` are stored using [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) and referenced using variable substitution in a [Docker Compose template](docker-compose-template.md).  
 
-See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/create-preview-environment) for example usage.
+See the [Uffizzi resuable workflow](https://github.com/marketplace/actions/preview-environments) for example usage.
 
 === "GitHub Actions"
 

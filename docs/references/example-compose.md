@@ -158,7 +158,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./uffizzi/nginx:/etc/nginx
+      - ./uffizzi/nginx:/etc/nginx/conf.d/
 
   app:
     depends_on:
@@ -186,10 +186,6 @@ services:
 Now we will create a new file in our repository `/uffizzi/nginx/nginx.conf` that defines how our paths will be exposed.
 
 ```json title="nginx.conf"
-
-events {
-  worker_connections  4096;  ## Default: 1024
-}
 
 http {
     server {

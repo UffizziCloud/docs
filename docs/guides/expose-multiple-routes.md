@@ -30,7 +30,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./uffizzi/nginx:/etc/nginx
+      - ./uffizzi/nginx:/etc/nginx/conf.d/
 
   app:
     ports:
@@ -41,14 +41,13 @@ services:
       - 7001:7001
 ```
 
-&nbsp;  
-Now we will create a new file in our repository `/uffizzi/nginx/nginx.conf` that defines how our paths will be exposed. Here we assume that `app` is listening for connections on `3001` and `3002` for the main applicaiton and console, respectively. If requests for port `:3001` are received, we tell `nginx` to forward those requests to `/`. If requests for port `3002` are received, we tell `nginx` to forward those requests to `/console`.
+&nbsp;
+
+Now we will create a new file in our repository `/uffizzi/nginx/nginx.conf` that defines how our paths will be exposed. By default the official `nginx:latest` base image we used in our Docker Compose file will include all `/etc/nginx/conf.d/*.conf` files.  
+
+Here we assume that `app` is listening for connections on `3001` and `3002` for the main applicaiton and console, respectively. If requests for port `:3001` are received, we tell `nginx` to forward those requests to `/`. If requests for port `3002` are received, we tell `nginx` to forward those requests to `/console`.
 
 ```json title="nginx.conf"
-
-events {
-  worker_connections  4096;
-}
 
 http {
     server {

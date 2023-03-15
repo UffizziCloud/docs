@@ -163,6 +163,28 @@ x-uffizzi:
     port: 8080
 ```
 
+#### additional_subdomains
+
+ By default, Uffizzi generates a unique hostname for each preview environment of the form:  
+
+ `{preview-id}.app.uffizzi.com`  
+
+ If your application requires that a service be exposed at a specific subdomain—for example, `auth.{preview-id}.app.uffizzi.com`, you can define a list of `additional_subdomains`, as follows: 
+
+ ``` yaml
+ x-uffizzi:
+   ingress:
+     service: app
+     port: 80
+     additional_subdomains:
+       - "auth"
+       - "my_landing"
+ ```
+
+ With this configuration, Uffizzi will provision two additional hostnames:  
+ - `auth.{preview-id}.app.uffizzi.com`  
+ - `my_landing.{preview-id}.app.uffizzi.com`  
+
 ### **continuous_previews** 
 
 Continuous Previews (CP) are an automation-enabled best practice that encourages cross-functional teams to continuously collaborate during the development process by providing feedback on features that are still in progress. With CP, git topic branches are previewed using on-demand test environments before they are merged into a downstream branch. Continuous Previews settings are optional for Uffizzi Compose.  

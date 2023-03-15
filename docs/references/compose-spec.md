@@ -166,7 +166,10 @@ x-uffizzi:
 #### additional_subdomains
 
 By default, Uffizzi generates a unique hostname for each preview environment of the form:  
-`{preview-id}.app.uffizzi.com`. If your application requires that a service be exposed at a specific subdomain—for example, `auth.{preview-id}.app.uffizzi.com`, you can use the `additional_subdomains` definition as follows: 
+
+`{preview-id}.app.uffizzi.com`  
+
+If your application requires that a service be exposed at a specific subdomain—for example, `auth.{preview-id}.app.uffizzi.com`, you can use the `additional_subdomains` definition as follows: 
 
 ``` yaml
 x-uffizzi:

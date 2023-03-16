@@ -151,10 +151,7 @@ This workflow takes as input the following **required** parameters:
 
   * `compose-file-cache-key`  
   * `compose-file-cache-path`  
-  * `username` - Your Uffizzi username (See [next section](configure-credentials.md))  
   * `server` - `https://app.uffizzi.com` or your own Uffizzi API endpoint if you are self-hosting (See [next section](configure-credentials.md))  
-  * `project` - A Uffizzi project ID (See [next section](configure-credentials.md))  
-  * `password` - Your Uffizzi account password stored as a GitHub Actions secret (See [next section](configure-credentials.md))
 
 Additionally, this workflow has a few **optional** parameters if you have configured password protection for your Uffizzi test environments. For instructions on configuring passwords, follow [this guide](password-protected.md).  
 
@@ -245,11 +242,8 @@ Additionally, this workflow has a few **optional** parameters if you have config
         with:
           compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
           compose-file-cache-path: docker-compose.rendered.yml
-          username: foo@example.com
           server: https://app.uffizzi.com
-          project: my-application
         secrets:
-          password: ${{ secrets.UFFIZZI_PASSWORD }}
           personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
           url-username: admin
           url-password: ${{ secrets.URL_PASSWORD }}
@@ -265,11 +259,7 @@ Additionally, this workflow has a few **optional** parameters if you have config
         with:
           compose-file-cache-key: ''
           compose-file-cache-path: docker-compose.rendered.yml
-          username: foo@example.com
           server: https://app.uffizzi.com
-          project: my-application
-        secrets:
-          password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
       contents: read
       pull-requests: write

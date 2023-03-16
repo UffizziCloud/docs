@@ -108,6 +108,7 @@ nav:
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up previews for your application: set-up-uffizzi-for-your-application.md
+    - Troubleshooting: guides/troubleshooting.md
   - Guides: 
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
@@ -129,6 +130,7 @@ nav:
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
     - Continuous Previews: guides/continuous-previews.md
+    - Troubleshooting: guides/troubleshooting.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md
@@ -138,3 +140,5 @@ nav:
     - CI/CD + CP: use-cases/ci-cd-registry.md
     - Docker Extensions Partner: use-cases/docker-extension-partner.md
     - Why Uffizzi?: use-cases/why-uffizzi.md
+  - Troubleshooting:
+    - Top reasons your ephemeral environments aren't working: guides/troubleshooting.md

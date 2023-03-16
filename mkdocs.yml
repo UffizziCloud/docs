@@ -140,6 +140,6 @@ nav:
     - CI/CD + CP: use-cases/ci-cd-registry.md
     - Docker Extensions Partner: use-cases/docker-extension-partner.md
     - Why Uffizzi?: use-cases/why-uffizzi.md
-    - Configure `API_BASE_URL` for React Apps and Other Single-page Applications (SPA)
+    - Configure API_BASE_URL for React Apps and Other Single-page Applications (SPA): use-cases/single-page-applications.md
   - Troubleshooting:
     - Top reasons your ephemeral environments aren't working: guides/troubleshooting.md

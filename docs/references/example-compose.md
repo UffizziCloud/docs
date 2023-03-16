@@ -158,7 +158,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./uffizzi/nginx:/etc/nginx
+      - ./uffizzi/nginx:/etc/nginx/conf.d/
 
   app:
     depends_on:
@@ -183,13 +183,11 @@ services:
 
 &nbsp;  
 
+Now we will create a new file in our repository `/uffizzi/nginx/nginx.conf` that defines how our paths will be exposed. By default the official `nginx:latest` base image we used in our Docker Compose file will include all `/etc/nginx/conf.d/*.conf` files.  
+
 Now we will create a new file in our repository `/uffizzi/nginx/nginx.conf` that defines how our paths will be exposed.
 
 ```json title="nginx.conf"
-
-events {
-  worker_connections  4096;  ## Default: 1024
-}
 
 http {
     server {

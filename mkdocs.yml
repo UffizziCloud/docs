@@ -116,7 +116,6 @@ nav:
     - Create a Docker Compose template: guides/docker-compose-template.md
     - Integrate with your CI pipeline: guides/integrate-with-ci.md
     - Configure credentials: guides/configure-credentials.md
-    - Troubleshooting: guides/troubleshooting.md
     - Teams and Accounts: guides/teams-and-accounts.md
     - Demo on Uffizzi button: guides/demo-on-uffizzi.md
     - Set up your account: guides/set-up-your-account.md
@@ -131,6 +130,7 @@ nav:
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
     - Continuous Previews: guides/continuous-previews.md
+    - Troubleshooting: guides/troubleshooting.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md

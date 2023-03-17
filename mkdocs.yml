@@ -130,6 +130,7 @@ nav:
     - Configure SSO: guides/single-sign-on.md 
     - Networking and architecture: guides/networking.md
     - Continuous Previews: guides/continuous-previews.md
+    - GitHub Environments: guides/github-environment.md
     - Troubleshooting: guides/troubleshooting.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md

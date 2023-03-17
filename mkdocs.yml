@@ -108,16 +108,19 @@ nav:
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up previews for your application: set-up-uffizzi-for-your-application.md
+    - Troubleshooting: guides/troubleshooting.md
   - Guides: 
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
-    - Set up your account: guides/set-up-your-account.md
-    - Teams and Accounts: guides/teams-and-accounts.md
-    - Demo on Uffizzi button: guides/demo-on-uffizzi.md
-    - Authenticating via OpenID Connect: guides/oidc.md
+    - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
     - Create a Docker Compose template: guides/docker-compose-template.md
     - Integrate with your CI pipeline: guides/integrate-with-ci.md
     - Configure credentials: guides/configure-credentials.md
+    - Teams and Accounts: guides/teams-and-accounts.md
+    - Demo on Uffizzi button: guides/demo-on-uffizzi.md
+    - Set up your account: guides/set-up-your-account.md
+    - Expose multiple routes: guides/expose-multiple-routes.md
+    - Authenticating via OpenID Connect: guides/oidc.md
     - Configure password-protected environments: guides/password-protected.md
     - Authenticate with a container registry: guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md
@@ -128,6 +131,7 @@ nav:
     - Networking and architecture: guides/networking.md
     - Continuous Previews: guides/continuous-previews.md
     - GitHub Environments: guides/github-environment.md
+    - Troubleshooting: guides/troubleshooting.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md
@@ -137,3 +141,6 @@ nav:
     - CI/CD + CP: use-cases/ci-cd-registry.md
     - Docker Extensions Partner: use-cases/docker-extension-partner.md
     - Why Uffizzi?: use-cases/why-uffizzi.md
+    - Configure API_BASE_URL for React Apps and Other Single-page Applications (SPA): use-cases/single-page-applications.md
+  - Troubleshooting:
+    - Top reasons your ephemeral environments aren't working: guides/troubleshooting.md

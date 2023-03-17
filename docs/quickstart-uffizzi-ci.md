@@ -19,7 +19,7 @@ At a minimum, this file must include the following object definitions:
 1. **[`services`](references/compose-spec.md#services)** - The container service(s) that make up your application. See [Docker Compose for Uffizzi](references/compose-spec.md) for supported keywords.
 2. **[`x-uffizzi`](references/compose-spec.md#x-uffizzi-extension-configuration-reference)** - This is a custom extension field required by Uffizzi.
 
-    a. [`ingress`](references/compose-spec.md#ingress-required) - Tells Uffizzi which of your `services` should receive incoming _https_ traffic
+    a. [`ingress`](references/compose-spec.md#ingress-required) - Tells Uffizzi which of your `services` should receive incoming _https_ traffic  
     b. [`continuous_previews`](references/compose-spec.md#continuous_previews) - Required by Uffizzi CI. Set the following values to `true`:
 
     - `deploy_preview_when_pull_request_is_opened: true`

@@ -290,7 +290,7 @@ x-uffizzi:
     This option requires that you have first connected your git repository in the Uffizzi Dashboard.  
 
 ## <a id="services-top-level-element"></a>`services` configuration reference  
-This section contains example configurations supported by a `services` definition.  
+This section contains example configurations supported by a `services` definition. Note that Uffizzi supports service name resolution, so you can reference any service you declare in any block of your Compose.
 
 ### **build**  
 

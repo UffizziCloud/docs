@@ -108,7 +108,7 @@ nav:
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up previews for your application: set-up-uffizzi-for-your-application.md
-    - Troubleshooting: guides/troubleshooting.md
+    - Troubleshooting: troubleshooting/top-reasons-for-failures.md
   - Guides: 
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
@@ -131,7 +131,7 @@ nav:
     - Networking and architecture: guides/networking.md
     - Continuous Previews: guides/continuous-previews.md
     - GitHub Environments: guides/github-environment.md
-    - Troubleshooting: guides/troubleshooting.md
+    - Troubleshooting: troubleshooting/top-reasons-for-failures.md
   - References:
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md
@@ -143,4 +143,4 @@ nav:
     - Why Uffizzi?: use-cases/why-uffizzi.md
     - Configure API_BASE_URL for React Apps and Other Single-page Applications (SPA): use-cases/single-page-applications.md
   - Troubleshooting:
-    - Top reasons your ephemeral environments aren't working: guides/troubleshooting.md
+    - Top reasons your ephemeral environments aren't working: troubleshooting/top-reasons-for-failures.md

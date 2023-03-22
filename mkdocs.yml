@@ -144,4 +144,4 @@ nav:
     - Configure API_BASE_URL for React Apps and Other Single-page Applications (SPA): use-cases/single-page-applications.md
   - Troubleshooting:
     - Most common problems: troubleshooting/most-common-problems.md
-    - Degugging: troubleshooting/debugging.md
+    - Debugging: troubleshooting/debugging.md

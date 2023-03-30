@@ -1,7 +1,8 @@
-# **Troubleshooting Guide** 
-## **Most common problems**
+# **Troubleshooting Guide**  
 
 By [Shruti Chaturvedi](https://github.com/ShrutiC-git)   
+
+## **Most common problems**
 
 Learn about the possible reasons your Uffizzi ephemeral environments might be failing and how you can fix them.  
 

@@ -71,7 +71,7 @@ You can now download the git repo in your container. Once you have access to the
 
 In the following example, we will download the zipped source that contains the directories our container needs with the most recent changes using `wget` (make sure the utility is available in your container). In your `docker-compose.uffizzi.yml`, make the following changes in your container:  
 
-```
+``` yaml
   app:
     image: my_app_image
     ports:

@@ -1,8 +1,8 @@
 # Error: File or Directory is Too Large
 
-Are you trying to mount a host file and/or directory to your Uffizzi ephemeral environment built using external CI, and seeing an error that says the file or directory is too large? In this article, we’ll take a look at how you can solve this problem.   
-
 By [Shruti Chaturvedi](https://github.com/ShrutiC-git)   
+
+Are you trying to mount a host file and/or directory to your Uffizzi ephemeral environment built using external CI, and seeing an error that says the file or directory is too large? In this article, we’ll take a look at how you can solve this problem.   
 
 ## Problem
 We often come across use cases where projects need to mount host files and directories to their Uffizzi ephemeral environments. This can be achieved through the [`volumes` directive](../references/compose-spec.md#volumes-1) within services in the docker-compose.uffizzi file (example below): 

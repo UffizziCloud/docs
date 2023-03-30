@@ -1,8 +1,8 @@
 # **Debugging Uffizzi ephemeral environments**
 
-Learn how to debug failures in your Uffizzi ephemeral environments.
+By [Shruti Chaturvedi](https://github.com/ShrutiC-git)  
 
-By [Shruti Chaturvedi](https://github.com/ShrutiC-git)
+Learn how to debug failures in your Uffizzi ephemeral environments.
 
 ## **Introduction**
 

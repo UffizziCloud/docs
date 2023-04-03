@@ -64,8 +64,6 @@ Once everything is configured on both GitHub and Uffizzi, you don't need to do a
 </details>
 
 ### When are previews triggered?
-!!! Important
-    **Uffizzi CI design is changing.** Our team is working on updating the logic for Uffizzi CI triggers. In the next release of Uffizzi CI, **any pull request** that is opened on your repository between **any two branches** will trigger a preview. Uffizzi CI will use whichever Compose file is in the head branch (i.e. the merging branch).
 
 Currently Uffizzi CI will only create previews for pull requests that target the branch you configure in the Uffizzi Dashboard (**Project** > **Settings** > **Compose file** > **Branch** > **Path to Compose**).  
 
@@ -85,7 +83,7 @@ For example, if you configure Uffizzi CI with a Compose file from your <code>mai
 - `{topic_branch}` ← `main` or  
 - `{topic_branch}` ← `{topic_branch}`
 
-Note that this design is changing with the next release of Uffizzi CI, such that all pull requests will be previewed for a given project.  
+Note that this design may change in a future release of Uffizzi CI, such that all pull requests will be previewed for a given project.  
 
 !!! Important
     If the Compose file in a base and head branches do not match for a given pull request, Uffizzi will use the Compose file in the head branch (i.e. the merging branch) as the preview configuration.  

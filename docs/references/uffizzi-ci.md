@@ -88,7 +88,7 @@ Note that this design may change in a future release of Uffizzi CI, such that al
 !!! Important
     If the Compose file in a base and head branches do not match for a given pull request, Uffizzi will use the Compose file in the head branch (i.e. the merging branch) as the preview configuration.  
 
-    For example, if a pull request is opened for `develop` ← `my-feature` and the Compose files do not match, Uffizzi will use the Compose file from `my-feature`,
+    For example, if a pull request is opened for `main` ← `my-feature` and the Compose files do not match, Uffizzi will use the Compose file from `my-feature`,
 
 &nbsp;  
 &nbsp;  

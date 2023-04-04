@@ -58,7 +58,7 @@ In the following example, `POSTGRES_USER` and `POSTGRES_PASSWORD` are the names 
     services:
       db:
         image: postgres:9.6
-        secrets:`
+        secrets:
           - pg_user
           - pg_password
 

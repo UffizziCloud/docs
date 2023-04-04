@@ -55,7 +55,7 @@ Previews are configured with a [Docker Compose template](https://github.com/Uffi
 
 Running this workflow will create a [Uffizzi Cloud](https://uffizzi.com) account and project from your GitHub user and repo information, respectively. If you sign in to the [Uffizzi Dashboard](https://app.uffizzi.com/sign_in) you can view logs, password protect your Preview Environments, manage projects and team members, set role-based access controls, and configure single-sign on (SSO).
 
-Each account receives 10,000 preview minutes per month for free. If you exceed this amount, your Preview Environments will be paused unless you add a credit card. See [our pricing](https://uffizzi.com/pricing) for details. Alternatively, you can [install open-source Uffizzi](https://github.com/UffizziCloud/uffizzi_app/blob/develop/INSTALL.md) if you have your own Kubernetes cluster.
+The [Starter Plan](https://uffizzi.com/pricing) is free includes up to two concurrent preview environments. See [our pricing](https://uffizzi.com/pricing) for plan details. Alternatively, you can [install open-source Uffizzi](https://github.com/UffizziCloud/uffizzi_app/blob/develop/INSTALL.md) if you have your own Kubernetes cluster.
 
 ## Set up Uffizzi for your application
 

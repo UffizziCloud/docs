@@ -294,6 +294,9 @@ This section contains example configurations supported by a `services` definitio
 
 ### **build**  
 
+!!! important  
+    This option is only supported by Uffizzi CI and in the context of a GitHub repository. It is not supported by other CI providers or directly via the `uffizzi` command-line. For example, Uffizzi will not build your application from a local workstation or remote development or CI server.
+
 Configuration options that are applied at build time. In each example below, the default build [context](#context) is `Dockerfile`, unless otherwise specified.
 
 `build` can be specified either as a string containing a path to the build context:  

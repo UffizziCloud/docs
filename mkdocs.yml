@@ -128,6 +128,7 @@ nav:
     - Check logs: guides/logs.md
     - Configure role-based access: guides/rbac.md
     - Configure SSO: guides/single-sign-on.md 
+    - Microservices on Uffizzi: guides/support-microservices-in-ephemeral-environments-with-nginx.md
     - Networking and architecture: guides/networking.md
     - Continuous Previews: guides/continuous-previews.md
     - GitHub Environments: guides/github-environment.md

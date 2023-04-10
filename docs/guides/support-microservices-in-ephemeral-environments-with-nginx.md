@@ -139,4 +139,6 @@ services:
    image: service-image
 ```
 
-Voila! After making these changes, and opening a PR in your project, a new environment will spin up, receiving HTTPS traffic on the port you have defined (here `8080`). Adding a reverse proxy as ingress for your ephemeral environments is a really powerful way of bringing your microservices application to Uffizzi. Scenarios we discussed above, and more, can efficiently be solved by adding Nginx into your Uffizzi ephemeral environments. For more blogs on enhancing developer productivity with ephemeral environments, check out [our blog](https://www.uffizzi.com/blog). If you want ephemeral environments for your microservices, [get in touch with us](https://www.uffizzi.com/contact) and let us know how we can help!
+Voila! After making these changes, and opening a PR in your project, a new environment will spin up, receiving HTTPS traffic on the port you have defined (here `8080`). Adding a reverse proxy as ingress for your ephemeral environments is a really powerful way of bringing your microservices application to Uffizzi. Scenarios we discussed above, and more, can efficiently be solved by adding Nginx into your Uffizzi ephemeral environments. For more blogs on enhancing developer productivity with ephemeral environments, check out [our blog](https://www.uffizzi.com/blog). If you want ephemeral environments for your microservices, [get in touch with us](https://www.uffizzi.com/contact) and let us know how we can help!  
+
+&nbsp;  

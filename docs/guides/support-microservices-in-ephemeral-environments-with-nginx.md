@@ -35,7 +35,7 @@ We will define Nginx as the ingress into the ephemeral environments to listen to
 
 ![Voting application microservices architecture](../assets/images/microservices-architecture-with-nginx.webp)  
 
-To define an ingress, we need a port ( the environment will be listening for traffic on this port) and a service (the requests coming to the port will be forwarded to this service). In our case, we will first create an nginx service in the compose file, and use this service as our ingress. 
+To define an [`ingress`](../references/compose-spec.md#ingress-required), we need a `port` (the environment will be listening for traffic on this port) and a `service` (the requests coming to the port will be forwarded to this service). In our case, we will first create an `nginx` service in the compose file, and use this service as our `ingress`. 
 
 ### **Step 1: Creating an Nginx container**  
 

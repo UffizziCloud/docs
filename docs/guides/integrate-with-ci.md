@@ -56,6 +56,65 @@ You can see a complete example workflow using GitHub Actions [here](https://gith
     
       [...]
 
+    ```  
+
+=== "GitLab CI"
+
+    ``` yaml hl_lines="20 21 36 42 48 54" title="docker-compose.uffizzi.yml"
+    include:
+      - "https://gitlab.com/uffizzi/environment-action/raw/main/environment.gitlab-ci.yml"
+      - "https://gitlab.com/uffizzi/environment-action/raw/main/Notifications/slack.yml"
+        
+    variables:
+      REGISTRY: registry.uffizzi.com/$CI_PIPELINE_ID
+      TAG: latest
+      VOTE_IMAGE: $REGISTRY/vote:$TAG
+      WORKER_IMAGE: $REGISTRY/worker:$TAG
+      RESULT_IMAGE: $REGISTRY/result:$TAG
+      LOADBALANCER_IMAGE: $REGISTRY/loadbalancer:$TAG
+      UFFIZZI_COMPOSE_FILE: docker-compose.rendered.yml
+        
+    .build_image: &build_image
+      stage: build
+      image: docker:latest
+      rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      script:
+        - docker build -t $IMAGE $DOCKERFILE_PATH
+        - docker push $IMAGE
+
+    services:
+      - docker:dind
+
+    stages:
+      - build
+      - uffizzi_deploy
+      - uffizzi_notification
+      - uffizzi_delete
+
+    build_vote:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./vote
+      IMAGE: $VOTE_IMAGE
+
+    build_worker:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./worker
+      IMAGE: $WORKER_IMAGE
+
+    build_result:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./result
+      IMAGE: $RESULT_IMAGE
+
+    build_loadbalancer:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./loadbalancer
+      IMAGE: $LOADBALANCER_IMAGE
     ```
 
 ## <a id="render-compose-from-cache"></a>Render and cache a new compose file
@@ -141,9 +200,91 @@ Next, we'll use the common utility `envsubst` and shell I/O redirection (`<`, `>
       [...]
     ```
 
+=== "GitLab CI"
+
+    ``` yaml hl_lines="56-77" title="gitlab-ci.yml"
+    include:
+      - "https://gitlab.com/uffizzi/environment-action/raw/main/environment.gitlab-ci.yml"
+      - "https://gitlab.com/uffizzi/environment-action/raw/main/Notifications/slack.yml"
+        
+    variables:
+      REGISTRY: registry.uffizzi.com/$CI_PIPELINE_ID
+      TAG: latest
+      VOTE_IMAGE: $REGISTRY/vote:$TAG
+      WORKER_IMAGE: $REGISTRY/worker:$TAG
+      RESULT_IMAGE: $REGISTRY/result:$TAG
+      LOADBALANCER_IMAGE: $REGISTRY/loadbalancer:$TAG
+      UFFIZZI_COMPOSE_FILE: docker-compose.rendered.yml
+        
+    .build_image: &build_image
+      stage: build
+      image: docker:latest
+      rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      script:
+        - docker build -t $IMAGE $DOCKERFILE_PATH
+        - docker push $IMAGE
+
+    services:
+      - docker:dind
+
+    stages:
+      - build
+      - uffizzi_deploy
+      - uffizzi_notification
+      - uffizzi_delete
+
+    build_vote:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./vote
+      IMAGE: $VOTE_IMAGE
+
+    build_worker:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./worker
+      IMAGE: $WORKER_IMAGE
+
+    build_result:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./result
+      IMAGE: $RESULT_IMAGE
+
+    build_loadbalancer:
+    <<: *build_image
+    variables:
+      DOCKERFILE_PATH: ./loadbalancer
+      IMAGE: $LOADBALANCER_IMAGE
+
+    render_compose_file:
+      stage: build
+      image: alpine:latest
+      rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      before_script:
+        - apk add --no-cache gettext
+      script:
+        - envsubst < ./docker-compose.uffizzi.yml > ./$UFFIZZI_COMPOSE_FILE
+        - echo "$(md5sum $UFFIZZI_COMPOSE_FILE | awk '{ print $1 }')"
+        - cat $UFFIZZI_COMPOSE_FILE
+        - echo $CI_PIPELINE_SOURCE
+        - echo $CI_COMMIT_BRANCH
+        - echo $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+        - echo $CI_ENVIRONMENT_ACTION
+        - echo $CI_COMMIT_REF_NAME
+        - echo $CI_COMMIT_REF_SLUG
+      artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+          - ./$UFFIZZI_COMPOSE_FILE
+    ```
+
 ## <a id="reusable-workflow"></a>Pass rendered compose file from cache to the reusable workflow
 
-Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
+### GitHub Actions
+Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a rendered compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
 
 In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your environment's containers as the [`UFFIZZI_URL`](../references/uffizzi-environment-variables.md) environment variable.
 
@@ -158,6 +299,16 @@ Additionally, this workflow has a few **optional** parameters if you have config
   * `url-username` - An HTTP username  
   * `url-password` - An HTTP password stored as a GitHub Actions secret  
   * `personal-access-token` - [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with access to the `read:packages` scope. This parameter is required only if you use GitHub Container Registry (ghcr.io) to store images.  
+
+### GitLab CI
+
+Uffizzi publishes an [environment action](https://gitlab.com/uffizzi/environment-action/-/blob/main/environment.gitlab-ci.yml) that can be used to create, update, and delete ephemeral environments given a rendered compose file. This action will spin up the Uffizzi CLI on a GitLab runner, which then opens a connection to the Uffizzi platform. Be sure to `include` this environment action in your `gitlab-ci.yml` as shown above:
+
+```
+include: "https://gitlab.com/uffizzi/environment-action/raw/main/environment.gitlab-ci.yml"
+```
+
+In this final step, we'll pass the cached compose file from the previous step to this environment action via GitLab environment variables. In response, Uffizzi will create a test environment, and generate a environment URL for your merge requests. This URL will also be available in your environment's containers as the [`UFFIZZI_URL`](../references/uffizzi-environment-variables.md) environment variable.
 
 === "GitHub Actions"
 
@@ -202,7 +353,7 @@ Additionally, this workflow has a few **optional** parameters if you have config
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
             context: ./app
-    
+
       render-compose-file:
         name: Render Docker Compose File
         runs-on: ubuntu-latest
@@ -263,6 +414,118 @@ Additionally, this workflow has a few **optional** parameters if you have config
     permissions:
       contents: read
       pull-requests: write
+    ```
+
+=== "GitLab CI"
+
+    ``` yaml hl_lines="47" title="https://gitlab.com/uffizzi/environment-action/-/blob/main/environment.gitlab-ci.yml"
+    # Add the following variables to your project:
+    # optional:
+    #  - UFFIZZI_SERVER (Uffizzi server URL)
+    #  - UFFIZZI_COMPOSE_FILE (Uffizzi compose file name)
+    # Include this pipeline in your project
+    # Add the following stages to your project:
+    #  - uffizzi_deploy
+    #  - uffizzi_delete
+
+    variables:
+      UFFIZZI_IMAGE: uffizzi/cli:v1
+      UFFIZZI_CURL_IMAGE: apteno/alpine-jq:2022-09-04
+      UFFIZZI_SERVER: https://app.uffizzi.com
+      UFFIZZI_COMPOSE_FILE: docker-compose.yml
+      UFFIZZI_DEPLOY_ENV_FILE: deploy.env
+      CURL_RETRY: 5
+      CURL_RETRY_DELAY: 0
+      CURL_RETRY_MAX_TIME: 60
+      OIDC_TOKEN: $CI_JOB_JWT
+      ACCESS_TOKEN: $CI_JOB_TOKEN
+
+    deploy_environment:
+      stage: uffizzi_deploy
+      image:
+        name: $UFFIZZI_IMAGE
+        entrypoint: [ "" ]
+      rules:
+        - if: $CI_MERGE_REQUEST_ID
+      before_script: []
+      script:
+        - echo "Checking if environment exists"
+        - | # Check if environment exists and update if it does
+          export OIDC_TOKEN=$OIDC_TOKEN
+          export ACCESS_TOKEN=$ACCESS_TOKEN
+          if UFFIZZI_ENVIRONMENT_ID=$(/root/docker-entrypoint.sh preview list --filter "gitlab.repo=$CI_PROJECT_PATH gitlab.merge_request.number=$CI_MERGE_REQUEST_IID" | grep deployment-); then
+            if test "$( wc -l <<< "$UFFIZZI_ENVIRONMENT_ID" )" -gt 1; then
+              echo "More than one preview found"
+              exit 1
+            fi
+            echo "Updating environment $UFFIZZI_ENVIRONMENT_ID"
+            ACTION=updated
+            OUTPUT=$(/root/docker-entrypoint.sh preview update $UFFIZZI_ENVIRONMENT_ID $UFFIZZI_COMPOSE_FILE --output=json --set-labels "gitlab.repo=$CI_PROJECT_PATH gitlab.merge_request.number=$CI_MERGE_REQUEST_IID" | tail -n 1)
+          else
+            echo "$UFFIZZI_ENVIRONMENT_ID"
+            echo "Creating new preview"
+            ACTION=deployed
+            OUTPUT=$(/root/docker-entrypoint.sh preview create $UFFIZZI_COMPOSE_FILE --output=json --creation-source=gitlab_actions --set-labels "gitlab.repo=$CI_PROJECT_PATH gitlab.merge_request.number=$CI_MERGE_REQUEST_IID" | tail -n 1)
+            UFFIZZI_ENVIRONMENT_ID=$(echo $OUTPUT | grep -Eo '"id"[^,]*' | cut -d '"' -f4)
+          fi
+        - UFFIZZI_ENVIRONMENT_URL=$(echo $OUTPUT | grep -Eo '"url"[^,]*' | cut -d '"' -f4)
+        - UFFIZZI_PROXY_URL=$(echo $OUTPUT | grep -Eo '"proxy_url"[^,]*' | cut -d '"' -f4)
+        - UFFIZZI_CONTAINERS_URI=$(echo $OUTPUT | grep -Eo '"containers_uri"[^,]*' | cut -d '"' -f4)
+        - echo "ACTION=$ACTION" >> $UFFIZZI_DEPLOY_ENV_FILE
+        - echo "UFFIZZI_CONTAINERS_URI=$UFFIZZI_CONTAINERS_URI" >> $UFFIZZI_DEPLOY_ENV_FILE
+        - echo "UFFIZZI_ENVIRONMENT_ID=$UFFIZZI_ENVIRONMENT_ID" >> $UFFIZZI_DEPLOY_ENV_FILE
+        - echo "UFFIZZI_ENVIRONMENT_URL=$UFFIZZI_ENVIRONMENT_URL" >> $UFFIZZI_DEPLOY_ENV_FILE
+        - echo "UFFIZZI_PROXY_URL=$UFFIZZI_PROXY_URL" >> $UFFIZZI_DEPLOY_ENV_FILE
+        - echo "Uffizzi Environment ID:${UFFIZZI_ENVIRONMENT_ID}"
+        - echo "Uffizzi Environment ${ACTION} at URL:${UFFIZZI_PROXY_URL}"
+        - echo "Uffizzi Environment deployment details at URI:${UFFIZZI_CONTAINERS_URI}"
+      environment:
+        name: "uffizzi/MR-${CI_MERGE_REQUEST_IID}"
+        url: $UFFIZZI_PROXY_URL
+        action: start
+        on_stop: delete_environment
+      artifacts:
+        reports:
+          dotenv: $UFFIZZI_DEPLOY_ENV_FILE
+
+    healthcheck_environment:
+      stage: uffizzi_deploy
+      image: $UFFIZZI_CURL_IMAGE
+      needs:
+        - deploy_environment
+      rules:
+        - if: $CI_MERGE_REQUEST_ID
+      before_script: []
+      script:
+        - echo "Healthchecking environment $UFFIZZI_ENVIRONMENT_ID"
+        - | # Wait for the environment to be healthy. If URL_USERNAME are set, we will use basic auth.
+          if test -z "$UFFIZZI_URL_USERNAME"; then
+            curl --retry $CURL_RETRY --retry-delay $CURL_RETRY_DELAY --retry-max-time $CURL_RETRY_MAX_TIME --silent --show-error --fail $UFFIZZI_PROXY_URL > /dev/null
+          else
+            curl -u "$UFFIZZI_URL_USERNAME:$UFFIZZI_URL_PASSWORD" --retry $CURL_RETRY --retry-delay $CURL_RETRY_DELAY --retry-max-time $CURL_RETRY_MAX_TIME --silent --show-error --fail $UFFIZZI_PROXY_URL > /dev/null
+          fi
+      environment:
+        name: "uffizzi/MR-${CI_MERGE_REQUEST_IID}"
+        url: $UFFIZZI_PROXY_URL
+
+    delete_environment:
+      stage: uffizzi_delete
+      image:
+        name: $UFFIZZI_IMAGE
+        entrypoint: [ "" ]
+      needs:
+        - deploy_environment
+      rules:
+        - if: $CI_MERGE_REQUEST_ID
+          when: manual
+        - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      before_script: []
+      script:
+        - echo "$UFFIZZI_ENVIRONMENT_ID deleted"
+        - /root/docker-entrypoint.sh preview delete $UFFIZZI_ENVIRONMENT_ID
+      environment:
+        name: "uffizzi/MR-${CI_MERGE_REQUEST_IID}"
+        action: stop
     ```
 
 See [the full documentation for this reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/README.md#workflow-inputs).

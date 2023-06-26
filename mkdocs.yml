@@ -106,11 +106,13 @@ nav:
   - Home:
     - What is Uffizzi?: index.md
     - Quickstart (GitHub Actions): quickstart-gha.md
+    - Quickstart (GitLab CI): quickstart-gitlab-ci.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up previews for your application: set-up-uffizzi-for-your-application.md
     - Troubleshooting: troubleshooting/most-common-problems.md
   - Guides: 
     - Quickstart (GitHub Actions): quickstart-gha.md
+    - Quickstart (GitLab CI): quickstart-gitlab-ci.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
     - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
     - Create a Docker Compose template: guides/docker-compose-template.md

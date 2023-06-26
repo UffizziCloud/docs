@@ -284,7 +284,7 @@ Next, we'll use the common utility `envsubst` and shell I/O redirection (`<`, `>
 ## <a id="reusable-workflow"></a>Pass rendered compose file from cache to the reusable workflow
 
 ### GitHub Actions
-Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
+Uffizzi publishes a GitHub Actions [reusable workflow](https://github.com/UffizziCloud/preview-action/blob/master/.github/workflows/reusable.yaml) that can be used to create, update, and delete on-demand test environments given a rendered compose file. This reusable workflow will spin up the Uffizzi CLI on a GitHub Actions runner, which then opens a connection to the Uffizzi platform. 
 
 In this final step, we'll pass the cached compose file from the previous step to this reusable workflow. In response, Uffizzi will create a test environment, and post the environment URL as a comment to your pull request issue. This URL will also be available in your environment's containers as the [`UFFIZZI_URL`](../references/uffizzi-environment-variables.md) environment variable.
 
@@ -302,7 +302,7 @@ Additionally, this workflow has a few **optional** parameters if you have config
 
 ### GitLab CI
 
-Uffizzi publishes an [environment action](https://gitlab.com/uffizzi/environment-action/-/blob/main/environment.gitlab-ci.yml) that can be used to create, update, and delete ephemeral environments given a compose file. This action will spin up the Uffizzi CLI on a GitLab runner, which then opens a connection to the Uffizzi platform. Be sure to `include` this environment action in your `gitlab-ci.yml` as shown above:
+Uffizzi publishes an [environment action](https://gitlab.com/uffizzi/environment-action/-/blob/main/environment.gitlab-ci.yml) that can be used to create, update, and delete ephemeral environments given a rendered compose file. This action will spin up the Uffizzi CLI on a GitLab runner, which then opens a connection to the Uffizzi platform. Be sure to `include` this environment action in your `gitlab-ci.yml` as shown above:
 
 ```
 include: "https://gitlab.com/uffizzi/environment-action/raw/main/environment.gitlab-ci.yml"

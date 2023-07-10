@@ -105,6 +105,7 @@ markdown_extensions:
 nav:
   - Home:
     - What is Uffizzi?: index.md
+    - Virtual Clusters: virtual-clusters/index.md
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (GitLab CI): quickstart-gitlab-ci.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
@@ -149,5 +150,8 @@ nav:
     - Most common problems: troubleshooting/most-common-problems.md
     - Debugging: troubleshooting/debugging.md
     - File or Directory is Too Large Error: troubleshooting/file-or-directory-is-too-large.md
-  - 🤖 Chat the docs:
-    - 🤖 Chat the docs: https://chat.uffizzi.com
+  - Virtual Clusters:
+    - Virtual Clusters: virtual-clusters/index.md
+    - Installation: virtual-clusters/installation.md
+    - Virtual Cluster Configuration: virtual-clusters/configuration.md
+    - Virtual Cluster Examples: virtual-clusters/examples.md

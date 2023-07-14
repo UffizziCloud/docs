@@ -3,7 +3,7 @@ site_name: Uffizzi Docs
 site_author: Uffizzi.com
 site_description: >-
   Uffizzi Documentation
-site_url: https://docs.uffizzi.com
+site_url: https://docs.uffizzi.com/
 
 # Repository
 repo_url: https://github.com/UffizziCloud/docs

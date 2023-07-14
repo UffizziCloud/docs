@@ -3,7 +3,7 @@ site_name: Uffizzi Docs
 site_author: Uffizzi.com
 site_description: >-
   Uffizzi Documentation
-site_url: https://docs.uffizzi.com
+site_url: https://docs.uffizzi.com/
 
 # Repository
 repo_url: https://github.com/UffizziCloud/docs
@@ -137,6 +137,7 @@ nav:
     - GitHub Environments: guides/github-environment.md
     - Troubleshooting: troubleshooting/most-common-problems.md
   - References:
+    - Command-line Reference: references/cli.md
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md

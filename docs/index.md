@@ -5,9 +5,9 @@ Uffizzi is a platform that enables teams to easily create and destroy on-demand 
 
 ## How it works
 
-When added to your git repository or continuous integration (CI) pipeline, Uffizzi works in the background each time a change is made to your code (typically often when a pull request is opened, closed, or updated). Additionally, you can create environments via the Uffizzi CLI, or by manually triggering a CI workflow.  
+When added to your git repository or continuous integration (CI) pipeline, Uffizzi works in the background each time a change is made to your code—for example, when a pull request (PR) or merge request (MR) is opened, closed, or updated. Additionally, you can create environments via the Uffizzi CLI from your local workstation, or by manually triggering a CI workflow.  
 
-Uffizzi will post a comment to your pull request issue with a secure _https_ link to your ephemeral environment. This environment is continually refreshed when you push new commits, so anyone reviewing the environment will see the latest changes to the branch. Uffizzi also handles clean up, so your environments last only as long as you need them.
+If initiated via PR, Uffizzi will post a comment to your PR issue with a secure _https_ link to your ephemeral environment. Or you can customize your workflows to send the URL to another service like Slack. In either case, your environment is continually refreshed when you push new commits, so anyone reviewing the environment will see the latest changes. Uffizzi also handles clean up, so your environments last only as long as you need them.
 
 <img src="assets/images/pr-comment.webp" width="800">
 

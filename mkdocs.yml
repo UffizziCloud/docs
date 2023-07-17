@@ -105,11 +105,12 @@ markdown_extensions:
 nav:
   - Home:
     - What is Uffizzi?: index.md
+    - Installation: installation.md
     - Virtual Clusters: virtual-clusters/index.md
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (GitLab CI): quickstart-gitlab-ci.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
-    - Set up previews for your application: set-up-uffizzi-for-your-application.md
+    - Getting Started: set-up-uffizzi-for-your-application.md
     - Troubleshooting: troubleshooting/most-common-problems.md
   - Guides: 
     - Quickstart (GitHub Actions): quickstart-gha.md

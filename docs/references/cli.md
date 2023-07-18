@@ -1,10 +1,10 @@
 # Uffizzi Command -Line Interface (CLI) Reference
 
-The Uffizzi command-line interface (CLI) allows you to interact with the Uffizzi API. To list available commands, you can run `uffizzi` or `uffizzi help`, or to get help on a specific group or subcommand run `uffizzi [GROUP] help` or `uffizzi [GROUP] [SUBCOMMAND] help`.
+The Uffizzi command-line interface (CLI) allows you to easily interact with the Uffizzi API. To list available commands, you can run `uffizzi` or `uffizzi help`, or to get help on a specific group or subcommand run `uffizzi [GROUP] help` or `uffizzi [GROUP] [SUBCOMMAND] help`.
 
 ## Groups and Subcommands
 
-| Group                              | Subcommands                                         | Description                                   |
+| Group or Command                   | Subcommands                                         | Description                                   |
 | ---------------------------------- | --------------------------------------------------- | --------------------------------------------- |
 | [**account**](cli.md#account)      | list, set-default                                   | Manage your Uffizzi accounts                  |
 | [**cluster**](cli.md#cluster)      | create, delete, list, update-kubeconfig             | Manage virtual clusters                       |
@@ -15,6 +15,7 @@ The Uffizzi command-line interface (CLI) allows you to interact with the Uffizzi
 | [**logout**](cli.md#logout)        |                                                     | Logout of Uffizzi                             |
 | [**preview**](cli.md#preview)      | create, delete, describe, events, list, update      | Manage Docker Compose preview environments    |
 | [**project**](cli.md#project)      | create, delete, describe, list, secret, set-default | Manage projects                               |
+| [**version**](cli.md#version)      |                                                     | Show CLI version                              |
 
 ## **account**
 
@@ -41,7 +42,7 @@ $ uffizzi account set-default [ACCOUNT_NAME]
 
 ## **cluster**
 
-Manage virtual clusters
+Manage [virtual clusters](../virtual-clusters/index.md)
 
 ```
 uffizzi cluster [SUBCOMMAND] [OPTIONS]
@@ -174,7 +175,7 @@ uffizzi config unset [OPTION]
 Grant a Uffizzi user account access to external registries
 
 ```
-uffizzi connect [SUBCOMMAND]
+uffizzi connect [SUBCOMMAND] [OPTIONS] [FLAGS]
 ```
 
 | Flags                          | Description                                                                                |
@@ -272,31 +273,201 @@ uffizzi connect ghcr
 | `-u`, `--username`          | `GITHUB_USERNAME`                                       | GitHub account username                        |
 | `-t`, `--token`             | `GITHUB_ACCESS_TOKEN`                                   | Password or access token to Docker Hub         |
 
-## **cluster**
-
 ## **disconnect**
+
+Revoke a Uffizzi user account access to external registries
+
+```
+uffizzi disconnect [SUBCOMMAND]
+```
+
+| Environment Variables              | Description                                             |
+|------------------------------------|---------------------------------------------------------|
+| acr                                | Azure Container Registry (ACR)                          |
+| docker-hub                         | Docker Hub                                              |
+| docker-registry                    | Docker Registry                                         |
+| ecr                                | Amazon Elastgic Container Registry (ACR)                |
+| gcr                                | Azure Container Registry (ACR)                          |
+| ghcr                               | Azure Container Registry (ACR)                          |
+
 
 ## **login**
 
+Login in to Uffizzi to manage your environments
+
+To login via the browser, run:
+
+```
+uffizzi login
+```
+
+| Options                        | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| `--email`                      | Email to use for login                                                                     |
+| `--server`                     | Login in to an alternate server                                                            |
+
 ## **logout**
+
+Log out of a Uffizzi user account
+
+```
+uffizzi logout
+```
 
 ## **preview**
 
-### service
+Manage Docker Compose preview environments
+
+```
+uffizzi preview [SUBCOMMAND] [OPTIONS]
+```
+
+### preview create
+
+Create a Docker Compose preview environment. See the [Uffizzi Compose Reference](compose-spec.md) for details.
+
+```
+uffizzi preview create [COMPOSE_FILE] [FLAGS]
+```
+
+| Flags                          | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| `--set-labels`                 | Set metadata for a deployment. Useful when filtering deployments                           |
+
+To create a preview with single label, run:
+
+```
+uffizzi preview create docker-compose.uffizzi.yaml --set-labels github.repo=my_repo
+```
+
+### preview delete
+
+Delete a Docker Compose preview environment given a valid preview ID. See the [Uffizzi Compose Reference](compose-spec.md) for details.
+
+```
+uffizzi preview delete [PREVIEW_ID]
+```
+
+### preview describe
+
+Show metadata for a project given a valid preview ID. See the [Uffizzi Compose Reference](compose-spec.md) for details.
+
+```
+uffizzi preview describe [PREVIEW_ID]
+```
+
+### preview list
+
+Lists all previews for a project, including active, building, deploying, failed, and sleeping.
+
+```
+uffizzi preview list [FLAGS]
+```
+
+| Flags                          | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| `--filter`                     | Metadata to filter list of deployments                                                     |
+| `--output`                     | Format output as `json` or `pretty-json`                                                   |
 
 ## **project**
 
+Manage Uffizzi projects
 
-### compose
+```
+uffizzi project [SUBCOMMAND] [OPTIONS]
+```
 
-### create
+### project compose
 
-### delete
+Manage the default compose file for a project. 
 
-### describe
+```
+uffizzi project compose [SUBCOMMAND] [OPTIONS]
+```
 
-### list
+#### project compose set
 
-### secret
+Sets the configuratoin of a project with the given compose file. By default, sets the configuration of the default project with the specified compose file. Use the --project flag to set the compose file of a different project. If already set, this command overrides the project´s configuration with the new compose file. The compose file must exist within a GitHub repository.
 
-### set_default
+| Flags                          | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| `--repository`                 | The repository that contains the compose file to use for the project                       |
+| `--branch`                     | The branch of repository that contains the compose file to use for the project             |
+| `--path`                       | This compose file is used as the default when creating previews.                           |
+
+
+```
+uffizzi project compose set \
+    --repository="github.com/example/example-app" \
+    --branch="main" \
+    --path="app/docker-compose.uffizzi.yml"
+```
+
+#### project compose describe
+
+Show metadata for a compose file. By default, shows the contents of the default project’s compose file. Use the `--project` flag to describe the compose file of a different project.
+
+```
+uffizzi project compose describe
+```
+
+#### project compose unset
+
+Unseet the compose file for a project. By default, unsets the compose file for the default project. Use the `--project` flag to unset the compose file of a different project.
+
+```
+uffizzi project compose unset
+```
+
+### project create
+
+Create a new Uffizzi project
+
+| Flags                          | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| `--description`                | Project description. Max of 256 characters.                                                |
+| `--name`                       | Name for the project to create                                                             |
+| `--slug`                       | A URL-compatible name used to uniquely identify your Uffizzi project. If a slug is not provided, Uffizzi will automatically generate one.|
+
+
+### project delete
+
+Deletes a Uffizzi project witht the given slug.
+
+```
+uffizzi project delete my-app-xc8fw
+```
+
+### project describe
+
+Shows metadata for a project
+
+```
+uffizzi project describe [OPTOIN]
+```
+
+| Flags                          | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| `--output`                     | Format output as `json` or `pretty`                                                   |
+
+### project list
+
+List all projects for a user's account
+
+```
+uffizzi project list
+```
+
+### project secret
+
+### project set_default
+
+### project update
+
+## version 
+
+Show the CLI version  
+
+```
+uffizzi version
+```

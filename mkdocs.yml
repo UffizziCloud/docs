@@ -136,6 +136,7 @@ nav:
     - GitHub Environments: guides/github-environment.md
     - Troubleshooting: troubleshooting/most-common-problems.md
   - References:
+    - Command-line Reference: references/cli.md
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md

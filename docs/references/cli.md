@@ -448,7 +448,7 @@ uffizzi project describe [OPTOIN]
 
 | Flags                          | Description                                                                                |
 |--------------------------------|--------------------------------------------------------------------------------------------|
-| `--output`                     | Format output as `json` or `pretty`                                                   |
+| `--output`                     | Format output as `json` or `pretty`                                                        |
 
 ### project list
 
@@ -460,9 +460,43 @@ uffizzi project list
 
 ### project secret
 
+Manage secrets for a project
+
+```
+uffizzi project secret [SUBCOMMAND] [OPTIONS]
+```
+
+#### project secret create
+
+Create a secret from STDIN. Once added, project secrets cannot be viewed or edited—only deleted. Be sure to pass your secrets securely so they are not recoverable from process logs. For example, this command reads standard input piped from the `printf` command: 
+
+```
+printf "my secret password" | uffizzi project secret create MY_SECRET - 
+```
+
+#### project secret delete
+
+Delete a secret
+
+```
+uffizzi project secret delete [SECRET]
+```
+
+#### project secret list
+
+Lists metadata for all secrets in a project
+
+```
+uffizzi project secret list
+```
+
 ### project set_default
 
-### project update
+Set the default project given with the given project slug. When set, all commands use this project as the default context unless overridden by the --project flag. See [`config`](cli.md#config) for details about CLI configuration.
+
+```
+uffizzi project set-default [PROJECT_SLUG]
+```
 
 ## version 
 

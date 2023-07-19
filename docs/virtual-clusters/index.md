@@ -1,6 +1,6 @@
 # **What are Uffizzi virtual clusters?**
 
-Similar to the concept of virtual machines, Uffizzi virtual clusters are virtualized instances of Kubernetes clusters running on top of a host cluster. Uffizzi virtual clusters provide all the same functionality of real Kubernetes clusters, while being more convenient and efficient. Virtual Kubernetes clusters are one of the configuration options for Uffizzi ephemeral environments (the other being [Docker Compose environents](../guides/docker-compose-template.md)). You can create virtual clusters from Helm charts, kustomize, or regular Kubernetes manifests. Once created, you can manage Uffizzi virtual clusters with kubectl.
+Similar to the concept of virtual machines, Uffizzi virtual clusters are virtualized instances of Kubernetes clusters running on top of a host cluster. Uffizzi virtual clusters provide all the same functionality of real Kubernetes clusters, while being more convenient and efficient. Virtual Kubernetes clusters are one of the configuration options for Uffizzi ephemeral environments (the other being [Docker Compose environents](../guides/docker-compose-template.md)). You can create virtual clusters from Helm charts, kustomizations, or regular Kubernetes manifests. Once created, you can manage Uffizzi virtual clusters with kubectl.
 
 You can let [Uffizzi Cloud](https://app.uffizzi.com) manage the host cluster for your team, or spin up virtual clusters on your own infrastructure by self-hosting Uffizzi.
 

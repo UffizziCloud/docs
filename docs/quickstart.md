@@ -36,7 +36,7 @@ uffizzi login
 
 ## Create a virtual cluster
 
-Let's create a virtual Kubernetes cluster to which we'll apply manifests in the next steps.  
+Let's create a [virtual Kubernetes cluster](topics/virtual-clusters.md) to which we'll apply manifests in the next steps.  
 
 In the command below, replace `~/.kube/config` with the path to your kubeconfig file, if different. Uffizzi will merge with an existing kubeconfig at the location you specify. If you don't have a kubeconfig file, you can omit this option and Uffizzi will create a new kubeconfig file at `~/.kube/config`.
 

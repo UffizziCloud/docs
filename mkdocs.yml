@@ -111,8 +111,7 @@ nav:
     - Installation: install.md
     - Using Uffizzi: using-uffizzi.md
     - Detailed Setup Guide: set-up-uffizzi-for-your-application.md
-    - Cheat Sheet: cheat-sheet.md
-    - Topics: topics/virtual-clusters.md
+    - Virtual Clusters: topics/virtual-clusters.md
   - How-To: 
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (GitLab CI): quickstart-gitlab-ci.md
@@ -139,11 +138,11 @@ nav:
     - Troubleshooting: troubleshooting/most-common-problems.md
   - Topics:
     - Virtual Clusters: topics/virtual-clusters.md
+    - Why Uffizzi?: topics/why-uffizzi.md
+    - Continuous Previews: topics/continuous-previews.md
     - CI/CD + CP: topics/ci-cd-registry.md
     - Single-Page Applications: topics/single-page-applications.md
     - Docker Extensions Partner: topics/docker-extension-partner.md
-    - Why Uffizzi?: topics/why-uffizzi.md
-    - Continuous Previews: topics/continuous-previews.md
   - References:
     - Command-line Reference: references/cli.md
     - Docker Compose for Uffizzi: references/compose-spec.md

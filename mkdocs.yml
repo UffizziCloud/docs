@@ -81,6 +81,8 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
@@ -105,14 +107,13 @@ markdown_extensions:
 nav:
   - Home:
     - Home: index.md
+    - Quickstart Guide: quickstart.md
     - Installation: install.md
-    - Virtual Clusters: virtual-clusters/index.md
-    - Quickstart (GitHub Actions): quickstart-gha.md
-    - Quickstart (GitLab CI): quickstart-gitlab-ci.md
-    - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
-    - Getting Started: set-up-uffizzi-for-your-application.md
-    - Troubleshooting: troubleshooting/most-common-problems.md
-  - Guides: 
+    - Using Uffizzi: using-uffizzi.md
+    - Detailed Setup Guide: set-up-uffizzi-for-your-application.md
+    - Cheat Sheet: cheat-sheet.md
+    - Topics: topics/virtual-clusters.md
+  - How-To: 
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (GitLab CI): quickstart-gitlab-ci.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
@@ -134,26 +135,22 @@ nav:
     - Configure SSO: guides/single-sign-on.md 
     - Microservices on Uffizzi: guides/support-microservices-in-ephemeral-environments-with-nginx.md
     - Networking and architecture: guides/networking.md
-    - Continuous Previews: guides/continuous-previews.md
     - GitHub Environments: guides/github-environment.md
     - Troubleshooting: troubleshooting/most-common-problems.md
+  - Topics:
+    - Virtual Clusters: topics/virtual-clusters.md
+    - CI/CD + CP: topics/ci-cd-registry.md
+    - Single-Page Applications: topics/single-page-applications.md
+    - Docker Extensions Partner: topics/docker-extension-partner.md
+    - Why Uffizzi?: topics/why-uffizzi.md
+    - Continuous Previews: topics/continuous-previews.md
   - References:
     - Command-line Reference: references/cli.md
     - Docker Compose for Uffizzi: references/compose-spec.md
     - Uffizzi CI: references/uffizzi-ci.md
     - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
-  - Use Cases: 
-    - CI/CD + CP: use-cases/ci-cd-registry.md
-    - Docker Extensions Partner: use-cases/docker-extension-partner.md
-    - Why Uffizzi?: use-cases/why-uffizzi.md
-    - Configure API_BASE_URL for React Apps and Other Single-page Applications (SPA): use-cases/single-page-applications.md
   - Troubleshooting:
     - Most common problems: troubleshooting/most-common-problems.md
     - Debugging: troubleshooting/debugging.md
     - File or Directory is Too Large Error: troubleshooting/file-or-directory-is-too-large.md
-  - Virtual Clusters:
-    - Virtual Clusters: virtual-clusters/index.md
-    - Installation: virtual-clusters/installation.md
-    - Virtual Cluster Configuration: virtual-clusters/configuration.md
-    - Virtual Cluster Examples: virtual-clusters/examples.md

@@ -28,9 +28,4 @@ Uffizzi virtual clusters provide secure multi-tenant Kubernetes out of the box, 
 Whether you install Uffizzi on your own host cluster or are relying on Uffizzi Cloud, virtualization is the most cost-effective way to power your Kubernetes-based test environments. 
 
 ## **Getting started**  
-Use the links to below to get started with Uffizzi virtual clusters:  
-
-- [Installation](installation.md)  
-- [Virtual Cluster Configuration](configuration.md) 
-- Virtual Cluster Examples  
-- Integrate Virtual Clusters into your CI Pipeline  
+To get started with Uffizzi virtual clusters, follow the [quickstart guide](../quickstart.md).

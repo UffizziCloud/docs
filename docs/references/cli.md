@@ -42,7 +42,7 @@ $ uffizzi account set-default [ACCOUNT_NAME]
 
 ## **cluster**
 
-Manage [virtual clusters](../virtual-clusters/index.md)
+Manage [virtual clusters](../topics/virtual-clusters.md)
 
 ```
 uffizzi cluster [SUBCOMMAND] [OPTIONS]
@@ -50,7 +50,7 @@ uffizzi cluster [SUBCOMMAND] [OPTIONS]
 
 ### cluster create
 
-Create a virtual cluster
+Create a [virtual cluster](../topics/virtual-clusters.md)
 
 ```
 uffizzi cluster create -n [CLUSTER_NAME] -k [PATH_TO_KUBECONFIG] -m [PATH_TO_MANIFEST_FILE]
@@ -65,7 +65,7 @@ uffizzi cluster create -n [CLUSTER_NAME] -k [PATH_TO_KUBECONFIG] -m [PATH_TO_MAN
 
 ### cluster delete
 
-Delete a virtual cluster
+Delete a [virtual cluster](../topics/virtual-clusters.md)
 
 ```
 uffizzi cluster delete -n [CLUSTER_NAME]

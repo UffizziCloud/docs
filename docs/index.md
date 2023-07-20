@@ -20,13 +20,14 @@ To configure Uffizzi environments for your project, you'll need two things:
 !!! Note 
     **What is Uffizzi CI?** Uffizzi CI is an integrated build service provided by Uffizzi Cloud. Every time you push a new commit to your repository, Uffizzi CI receives a webhook and builds your application from source. Choose this solution if you don't already have a CI platform or don't want to use your existing solution to build preview images. [Learn more >](references/uffizzi-ci.md)
 
-## Getting Started
-Uffizzi can be use via its CLI, but it is primarily designed to work as a step in your CI pipeline, after images are built and pushed to a container registry. As noted above, you can use Uffizzi's integrated CI service ([Uffizzi CI](references/uffizzi-ci.md)) if you don't have an existing solution. 
+## **Quicklinks**
+| Topic  | Description   |
+|--------|---------------|
+| [Quickstart](quickstart.md)  | How to install and get started with Uffizzi |
+| [Set up Uffizzi for your application](set-up-uffizzi-for-your-application.md)  | Detailed integration guide that covers git and/or CI integration |
+| [CLI Reference](references/cli.md)  | Command-line reference |
+| [Troubleshooting](troubleshooting/most-common-problems.md)  | Most common problems and ways to solve them  |
 
-Choose a guide below based on your CI provider of choice.  
-&nbsp;  
-[&nbsp; &nbsp; Quickstart for Uffizzi CI &nbsp; &nbsp;](quickstart-uffizzi-ci.md){ .md-button .md-button--primary }&nbsp; &nbsp;
-[Quickstart for GitHub Actions](quickstart-gha.md){ .md-button }
 &nbsp;  
 &nbsp;  
 &nbsp;  

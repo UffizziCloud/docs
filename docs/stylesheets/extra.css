@@ -31,3 +31,7 @@
   /* Link color */
   --md-typeset-a-color: rgb(92, 127, 209);
 }
+
+.highlight.no-copy .md-clipboard {
+  display: none;
+}

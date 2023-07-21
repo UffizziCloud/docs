@@ -32,7 +32,7 @@ uffizzi login
 
 1. **Select an account** - If you have multiple GitHub/GitLab accounts, select which one you want to configure as your default account context. You can change this setting later with the [`uffizzi config`](references/cli.md#config) command.  
 
-2. **Create a new project** - Select **Create a new project**. Then enter a project name `quickstart` or similar, then confirm the project slug. For project description, enter "Quickstart guide" or just leave it blank.
+2. **Create a new project** - Select **Create a new project**. Enter a project name as "quickstart" or similar, then confirm the project slug. For project description, enter "Quickstart guide" or just leave it blank.
 
 ## Create a virtual cluster
 

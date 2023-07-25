@@ -124,21 +124,20 @@ nav:
     - Demo on Uffizzi button: guides/demo-on-uffizzi.md
     - Set up your account: guides/set-up-your-account.md
     - Expose multiple routes: guides/expose-multiple-routes.md
-    - Authenticating via OpenID Connect: guides/oidc.md
     - Configure password-protected environments: guides/password-protected.md
     - Authenticate with a container registry: guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md
     - Add secrets: guides/secrets.md
     - Check logs: guides/logs.md
-    - Configure role-based access: guides/rbac.md
     - Configure SSO: guides/single-sign-on.md 
     - Microservices on Uffizzi: guides/support-microservices-in-ephemeral-environments-with-nginx.md
-    - Networking and architecture: guides/networking.md
     - GitHub Environments: guides/github-environment.md
-    - Troubleshooting: troubleshooting/most-common-problems.md
   - Topics:
     - Virtual Clusters: topics/virtual-clusters.md
     - Why Uffizzi?: topics/why-uffizzi.md
+    - Role-based access (RBAC): topics/rbac.md
+    - Networking and architecture: topics/networking.md
+    - OpenID Connect (OIDC): topics/oidc.md
     - Continuous Previews: topics/continuous-previews.md
     - CI/CD + CP: topics/ci-cd-registry.md
     - Single-Page Applications: topics/single-page-applications.md

@@ -1,6 +1,6 @@
 # Password-protected environments
 
-Uffizzi allows you to configure a username and password for your Preview Environments to limit who has access to them. This feature is enabled per project, so anyone navigating to the URL of any Preview Environment of that project, either via a web browser or with a command like `curl`, must enter valid credentials to gain access. To configure this feature, you must be an account [Owner](../guides/rbac.md#owner).
+Uffizzi allows you to configure a username and password for your Preview Environments to limit who has access to them. This feature is enabled per project, so anyone navigating to the URL of any Preview Environment of that project, either via a web browser or with a command like `curl`, must enter valid credentials to gain access. To configure this feature, you must be an account [Owner](../topics/rbac.md#owner).
 
 Select your CI provider to begin set up:    
 
@@ -66,5 +66,5 @@ curl -u "username:password" [PREVIEW_URL]
 
 ## Suggested articles
 * [Set up single sign-on (SSO)](single-sign-on.md)
-* [Configure role-based access (RBAC)](rbac.md)
+* [Configure role-based access (RBAC)](../topics/rbac.md)
 * [Check the logs](logs.md)

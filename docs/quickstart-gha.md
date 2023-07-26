@@ -59,5 +59,5 @@ The [Starter Plan](https://uffizzi.com/pricing) is free includes up to two concu
 
 ## Set up Uffizzi for your application
 
-Now that you know how Uffizzi works, [set up Uffizzi for your application or service ➡️](set-up-uffizzi-for-your-application.md).
+Now that you know how Uffizzi works, [set up Uffizzi for your application or service ➡️](set-up-guide-docker-compose-environment.md).
 

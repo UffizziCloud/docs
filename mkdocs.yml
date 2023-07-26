@@ -110,16 +110,12 @@ nav:
     - Quickstart Guide: quickstart.md
     - Installation: install.md
     - Using Uffizzi: using-uffizzi.md
-    - Detailed Setup Guide: set-up-uffizzi-for-your-application.md
-    - Virtual Clusters: topics/virtual-clusters.md
+    - Virtual Cluster Environments from CI Pipelines: virtual-cluster-environment.md
+    - Docker Compose Environments from CI Pipelines: docker-compose-environment.md
   - How-To: 
     - Quickstart (GitHub Actions): quickstart-gha.md
     - Quickstart (GitLab CI): quickstart-gitlab-ci.md
     - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
-    - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
-    - Create a Docker Compose template: guides/docker-compose-template.md
-    - Integrate with your CI pipeline: guides/integrate-with-ci.md
-    - Configure credentials: guides/configure-credentials.md
     - Teams and Accounts: guides/teams-and-accounts.md
     - Demo on Uffizzi button: guides/demo-on-uffizzi.md
     - Set up your account: guides/set-up-your-account.md
@@ -145,9 +141,9 @@ nav:
   - References:
     - Command-line Reference: references/cli.md
     - Docker Compose for Uffizzi: references/compose-spec.md
-    - Uffizzi CI: references/uffizzi-ci.md
-    - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
+    - Uffizzi CI: references/uffizzi-ci.md
+    - Uffizzi Environment URL: references/uffizzi-environment-variables.md
   - Troubleshooting:
     - Most common problems: troubleshooting/most-common-problems.md
     - Debugging: troubleshooting/debugging.md

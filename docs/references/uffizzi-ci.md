@@ -1,5 +1,6 @@
 # Uffizzi CI  
-_If you use [GitHub Actions](https://github.com/features/actions) or another CI provider, you do not need to use Uffizzi CI._
+!!! Note
+    If you use GitHub Actions, GitLab CI, or another CI provider, you do not need to use Uffizzi CI.
 
 ## What is Uffizzi CI?
 Uffizzi CI is an integrated build and deployment service provided by Uffizzi Cloud free of charge. Choose this solution if you don't already have a CI platform or don't want to use your existing solution to build preview images.

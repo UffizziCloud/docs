@@ -8,6 +8,7 @@
   --md-text-link-color: hsla(231, 48%, 48%, 1);
 
   /* Accent color shades */
+  --md-accent-sh-color: rgb(67, 67, 67);
   --md-accent-fg-color: rgb(100, 100, 100);
   --md-accent-fg-color--transparent: hsla(189, 100%, 37%, 0.1);
   --md-accent-bg-color: hsla(0, 0%, 100%, 1);
@@ -32,6 +33,29 @@
   --md-typeset-a-color: rgb(92, 127, 209);
 }
 
+/* Optionally remove the copy code button from code block */
 .highlight.no-copy .md-clipboard {
   display: none;
+}
+
+
+/* H1 and H2 tags */
+.md-typeset h1 {
+  font-weight: bold;
+  color: var(--md-primary-fg-color);
+}
+
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: bold;
+  color: var(--md-accent-sh-color);
+}
+
+/* Full-width tables */
+.md-typeset__table {
+  min-width: 100%;
+}
+
+.md-typeset table:not([class]) {
+  display: table;
 }

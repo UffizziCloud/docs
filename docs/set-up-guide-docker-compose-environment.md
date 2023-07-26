@@ -1,4 +1,4 @@
-# Set up Uffizzi for your application
+# Set Up a Docker Compose Ephemeral Environment
 !!! Tip
     If this is your first time using Uffizzi, we recommend following one of our quickstart guides ([GitHub Actions](quickstart-gha.md), [GitLab CI](quickstart-gitlab-ci.md), or [Uffizzi CI](quickstart-uffizzi-ci.md)) to see how Uffizzi is configured with an example application.
 

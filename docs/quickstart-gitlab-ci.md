@@ -76,5 +76,5 @@ Our Starter Plan is free for up to two concurrent ephemeral environments. The Pr
 
 ## Set up Uffizzi for your application
 
-Now that you know how Uffizzi works, [set up Uffizzi for your application or service ➡️](set-up-uffizzi-for-your-application.md).
+Now that you know how Uffizzi works, [set up Uffizzi for your application or service ➡️](set-up-guide-docker-compose-environment.md).
 

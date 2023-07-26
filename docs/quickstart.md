@@ -7,7 +7,7 @@ This guide covers how you can quickly get started using Uffizzi.
 The following prerequisites are required for this guide:
 
 1. A GitHub or GitLab account for creating a Uffizzi Cloud login
-2. Installing and configuring Uffizzi  
+2. Installing and configuring the Uffizzi client
 3. Deciding which continuous integration tool to configure, if any
 
 ## Install Uffizzi
@@ -117,6 +117,10 @@ uffizzi cluster delete quickstart --delete-config
 ```
 
 The `--delete-config` flag tells Uffizzi to delete this cluster, user, and context for your kubeconfig file.
+
+## What's next?
+
+See how to add Uffizzi to a continuous integration (CI) pipeline like GitHub Actions or GitLab CI, so you can create ephemeral environments on every pull request or merge request.
 
 ## Set up Uffizzi for GitHub Actions
 

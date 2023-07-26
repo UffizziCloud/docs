@@ -1,6 +1,9 @@
 # Quickstart Guide
 
-This guide covers how you can quickly get started using Uffizzi.
+This guide covers how you can quickly get started using Uffizi to create virtual clusters. If you want to create Docker Compose-based environments instead, start with [this guide](docker-compose-environment.md).
+
+!!! Important
+    Uffizzi virtual clusters are currently in beta. Our team is actively working to improve reliability and developer experience. Please report any bugs to bugs@uffizzi.com
 
 ## Prerequisites
 

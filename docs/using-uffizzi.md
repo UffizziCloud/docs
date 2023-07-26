@@ -8,7 +8,7 @@ If just want to run a few quick commands, you may want to start with the [Quicks
 
 Uffizzi currently supports two types of ephemeral environments:
 
-- **Virtual cluster environments** are Kubernetes-based environments built from a Kubernetes specification—typically Helm, kustomize, or standard manifests. You can read more about Uffizzi's virtual clusters [here](topics/virtual-clusters.md), but in short, these are fully functional Kubernetes clusters that run in isolation on top of a host cluster. Once you've created these clusters with the Uffizzi client or from your CI pipeline, you can use standard Kubernetes tools like `kubectl` and `helm` to manage them and their configurations.
+- **(In Beta) Virtual cluster environments** are Kubernetes-based environments built from a Kubernetes specification—typically Helm, kustomize, or standard manifests. You can read more about Uffizzi's virtual clusters [here](topics/virtual-clusters.md), but in short, these are fully functional Kubernetes clusters that run in isolation on top of a host cluster. Once you've created these clusters with the Uffizzi client or from your CI pipeline, you can use standard Kubernetes tools like `kubectl` and `helm` to manage them and their configurations.
 
 - **Docker Compose environments** are container-based environments built from a Docker Compose specification. You can read more about Uffizzi's support for the Compose specification [here](references/compose-spec.md), as well as a tutorial on how to [write a Uffizzi Compose file](guides/docker-compose-template.md) and how to [upload and configure it](http://localhost:8000/guides/configure-credentials/).
 
@@ -21,27 +21,25 @@ Uffizzi has two primary functions:
 
 ## From the Uffizzi Client
 
-You use the Uffizzi client to create environments from your local directory or a remote repository. When you create an environment, the Uffizzi client will return a hostname that you can connect to.
+You use the Uffizzi client to create environments from a local directory. When you create an environment, the Uffizzi client will update the kubeconfig file you specify with a cluster hostname and certificate you can use to connect.
 
-**Local directory**
-
-Here we create a cluster with the Uffizzi client and apply the manifests with kubectl. 
+Here we create a cluster with the Uffizzi client and apply the manifests from a local directory with `kubectl`:
 ```
 uffizzi cluster create -n my-cluster -k ~/.kube/config
 kubectl apply -f manifests/
 ```
 
-Alternately, we can create a cluster and apply the manifests in a single Uffizzi command.
+Alternately, we can create a cluster and apply the manifests in a single Uffizzi command:
 
 ```
 uffizzi cluster create -n my-cluster -k ~/.kube/config -m manifests/
 ```
 
-**Remote repository**
+If connect to an existing Uffizzi cluster you can run the `update-kubeconfig` command with the name of the cluster you're targeting and the location of your kubeconfig file:
 
-
-
-
+```
+uffizzi cluster update-kubeconfig my-cluster -k ~/.kube/config
+```
 
 ## From a CI Pipeline
 

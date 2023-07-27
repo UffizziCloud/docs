@@ -23,9 +23,11 @@ Uffizzi has two primary functions:
 
 You use the Uffizzi client to create environments from a local directory. When you create an environment, the Uffizzi client will update the kubeconfig file you specify with a cluster hostname and certificate you can use to connect.
 
+### Creating and managing clusters  
+
 Here we create a cluster with the Uffizzi client and apply the manifests from a local directory with `kubectl`:
 ```
-uffizzi cluster create -n my-cluster -k ~/.kube/config
+uffizzi cluster create -n my-cluster -k ~/.kube/config &&
 kubectl apply -f manifests/
 ```
 
@@ -35,11 +37,28 @@ Alternately, we can create a cluster and apply the manifests in a single Uffizzi
 uffizzi cluster create -n my-cluster -k ~/.kube/config -m manifests/
 ```
 
-If connect to an existing Uffizzi cluster you can run the `update-kubeconfig` command with the name of the cluster you're targeting and the location of your kubeconfig file:
+To connect to an existing Uffizzi cluster, you can run the `update-kubeconfig` command with the name of the cluster you're targeting and the location of your kubeconfig file:
 
 ```
 uffizzi cluster update-kubeconfig my-cluster -k ~/.kube/config
 ```
+See the [CLI Reference](references/cli.md#cluster-update-kubeconfig) for how Uffizzi handles kubeconfig updates.
+
+### Creating and managing Docker Compose environments
+
+**Support for Compose**
+
+Use the `preview` command to create an ephemeral environment from a Docker Compose configuration. Note that Uffizzi supports a subset of the of the complete [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Uffizzi also requires some additional configuration that is not included in the Compose specification, most notably an `ingress` definition. See the [Uffizzi Compose File Reference](references/compose-spec.md) for more detail on what is required for your `docker-compose.uffizzi.yml` file. For help writing this file or for using it in CI pipelines to create pull request environments, see [this guide](docker-compose-environment.md).
+
+In the following example, we pass a `docker-compose.uffizzi.yml` from our local development environment. This command will create a preview environment for this Compose file in the default account and project. 
+
+!!! Important
+    The Uffizzi client does not build containers from your local environment even if your environment includes a `DOCKERFILE`. Instead you should included pre-built images in your Docker Compose file (i.e. use the `image` directive instead of the `build` directive.) If you want Uffizzi to build container images for you, your code must hosted in a GitHub repository Uffizzi CI. (i.e. it will not build containers from your local workstation. 
+
+```
+uffizzi preview create docker-compose.uffizzi.yml
+```
+
 
 ## From a CI Pipeline
 

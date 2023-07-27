@@ -46,9 +46,11 @@ See the [CLI Reference](references/cli.md#cluster-update-kubeconfig) for how Uff
 
 ### Creating and managing Docker Compose environments
 
+Use the `preview` command to create an ephemeral environment from a Docker Compose configuration. 
+
 **Support for Compose**
 
-Use the `preview` command to create an ephemeral environment from a Docker Compose configuration. Note that Uffizzi supports a subset of the of the complete [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Uffizzi also requires some additional configuration that is not included in the Compose specification, most notably an `ingress` definition. See the [Uffizzi Compose File Reference](references/compose-spec.md) for more detail on what is required for your `docker-compose.uffizzi.yml` file. For help writing this file or for using it in CI pipelines to create pull request environments, see [this guide](docker-compose-environment.md).
+Note that Uffizzi supports a subset of the of the complete [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Uffizzi also requires some additional configuration that is not included in the Compose specification, most notably an `ingress` definition. See the [Uffizzi Compose File Reference](references/compose-spec.md) for more detail on what is required for your `docker-compose.uffizzi.yml` file. For help writing this file or for using it in CI pipelines to create pull request environments, see [this guide](docker-compose-environment.md).
 
 In the following example, we pass a `docker-compose.uffizzi.yml` from our local development environment. This command will create a preview environment for this Compose file in the default account and project. 
 

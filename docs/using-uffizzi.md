@@ -20,6 +20,8 @@ Uffizzi has two primary functions:
 
 ## From the Uffizzi Client
 
+### Configuring the client
+
 You can configure the Uffizzi client using the `config` subcommand. The configuration is stored in `~/.uffizzi/config`. 
 
 ``` bash
@@ -201,9 +203,9 @@ Running this workflow will create a [Uffizzi Cloud](https://uffizzi.com) account
 
 **Docker Compose environment**
 
-Create a Docker Compose environment from a GitLab CI pipleine. See source code [here](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci).
+Create a Docker Compose environment from a GitLab CI pipleine.
 
-From the project home page, select **Fork**, then choose a namespace and project slug. Select **Fork project**.
+Start by forking the the [quickstart](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci) repository on GitLab. From the project home page, select **Fork**, then choose a namespace and project slug. Select **Fork project**.
 
 Ensure GitLab CI/CD is enabled for your project. If you don't see the **Build > Pipelines** option in left sidebar, following [these steps](https://docs.gitlab.com/ee/ci/enable_or_disable_ci.html#enable-cicd-in-a-project) to enable it.
 

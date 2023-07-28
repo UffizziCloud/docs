@@ -17,6 +17,6 @@ If initiated via PR, Uffizzi will post a comment to your PR issue with a secure 
 | Topic  | Description |
 |--------|---------------|
 | [Quickstart](quickstart.md)  | How to install and get started with Uffizzi |
-| [Detailed Setup Guide](set-up-guide-docker-compose-environment.md)  | Detailed integration guide that covers git and/or CI integration |
+| [Using Uffizzi](using-uffizzi.md)  | Detailed integration guide that covers git and/or CI integration |
 | [CLI Reference](references/cli.md)  | Command-line reference |
 | [Troubleshooting](troubleshooting/most-common-problems.md)  | Most common problems and ways to solve them  |

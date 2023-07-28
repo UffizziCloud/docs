@@ -123,12 +123,8 @@ The `--delete-config` flag tells Uffizzi to delete this cluster, user, and conte
 
 ## What's next?
 
-See how to add Uffizzi to a continuous integration (CI) pipeline like GitHub Actions or GitLab CI, so you can create ephemeral environments on every pull request or merge request.
+See advanced usage examples, like how to add Uffizzi to a continuous integration (CI) pipeline like GitHub Actions or GitLab CI, so you can create ephemeral environments on every pull request or merge request.
 
-## Set up Uffizzi for GitHub Actions
+[Using Uffizzi →](using-uffizzi.md){ .md-button .md-button--primary }
 
-TODO
-
-## Set up Uffizzi for GitLab CI
-
-TODO
+&nbsp;

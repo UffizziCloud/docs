@@ -113,9 +113,7 @@ nav:
     - Virtual Cluster Environments from CI Pipelines: virtual-cluster-environment.md
     - Docker Compose Environments from CI Pipelines: docker-compose-environment.md
   - How-To: 
-    - Quickstart (GitHub Actions): quickstart-gha.md
-    - Quickstart (GitLab CI): quickstart-gitlab-ci.md
-    - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
+    - Uffizzi CI: quickstart-uffizzi-ci.md
     - Teams and Accounts: guides/teams-and-accounts.md
     - Demo on Uffizzi button: guides/demo-on-uffizzi.md
     - Set up your account: guides/set-up-your-account.md

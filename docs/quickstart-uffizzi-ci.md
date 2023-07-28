@@ -1,17 +1,17 @@
-# Quickstart (Uffizzi CI)
+# What is Uffizzi CI?
 
-## What is Uffizzi CI?
 Uffizzi CI is an integrated build service provided by Uffizzi Cloud. Every time you push a new commit to your repository, Uffizzi CI receives a webhook and builds your application from source. Choose this solution if you don't already have a CI platform or don't want to use your existing solution to build preview images. [Learn more >](references/uffizzi-ci.md)  
 
+## Example Usage
 
-## **1. Fork the `quickstart-uffizzi-ci` repository**  
+### **1. Fork the `quickstart-uffizzi-ci` repository**  
 Fork the [`quickstart-uffizzi-ci`](https://github.com/UffizziCloud/quickstart-uffizzi-ci) repository on GitHub. Be sure to uncheck the option **Copy the `main` branch only**. This ensures that the `try-uffizzi` branch will be included in your fork.  
 
 <details><summary>Click to expand</summary>
 <img src="https://user-images.githubusercontent.com/7218230/191072997-94fdc9cc-2be2-4b44-900f-d4507c6df8a6.png" width="800">  
 </details>
 
-### What's in this repository?
+#### What's in this repository?
 This repository includes a sample voting application that consists of five microservies. Also included in the repository is a Docker Compose template ([`docker-compose.uffizzi.yml`](https://github.com/UffizziCloud/quickstart-uffizzi-ci/blob/main/docker-compose.uffizzi.yml)) that describes the application stack and includes information required by Uffizzi.
 
 At a minimum, this file must include the following object definitions:
@@ -31,7 +31,7 @@ Your Docker Compose template must be committed to the branch that you merge _int
 !!! Note  
     See the [Docker Compose for Uffizzi reference guide](references/compose-spec.md) for a comprehensive list of supported keywords. 
 
-## **2. Create a project at uffizzi.com**  
+### **2. Create a project at uffizzi.com**  
 
 If you haven't already done so, [create a Uffizzi Cloud account](https://app.uffizzi.com/sign_up). Once logged in, follow these steps to create project:  
 
@@ -60,7 +60,7 @@ If you haven't already done so, [create a Uffizzi Cloud account](https://app.uff
 <img src="../assets/images/compose-added.webp" width="600">
 </details>  
 
-## **3. Open a pull request for `try-uffizzi` branch against `main` in your fork** 
+### **3. Open a pull request for `try-uffizzi` branch against `main` in your fork** 
 
 Be sure that you're opening a PR on the branches of _your fork_ (i.e. `your-account/main` ← `your-account/try-uffizzi`). If you try to open a PR for `UffizziCloud/main` ← `your-account/try-uffizzi`, a preview will not run in this example.   
 

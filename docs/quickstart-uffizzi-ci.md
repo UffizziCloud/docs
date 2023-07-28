@@ -1,4 +1,4 @@
-# What is Uffizzi CI?
+# Configure Uffizzi CI
 
 Uffizzi CI is an integrated build service provided by Uffizzi Cloud. Every time you push a new commit to your repository, Uffizzi CI receives a webhook and builds your application from source. Choose this solution if you don't already have a CI platform or don't want to use your existing solution to build preview images. [Learn more >](references/uffizzi-ci.md)  
 

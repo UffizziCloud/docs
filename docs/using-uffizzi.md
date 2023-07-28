@@ -201,7 +201,7 @@ Running this workflow will create a [Uffizzi Cloud](https://uffizzi.com) account
 
 ### GitLab CI examples
 
-**Docker Compose environment**
+#### Docker Compose environment
 
 Create a Docker Compose environment from a GitLab CI pipleine.
 

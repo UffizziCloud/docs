@@ -11,7 +11,7 @@ When Continuous Previews are configured, Uffizzi uses webhooks on your git repos
 ## Uffizzi-Managed Build vs. Bring Your Own Build Options
 Uffizzi supports deploying previews directly from your git repository or from a [container registry](../guides/container-registry-integrations.md).  
 
-Users have the option for Uffizzi to build your application or you can [augment your existing CI/CD solution with a Continuous Previews (CP) capability](../use-cases/ci-cd-registry.md).  
+Users have the option for Uffizzi to build your application or you can [augment your existing CI/CD solution with a Continuous Previews (CP) capability](ci-cd-registry.md).  
 
 If you are using your own CI/CD for the build, images tagged `uffizzi_request_<#>` can initiate new preview deployments.  In addition to being compatible with custom build processes this allows for users on Gitlab, Bitbucket, or other Version Control Systems to immediately benefit from Uffizzi.
 

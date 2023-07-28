@@ -3,7 +3,7 @@ site_name: Uffizzi Docs
 site_author: Uffizzi.com
 site_description: >-
   Uffizzi Documentation
-site_url: https://docs.uffizzi.com
+site_url: https://docs.uffizzi.com/
 
 # Repository
 repo_url: https://github.com/UffizziCloud/docs
@@ -81,6 +81,8 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
@@ -104,51 +106,43 @@ markdown_extensions:
 # Page tree
 nav:
   - Home:
-    - What is Uffizzi?: index.md
-    - Quickstart (GitHub Actions): quickstart-gha.md
-    - Quickstart (GitLab CI): quickstart-gitlab-ci.md
-    - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
-    - Set up previews for your application: set-up-uffizzi-for-your-application.md
-    - Troubleshooting: troubleshooting/most-common-problems.md
-  - Guides: 
-    - Quickstart (GitHub Actions): quickstart-gha.md
-    - Quickstart (GitLab CI): quickstart-gitlab-ci.md
-    - Quickstart (Uffizzi CI): quickstart-uffizzi-ci.md
-    - Set up Uffizzi for your application: set-up-uffizzi-for-your-application.md
-    - Create a Docker Compose template: guides/docker-compose-template.md
-    - Integrate with your CI pipeline: guides/integrate-with-ci.md
-    - Configure credentials: guides/configure-credentials.md
+    - Home: index.md
+    - Quickstart Guide: quickstart.md
+    - Installation: install.md
+    - Using Uffizzi: using-uffizzi.md
+    - Virtual Cluster Environments from CI Pipelines: virtual-cluster-environment.md
+    - Docker Compose Environments from CI Pipelines: docker-compose-environment.md
+  - How-To: 
+    - Uffizzi CI: quickstart-uffizzi-ci.md
     - Teams and Accounts: guides/teams-and-accounts.md
     - Demo on Uffizzi button: guides/demo-on-uffizzi.md
     - Set up your account: guides/set-up-your-account.md
     - Expose multiple routes: guides/expose-multiple-routes.md
-    - Authenticating via OpenID Connect: guides/oidc.md
     - Configure password-protected environments: guides/password-protected.md
     - Authenticate with a container registry: guides/container-registry-integrations.md
     - Add environment variables: guides/environment-variables.md
     - Add secrets: guides/secrets.md
     - Check logs: guides/logs.md
-    - Configure role-based access: guides/rbac.md
     - Configure SSO: guides/single-sign-on.md 
     - Microservices on Uffizzi: guides/support-microservices-in-ephemeral-environments-with-nginx.md
-    - Networking and architecture: guides/networking.md
-    - Continuous Previews: guides/continuous-previews.md
     - GitHub Environments: guides/github-environment.md
-    - Troubleshooting: troubleshooting/most-common-problems.md
+  - Topics:
+    - Virtual Clusters: topics/virtual-clusters.md
+    - Why Uffizzi?: topics/why-uffizzi.md
+    - Role-based access (RBAC): topics/rbac.md
+    - Networking and architecture: topics/networking.md
+    - OpenID Connect (OIDC): topics/oidc.md
+    - Continuous Previews: topics/continuous-previews.md
+    - CI/CD + CP: topics/ci-cd-registry.md
+    - Single-Page Applications: topics/single-page-applications.md
+    - Docker Extensions Partner: topics/docker-extension-partner.md
   - References:
     - Command-line Reference: references/cli.md
     - Docker Compose for Uffizzi: references/compose-spec.md
-    - Uffizzi CI: references/uffizzi-ci.md
-    - Uffizzi environment variables: references/uffizzi-environment-variables.md
     - Example Uffizzi Compose: references/example-compose.md
-  - Use Cases: 
-    - CI/CD + CP: use-cases/ci-cd-registry.md
-    - Docker Extensions Partner: use-cases/docker-extension-partner.md
-    - Why Uffizzi?: use-cases/why-uffizzi.md
-    - Configure API_BASE_URL for React Apps and Other Single-page Applications (SPA): use-cases/single-page-applications.md
+    - Uffizzi CI: references/uffizzi-ci.md
+    - Uffizzi Environment URL: references/uffizzi-environment-variables.md
   - Troubleshooting:
     - Most common problems: troubleshooting/most-common-problems.md
     - Debugging: troubleshooting/debugging.md
     - File or Directory is Too Large Error: troubleshooting/file-or-directory-is-too-large.md
-  - 🤖 Chat the docs:
-    - 🤖 Chat the docs: https://chat.uffizzi.com

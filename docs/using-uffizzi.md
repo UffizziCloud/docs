@@ -138,12 +138,12 @@ Open a pull request for `try-uffizzi` branch against `main` in your fork. Be sur
 &nbsp;  
 **What to expect**
 
-The PR will trigger a [GitHub Actions workflow](.github/workflows/uffizzi-cluster.yaml) that uses the Uffizzi client and Kubernetes manifests to create a Uffizzi ephemeral environment for the [microservices application](#architecture-of-this-example-app) defined by the repo. When the workflow completes, the ephemeral environment URL will be posted as a comment in your PR issue.
+The PR will trigger a [GitHub Actions workflow](https://github.com/UffizziCloud/quickstart-k8s/blob/main/.github/workflows/uffizzi.yml) that uses the Uffizzi client and Kubernetes manifests to create a Uffizzi ephemeral environment for the [microservices application](#architecture-of-this-example-app) defined by the repo. When the workflow completes, the ephemeral environment URL will be posted as a comment in your PR issue.
 
 &nbsp;  
 **How it works**
 
-Ephemeral environments are configured with [Kubernetes manifests](manifests/) that describe the application components and a [GitHub Actions workflow](.github/workflows/uffizzi-cluster.yaml) that includes a series of jobs triggered by a `pull_request` event and subsequent `push` events:
+Ephemeral environments are configured with [Kubernetes manifests](manifests/) that describe the application components and a [GitHub Actions workflow](https://github.com/UffizziCloud/quickstart-k8s/blob/main/.github/workflows/uffizzi.yml) that includes a series of jobs triggered by a `pull_request` event and subsequent `push` events:
 
 1. [Build and push the voting-app images](https://github.com/UffizziCloud/quickstart-k8s/blob/fc27d539d98fd602039a4259cafe9dd2ccf65dc5/.github/workflows/reusable.yml#L11C1-L90C28)
 2. [Create the Uffizzi cluster using the uffizzi-cli](https://github.com/UffizziCloud/quickstart-k8s/blob/fc27d539d98fd602039a4259cafe9dd2ccf65dc5/.github/workflows/reusable.yml#L92C1-L102C22)

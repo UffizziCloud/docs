@@ -207,17 +207,34 @@ Create a Docker Compose environment from a GitLab CI pipleine.
 
 Start by forking the the [quickstart](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci) repository on GitLab. From the project home page, select **Fork**, then choose a namespace and project slug. Select **Fork project**.
 
+<details><summary>Click to expand</summary>
+<img src="../assets/images/quickstart-gitlab-fork-1.png" width="800">
+<hr>
+<img src="../assets/images/quickstart-gitlab-fork-2.png" width="800">  
+</details>
+
+&nbsp;  
 Ensure GitLab CI/CD is enabled for your project. If you don't see the **Build > Pipelines** option in left sidebar, following [these steps](https://docs.gitlab.com/ee/ci/enable_or_disable_ci.html#enable-cicd-in-a-project) to enable it.
 
+<details><summary>Click to expand</summary>
+<img src="../assets/images/quickstart-gitlab-build-pipelines.png" width="800">
+</details>
+
+&nbsp;   
 Open a merge request (MR) for `try-uffizzi` branch against `master` in your fork.
 
 :warning: Be sure that you’re opening the MR on the branches of _your fork_ (i.e. `your-account/master` ← `your-account/try-uffizzi`).
 
 If you try to open a MR for `uffizzi/quickstart/~/tree/master` ← `your-account/~/tree/try-uffizzi`, the pipeline will not run in this example.
 
-This will kick off a GitLab pipeline and the ephemeral environment URL will be dumped to `stdout` of the pipeline job. 
+<details><summary>Click to expand</summary>
+<img src="../assets/images/quickstart-gitlab-create-mr.png" width="800">
+</details>
 
 &nbsp;  
+This will kick off a GitLab pipeline and the ephemeral environment URL will be dumped to `stdout` of the pipeline job. 
+
+&nbsp;   
 **What to expect**
 
 The MR will trigger a pipeline defined in [`.gitlab-ci.yml`](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci/-/blob/master/.gitlab-ci.yml) that creates a Uffizzi ephemeral environment for the microservices application defined by the repo. The ephemeral environment URL will be echoed to `stdout` of the `deploy_environment` Job. Look for the following line in the Job logs:
@@ -231,7 +248,7 @@ This link will take you to the Uffizzi Dashboard where you can view application 
 
 You might also want configure a new Job to post the URL as a comment to your MR issue or send a notification to Slack, MS Teams, etc. See our Slack notification example [here](https://gitlab.com/uffizzi/environment-action/-/blob/main/Notifications/slack.yml).
 
-&nbsp;  
+&nbsp;   
 **How it works**
 
 Ephemeral environments are configured with a [Docker Compose template](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci/-/blob/master/docker-compose.uffizzi.yml) that describes the application components and a [GitLab CI pipeline](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci/-/blob/master/.gitlab-ci.yml) that includes a series of jobs triggered by a `merge_request_event`:
@@ -240,5 +257,12 @@ Ephemeral environments are configured with a [Docker Compose template](https://g
 2. [Render a Docker Compose file from the Docker Compose template and the built images](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci/-/blob/master/.gitlab-ci.yml#L56-76)
 3. [Deploy the application to a Uffizzi ephemeral environment and echo the environment URL to the Job logs](https://gitlab.com/uffizzi/environment-action/-/blob/main/environment.gitlab-ci.yml#L30-76)
 4. [Delete the environment](https://gitlab.com/uffizzi/environment-action/-/blob/main/environment.gitlab-ci.yml#L98-115)
+
+!!! Tip
+    Each ephemeral environment is available at a predictable URL which consists of `https://app.uffizzi.com/` appended with the GitLab merge request domain. For example:  
+    `https://app.uffizzi.com/gitlab.com/{account}/{repo}/merge_requests/{merge-request-number}`.  
+
+    You can make requests to specific endpoints by appending a route to the end of the URL. For example:  
+    `https://app.uffizzi.com/gitlab.com/acme/example-app/pull/661/api/health`  
 
 Running this workflow will create a [Uffizzi Cloud](https://uffizzi.com) account and project from your GitLab user and repo information, respectively. If you sign in to the [Uffizzi Dashboard](https://app.uffizzi.com/sign_in) you can view logs, password protect your environments, manage projects and team members, set role-based access controls, and configure single-sign on (SSO).

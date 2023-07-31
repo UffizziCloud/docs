@@ -1,7 +1,7 @@
 # Create Docker Compose Environments from CI Pipelines
 
 !!! Tip
-    If this is your first time using Uffizzi, we recommend following the [Quickstart Guide](quickstart.md) and [Using Uffizzi](using-uffizzi.md) to see a preconfigured example of how Uffizzi is configured.
+    If this is your first time using Uffizzi, we recommend reading through [Using Uffizzi](using-uffizzi.md) to see examples of how Uffizzi is configured and managed.
 
 ## Overview of the process
 

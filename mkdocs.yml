@@ -114,7 +114,6 @@ nav:
     - Docker Compose Environments from CI Pipelines: docker-compose-environment.md
   - How-To: 
     - Uffizzi CI: quickstart-uffizzi-ci.md
-    - Teams and Accounts: guides/teams-and-accounts.md
     - Demo on Uffizzi button: guides/demo-on-uffizzi.md
     - Set up your account: guides/set-up-your-account.md
     - Expose multiple routes: guides/expose-multiple-routes.md
@@ -128,10 +127,11 @@ nav:
     - GitHub Environments: guides/github-environment.md
   - Topics:
     - Virtual Clusters: topics/virtual-clusters.md
-    - Why Uffizzi?: topics/why-uffizzi.md
+    - Teams and Accounts: topics/teams-and-accounts.md
     - Role-based access (RBAC): topics/rbac.md
     - Networking and architecture: topics/networking.md
     - OpenID Connect (OIDC): topics/oidc.md
+    - Why Uffizzi?: topics/why-uffizzi.md
     - Continuous Previews: topics/continuous-previews.md
     - CI/CD + CP: topics/ci-cd-registry.md
     - Single-Page Applications: topics/single-page-applications.md

@@ -55,7 +55,7 @@ For more information on Uffizzi's account model, see [Teams and Accounts on Uffi
 
 ### Via Environment Variables
 
-Alternatively, if you set environment varialbes `UFFIZZI_USER_EMAIL` and `UFFIZZI_USER_PASSWORD`, Uffizzi will log you in automatically when you run `uffizzi login`.
+Alternatively, for email/password accounts (i.e. not GitHub or GitLab OAuth), if you set environment varialbes `UFFIZZI_USER_EMAIL` and `UFFIZZI_USER_PASSWORD`, Uffizzi will log you in automatically when you run `uffizzi login`.
 
 ## Create a new project
 

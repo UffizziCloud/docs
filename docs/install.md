@@ -42,7 +42,7 @@ Once you've configured the Ufizzi CLI, you can login via `uffizzi login`. This c
 uffizzi login
 ```
 
-Once you're logged in, return to the CLI and select the specific GitHub or GitLab account you want to use as the default account context. You can change this setting later with the [`uffizzi config`](references/cli.md#config) command. 
+Once you're logged in, return to the CLI. If you logged in with a GitHub or GitLab account, you'll need to select which account you want to use as the default account context, for example, if you have both a personal and organizational account. You can change this setting later with the [`uffizzi config`](references/cli.md#config) command. 
 
 ``` bash
 $ uffizzi login
@@ -52,6 +52,10 @@ Select an account: (Press ↑/↓ arrow to move and Enter to select)
 ```
 
 For more information on Uffizzi's account model, see [Teams and Accounts on Uffizzi Cloud](topics/teams-and-accounts.md) and [Role-based Access Control](topics/rbac.md).
+
+### Via Environment Variables
+
+Alternatively, if you set environment varialbes `UFFIZZI_USER_EMAIL` and `UFFIZZI_USER_PASSWORD`, Uffizzi will log you in automatically when you run `uffizzi login`.
 
 ## Create a new project
 

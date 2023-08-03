@@ -44,8 +44,10 @@ Let's create a [virtual Kubernetes cluster](topics/virtual-clusters.md) to which
 In the command below, replace `~/.kube/config` with the path to your kubeconfig file, if different. Uffizzi will merge with an existing kubeconfig at the location you specify. If you don't have a kubeconfig file, you can omit this option and Uffizzi will create a new kubeconfig file at `~/.kube/config`.
 
 ``` bash
-uffizzi cluster create --name quickstart --kubeconfig ~/.kube/config
+uffizzi cluster create --name quickstart --kubeconfig ~/.kube/config --update-current-context
 ```
+
+The last option `--update-current-context` is equivalent to `kubectl config use-context`. It tells Uffizzi to set the default cluster context to the one that was just created.
 
 ## Download an example application
 

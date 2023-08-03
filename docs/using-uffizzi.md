@@ -48,10 +48,15 @@ uffizzi config get-value server
 
 ### Creating and managing clusters  
 
-Use the Uffizzi client to create environments from a local directory (support for remote Chart repositories is coming soon). When you create an environment, the Uffizzi client will update the kubeconfig file you specify with a cluster hostname and certificate you can use to connect, as well as, update your current context. Here we create a cluster with the Uffizzi client and apply the manifests from a local directory with `kubectl`:
+Use the Uffizzi client to create environments from a local directory (support for remote Chart repositories is coming soon). When you create an environment, the Uffizzi client will update the kubeconfig file you specify with a cluster hostname and certificate you can use to connect, as well as, update your current context. Here we create a cluster with the Uffizzi client:
 
 ``` bash
-uffizzi cluster create -n my-cluster -k ~/.kube/config &&
+uffizzi cluster create -n my-cluster -k ~/.kube/config --update-current-context
+```
+
+Then apply the manifests from a local directory with `kubectl`:
+
+``` bash
 kubectl apply -f manifests/
 ```
 

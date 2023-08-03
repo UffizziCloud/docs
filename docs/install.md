@@ -23,9 +23,7 @@ The Uffizzi CLI is currently available as a binary for macOS and Linux. Windows 
     docker run --interactive --rm --tty --entrypoint=sh uffizzi/cli
     ```
 
-### Add Uffizzi to your PATH
-
-
+Alternatively, you can download binaries directly from the [GitHub Releases](https://github.com/UffizziCloud/uffizzi_cli/releases) page, then add the location to your `PATH`.
 
 ## Configure the CLI
 

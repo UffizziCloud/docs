@@ -62,7 +62,7 @@ uffizzi cluster create -n [CLUSTER_NAME] -k [PATH_TO_KUBECONFIG] -m [PATH_TO_MAN
 | `-k`, `--kubeconfig`      | The location of the kubeconfig file to create or update                                    |
 | `-m`, `--manifest`        | The path to a Kubernetes manifest file. If no manifest is provided, Uffizzi creates an empty cluster instance. |
 | `-o`, `--output`          | Formats the output of this command. Accepted values are `pretty-json` and `json`           |
-| `--update-current-context`| Updates the current kubeconfig context to the named cluster created by this command        |
+| `--update-current-context`| Updates the current kubeconfig context                                                     |
 
 ### cluster delete
 

@@ -1,4 +1,4 @@
-# Installing Uffizzi
+# Install the Uffizzi CLI
 
 This guide describes how to install the command-line interface (CLI) tool [`uffizzi`](https://github.com/UffizziCloud/uffizzi_cli), which will allow you to create and manage ephemeral environments on Uffizzi Cloud. If you're self-hosting Uffizzi, you should instead follow the [self-hosting installation guide](https://github.com/UffizziCloud/uffizzi/blob/develop/INSTALL.md).
 
@@ -22,6 +22,10 @@ The Uffizzi CLI is currently available as a binary for macOS and Linux. Windows 
     ``` bash
     docker run --interactive --rm --tty --entrypoint=sh uffizzi/cli
     ```
+
+### Add Uffizzi to your PATH
+
+
 
 ## Configure the CLI
 

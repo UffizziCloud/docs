@@ -205,7 +205,7 @@ Sure! Here's the content formatted in markdown with code formatting:
 
 ## 7. HTTP 503 Errors in Ephemeral Environments (Node.js)
 
-Some users may experience 503 errors when running the tests against their Uffizzi ephemeral environments. These errors are usually encountered during the first run after the Uffizzi stack is spun up.
+Some users may experience 503 errors when running the tests against their Node.js applications deployed to Uffizzi ephemeral environments. These errors are usually encountered during the first run after the Uffizzi stack is spun up.
 
 **Symptoms**
 

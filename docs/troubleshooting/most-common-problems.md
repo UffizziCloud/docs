@@ -199,5 +199,57 @@ Once you export the secret from the GHA workflow file, you can leverage the [`en
       SOME_SECRET: "${SOME_SECRET}" 
 ```
 
+Sure! Here's the content formatted in markdown with code formatting:
+
+---
+
+## 7. HTTP 503 Errors in Ephemeral Environments (Node.js)
+
+Some users may experience 503 errors when running the tests against their Uffizzi ephemeral environments. These errors are usually encountered during the first run after the Uffizzi stack is spun up.
+
+**Symptoms**
+
+- 503 errors occurring, particularly during the first run after the Uffizzi stack is spun up.
+- Most of the tests failing due to the appearance of 503 errors.
+- Containers restarting
+- Application error: 
+```
+"FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory error Command failed with signal "SIGABRT"
+```
+
+**Probable Cause**
+
+The 503 errors and heap-related failures are likely caused by the Node.js applications running within the web-app containers running out of memory. This is especially common when using Node.js for applications with high memory usage.
+
+**Troubleshooting Steps**
+
+1. **Profile the Workload:** Start by profiling the workload and identifying the parts of the application that consume the most memory. Look for areas that might be improved to be more memory-efficient. This can be done using various Node.js profiling tools.
+
+2. **Increase Node.js Heap Size:** Try increasing the heap size for Node.js by setting the environment variable `NODE_OPTIONS` to a value like `--max-old-space-size=400`. This can be done in the container's configuration or within the Node.js application itself.
+
+    ```bash
+    export NODE_OPTIONS=--max-old-space-size=400
+    ```
+
+3. **Increase Container Memory Limit:** If increasing the Node.js heap size doesn't resolve the issue, you can try increasing the memory limit for the web-app container. This can be achieved by setting the memory limit to a higher value, such as `1000Mi` or `2000Mi`. After doing this, set the `NODE_OPTIONS` environment variable to a value like `--max-old-space-size=900` or `--max-old-space-size=1900`.
+
+    ``` yaml
+    web-app:
+      ...
+      deploy:
+        resources:
+          limits:
+            memory: 2000M
+    ```
+
+    ``` bash
+    export NODE_OPTIONS=--max-old-space-size=900
+    ```
+
+4. **Monitoring and Scaling:** Keep a close eye on the container's resource usage. Monitoring tools can help you understand memory consumption and performance bottlenecks. If necessary, consider manual scaling of the application to allocate more resources.
+
+5. **Optimize Application Code:** Continue optimizing the application code to reduce memory usage. Techniques like memory caching, stream processing, and avoiding unnecessary object duplication can help in this regard.
+
+
 ## **Other issues?**
 If you're having issues with your Uffizzi ephemeral environment that are not listed above, [get help on Slack](https://join.slack.com/t/uffizzi/shared_invite/zt-ffr4o3x0-J~0yVT6qgFV~wmGm19Ux9A) or [set up a Zoom call](https://calendly.com/d/yjr-gfc-g5w/uffizzi-support-call) with a member of our Technical Support Team.

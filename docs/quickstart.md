@@ -33,7 +33,17 @@ uffizzi login
 
 ### Account setup
 
-1. **Select an account** - If you have multiple GitHub/GitLab accounts, select which one you want to configure as your default account context. You can change this setting later with the [`uffizzi config`](references/cli.md#config) command.  
+
+1. **Select an account** -  In this step, you'll select your default account context. You can change this setting later with the [`uffizzi config`](references/cli.md#config) command.   
+
+    ```
+    $ uffizzi login
+    Select an account: (Press ↑/↓ arrow to move and Enter to select)
+    ‣ Acme Corp
+      jdoe
+    ```
+    !!! Note 
+        If you signed up with GitHub or GitLab, you'll see your personal account and any organizations or groups you belong to. Choose your organization/group account if you want to create ephemeral environments for your team applications. Otherwise, you can select your personal account to create clusters for personal projects. Note that Personal and Team accounts are billed separately. [Learn more >](topics/teams-and-accounts.md)
 
 2. **Create a new project** - Select **Create a new project**. Enter a project name as "quickstart" or similar, then confirm the project slug. For project description, enter "Quickstart guide" or just leave it blank.
 

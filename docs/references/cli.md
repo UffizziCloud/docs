@@ -1,4 +1,4 @@
-# Uffizzi Command -Line Interface (CLI) Reference
+# Uffizzi Command-Line Interface (CLI) Reference
 
 The Uffizzi command-line interface (CLI) allows you to easily interact with the Uffizzi API. To list available commands, you can run `uffizzi` or `uffizzi help`, or to get help on a specific group or subcommand run `uffizzi [GROUP] help` or `uffizzi [GROUP] [SUBCOMMAND] help`.
 

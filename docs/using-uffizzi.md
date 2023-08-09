@@ -90,7 +90,7 @@ uffizzi preview create docker-compose.uffizzi.yml
 ```
 
 !!! Important
-    The Uffizzi client **does not** build containers for you from your local environment even if your environment includes a `DOCKERFILE`. Instead, you should execute a build step first, and then add images in your Docker Compose configuration (i.e. use the `image` directive instead of the `build` directive). Uffizzi Cloud customers can use [Uffizzi CI](references/uffizzi-ci.md) if they want Uffizzi to build container images from source, or you can use another build service like GitHub Action or GitLab CI. You can learn more about Uffizzi CI [here](references/uffizzi-ci.md).
+    The Uffizzi client **does not** build containers for you from your local environment even if your environment includes a `DOCKERFILE`. Instead, you should execute a build step first, and then add images in your Docker Compose configuration (i.e. use the `image` directive instead of the `build` directive). Uffizzi Cloud customers can use [Uffizzi CI](references/uffizzi-ci.md) if they want Uffizzi to build container images from source, or you can use another build service like GitHub Actions or GitLab CI. You can learn more about Uffizzi CI [here](references/uffizzi-ci.md).
 
 &nbsp;  
 **Add metadata labels**

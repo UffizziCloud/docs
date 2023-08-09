@@ -251,7 +251,7 @@ Uffizzi Environment deployment details at URI:https://app.uffizzi.com//projects/
 
 This link will take you to the Uffizzi Dashboard where you can view application logs and manage your environments and team. The environment will be deleted when the MR is merged/closed or after 1 hour ([configurable](https://gitlab.com/uffizzicloud/quickstart-gitlab-ci/-/blob/master/docker-compose.uffizzi.yml#L7)).
 
-You might also want configure a new Job to post the URL as a comment to your MR issue or send a notification to Slack, MS Teams, etc. See our Slack notification example [here](https://gitlab.com/uffizzi/environment-action/-/blob/main/Notifications/slack.yml).
+You might also want to configure a new Job to post the URL as a comment to your MR issue or send a notification to Slack, MS Teams, etc. See our Slack notification example [here](https://gitlab.com/uffizzi/environment-action/-/blob/main/Notifications/slack.yml).
 
 &nbsp;   
 **How it works**

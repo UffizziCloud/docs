@@ -18,13 +18,13 @@ Add registry credentials to grant Uffizzi access to pull images.
 
 ## Create a Docker Compose template
 
-In this section, we'll create a template using [Docker Compose](https://docs.docker.com/compose/compose-file/) that describes our application configuration. Uffizzi uses Docker Compose as its configuration format because it is relatively simple and widely used by developers.
+In this section, we'll create a template using [Docker Compose](https://docs.docker.com/compose/compose-file/) that describes our application configuration.
 
 !!! note
     Uffizzi supports a subset of the [Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). For a full list of supported keywords, see the [Uffizzi Compose file reference](references/compose-spec.md). 
 
 ### Configure your Compose to dynamically update image definitions
-The Uffizzi environment creation step typically executes at the end of a CI pipeline after a series of steps that are triggered by an event, such as a pull request or new commit. If you don't have an existing CI solution, Uffizzi CI can build your application from source and store your container images for you (Note: Your source code must be stored in a GitHub repository to use Uffizzi CI). Alternatively, if you're using an external CI service, such as GitHub Actions or CircleCI, you will need to tell Uffizzi where your images are stored and how to access them.
+The Uffizzi environment creation step typically executes at the end of a CI pipeline after a series of steps that are triggered by an event, such as a pull request or new commit. If you don't have an existing CI solution, Uffizzi CI can build your application from source and store your container images for you (Note: Your source code must be stored in a GitHub repository to use Uffizzi CI). Alternatively, if you're using an external CI service, such as GitHub Actions or GitLab CI, you will need to tell Uffizzi where your images are stored and how to access them.
 
 Each time your CI pipeline builds and pushes new images, Uffizzi needs access to them. This means that we need to dynamically update our compose file `service` definitions with the new image names and tags each time our pipeline runs. To do this, we'll follow one of two methods, depending on which CI solution you choose:
 
@@ -204,7 +204,7 @@ If you're using an external CI provider, such as GitHub Actions, GitLab, or Circ
 You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-preview.yaml).
 
 ### <a id="cache-tags"></a>Output tags from your build step
- In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), as highlighted below.
+ In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), or in GitLab with `script`, as highlighted below.
 
 === "GitHub Actions"
 
@@ -802,7 +802,7 @@ Login to Uffizzi, then navigate to <b>Account</b> > <b>Settings</b> > <b>Registr
 </details>
 
 #### ECR, ACR, GCR, Docker Hub
-If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as [GitHub repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
+If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as [GitHub repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) or [GitLab masked CI/CD variables](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable).
 
 <details><summary>See this AWS ECR example</summary>
 <p>If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub repository secrets</a>. In the highlighted example below, <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> are used:</p>

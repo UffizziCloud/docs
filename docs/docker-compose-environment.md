@@ -802,7 +802,7 @@ Login to Uffizzi, then navigate to <b>Account</b> > <b>Settings</b> > <b>Registr
 </details>
 
 #### ECR, ACR, GCR, Docker Hub
-If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as [GitHub repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
+If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as [GitHub repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) or [GitLab masked CI/CD variables](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable).
 
 <details><summary>See this AWS ECR example</summary>
 <p>If you use Amazon ECR, Azure Container Registry (ACR), Google Container Registry (GCR), or Docker Hub, you should add your credentials as <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub repository secrets</a>. In the highlighted example below, <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> are used:</p>

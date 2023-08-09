@@ -204,7 +204,7 @@ If you're using an external CI provider, such as GitHub Actions, GitLab, or Circ
 You can see a complete example workflow using GitHub Actions [here](https://github.com/UffizziCloud/quickstart/blob/main/.github/workflows/uffizzi-preview.yaml).
 
 ### <a id="cache-tags"></a>Output tags from your build step
- In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), as highlighted below.
+ In this step, we'll add a few lines to the build job of our workflow to output the tags of our container images. Later, we'll use these tags in our compose file. In GitHub Actions, this can be done with [`outputs`](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs-for-docker-container-and-javascript-actions), or in GitLab with `script`, as highlighted below.
 
 === "GitHub Actions"
 

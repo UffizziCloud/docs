@@ -65,7 +65,6 @@ To verify that the cluster was successfully created, run:
 uffizzi cluster list
 ```
 
-
 ## Download an example application
 
 We'll be using an [example application](https://github.com/UffizziCloud/quickstart-k8s) to deploy onto our cluster. The following GitHub repository includes code for the applicaiton, along with Kubernetes manifests that describe its configuration.  
@@ -87,11 +86,11 @@ kubectl apply --kustomize .
 
 The above will create deployments, services and ingresses for a `vote` and `result` applications. The hostnames on the ingresses are assigned dynamically so that users don't have to create their own and spend time sorting out possible hostname conflict issues.
 
-If you query your created ingress it should look something like the following :
+If you query your created ingress with `kubectl get ingress -A`, you should see something like the following:
 ```
-NAME     CLASS     HOSTS                                                       ADDRESS   PORTS     AGE
-result   uffizzi   result-default.cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
-vote     uffizzi   vote-default.cluster-32.uclusters.app.uffizzi.com               80, 443   14m
+NAME     CLASS     HOSTS                                                             ADDRESS   PORTS     AGE
+result   uffizzi   result-default-quickstart-cluster-320.uclusters.app.uffizzi.com             80, 443   14m 
+vote     uffizzi   vote-default-quickstart-cluster-320.uclusters.app.uffizzi.com               80, 443   14m
 ```
 
 ## Verify everything works

@@ -83,13 +83,13 @@ The above will create deployments, services and ingresses for a `vote` and `resu
 If you query your created ingress it should look something like the following :
 ```
 NAME     CLASS     HOSTS                                                       ADDRESS   PORTS     AGE
-result   uffizzi   result-default-pr-89.cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
-vote     uffizzi   vote-default-pr-89.cluster-32.uclusters.app.uffizzi.com               80, 443   14m
+result   uffizzi   result-default.cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
+vote     uffizzi   vote-default.cluster-32.uclusters.app.uffizzi.com               80, 443   14m
 ```
 
 ## Verify everything works
 
-You can verify that everything is working by running both the ingresses in your browser and seeing if you are able to vote from the vote service and then are able to check the result in the result service.
+You can verify that everything is working by opening both the ingress URLs in your browser. You can vote for cats or dogs from the vote service, then see the voting results in the result service.
 
 ## Clean up
 

@@ -75,53 +75,21 @@ cd quickstart-k8s
 From the `quickstart-k8s/` directory, run the following `kubectl` command to apply the manifests from the `manifests/` directory to your cluster:
 
 ``` bash
-kubectl apply -f manifests/
+kubectl apply --kustomize .
 ```
 
-## Create ingresses
+The above will create deployments, services and ingresses for a `vote` and `result` applications. The hostnames on the ingresses are assigned dynamically so that users don't have to create their own and spend time sorting out possible hostname conflict issues.
 
-Next we'll create ingresses for two of the application components to allow these services to receive HTTP requests.  
-
-!!! Note
-    Notice the commands below use `openssl` (Mac or Linux) or `Guid` (Windows) to generate random 12-character strings for the subdomains. This is to prevent hostname collision on Uffizzi Cloud. Alternatively, you could use a domain you control and update your DNS accordingly.
-
-### Create an ingress for the `vote` component
-
-=== "Mac or Linux"
-
-    ``` bash
-    kubectl create ingress vote --class=nginx --rule="$(openssl rand -hex 6).app.uffizzi.com/*=vote:5000"
-    ```
-
-=== "Windows"  
-
-    ``` powershell
-    kubectl create ingress vote --class=nginx --rule="$((New-Guid).Guid.SubString(0,12)).app.uffizzi.com/*=vote:5000"
-
-    ```
-
-### Create an ingress for the `result` component
-
-=== "Mac or Linux"
-
-    ``` bash
-    kubectl create ingress result --class=nginx --rule="$(openssl rand -hex 6)-result.app.uffizzi.com/*=result:5000"
-    ```
-
-=== "Windows"  
-
-    ``` powershell
-    kubectl create ingress result --class=nginx --rule="$((New-Guid).Guid.SubString(0,12))-result.app.uffizzi.com/*=result:5000"
-
-    ```
+If you query your created ingress it should look something like the following :
+```
+NAME     CLASS     HOSTS                                                       ADDRESS   PORTS     AGE
+result   uffizzi   result-default-pr-89.cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
+vote     uffizzi   vote-default-pr-89.cluster-32.uclusters.app.uffizzi.com               80, 443   14m
+```
 
 ## Verify everything works
 
-You can verify that everything is working by copying the link for the `vote` component into your browser. Note that your randomly generated string will be different than the one below:
-
-```
-http://2966fe8c4e77.app.uffizzi.com
-```
+You can verify that everything is working by running both the ingresses in your browser and seeing if you are able to vote from the vote service and then are able to check the result in the result service.
 
 ## Clean up
 

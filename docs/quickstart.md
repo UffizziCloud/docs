@@ -103,7 +103,7 @@ This allows users to quickly start testing their serivces and routing traffic fr
 
 ### Custom IngressClass
 
-You can bring your own IngressClass, and install the necessary controller on your virtual cluster. Custom IngressClasses on Uffizzi virtual clusters work just like they do on a standard Kubernetes cluster.
+You can bring your own IngressClass, and install the necessary controller on your virtual cluster. Custom IngressClasses on Uffizzi virtual clusters are configured just like they are for a standard Kubernetes cluster.
 
 Follow the official kubernetes documentation for understanding what an [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) is and how you can back it up by deploying your own [Ingress controller of choice](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
 

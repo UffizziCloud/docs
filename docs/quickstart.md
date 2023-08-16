@@ -84,7 +84,7 @@ From the `quickstart-k8s/` directory, run the following `kubectl` command to app
 kubectl apply --kustomize .
 ```
 
-The above will create deployments, services and ingresses for a `vote` and `result` applications. The hostnames on the ingresses are assigned dynamically so that users don't have to create their own and spend time sorting out possible hostname conflict issues.
+The above will create deployments, services, and ingresses for `vote` and `result` applications. The hostnames on the ingresses are assigned dynamically so that users don't have to create their own and spend time sorting out possible hostname conflict issues.
 
 If you query your created ingress with `kubectl get ingress -A`, you should see something like the following:
 ```
@@ -92,6 +92,26 @@ NAME     CLASS     HOSTS                                                        
 result   uffizzi   result-default-quickstart-cluster-320.uclusters.app.uffizzi.com             80, 443   14m 
 vote     uffizzi   vote-default-quickstart-cluster-320.uclusters.app.uffizzi.com               80, 443   14m
 ```
+
+## Understanding Ingress on Uffizzi
+
+There are two ingress options on Uffizzi: default and custom. 
+
+### Default IngressClass `uffizzi`
+
+The default IngressClass for any ingress created in a virtual cluster is `uffizzi`. The hostnames will be overriden to the format below :
+
+```
+https://<ingress-name>-<virtual-namespace>-<ucluster-name>-<ucluster-id>.uclusters.app.uffizzi.com 
+```
+
+This allows users to quickly start testing their serivces and routing traffic from the outside world without having to configure hostnames manually or provisioning their own Ingress controller. Alternatively, you can define a custom IngressClass, as described below.
+
+### Custom IngressClass
+
+You can bring your own IngressClass, and install the necessary controller on your virtual cluster. Custom IngressClasses on Uffizzi virtual clusters are configured just like they are for a standard Kubernetes cluster.
+
+Follow the official kubernetes documentation for understanding what an [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) is and how you can back it up by deploying your own [Ingress controller of choice](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
 
 ## Verify everything works
 

@@ -8,7 +8,7 @@ If just want to run a few quick commands, you may want to start with the [Quicks
 
 Uffizzi currently supports two types of ephemeral environments:
 
-- **(In Beta) Virtual cluster environments** are Kubernetes-based environments built from a Kubernetes specification—typically [Helm Charts](https://helm.sh), [kustomizations](https://kustomize.io), or standard manifests applied by [kubectl](https://kubernetes.io/docs/reference/kubectl/). You can read more about Uffizzi's virtual clusters [here](topics/virtual-clusters.md), but in short, these are fully functional Kubernetes clusters that run in isolation on top of a host cluster. Once you've created these clusters with the Uffizzi client or from your CI pipeline, you can use standard Kubernetes tools like `kubectl` and `helm` to manage them and their configurations.
+- **(In Beta) Virtual Cluster environments** are Kubernetes-based environments built from a Kubernetes specification—typically [Helm Charts](https://helm.sh), [kustomizations](https://kustomize.io), or standard manifests applied by [kubectl](https://kubernetes.io/docs/reference/kubectl/). You can read more about Uffizzi's virtual clusters [here](topics/virtual-clusters.md), but in short, these are fully functional Kubernetes clusters that run in isolation on top of a host cluster. Once you've created these clusters with the Uffizzi client or from your CI pipeline, you can use standard Kubernetes tools like `kubectl` and `helm` to manage them and their configurations.
 
 - **Docker Compose environments** are container-based environments built from a Docker Compose specification. You can read more about Uffizzi's support for the Compose specification [here](references/compose-spec.md), as well as a tutorial on how to [configure a Uffizzi Compose file](docker-compose-environment.md#create-a-docker-compose-template).
 ## Managing Environments
@@ -46,7 +46,9 @@ Get the value of the specified property, like `server`:
 uffizzi config get-value server
 ```
 
-### Creating and managing clusters  
+### Creating and managing clusters
+
+#### Cluster creation and workload deployments
 
 Use the Uffizzi client to create environments from a local directory (support for remote Chart repositories is coming soon). When you create an environment, the Uffizzi client will update the kubeconfig file you specify with a cluster hostname and certificate you can use to connect, as well as, update your current context. Here we create a cluster with the Uffizzi client:
 
@@ -72,6 +74,16 @@ To connect to an existing Uffizzi cluster, you can run the `update-kubeconfig` c
 uffizzi cluster update-kubeconfig my-cluster -k ~/.kube/config
 ```
 See the [CLI Reference](references/cli.md#cluster-update-kubeconfig) for how Uffizzi handles kubeconfig updates.
+
+#### Acessing services created inside the cluster
+
+If you are creating ingresses explicitly in your manifests without a specific IngressClass. Uffizzi will dynamically set a hostname for all such ingresses created inside the ephemeral cluster environment. The naming of the ingress follows the convention as follows
+
+```
+<ingress-name>-<virtual-namespace>-<virtual-cluster-name>.<host-namespace>.uclusters.app.uffizzi.com
+```
+
+This allows us to keep the let users have easy access to their services through the ingress while keeping a more deterministic naming convention for the hostname without any extra configuraiton required to set up the hostname.
 
 ### Creating and managing Docker Compose environments
 

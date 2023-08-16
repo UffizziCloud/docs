@@ -83,8 +83,8 @@ The above will create deployments, services and ingresses for a `vote` and `resu
 If you query your created ingress it should look something like the following :
 ```
 NAME     CLASS     HOSTS                                                       ADDRESS   PORTS     AGE
-result   uffizzi   result-default.cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
-vote     uffizzi   vote-default.cluster-32.uclusters.app.uffizzi.com               80, 443   14m
+result   uffizzi   result-default-cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
+vote     uffizzi   vote-default-cluster-32.uclusters.app.uffizzi.com               80, 443   14m
 ```
 
 ## Verify everything works

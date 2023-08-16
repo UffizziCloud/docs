@@ -83,9 +83,25 @@ The above will create deployments, services and ingresses for a `vote` and `resu
 If you query your created ingress it should look something like the following :
 ```
 NAME     CLASS     HOSTS                                                       ADDRESS   PORTS     AGE
-result   uffizzi   result-default.cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
+result   uffizzi   result-default-cluster-32.uclusters.app.uffizzi.com             80, 443   14m 
 vote     uffizzi   vote-default.cluster-32.uclusters.app.uffizzi.com               80, 443   14m
 ```
+
+### Default `uffizzi` IngressClass
+
+The default IngressClass for any ingress created in a virtual cluster is `uffizzi`. The hostnames will be overriden to the format below :
+
+```
+https://<ingress-name>-<virtual-namespace>-<uffizzi-cluster-name>.uclusters.app.uffizzi.com 
+```
+
+This allows users to quickly start testing their serivces and routing traffic from the outside world without having to configure hostnames manually or provisioning their own Ingress controller. But, if this is a requirement then do follow the Custom IngressClass section below to learn more.  
+
+### Custom IngressClass
+
+You can bring your own IngressClass, and install the necessary controller on your virtual cluster for consumption.
+
+Follow the official kubernetes documentation for understanding what an [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) is and how you can back it up by deploying your own [Ingress controller of choice](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
 
 ## Verify everything works
 

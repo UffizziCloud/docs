@@ -59,6 +59,13 @@ uffizzi cluster create --name quickstart --kubeconfig ~/.kube/config --update-cu
 
 The last option `--update-current-context` is equivalent to `kubectl config use-context`. It tells Uffizzi to set the default cluster context to the one that was just created.
 
+To verify that the cluster was successfully created, run:
+
+``` bash
+uffizzi cluster list
+```
+
+
 ## Download an example application
 
 We'll be using an [example application](https://github.com/UffizziCloud/quickstart-k8s) to deploy onto our cluster. The following GitHub repository includes code for the applicaiton, along with Kubernetes manifests that describe its configuration.  

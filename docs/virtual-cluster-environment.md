@@ -7,15 +7,27 @@
 
 Follow this example and our GitHub Actions:
 
-[Example Configuration](https://github.com/UffizziCloud/quickstart-k8s)  
-[Cluster Action](https://github.com/UffizziCloud/cluster-action)  
-[Setup Action](https://github.com/UffizziCloud/setup-action)  
+- [Example Configuration](https://github.com/UffizziCloud/quickstart-k8s)  
+- [Cluster Action](https://github.com/UffizziCloud/cluster-action)  
+- [Setup Action](https://github.com/UffizziCloud/setup-action)  
 
 ### Overview of the process
+
+This guide will walk you through the process of creating Uffizzi cluster (uCluster) environments using Continuous Integration (CI) pipelines with Uffizzi. uCluster environments provide an isolated and reproducible environment for your applications, allowing you to easily test and deploy your code in a controlled setting. We will leverage the power of Uffizzi to set up and manage these environments directly from your CI pipelines.
+
 Adding the ability to create virtual cluster environments from you GitHub Actions workflow involves the following steps:
 
-1. Create a file `.github/workflows/uffizzi.yaml`
-2. Give your workflow a name, then define when it runs:
+1. [Create a new Uffizzi Workflow](virtual-cluster-environment.md#create-a-new-uffizzi-workflow) - A file named `.github/workflows/uffizzi.yaml` in your repository and configure the workflow.
+
+2. [Define build jobs](virtual-cluster-environment.md#define-build-jobs) - Build and push platform specific artifacts.
+
+3. [Deploy Uffizzi Cluster](virtual-cluster-environment.md#deploy-uffizzi-cluster) - Create a uCluster with the application built in step 2.
+
+For a more detailed example and additional configurations, refer to the [complete example](https://github.com/UffizziCloud/quickstart-k8s/blob/main/.github/workflows/uffizzi.yml) in the UffizziCloud repository.
+
+## Create a new Uffizzi Workflow
+
+In this section, we'll create a new GitHub workflow within the application repository -- Add a name, then define when it runs -- also provide the following permissions:
    ```
    name: Uffizzi Cluster Quickstart
 
@@ -28,7 +40,10 @@ Adding the ability to create virtual cluster environments from you GitHub Action
      pull-requests: write
      id-token: write
    ```
-3. Create build jobs for each of your application components:
+
+## Define build jobs
+
+For each of the application components define the various configurations required to build the application. For example, Replace build-foo and build-bar with your actual build job names and configurations:
    ```
    jobs:
      build-foo:
@@ -36,24 +51,35 @@ Adding the ability to create virtual cluster environments from you GitHub Action
      build-bar:
        ...
    ```
-4. Create a cluster job that uses the Uffizzi cluster action:
+
+## Deploy Uffizzi Cluster
+
+Create a cluster job within the workflow that utilizes the Uffizzi cluster-action. This job will deploy your application to the uCluster. Adjust the parameters as needed:
    ```
    uffizzi-cluster:
      name: Deploy to Uffizzi Virtual Cluster
+
      needs:
      - build-foo
      - build-bar
+
      if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
+
      runs-on: ubuntu-latest
+
      steps:
+
+     # Checkout the repository
      - name: Checkout
        uses: actions/checkout@v3
 
+     # Create a uCluster with cluster-name as pr-number
      - name: Connect to Virtual Cluster
        uses: UffizziCloud/cluster-action@main
        with:
          cluster-name: pr-${{ github.event.pull_request.number }}
-         server: https://app.uffizzi.com
+
+     # Edit manifests and Apply
      - name: Kustomize and Apply Manifests
        id: prev
        run: |
@@ -61,17 +87,12 @@ Adding the ability to create virtual cluster environments from you GitHub Action
          kustomize edit set image my-registry/image_name=${{ needs.build-vote.outputs.tags }}
          kustomize edit set image my-registry/image_name=${{ needs.build-vote.outputs.tags }}
 
-         if [[ ${RUNNER_DEBUG} == 1 ]]; then
-           cat kustomization.yaml
-           echo "`pwd`"
-           echo "`ls`"
-         fi
-
          # Apply kustomized manifests to virtual cluster.
          kubectl apply --kustomize . --kubeconfig ./kubeconfig
    ```
-5. See the [rest of this example](https://github.com/UffizziCloud/quickstart-k8s/blob/def540ce9b404851436e10529957162fbcc400fc/.github/workflows/uffizzi.yml#L143-L229) for details 
 
 ## GitLab CI Instructions
 
-[Example Configuration](https://gitlab.com/uffizzi/quickstart-k8s/-/blob/main/.github/workflows/uffizzi.yml)
+If you're using GitLab CI, you can also integrate Uffizzi virtual cluster environments. Check out the [Example Configuration](https://gitlab.com/uffizzicloud/quickstart-k8s/-/blob/main/.gitlab-ci.yml) for GitLab CI integration details.
+
+Now you're ready to harness the power of Uffizzi Virtual Cluster Environments within your CI/CD pipelines. If you have any questions or need assistance, feel free to reach out to our support team. Happy coding!

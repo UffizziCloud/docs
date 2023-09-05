@@ -78,13 +78,13 @@ In this workflow, we use Kustomize to customize our Kubernetes manifests before 
        run: |
          # Change the image name to those just built and pushed.
          kustomize edit set image my-registry/image_name=${{ needs.build-vote.outputs.tags }}
-         kustomize edit set image my-registry/image_name=${{ needs.build-vote.outputs.tags }}
+         kustomize edit set image my-registry/image_name=${{ needs.build-result.outputs.tags }}
 
          # Apply kustomized manifests to virtual cluster.
          kubectl apply --kustomize . --kubeconfig ./kubeconfig
    ```
   
-Alternatively the `helm --set` command can be integrated into the workflow to modify image references within a Helm chart `values.yaml` file:
+Alternatively, the `helm --set` command can be integrated into the workflow to modify image references within a Helm chart `values.yaml` file:
 
    ```yaml
     # Apply Harbor Helm Chart

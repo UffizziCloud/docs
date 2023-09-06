@@ -250,6 +250,15 @@ The 503 errors and heap-related failures are likely caused by the Node.js applic
 
 5. **Optimize Application Code:** Continue optimizing the application code to reduce memory usage. Techniques like memory caching, stream processing, and avoiding unnecessary object duplication can help in this regard.
 
+## 8. Unauthorized: Bad Credentials (GitHub Integration)
+
+There are a few reason you might see the following error message in your account Settings > General page:
+
+![GitHub Integration Error](../assets/images/bad-credentials.webp)
+
+For example, your credentials may have changed, you tried configuring your Uffizzi Team with a personal GitHub account (or vice versa), or perhaps something else. The easiest solution is to simply uninstall and then reinstall the Uffizzi Cloud GitHub App. This will re-establish the connection between your GitHub account and Uffizzi.
+
+To uninstall the Uffizzi Cloud GitHub App, go to GitHub.com > **Account** > **Settings** > **Applications** > **Installed GitHub Apps** > **Uffizzi Cloud** > **Configure** > **Uninstall “Uffizzi Cloud”**.
 
 ## **Other issues?**
 If you're having issues with your Uffizzi ephemeral environment that are not listed above, [get help on Slack](https://join.slack.com/t/uffizzi/shared_invite/zt-ffr4o3x0-J~0yVT6qgFV~wmGm19Ux9A) or [set up a Zoom call](https://calendly.com/d/yjr-gfc-g5w/uffizzi-support-call) with a member of our Technical Support Team.

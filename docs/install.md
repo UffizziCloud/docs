@@ -4,7 +4,7 @@ This guide describes how to install the command-line interface (CLI) tool [`uffi
 
 ## Homebrew Tap
 
-If you're on macOS, you can install the Uffizzi CLI via the [Homebrew](https://brew.sh/) tap:
+For macOS or Linux users, you can install the Uffizzi CLI via the [Homebrew](https://brew.sh/) tap:
 
 ``` bash
 brew update

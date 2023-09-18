@@ -4,7 +4,6 @@ site_author: Uffizzi.com
 site_description: >-
   Uffizzi Documentation
 site_url: https://docs.uffizzi.com/
-
 # Repository
 repo_url: https://github.com/UffizziCloud/docs
 repo_name: UffizziCloud/docs
@@ -106,43 +105,44 @@ markdown_extensions:
 # Page tree
 nav:
   - Home:
-    - Home: index.md
-    - Quickstart Guide: quickstart.md
-    - Installation: install.md
-    - Using Uffizzi: using-uffizzi.md
-    - Virtual Cluster Environments from CI Pipelines: virtual-cluster-environment.md
-    - Docker Compose Environments from CI Pipelines: docker-compose-environment.md
-  - How-To: 
-    - Uffizzi CI: quickstart-uffizzi-ci.md
-    - Demo on Uffizzi button: guides/demo-on-uffizzi.md
-    - Set up your account: guides/set-up-your-account.md
-    - Expose multiple routes: guides/expose-multiple-routes.md
-    - Configure password-protected environments: guides/password-protected.md
-    - Authenticate with a container registry: guides/container-registry-integrations.md
-    - Add environment variables: guides/environment-variables.md
-    - Add secrets: guides/secrets.md
-    - Check logs: guides/logs.md
-    - Configure SSO: guides/single-sign-on.md 
-    - Microservices on Uffizzi: guides/support-microservices-in-ephemeral-environments-with-nginx.md
-    - GitHub Environments: guides/github-environment.md
+      - Home: index.md
+      - Quickstart Guide: quickstart.md
+      - Installation: install.md
+      - Using Uffizzi: using-uffizzi.md
+      - Virtual Cluster Environments from CI Pipelines: virtual-cluster-environment.md
+      - Docker Compose Environments from CI Pipelines: docker-compose-environment.md
+      - Architecture: architecture.md
+  - How-To:
+      - Uffizzi CI: quickstart-uffizzi-ci.md
+      - Demo on Uffizzi button: guides/demo-on-uffizzi.md
+      - Set up your account: guides/set-up-your-account.md
+      - Expose multiple routes: guides/expose-multiple-routes.md
+      - Configure password-protected environments: guides/password-protected.md
+      - Authenticate with a container registry: guides/container-registry-integrations.md
+      - Add environment variables: guides/environment-variables.md
+      - Add secrets: guides/secrets.md
+      - Check logs: guides/logs.md
+      - Configure SSO: guides/single-sign-on.md
+      - Microservices on Uffizzi: guides/support-microservices-in-ephemeral-environments-with-nginx.md
+      - GitHub Environments: guides/github-environment.md
   - Topics:
-    - Virtual Clusters: topics/virtual-clusters.md
-    - Teams and Accounts: topics/teams-and-accounts.md
-    - Role-based access (RBAC): topics/rbac.md
-    - Networking and architecture: topics/networking.md
-    - OpenID Connect (OIDC): topics/oidc.md
-    - Why Uffizzi?: topics/why-uffizzi.md
-    - Continuous Previews: topics/continuous-previews.md
-    - CI/CD + CP: topics/ci-cd-registry.md
-    - Single-Page Applications: topics/single-page-applications.md
-    - Docker Extensions Partner: topics/docker-extension-partner.md
+      - Virtual Clusters: topics/virtual-clusters.md
+      - Teams and Accounts: topics/teams-and-accounts.md
+      - Role-based access (RBAC): topics/rbac.md
+      - Networking and architecture: topics/networking.md
+      - OpenID Connect (OIDC): topics/oidc.md
+      - Why Uffizzi?: topics/why-uffizzi.md
+      - Continuous Previews: topics/continuous-previews.md
+      - CI/CD + CP: topics/ci-cd-registry.md
+      - Single-Page Applications: topics/single-page-applications.md
+      - Docker Extensions Partner: topics/docker-extension-partner.md
   - References:
-    - Command-line Reference: references/cli.md
-    - Docker Compose for Uffizzi: references/compose-spec.md
-    - Example Uffizzi Compose: references/example-compose.md
-    - Uffizzi CI: references/uffizzi-ci.md
-    - Uffizzi Environment URL: references/uffizzi-environment-variables.md
+      - Command-line Reference: references/cli.md
+      - Docker Compose for Uffizzi: references/compose-spec.md
+      - Example Uffizzi Compose: references/example-compose.md
+      - Uffizzi CI: references/uffizzi-ci.md
+      - Uffizzi Environment URL: references/uffizzi-environment-variables.md
   - Troubleshooting:
-    - Most common problems: troubleshooting/most-common-problems.md
-    - Debugging: troubleshooting/debugging.md
-    - File or Directory is Too Large Error: troubleshooting/file-or-directory-is-too-large.md
+      - Most common problems: troubleshooting/most-common-problems.md
+      - Debugging: troubleshooting/debugging.md
+      - File or Directory is Too Large Error: troubleshooting/file-or-directory-is-too-large.md

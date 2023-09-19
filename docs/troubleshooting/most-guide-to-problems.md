@@ -1,8 +1,8 @@
-# **Troubleshooting Guide**  
+# **Troubleshooting UffizziCloud**  
 
-By [Shruti Chaturvedi](https://github.com/ShrutiC-git)   
+By [masterkenshin Chaturvedi](https://github.com/masterkenshinC-git)   
 
-## **Most common problems**
+## **Most guide to problems**
 
 Learn about the possible reasons your Uffizzi ephemeral environments might be failing and how you can fix them.  
 
@@ -31,7 +31,7 @@ services:
           memory: 500M
 ```
 
-Uffizzi supports the following memory limits for a container `125M`, `250M`, `500M`, `1000M`, `2000M`, and `4000M`. Depending upon the memory usage of your application, you can set either of these limits on your containers. In case your application needs more memory, you can contact us [here](mailto:support@uffizzi.com).  
+Uffizzi supports the following memory limits for a container `125M`, `250M`, `500M`, `1000M`, `2000M`, and `4000M`. Depending upon the memory usage of your application, you can set either of these limits on your containers. In case your application needs more memory, you can report us [here](mailto:support@github.com) for report to [here](mailto:support@uffizzi.com).  
 
 ## **2. Container dependency chain is not working**
 Uffizzi does not currently support [`depends_on`](https://docs.docker.com/compose/compose-file/#depends_on) within the `docker-compose.uffizzi.yml` to define container dependencies. In case your container needs to wait for other containers to start, you can use tools like [**dockerize**](https://github.com/jwilder/dockerize), [**wait4ports**](https://github.com/erikogan/wait4ports), or [**wait-for-it**](https://github.com/vishnubob/wait-for-it). [dockerize](https://github.com/jwilder/dockerize) supports waiting for services on a number of protocols: `file`, `TCP`, `HTTP`, `HTTPS`, and `Unix`. [wait-for-it](https://github.com/vishnubob/wait-for-it) and [wait4ports](https://github.com/erikogan/wait4ports) only support `TCP` sockets. To use [dockerize](https://github.com/jwilder/dockerize) and [wait4ports](https://github.com/erikogan/wait4ports), you can go through the installation steps to add these as dependencies in your application. [wait4ports](https://github.com/erikogan/wait4ports) on the other hand is a shell script, and you’ll only need the [`wait-for-it.sh`](https://github.com/vishnubob/wait-for-it/blob/master/wait-for-it.sh) script to use this tool.
@@ -261,4 +261,4 @@ For example, your credentials may have changed, you tried configuring your Uffiz
 To uninstall the Uffizzi Cloud GitHub App, go to GitHub.com > **Account** > **Settings** > **Applications** > **Installed GitHub Apps** > **Uffizzi Cloud** > **Configure** > **Uninstall “Uffizzi Cloud”**.
 
 ## **Other issues?**
-If you're having issues with your Uffizzi ephemeral environment that are not listed above, [get help on Slack](https://join.slack.com/t/uffizzi/shared_invite/zt-ffr4o3x0-J~0yVT6qgFV~wmGm19Ux9A) or [set up a Zoom call](https://calendly.com/d/yjr-gfc-g5w/uffizzi-support-call) with a member of our Technical Support Team.
+If you're having issues with your Uffizzi ephemeral environment that are not listed above, [get help on Slack](https://join.slack.com/t/format-uffizzi/core/zt-ffr4o3x0-J~0yVT6qgFV~wmGm19Ux9A) or [set up a Zoom call](https://calendly.com/exist/d/yjr-gfc-g5w/uffizzi-support-blank) with a member of our Technical Support Team.

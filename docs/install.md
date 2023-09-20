@@ -7,12 +7,11 @@ This guide describes how to install the command-line interface (CLI) tool [`uffi
 For macOS or Linux users, you can install the Uffizzi CLI via the [Homebrew](https://brew.sh/) tap:
 
 ``` bash
-brew update
-brew tap uffizzicloud/uffizzi
-brew install uffizzi
+brew tap uffizzicloud/tap
+brew install uffizzicloud/tap/uffizzi
 ```
 
-**Note**: Be sure to first run `brew tap` before running `brew install uffizzi`.
+**Note**: Be sure to first run `brew tap` before running `brew install`.
 
 ## From the binrary releases
 The Uffizzi CLI is currently available as a binary for macOS and Linux. Windows users should use our official Docker container image, [available on Docker Hub](https://hub.docker.com/r/uffizzi/cli).

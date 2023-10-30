@@ -59,6 +59,7 @@ uffizzi cluster create -n [CLUSTER_NAME] -k [PATH_TO_KUBECONFIG] -m [PATH_TO_MAN
 | Option                    | Description                                                                                |
 | --------------------------|------------------------------------------------------------------------------------------- |
 | `-n`, `--name`            | The name of the cluster to be created. If no name is provided, a name is auto-generated.   |
+| `--k8s-version`           |Specify which version of the Kubernetes API to use when creating the cluster, formatted as [MAJOR].[MINOR]. Defaults to 1.27. Minor versions point to the latest release of the corresponding k3s minor version. See https://github.com/k3s-io/k3s/releases|
 | `-k`, `--kubeconfig`      | The location of the kubeconfig file to create or update                                    |
 | `-m`, `--manifest`        | The path to a Kubernetes manifest file. If no manifest is provided, Uffizzi creates an empty cluster instance. |
 | `-o`, `--output`          | Formats the output of this command. Accepted values are `pretty-json` and `json`           |

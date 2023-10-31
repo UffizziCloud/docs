@@ -75,7 +75,7 @@ uffizzi cluster update-kubeconfig my-cluster -k ~/.kube/config
 ```
 See the [CLI Reference](references/cli.md#cluster-update-kubeconfig) for how Uffizzi handles kubeconfig updates.
 
-#### Acessing services created inside the cluster
+#### Accessing services created inside the cluster
 
 If you are creating ingresses explicitly in your manifests without a specific IngressClass. Uffizzi will dynamically set a hostname for all such ingresses created inside the ephemeral cluster environment. The naming of the ingress follows the convention as follows
 

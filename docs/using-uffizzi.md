@@ -114,23 +114,6 @@ uffizzi preview create docker-compose.uffizzi.yml \
   --set-labels="github.repo=my_repo github.pull_request.number=23"
 ```
 
-&nbsp;  
-**Add container registry credentials**
-
-If your compose file includes private images, you'll need to provide credentials so Uffizzi can pull these images and deploy them to your preview environment. Use the `connect` subcommand to add container registry credentials. See the CLI Refernce for a complete list of supported [container registries](references/cli.md#connect).
-
-For example, make Amazon ECR credentials available to all preview environments within the default project:
-
-``` bash
-uffizzi connect ecr --registry https://my-account.dkr.ecr.us-west-2.amazonaws.com --id SOMEACCESSKEY --secret MYSUPERSECRETKEY
-```
-
-You can revoke these credential from Uffizzi with the `disconnect` subcommand:
-
-``` bash
-uffizzi disconnect ecr
-```
-
 ## From a CI Pipeline
 
 In addition to creating environments from the Uffizzi client, you can configure a CI service to automatically deploy new environments for certain events, like pull or merge requests.

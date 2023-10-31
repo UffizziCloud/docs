@@ -22,7 +22,7 @@ Uffizzi has two primary functions:
 
 ### Configuring the client
 
-You can configure the Uffizzi client using the `config` subcommand. The configuration is stored in `~/.uffizzi/config`. 
+You can configure the Uffizzi client using the `config` subcommand. The configuration is stored in `~/.config/uffizzi/config_default.json`. 
 
 ``` bash
 uffizzi config
